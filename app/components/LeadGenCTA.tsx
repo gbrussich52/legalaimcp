@@ -11,9 +11,9 @@ export function LeadGenCTA() {
         NYClaw.io builds private AI integrations tailored to your practice area, case management
         system, and workflows.
       </p>
-      <Link href={NYCLAW_CONTACT} className="btn-primary inline-block">
+      <a href={NYCLAW_CONTACT} target="_blank" rel="noopener noreferrer" className="btn-primary inline-block">
         Get a Free Consultation →
-      </Link>
+      </a>
     </div>
   )
 }
