@@ -1,0 +1,15 @@
+# dependencies
+node_modules/
+
+# next.js
+.next/
+
+# env files
+.env.local
+.env
+
+# typescript
+tsconfig.tsbuildinfo
+
+# macos
+.DS_Store
