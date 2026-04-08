@@ -43,6 +43,10 @@ export async function submitListing(
 
   const { submitter_email, creator_name, ...listingData } = parsed.data
 
+  if (!supabase) {
+    return { success: false, error: 'Service unavailable. Please try again later.' }
+  }
+
   const { error } = await supabase.from('submissions').insert({
     listing_data: listingData,
     submitter_email,
