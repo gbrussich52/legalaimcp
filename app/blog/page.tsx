@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { getAllPosts } from '@/lib/blog'
 
 export const metadata: Metadata = {
   title: 'Legal AI Blog',
@@ -9,6 +10,8 @@ export const metadata: Metadata = {
 }
 
 export default function BlogPage() {
+  const posts = getAllPosts()
+
   return (
     <main className="section-padding">
       <div className="max-w-content mx-auto">
@@ -19,25 +22,34 @@ export default function BlogPage() {
           Insights, guides, and tool reviews for law firms navigating AI.
         </p>
 
-        {/* Coming soon */}
-        <div className="mt-12 bg-white rounded-xl p-10 border border-slate-200 text-center">
-          <h2 className="font-display text-2xl font-bold text-navy">
-            Coming Soon
-          </h2>
-          <p className="font-body text-charcoal/80 leading-relaxed mt-4 max-w-prose mx-auto">
-            We&apos;re writing in-depth articles about AI for the legal
-            profession. Topics include tool comparisons, implementation guides,
-            and compliance considerations.
-          </p>
-          <p className="font-body text-charcoal/80 leading-relaxed mt-4">
-            In the meantime, browse our directory:{' '}
+        <div className="mt-12 space-y-8">
+          {posts.map((post) => (
             <Link
-              href="/servers"
-              className="font-sans font-semibold text-gold-text hover:underline"
+              key={post.slug}
+              href={`/blog/${post.slug}`}
+              className="block card-bordered group hover:border-navy/20 transition-colors"
             >
-              Browse AI Tools →
+              <div className="flex items-center gap-3 mb-3">
+                <span className="text-xs bg-slate-100 text-charcoal rounded-full px-2.5 py-1 font-sans">
+                  {post.category}
+                </span>
+                <span className="text-xs text-charcoal/40 font-body">
+                  {new Date(post.date).toLocaleDateString('en-US', {
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric',
+                  })}
+                </span>
+                <span className="text-xs text-charcoal/40 font-body">{post.readingTime}</span>
+              </div>
+              <h2 className="font-display text-xl font-bold text-navy group-hover:text-gold-text transition-colors">
+                {post.title}
+              </h2>
+              <p className="font-body text-charcoal/60 mt-2 leading-relaxed">
+                {post.description}
+              </p>
             </Link>
-          </p>
+          ))}
         </div>
       </div>
     </main>

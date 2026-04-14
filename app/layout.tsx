@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Fraunces, Inter, DM_Sans } from 'next/font/google';
 import Link from 'next/link';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import { Footer } from './components/Footer';
 import { WebSiteJsonLd, OrganizationJsonLd } from './components/JsonLd';
@@ -92,6 +93,12 @@ export default function RootLayout({
                 Submit a Tool
               </Link>
               <Link
+                href="/blog"
+                className="font-sans text-sm text-charcoal hover:text-gold-text transition-colors"
+              >
+                Blog
+              </Link>
+              <Link
                 href="/about"
                 className="font-sans text-sm text-charcoal hover:text-gold-text transition-colors"
               >
@@ -130,6 +137,7 @@ export default function RootLayout({
         <main>{children}</main>
 
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
