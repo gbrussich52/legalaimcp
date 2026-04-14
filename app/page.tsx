@@ -46,7 +46,7 @@ export default async function HomePage() {
   const typedCategories = (categories ?? []) as Category[]
 
   return (
-    <>
+    <main>
       {/* ── 1. Hero ── */}
       <section className="bg-gradient-to-b from-navy to-[#1E293B] text-white py-28 px-6 text-center">
         <div className="max-w-4xl mx-auto">
@@ -152,6 +152,6 @@ export default async function HomePage() {
           <LeadGenCTA />
         </div>
       </section>
-    </>
+    </main>
   )
 }

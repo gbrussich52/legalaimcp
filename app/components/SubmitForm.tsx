@@ -1,6 +1,6 @@
 'use client'
 
-import { useActionState } from 'react'
+import React, { useActionState } from 'react'
 import { CheckCircle2 } from 'lucide-react'
 import Link from 'next/link'
 import { submitListing, SubmissionState } from '../submit/actions'
@@ -400,7 +400,3 @@ export default function SubmitForm() {
     </form>
   )
 }
-
-// React must be in scope for JSX — Next.js 15 / React 19 auto-imports it,
-// but the explicit import keeps TS happy without relying on that transform.
-import React from 'react'

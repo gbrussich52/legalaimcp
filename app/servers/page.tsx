@@ -37,7 +37,7 @@ export default async function BrowsePage({
       .eq('status', 'published')
     if (category) countQuery = countQuery.eq('category', category)
     if (pricing) countQuery = countQuery.eq('pricing_model', pricing)
-    if (q) countQuery = countQuery.ilike('name', `%${q}%`)
+    if (q) countQuery = countQuery.or(`name.ilike.%${q}%,tagline.ilike.%${q}%`)
     const { count } = await countQuery
     totalCount = count ?? 0
 
@@ -45,7 +45,7 @@ export default async function BrowsePage({
     let query = supabase.from('listings').select('*').eq('status', 'published')
     if (category) query = query.eq('category', category)
     if (pricing) query = query.eq('pricing_model', pricing)
-    if (q) query = query.ilike('name', `%${q}%`)
+    if (q) query = query.or(`name.ilike.%${q}%,tagline.ilike.%${q}%`)
 
     query = query
       .order('featured', { ascending: false })

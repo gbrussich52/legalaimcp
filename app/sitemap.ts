@@ -1,8 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { supabase } from '@/lib/supabase'
 import { getAllPosts } from '@/lib/blog'
-
-const SITE_URL = 'https://legalaimcp.com'
+import { SITE_URL } from '@/lib/constants'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const listings = supabase

@@ -55,5 +55,3 @@ export function ListingFilters() {
     </div>
   )
 }
-
-export default ListingFilters
