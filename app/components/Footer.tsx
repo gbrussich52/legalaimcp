@@ -99,8 +99,14 @@ export function Footer() {
           <p className="text-slate-400 text-sm font-body">
             © {currentYear} {SITE_NAME}. All rights reserved.
           </p>
-          <p className="text-slate-500 text-xs font-body">
-            Some links may earn us a commission at no extra cost to you.
+          {/* Affiliate disclosure reframed as transparency rather than fine
+              print — CRO rule #11 trust cluster. Same legal disclosure,
+              owned upfront. */}
+          <p className="text-slate-400 text-xs font-body">
+            Funded by affiliate revenue.{' '}
+            <span className="text-slate-500">
+              Your price is the same. No paid placements.
+            </span>
           </p>
         </div>
       </div>
