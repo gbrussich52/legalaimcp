@@ -16,6 +16,122 @@ export interface BlogPost {
 
 const posts: BlogPost[] = [
   {
+    slug: 'courtlistener-mcp-inside-claude',
+    title: 'CourtListener Is Now Inside Claude — What It Means for Litigators',
+    description:
+      'Free Law Project\'s CourtListener MCP connector gives AI agents native access to case law, PACER data, and oral argument transcripts. Here\'s what changes for litigators.',
+    date: '2026-05-14',
+    author: 'LegalAIMCP Team',
+    category: 'News',
+    readingTime: '5 min read',
+    content: `
+<p>On May 12, 2026, the Free Law Project announced that <strong>CourtListener is now available as an MCP connector inside Claude</strong> — giving AI assistants native, real-time access to one of the most comprehensive legal databases in the country. This is a significant moment for litigators who've been manually bouncing between research platforms and their AI tools.</p>
+
+<h2>What CourtListener Gives You</h2>
+<p>CourtListener isn't a lightweight database. Through the MCP connector, AI assistants can now directly access:</p>
+<ul>
+<li><strong>Federal and state case law</strong> — millions of opinions across all circuits</li>
+<li><strong>PACER data</strong> — real court docket information without the manual login</li>
+<li><strong>Citation analysis</strong> — see how cases have been cited, distinguished, or overruled</li>
+<li><strong>Oral argument transcripts</strong> — understand how courts have engaged with specific arguments</li>
+<li><strong>Judge data</strong> — judicial history and appointment records</li>
+<li><strong>Real-time alerts</strong> — set up monitoring for new opinions on specific topics</li>
+</ul>
+<p>All of this is accessible in plain English, directly from your AI assistant, without switching applications or manually querying a search interface.</p>
+
+<h2>What Actually Changes for Litigators</h2>
+<p>Before this integration, a typical research workflow looked like: query Westlaw or Lexis, copy the relevant case text, paste it into your AI tool, get analysis, then go back to verify citations. The CourtListener connector collapses this into a single conversation.</p>
+<p>You can ask Claude to find the three most relevant circuit court opinions on a damages issue in securities cases, get a summary of how each court reasoned, identify which circuits have split, and then draft a memo framing your argument around the majority approach — all in one session, with citations that are real.</p>
+<p><strong>The hallucination problem becomes less acute.</strong> When your AI assistant is pulling from a live legal database rather than generating from training data, fabricated citations become a much smaller risk. That alone is significant.</p>
+
+<h2>The Catch: It's Free Law, Not Westlaw</h2>
+<p>CourtListener is excellent for federal court opinions and increasingly strong on state courts, but it isn't a substitute for Westlaw's editorial layer — KeyCite, headnotes, secondary sources, and practice guides. For primary source research on federal questions, it's now a serious option. For comprehensive state court research or secondary source access, you still need a commercial subscription.</p>
+
+<h2>How to Use It</h2>
+<p>The CourtListener MCP connector works with Claude Desktop and Claude Code. If you're already using Claude as your primary AI tool, you can add the connector through the MCP settings. The Free Law Project has published setup documentation on their site.</p>
+<p>This is the kind of integration that demonstrates what the MCP ecosystem can become for legal practice — specialized, reliable, and genuinely useful rather than a demo. Expect more of these in 2026.</p>
+`,
+  },
+  {
+    slug: 'general-legal-mcp-server-first-law-firm',
+    title: 'General Legal\'s MCP Server: The First Law Firm Built for AI Agents',
+    description:
+      'General Legal shipped the first production MCP server designed for AI agents to use as clients — uploading contracts for attorney review and getting back redlines. Here\'s how it works and what it signals for the industry.',
+    date: '2026-05-16',
+    author: 'LegalAIMCP Team',
+    category: 'Analysis',
+    readingTime: '6 min read',
+    content: `
+<p>In April 2026, General Legal quietly shipped something that nobody else in the legal industry has done: a production MCP server that allows AI agents to be <em>clients</em> of a law firm. Not a tool for lawyers — a tool that lets AI workflows hire lawyers.</p>
+<p>It's a small but meaningful inversion that says a lot about where legal services are heading.</p>
+
+<h2>What General Legal Built</h2>
+<p>The General Legal MCP server exposes four tools:</p>
+<ul>
+<li><strong>upload_contract</strong> — Submit a contract for attorney review</li>
+<li><strong>confirm_upload</strong> — Verify the submission was received</li>
+<li><strong>list_contracts</strong> — Check the status of pending reviews</li>
+<li><strong>download_contract</strong> — Retrieve the attorney-redlined version</li>
+</ul>
+<p>The workflow is entirely conversational. An AI agent running inside Claude Code or Claude Desktop can upload a contract, monitor its status, and download the completed attorney review — all without a human manually logging into a portal or emailing attachments.</p>
+
+<h2>Why This Is Different</h2>
+<p>The key distinction is professional liability. General Legal isn't selling AI-generated redlines dressed up with a law firm name. Licensed attorneys review every contract. The MCP server is the intake and delivery mechanism — the human judgment is still in the loop, just accessed differently.</p>
+<p>Their pricing reflects this: $250 for contracts under three pages, $500 for standard contracts, $10/page for longer documents, and $2,000 for contract drafting. Turnaround is typically a few hours.</p>
+<p>This is fundamentally different from AI tools that generate redlines and hope you review them carefully. It's a law firm that happens to accept work from AI agents as clients.</p>
+
+<h2>The Broader Implication</h2>
+<p>Legal services are increasingly being consumed by software systems, not just humans. As AI-powered business automation grows, there will be more situations where an AI agent needs to complete a legal task — review a vendor contract, check compliance, flag an issue — as part of a larger automated workflow.</p>
+<p>General Legal's model is one answer to that: a law firm designed from the ground up to serve AI agents as clients, with the professional accountability that human lawyers bring.</p>
+<p>Other law firms should be paying attention. The clients who come to you in 2028 may not always be humans.</p>
+
+<h2>What It Means for Your Firm</h2>
+<p>If you run a firm that handles commodity contract review — NDAs, standard vendor agreements, boilerplate leases — the competitive pressure is now explicit. AI agents can now access attorney review programmatically, at scale, at flat-fee pricing.</p>
+<p>The winning position isn't to compete on volume and price. It's to build expertise and relationships that AI workflows can't replicate. But understanding what's happening in the MCP ecosystem is a prerequisite for making that strategic shift with your eyes open.</p>
+`,
+  },
+  {
+    slug: 'anthropic-enters-legal-ai-what-it-means',
+    title: 'Anthropic Enters Legal AI: What It Means for Your Firm',
+    description:
+      'Anthropic is partnering with legal AI platforms to automate specific firm workflows. Here\'s what the $4B company\'s move into legal means for lawyers evaluating AI tools in 2026.',
+    date: '2026-05-20',
+    author: 'LegalAIMCP Team',
+    category: 'Analysis',
+    readingTime: '5 min read',
+    content: `
+<p>In May 2026, TechCrunch reported that Anthropic — the company behind Claude — is actively partnering with legal AI platforms to automate specific clerical functions at law firms. For an industry that's been cautiously evaluating AI for years, this represents a meaningful shift in how seriously the major AI players are treating legal as a vertical.</p>
+
+<h2>What Anthropic Is Actually Building</h2>
+<p>The company's legal AI push targets specific high-volume, low-judgment workflows:</p>
+<ul>
+<li><strong>Document search and review</strong> — finding relevant documents across large case files</li>
+<li><strong>Case law research</strong> — identifying relevant precedents and summarizing holdings</li>
+<li><strong>Deposition prep</strong> — organizing deposition transcripts and flagging key testimony</li>
+<li><strong>Document drafting</strong> — generating first drafts of standard documents from templates</li>
+</ul>
+<p>The focus on "clerical functions" is deliberate. Anthropic isn't positioning Claude as a lawyer — it's positioning Claude as a paralegal that never sleeps and never makes typos.</p>
+
+<h2>Why This Matters More Than It Seems</h2>
+<p>When a company with $4 billion in funding and backing from Google and Amazon decides that legal is a priority vertical, it changes the investment calculus for the entire legal AI ecosystem. More capital flows in. More specialized tools get built. The underlying model capabilities improve faster because legal use cases drive training data and fine-tuning.</p>
+<p>The firms that are figuring out AI workflows <em>now</em> will have a significant advantage when these tools mature. Not because they'll have locked in some specific platform, but because they'll have the organizational knowledge of how to integrate AI into legal work — which is genuinely hard to develop quickly.</p>
+
+<h2>The MCP Connection</h2>
+<p>Anthropic's involvement also accelerates the MCP ecosystem. Claude is already the most MCP-capable AI assistant in widespread use, and as Anthropic pushes deeper into legal verticals, expect more legal-specific MCP connectors — for case management systems, document stores, court filing platforms, and billing tools.</p>
+<p>CourtListener's May 2026 MCP connector is an early example of this. Expect more.</p>
+
+<h2>What To Do Right Now</h2>
+<p>You don't need to wait for Anthropic's formal legal product launch. The tools are good enough today to meaningfully change how you work on document-heavy tasks. The practical steps:</p>
+<ol>
+<li><strong>Identify your highest-volume repetitive tasks</strong> — document review, research, first-draft generation</li>
+<li><strong>Run a 30-day trial</strong> using Claude or another AI assistant on just one of those tasks</li>
+<li><strong>Measure the time savings</strong> and document what had to be reviewed or corrected</li>
+<li><strong>Browse the MCP directory</strong> to see if there's an integration that connects your AI to the specific data source you need</li>
+</ol>
+<p>The firms that are waiting for AI to be "ready" are already behind. The question now is how far behind — and whether the gap is still closeable.</p>
+`,
+  },
+  {
     slug: 'what-is-mcp-for-law-firms',
     title: 'What Is MCP and Why Should Your Law Firm Care?',
     description:
