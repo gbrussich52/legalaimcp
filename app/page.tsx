@@ -5,6 +5,9 @@ import { ListingCard } from './components/ListingCard'
 import { CategoryCard } from './components/CategoryCard'
 import { LeadGenCTA } from './components/LeadGenCTA'
 import { HeroSearch } from './components/HeroSearch'
+import { TrustStrip } from './components/TrustStrip'
+import { ChecklistOptin } from './components/ChecklistOptin'
+import { FAQ } from './components/FAQ'
 import { getAllPosts } from '@/lib/blog'
 import type { Listing, Category } from '@/lib/types'
 
@@ -13,6 +16,16 @@ export const metadata: Metadata = {
   description:
     'The curated directory of AI-powered MCP integrations for law firms. Find tools for contract review, case management, legal research, client intake, and more.',
   alternates: { canonical: 'https://legalaimcp.com' },
+}
+
+// Pricing-tier sort key for the Featured grid — implements CRO rule #10
+// (price anchoring): show higher-priced options first so freemium/free reads
+// as relief, not as "is this serious?"
+const PRICING_ANCHOR_ORDER: Record<string, number> = {
+  contact: 0,
+  paid: 1,
+  freemium: 2,
+  free: 3,
 }
 
 export default async function HomePage() {
@@ -43,14 +56,20 @@ export default async function HomePage() {
     categoryCounts[row.category] = (categoryCounts[row.category] ?? 0) + 1
   }
 
-  const typedListings = (featuredListings ?? []) as Listing[]
+  // Sort Featured tools by price anchor (high → low) so visitor brain anchors
+  // on the expensive options before reaching the free ones. CRO rule #10.
+  const typedListings = ((featuredListings ?? []) as Listing[]).slice().sort(
+    (a, b) =>
+      (PRICING_ANCHOR_ORDER[a.pricing_model] ?? 99) -
+      (PRICING_ANCHOR_ORDER[b.pricing_model] ?? 99),
+  )
   const typedCategories = (categories ?? []) as Category[]
   const totalTools = countData?.length ?? 0
   const recentPosts = getAllPosts().slice(0, 3)
 
   return (
     <main>
-      {/* ── 1. Hero ── */}
+      {/* ── 1. Hero ── Keeps the existing redesign (HeroSearch + stats bar). */}
       <section className="bg-gradient-to-b from-navy to-[#1E293B] text-white py-24 px-6 text-center">
         <div className="max-w-4xl mx-auto">
           <span className="inline-block bg-white/10 border border-white/20 text-white/80 text-xs font-sans font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6">
@@ -94,7 +113,13 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── 2. How It Works ── */}
+      {/* ── 2. Trust strip ── CRO #6/#7/#11 — clustered trust signals
+          immediately under the primary CTA. Complements the hero stats bar
+          with the differentiation claims (no paid placements, attorney
+          curation) that the stats bar doesn't cover. */}
+      <TrustStrip />
+
+      {/* ── 3. How It Works ── */}
       <section className="bg-white py-16 px-6">
         <div className="max-w-5xl mx-auto">
           <p className="font-sans text-xs font-bold uppercase tracking-widest text-gold-text text-center mb-2">
@@ -138,7 +163,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── 3. Featured Listings ── */}
+      {/* ── 4. Featured Listings ── Now sorted by price anchor (CRO #10). */}
       <section className="section-padding bg-warm-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-end justify-between mb-2">
@@ -178,7 +203,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── 4. Categories ── */}
+      {/* ── 5. Categories ── */}
       <section className="section-padding bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="font-display text-3xl font-bold text-navy text-center">
@@ -206,7 +231,20 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── 5. What is MCP? ── */}
+      {/* ── 6. Lead magnet (email capture) ──
+          The new primary first ask. CRO #13 lead-magnet hierarchy (template /
+          checklist > guide), #23 micro-commitment ladder (single field).
+          Positioned AFTER visitors have seen the directory + categories,
+          BEFORE the deeper MCP explainer — they've seen enough to know what's
+          on offer; the checklist is the natural next step for the
+          consideration-stage visitor. */}
+      <section className="section-padding bg-gradient-to-b from-white to-warm-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <ChecklistOptin source="homepage_checklist" variant="hero" />
+        </div>
+      </section>
+
+      {/* ── 7. What is MCP? ── */}
       <section className="section-padding bg-slate-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -256,7 +294,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── 6. Recent Blog Posts ── */}
+      {/* ── 8. Recent Blog Posts ── */}
       {recentPosts.length > 0 && (
         <section className="section-padding bg-warm-white">
           <div className="max-w-7xl mx-auto px-6">
@@ -302,7 +340,12 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* ── 7. Lead Gen CTA ── */}
+      {/* ── 9. FAQ ── CRO #14 objection preemption. Sits BEFORE the
+          consultation CTA so skeptical visitors get their hard questions
+          answered before being asked to spend 30 minutes on a call. */}
+      <FAQ />
+
+      {/* ── 10. Lead Gen CTA ── */}
       <section className="section-padding bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <LeadGenCTA />
