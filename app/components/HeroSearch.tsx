@@ -30,6 +30,7 @@ export function HeroSearch() {
         placeholder="Search tools — e.g. contract review, intake, billing..."
         className="w-full pl-12 pr-32 py-4 rounded-xl text-charcoal text-sm font-body bg-white border-2 border-transparent focus:border-gold-text focus:outline-none shadow-lg"
         aria-label="Search legal AI tools"
+        maxLength={100}
       />
       <button
         type="submit"

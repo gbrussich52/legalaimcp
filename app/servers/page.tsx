@@ -7,6 +7,8 @@ import { ListingFilters } from '../components/ListingFilters'
 import { LeadGenCTA } from '../components/LeadGenCTA'
 import { ItemListJsonLd } from '../components/JsonLd'
 import type { Listing } from '@/lib/types'
+import { CATEGORY_LABELS, PRICING_LABELS } from '@/lib/constants'
+import { sanitizeSearchQuery } from '@/lib/search'
 
 const PAGE_SIZE = 12
 
@@ -23,7 +25,21 @@ export default async function BrowsePage({
   searchParams: Promise<{ category?: string; pricing?: string; q?: string; page?: string }>
 }) {
   const params = await searchParams
-  const { category, pricing, q } = params
+
+  // Validate category and pricing against their respective allowlists.
+  // Unknown param values are ignored rather than passed to the DB query.
+  const category =
+    params.category && Object.prototype.hasOwnProperty.call(CATEGORY_LABELS, params.category)
+      ? params.category
+      : undefined
+  const pricing =
+    params.pricing && Object.prototype.hasOwnProperty.call(PRICING_LABELS, params.pricing)
+      ? params.pricing
+      : undefined
+
+  // Sanitize q: strip PostgREST structural chars and cap at 100 chars.
+  const q = params.q ? sanitizeSearchQuery(params.q) : undefined
+
   const currentPage = Math.max(1, parseInt(params.page || '1', 10))
 
   let listings: Listing[] = []
