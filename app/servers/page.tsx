@@ -6,7 +6,7 @@ import { SearchBar } from '../components/SearchBar'
 import { ListingFilters } from '../components/ListingFilters'
 import { LeadGenCTA } from '../components/LeadGenCTA'
 import { ItemListJsonLd } from '../components/JsonLd'
-import type { Listing } from '@/lib/types'
+import { LISTING_CARD_COLUMNS, type ListingCardData } from '@/lib/types'
 import { CATEGORY_LABELS, PRICING_LABELS } from '@/lib/constants'
 import { sanitizeSearchQuery } from '@/lib/search'
 
@@ -42,7 +42,7 @@ export default async function BrowsePage({
 
   const currentPage = Math.max(1, parseInt(params.page || '1', 10))
 
-  let listings: Listing[] = []
+  let listings: ListingCardData[] = []
   let totalCount = 0
 
   if (supabase) {
@@ -57,8 +57,8 @@ export default async function BrowsePage({
     const { count } = await countQuery
     totalCount = count ?? 0
 
-    // Data query with pagination
-    let query = supabase.from('listings').select('*').eq('status', 'published')
+    // Data query with pagination (Q3: card columns only — no description)
+    let query = supabase.from('listings').select(LISTING_CARD_COLUMNS).eq('status', 'published')
     if (category) query = query.eq('category', category)
     if (pricing) query = query.eq('pricing_model', pricing)
     if (q) query = query.or(`name.ilike.%${q}%,tagline.ilike.%${q}%`)
