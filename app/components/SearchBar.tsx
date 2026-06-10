@@ -44,6 +44,7 @@ export function SearchBar() {
         placeholder="Search legal AI tools..."
         className="pl-10 pr-4 py-3 w-full border-2 border-slate-200 rounded-lg text-sm font-body focus:border-gold-text focus:outline-none"
         aria-label="Search listings"
+        maxLength={100}
       />
     </div>
   )

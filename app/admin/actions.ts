@@ -3,6 +3,44 @@
 import { revalidatePath } from 'next/cache'
 import { isAdminAuthenticated } from '@/lib/admin-auth'
 import { getAdminClient } from '@/lib/supabase-admin'
+import { z } from 'zod'
+
+/**
+ * Schema matching the shape of listing_data stored in the submissions table.
+ *
+ * This mirrors the submissionSchema in app/submit/actions.ts, minus the fields
+ * that are extracted before storage (submitter_email, creator_name). Min-length
+ * constraints from the original schema are preserved — all stored submissions
+ * passed these rules on entry so they should pass here too.
+ *
+ * Validation is intentionally warn-on-failure rather than hard-throw.
+ * Rationale: if a future schema change tightens constraints, or if any
+ * submission was stored via a migration / admin backdoor that bypassed
+ * the public form, a hard-throw would silently block the approve action
+ * on production data. Instead we log the issue and continue — this surfaces
+ * problems in logs without taking down the admin panel. Switch to hard-throw
+ * once all 54 live submissions have been audited against this schema (Wave 2).
+ */
+const listingDataSchema = z.object({
+  name: z.string().min(2).max(100),
+  tagline: z.string().min(10).max(120),
+  category: z.enum([
+    'document_processing',
+    'case_management',
+    'client_communication',
+    'legal_research',
+    'billing_time',
+    'compliance',
+    'general',
+  ]),
+  external_url: z.string().url(),
+  mcp_repo_url: z.string().url().optional().or(z.literal('')),
+  mcp_install_command: z.string().optional(),
+  pricing_model: z.enum(['free', 'freemium', 'paid', 'contact']),
+  pricing_details: z.string().optional(),
+  description: z.string().min(50).max(2000),
+  creator_url: z.string().url().optional().or(z.literal('')),
+})
 
 async function requireAdmin() {
   if (!(await isAdminAuthenticated())) {
@@ -64,10 +102,30 @@ export async function approveSubmission(submissionId: string) {
     .single()
   if (fetchErr || !sub) throw new Error('Submission not found')
 
-  const data = sub.listing_data as Record<string, string>
-  if (!data.name) throw new Error('Submission has no tool name')
+  // Cast to Record<string, unknown> for safe property access; individual
+  // string fields are cast to string at the insert site via String() or '|| ""'.
+  const rawData = sub.listing_data as Record<string, unknown>
+  if (!rawData.name) throw new Error('Submission has no tool name')
+  // Narrow to string-keyed record for downstream usage in insert payload.
+  const data: Record<string, string | undefined> = Object.fromEntries(
+    Object.entries(rawData).map(([k, v]) => [k, v != null ? String(v) : undefined]),
+  )
 
-  // Generate slug with uniqueness check
+  // Re-validate listing_data against schema before publishing.
+  // Warn-on-failure (see listingDataSchema comment above) — log the issue but
+  // do not block the approve action, since all stored submissions should have
+  // passed this on entry.
+  const validation = listingDataSchema.safeParse(rawData)
+  if (!validation.success) {
+    console.warn(
+      `[approveSubmission] Submission ${submissionId} listing_data failed re-validation — proceeding anyway:`,
+      validation.error.issues,
+    )
+  }
+
+  // Generate slug with uniqueness check (re-assert name is present so TS narrows
+  // data.name from string|undefined to string; rawData.name was guarded above).
+  if (!data.name) throw new Error('Submission has no tool name')
   let slug = generateSlug(data.name)
   const { data: existing } = await db.from('listings').select('slug').eq('slug', slug).maybeSingle()
   if (existing) {
