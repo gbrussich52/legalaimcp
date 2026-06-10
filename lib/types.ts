@@ -35,6 +35,20 @@ export interface Listing {
   updated_at: string
 }
 
+/**
+ * Subset of Listing needed to render a ListingCard / browse grid (audit Q3).
+ * Browse, homepage, and category pages previously selected '*', over-fetching
+ * `description` (up to 2000 chars per row) that the card never renders.
+ * Keep LISTING_CARD_COLUMNS in sync with this type.
+ */
+export type ListingCardData = Pick<
+  Listing,
+  'id' | 'slug' | 'name' | 'tagline' | 'category' | 'pricing_model' | 'verified' | 'logo_url'
+>
+
+export const LISTING_CARD_COLUMNS =
+  'id, slug, name, tagline, category, pricing_model, verified, logo_url'
+
 export interface Category {
   slug: string
   name: string

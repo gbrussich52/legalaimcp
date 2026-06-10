@@ -3,6 +3,26 @@
 import { supabase } from '@/lib/supabase'
 import { z } from 'zod'
 
+/**
+ * z.string().url() accepts ANY parseable URL — including javascript: and
+ * data: schemes. external_url / creator_url / mcp_repo_url end up in <a href>
+ * on public pages, so restrict to http(s) at the validation boundary.
+ */
+const httpUrl = z
+  .string()
+  .url()
+  // Zod v4 still runs refinements when .url() failed — guard the parse.
+  .refine(
+    (u) => {
+      try {
+        return /^https?:$/.test(new URL(u).protocol)
+      } catch {
+        return false
+      }
+    },
+    { message: 'URL must use http or https' },
+  )
+
 const submissionSchema = z.object({
   name: z.string().min(2).max(100),
   tagline: z.string().min(10).max(120),
@@ -15,15 +35,15 @@ const submissionSchema = z.object({
     'compliance',
     'general',
   ]),
-  external_url: z.string().url(),
-  mcp_repo_url: z.string().url().optional().or(z.literal('')),
+  external_url: httpUrl,
+  mcp_repo_url: httpUrl.optional().or(z.literal('')),
   mcp_install_command: z.string().optional(),
   pricing_model: z.enum(['free', 'freemium', 'paid', 'contact']),
   pricing_details: z.string().optional(),
   description: z.string().min(50).max(2000),
   creator_name: z.string().min(2).max(100),
   submitter_email: z.string().email(),
-  creator_url: z.string().url().optional().or(z.literal('')),
+  creator_url: httpUrl.optional().or(z.literal('')),
 })
 
 export type SubmissionState = {

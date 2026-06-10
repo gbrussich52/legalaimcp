@@ -7,7 +7,8 @@ import { SoftwareAppJsonLd } from '../../components/JsonLd'
 import { ListingCard } from '../../components/ListingCard'
 import { LeadGenCTA } from '../../components/LeadGenCTA'
 import { CATEGORY_LABELS, PRICING_LABELS, SITE_URL } from '@/lib/constants'
-import type { Listing } from '@/lib/types'
+import { sanitizeLogoUrl } from '@/lib/logo-url'
+import { LISTING_CARD_COLUMNS, type ListingCardData } from '@/lib/types'
 
 export async function generateMetadata({
   params,
@@ -17,9 +18,10 @@ export async function generateMetadata({
   const { slug } = await params
   if (!supabase) return { title: 'Tool Not Found' }
 
+  // Q3: metadata only needs name/tagline/slug — skip the 2000-char description.
   const { data: listing } = await supabase
     .from('listings')
-    .select('*')
+    .select('name, tagline, slug')
     .eq('slug', slug)
     .eq('status', 'published')
     .single()
@@ -65,19 +67,22 @@ export default async function ListingDetailPage({
 
   if (!listing) notFound()
 
-  // Fetch up to 3 related listings in the same category, excluding the current one
+  // Fetch up to 3 related listings in the same category, excluding the current
+  // one. Q3: card columns only — the related grid never shows description.
   const { data: relatedData } = await supabase
     .from('listings')
-    .select('*')
+    .select(LISTING_CARD_COLUMNS)
     .eq('status', 'published')
     .eq('category', listing.category)
     .neq('id', listing.id)
     .limit(3)
 
-  const related: Listing[] = relatedData ?? []
+  const related: ListingCardData[] = relatedData ?? []
 
   const categoryLabel = CATEGORY_LABELS[listing.category] ?? listing.category
   const pricingLabel = PRICING_LABELS[listing.pricing_model] ?? listing.pricing_model
+  // S4: strict https-only parse before the URL reaches <img src>.
+  const logoSrc = sanitizeLogoUrl(listing.logo_url)
 
   return (
     <main className="max-w-content mx-auto px-4 py-12">
@@ -95,10 +100,10 @@ export default async function ListingDetailPage({
       {/* Header */}
       <div className="mb-10">
         <div className="flex items-start gap-5 mb-4">
-          {listing.logo_url ? (
+          {logoSrc ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
-              src={listing.logo_url}
+              src={logoSrc}
               alt={`${listing.name} logo`}
               className="h-16 w-16 rounded-xl object-cover flex-shrink-0"
             />

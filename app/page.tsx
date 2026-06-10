@@ -9,7 +9,7 @@ import { TrustStrip } from './components/TrustStrip'
 import { ChecklistOptin } from './components/ChecklistOptin'
 import { FAQ } from './components/FAQ'
 import { getAllPosts } from '@/lib/blog'
-import type { Listing, Category } from '@/lib/types'
+import { LISTING_CARD_COLUMNS, type ListingCardData, type Category } from '@/lib/types'
 
 export const metadata: Metadata = {
   title: 'LegalAIMCP — AI Integrations for Law Firms',
@@ -33,7 +33,7 @@ export default async function HomePage() {
     ? await Promise.all([
         supabase
           .from('listings')
-          .select('*')
+          .select(LISTING_CARD_COLUMNS) // Q3: card columns only — no description
           .eq('status', 'published')
           .eq('featured', true)
           .limit(6)
@@ -58,7 +58,7 @@ export default async function HomePage() {
 
   // Sort Featured tools by price anchor (high → low) so visitor brain anchors
   // on the expensive options before reaching the free ones. CRO rule #10.
-  const typedListings = ((featuredListings ?? []) as Listing[]).slice().sort(
+  const typedListings = ((featuredListings ?? []) as ListingCardData[]).slice().sort(
     (a, b) =>
       (PRICING_ANCHOR_ORDER[a.pricing_model] ?? 99) -
       (PRICING_ANCHOR_ORDER[b.pricing_model] ?? 99),

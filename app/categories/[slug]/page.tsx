@@ -5,7 +5,7 @@ import { ListingCard } from '../../components/ListingCard'
 import { LeadGenCTA } from '../../components/LeadGenCTA'
 import { ItemListJsonLd } from '../../components/JsonLd'
 import { SITE_URL } from '@/lib/constants'
-import type { Listing, Category } from '@/lib/types'
+import { LISTING_CARD_COLUMNS, type ListingCardData, type Category } from '@/lib/types'
 
 export async function generateMetadata({
   params,
@@ -15,9 +15,10 @@ export async function generateMetadata({
   const { slug } = await params
   if (!supabase) return { title: 'Category Not Found' }
 
+  // Q3: metadata only needs name + description.
   const { data: category } = await supabase
     .from('categories')
-    .select('*')
+    .select('name, description')
     .eq('slug', slug)
     .single()
 
@@ -59,15 +60,16 @@ export default async function CategoryPage({
   // Category slugs use hyphens ('document-processing'), enum uses underscores ('document_processing')
   const categoryEnum = slug.replace(/-/g, '_')
 
+  // Q3: card columns only — the category grid never renders description.
   const { data: listings } = await supabase
     .from('listings')
-    .select('*')
+    .select(LISTING_CARD_COLUMNS)
     .eq('status', 'published')
     .eq('category', categoryEnum)
     .order('featured', { ascending: false })
     .order('name', { ascending: true })
 
-  const safeListings: Listing[] = listings || []
+  const safeListings: ListingCardData[] = listings || []
 
   return (
     <>

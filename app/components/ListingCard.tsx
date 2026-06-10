@@ -1,20 +1,24 @@
 import Link from 'next/link'
 import { CATEGORY_LABELS, PRICING_LABELS } from '@/lib/constants'
-import type { Listing } from '@/lib/types'
+import { sanitizeLogoUrl } from '@/lib/logo-url'
+import type { ListingCardData } from '@/lib/types'
 
-export function ListingCard({ listing }: { listing: Listing }) {
+export function ListingCard({ listing }: { listing: ListingCardData }) {
   const categoryLabel = CATEGORY_LABELS[listing.category] ?? listing.category
   const pricingLabel = PRICING_LABELS[listing.pricing_model] ?? listing.pricing_model
+  // S4: only render https URLs that survive strict parsing — falls back to
+  // the initial-letter tile for anything suspicious.
+  const logoSrc = sanitizeLogoUrl(listing.logo_url)
 
   return (
     <Link href={`/servers/${listing.slug}`} className="card group block">
       {/* Header row: logo + text */}
       <div className="flex items-start gap-4">
         {/* Logo or initial-letter fallback */}
-        {listing.logo_url ? (
+        {logoSrc ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={listing.logo_url}
+            src={logoSrc}
             alt={`${listing.name} logo`}
             className="h-12 w-12 rounded-lg object-cover flex-shrink-0"
           />

@@ -78,7 +78,8 @@ export function ItemListJsonLd({
   listings,
   name,
 }: {
-  listings: Listing[]
+  // Only slug is used — accepts full Listing rows or Q3 card-column subsets.
+  listings: Pick<Listing, 'slug'>[]
   name: string
 }) {
   const schema = {
