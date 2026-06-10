@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { adminLogin } from '@/lib/admin-auth'
+import { isSameOriginRequest } from '@/lib/origin'
 
 /**
  * In-memory IP lockout for Wave-1 brute-force protection.
@@ -78,6 +79,11 @@ function recordSuccess(ip: string): void {
 }
 
 export async function POST(request: Request) {
+  // CSRF defense: reject cross-origin requests before touching any state.
+  if (!isSameOriginRequest(request.headers)) {
+    return NextResponse.json({ error: 'Cross-origin request rejected' }, { status: 403 })
+  }
+
   const ip = getClientIp(request)
 
   // Reject immediately if the IP is already locked out
