@@ -114,8 +114,48 @@ const handler = createMcpHandler(
           // an `or` string. This is the same class of injection the site's
           // search guard handles; an MCP tool argument is attacker-controlled
           // in exactly the same way a query param is.
-          const safe = query.replace(/[,()*\\%]/g, ' ').trim()
-          if (safe) q = q.or(`name.ilike.%${safe}%,tagline.ilike.%${safe}%`)
+          // Tokenise, then match ANY token across name/tagline/description.
+          //
+          // Two failures this fixes, both discovered by calling the deployed
+          // endpoint rather than by reading the code:
+          //
+          // 1. Phrase-matching a natural-language query. `ilike '%contract
+          //    review%'` demands that exact adjacent phrase, but assistants
+          //    send prose, not keywords. "contract review" matched 2 of 45
+          //    listings; "contract" alone matches far more.
+          // 2. Searching name/tagline only. The website has a human scanning
+          //    a results page as a safety net; an assistant takes the first
+          //    response as the answer and moves on. Recall matters more than
+          //    precision when the consumer cannot scroll.
+          //
+          // Stopwords are dropped because a token like "for" or "tool" would
+          // otherwise ilike-match nearly every description and flatten the
+          // ranking into noise. Capped at 4 tokens to bound the URL length
+          // PostgREST has to parse.
+          const STOPWORDS = new Set([
+            'the', 'a', 'an', 'for', 'and', 'or', 'of', 'to', 'in', 'on',
+            'with', 'my', 'me', 'i', 'ai', 'tool', 'tools', 'legal', 'law',
+            'best', 'good', 'need', 'want', 'that', 'this', 'is', 'are',
+          ])
+          const tokens = query
+            .replace(/[,()*\\%]/g, ' ')
+            .toLowerCase()
+            .split(/\s+/)
+            .filter((t) => t.length > 2 && !STOPWORDS.has(t))
+            .slice(0, 4)
+
+          // If the query was entirely stopwords, fall back to the raw string
+          // rather than silently dropping the filter and returning everything
+          // as though it all matched.
+          const terms = tokens.length ? tokens : [query.replace(/[,()*\\%]/g, ' ').trim()]
+          const clauses = terms
+            .filter(Boolean)
+            .flatMap((t) => [
+              `name.ilike.%${t}%`,
+              `tagline.ilike.%${t}%`,
+              `description.ilike.%${t}%`,
+            ])
+          if (clauses.length) q = q.or(clauses.join(','))
         }
 
         const { data, error } = await q

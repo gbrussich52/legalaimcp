@@ -26,6 +26,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     },
     {
+      // High priority deliberately: this is the install page for our own MCP
+      // server, and it's the canonical URL every MCP registry listing points
+      // back to. It's the site's only first-party tool, not a marketing page.
+      url: `${SITE_URL}/mcp`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
       url: `${SITE_URL}/submit`,
       lastModified: new Date(),
       changeFrequency: 'monthly',

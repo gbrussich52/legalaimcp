@@ -86,6 +86,15 @@ export default function RootLayout({
               >
                 Browse
               </Link>
+              {/* Our own MCP server. Sits second because it is the only
+                  first-party tool on the site — everything else here is a
+                  pointer to someone else's product. */}
+              <Link
+                href="/mcp"
+                className="font-sans text-sm text-charcoal hover:text-gold-text transition-colors"
+              >
+                MCP Server
+              </Link>
               <Link
                 href="/submit"
                 className="font-sans text-sm text-charcoal hover:text-gold-text transition-colors"
