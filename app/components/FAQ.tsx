@@ -15,13 +15,16 @@ const FAQ_ITEMS = [
     q: 'Are these AI tools actually vetted?',
     a: (
       <>
-        Yes. Every featured tool is reviewed by{' '}
+        Partly — and it&apos;s worth knowing exactly how far it goes. Listings are
+        compiled and reviewed by{' '}
         <Link href={NYCLAW_URL} className="text-gold-text font-semibold hover:underline" target="_blank" rel="noopener noreferrer">
           NYClaw.io
-        </Link>{' '}
-        — a working attorney building AI for law firms. We check the maker, the
-        privacy stance, and whether the tool actually does what it claims. Tools
-        we&apos;d flag as risky for client work don&apos;t make the cut.
+        </Link>
+        , an AI implementation agency. We confirm the tool exists, the maker is
+        real, and the link resolves — and we re-check every published link
+        automatically, so dead tools get pulled instead of quietly rotting.
+        What we don&apos;t do is legal or bar-compliance review. We&apos;re engineers,
+        not attorneys. Our free checklist walks you through that side yourself.
       </>
     ),
   },
@@ -41,11 +44,14 @@ const FAQ_ITEMS = [
     q: 'How is this directory funded? Are listings paid?',
     a: (
       <>
-        No tool pays to appear in the directory. We earn affiliate revenue when
-        you click through to certain tools and they pay us a referral — same as
-        Wirecutter. Your price is identical whether you find the tool here or
-        not. We disclose this on every page and never let it shape what gets
-        featured.
+        No tool pays to appear, and right now the directory earns nothing at
+        all — there are no affiliate links and no sponsorships. It&apos;s funded by{' '}
+        <Link href={NYCLAW_URL} className="text-gold-text font-semibold hover:underline" target="_blank" rel="noopener noreferrer">
+          NYClaw.io
+        </Link>
+        , the AI agency that builds it, because we work in this space and
+        needed the map ourselves. If that ever changes, we&apos;ll label the paid
+        or affiliate links on the listing itself — not just in the footer.
       </>
     ),
   },
@@ -69,9 +75,9 @@ const FAQ_ITEMS = [
         <Link href={NYCLAW_URL} className="text-gold-text font-semibold hover:underline" target="_blank" rel="noopener noreferrer">
           NYClaw.io
         </Link>
-        . That&apos;s the attorney who runs this directory — they build private AI
-        integrations for firms whose workflow doesn&apos;t match any off-the-shelf
-        tool. (Disclosure: NYClaw funds this site.)
+        . That&apos;s the AI agency that builds and funds this directory — they
+        build private AI integrations for firms whose workflow doesn&apos;t match
+        any off-the-shelf tool. (Disclosure: NYClaw funds this site.)
       </>
     ),
   },

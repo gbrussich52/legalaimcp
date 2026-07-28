@@ -26,7 +26,14 @@ export interface Listing {
   tags: string[]
   logo_url: string | null
   featured: boolean
+  /**
+   * Automated link-resolution check passed as of `verified_at`. Set only by
+   * scripts/curate.mjs — never by hand, and never by the admin UI. Reading it
+   * without `verified_at` is meaningless: the pair is the claim.
+   */
   verified: boolean
+  /** When the check that set `verified` actually ran. Null = never checked. */
+  verified_at: string | null
   source: ListingSource
   status: ListingStatus
   creator_name: string | null
@@ -43,11 +50,12 @@ export interface Listing {
  */
 export type ListingCardData = Pick<
   Listing,
-  'id' | 'slug' | 'name' | 'tagline' | 'category' | 'pricing_model' | 'verified' | 'logo_url'
+  | 'id' | 'slug' | 'name' | 'tagline' | 'category' | 'pricing_model'
+  | 'verified' | 'verified_at' | 'logo_url'
 >
 
 export const LISTING_CARD_COLUMNS =
-  'id, slug, name, tagline, category, pricing_model, verified, logo_url'
+  'id, slug, name, tagline, category, pricing_model, verified, verified_at, logo_url'
 
 export interface Category {
   slug: string

@@ -4,10 +4,18 @@
  *
  *   node scripts/curate.mjs discover [--min-stars N] [--limit N] [--dry-run]
  *   node scripts/curate.mjs check-links [--json]
+ *   node scripts/curate.mjs verify [--dry-run]
  *
  * A directory lives or dies on two things: coverage and accuracy. `discover`
  * feeds the first, `check-links` protects the second — a directory full of
  * dead links is worse than no directory.
+ *
+ * `verify` is `check-links` with teeth: it writes the result back, so the
+ * public "Verified" badge is a record of a check that actually ran rather than
+ * an adjective someone typed. The site's copy now promises that published
+ * links are re-checked automatically and dead tools get pulled; this command
+ * is the thing that makes that sentence true. If you ever disable it, change
+ * the copy in the same commit.
  *
  * DESIGN NOTE — why this writes to `submissions` and not `listings`:
  * the site already has a submit -> admin-approve pipeline, and RLS allows
@@ -229,6 +237,39 @@ async function discover() {
 
 // ----------------------------------------------------------- link health ----
 
+async function probe(url) {
+  if (!url) return null
+  const ctrl = new AbortController()
+  const timer = setTimeout(() => ctrl.abort(), 15000)
+  try {
+    // Some hosts reject HEAD; fall back to a ranged GET before calling it dead.
+    let res = await fetch(url, { method: 'HEAD', redirect: 'follow', signal: ctrl.signal })
+    if (res.status === 405 || res.status === 403) {
+      res = await fetch(url, { method: 'GET', redirect: 'follow', signal: ctrl.signal, headers: { Range: 'bytes=0-0' } })
+    }
+    return res.status
+  } catch (e) {
+    return e.name === 'AbortError' ? 'timeout' : 'error'
+  } finally {
+    clearTimeout(timer)
+  }
+}
+
+/**
+ * Classifies a probe result into the only three states that matter here.
+ *
+ * The middle state is the whole point. A 403 from a host that resolved is
+ * bot protection, not death — treating it as either "alive" or "dead" is
+ * wrong, so it gets its own bucket that changes nothing. This is the guard
+ * against the failure mode where an over-eager checker unpublishes real
+ * vendors for the crime of using Cloudflare.
+ */
+function classify(status) {
+  if (typeof status === 'number' && status < 400) return 'alive'
+  if (status === 401 || status === 403 || status === 429) return 'blocked'
+  return 'dead'
+}
+
 async function checkLinks() {
   const supabase = await loadEnv()
   const { data: listings, error } = await supabase
@@ -236,24 +277,6 @@ async function checkLinks() {
     .select('name, slug, external_url, mcp_repo_url, status')
     .eq('status', 'published')
   if (error) throw new Error(`Supabase read failed: ${error.message}`)
-
-  const probe = async (url) => {
-    if (!url) return null
-    const ctrl = new AbortController()
-    const timer = setTimeout(() => ctrl.abort(), 15000)
-    try {
-      // Some hosts reject HEAD; fall back to a ranged GET before calling it dead.
-      let res = await fetch(url, { method: 'HEAD', redirect: 'follow', signal: ctrl.signal })
-      if (res.status === 405 || res.status === 403) {
-        res = await fetch(url, { method: 'GET', redirect: 'follow', signal: ctrl.signal, headers: { Range: 'bytes=0-0' } })
-      }
-      return res.status
-    } catch (e) {
-      return e.name === 'AbortError' ? 'timeout' : 'error'
-    } finally {
-      clearTimeout(timer)
-    }
-  }
 
   const broken = []
   const blocked = []
@@ -301,9 +324,147 @@ async function checkLinks() {
   process.exitCode = 1
 }
 
+// ---------------------------------------------------------------- verify ----
+
+/** Threshold for auto-unpublish. See MAX_FAILURES note in verify(). */
+const MAX_FAILURES = 3
+
+/**
+ * Writes through the linked Supabase CLI rather than supabase-js.
+ *
+ * RLS denies anonymous UPDATE on `listings` (correctly — the public key is
+ * shipped to every browser). The alternative would be putting a service-role
+ * key in .env.local, which creates a second, far more dangerous secret on disk
+ * for a script that runs weekly on one laptop. `supabase db query --linked`
+ * already authenticates as postgres through the CLI's own stored credentials,
+ * so this adds no new trust surface.
+ *
+ * Values are escaped rather than parameterized because the CLI takes a SQL
+ * string, not bound params. Everything interpolated here is either a literal
+ * from this file or a UUID read back from the same database — no user input
+ * reaches it — but the escaping stays as defense in depth.
+ */
+async function sql(query) {
+  const { stdout } = await run('supabase', ['db', 'query', '--linked', query], {
+    maxBuffer: 10 * 1024 * 1024,
+  })
+  return stdout
+}
+
+const uuid = (v) => {
+  if (!/^[0-9a-f-]{36}$/i.test(v)) throw new Error(`refusing non-uuid id: ${v}`)
+  return `'${v}'`
+}
+
+async function verify() {
+  const dryRun = has('dry-run')
+  const supabase = await loadEnv()
+
+  const { data: listings, error } = await supabase
+    .from('listings')
+    .select('id, name, slug, external_url, mcp_repo_url, verified, link_failures')
+    .eq('status', 'published')
+  if (error) throw new Error(`Supabase read failed: ${error.message}`)
+
+  log(`verifying ${listings?.length ?? 0} published listing(s)`)
+
+  const alive = []
+  const dead = []
+  const blocked = []
+
+  for (const l of listings ?? []) {
+    const urls = [l.external_url, l.mcp_repo_url].filter(Boolean)
+    if (urls.length === 0) {
+      // No URL is not a passing grade. A listing with nothing to check can
+      // never earn a badge that means "we checked it".
+      dead.push({ ...l, reason: 'no url to check' })
+      process.stdout.write('?')
+      continue
+    }
+
+    const results = await Promise.all(urls.map(probe))
+    const states = results.map(classify)
+
+    if (states.includes('dead')) {
+      const i = states.indexOf('dead')
+      dead.push({ ...l, reason: `${urls[i]} -> ${results[i]}` })
+      process.stdout.write('X')
+    } else if (states.includes('blocked')) {
+      // Can't confirm, can't condemn. Leave the row exactly as it is.
+      blocked.push(l)
+      process.stdout.write('~')
+    } else {
+      alive.push(l)
+      process.stdout.write('.')
+    }
+  }
+  process.stdout.write('\n')
+
+  // A listing only gets pulled after MAX_FAILURES consecutive weekly runs —
+  // roughly three weeks of being continuously unreachable. Slow on purpose:
+  // silently unpublishing a real vendor over a transient outage is a worse
+  // failure than showing one stale link, and it is the kind of error nobody
+  // notices because the evidence removes itself.
+  const toPull = dead.filter((l) => (l.link_failures ?? 0) + 1 >= MAX_FAILURES)
+
+  log(`alive ${alive.length} · bot-blocked ${blocked.length} · unreachable ${dead.length}`)
+  for (const d of dead) {
+    const n = (d.link_failures ?? 0) + 1
+    log(`  [${n}/${MAX_FAILURES}] ${d.name} (${d.slug}) — ${d.reason}`)
+  }
+  if (toPull.length) {
+    log(`${toPull.length} listing(s) hit ${MAX_FAILURES} consecutive failures and will be unpublished:`)
+    for (const p of toPull) log(`  PULL ${p.name} (${p.slug})`)
+  }
+
+  if (dryRun) {
+    log('dry run — nothing written')
+    return
+  }
+
+  // Batched into three statements rather than one round-trip per listing:
+  // 45 listings would otherwise mean 45 CLI invocations, each paying process
+  // startup and a fresh connection.
+  const statements = []
+
+  if (alive.length) {
+    statements.push(
+      `UPDATE listings SET verified = TRUE, verified_at = NOW(), link_failures = 0
+       WHERE id IN (${alive.map((l) => uuid(l.id)).join(',')});`
+    )
+  }
+  if (dead.length) {
+    // verified drops to FALSE immediately on the first failure — the badge
+    // makes a present-tense claim, so it should not survive a failed check
+    // even while we wait out the pull threshold.
+    statements.push(
+      `UPDATE listings SET verified = FALSE, link_failures = link_failures + 1
+       WHERE id IN (${dead.map((l) => uuid(l.id)).join(',')});`
+    )
+  }
+  if (toPull.length) {
+    statements.push(
+      `UPDATE listings SET status = 'rejected'
+       WHERE id IN (${toPull.map((l) => uuid(l.id)).join(',')});`
+    )
+  }
+
+  if (statements.length === 0) {
+    log('nothing to write')
+    return
+  }
+
+  await sql(statements.join('\n'))
+  log(`wrote: ${alive.length} verified, ${dead.length} failed, ${toPull.length} unpublished`)
+
+  // Non-zero exit so a scheduled run surfaces in launchd logs as needing a
+  // human look, rather than succeeding quietly while listings disappear.
+  if (toPull.length) process.exitCode = 1
+}
+
 // ------------------------------------------------------------------ main ----
 
-const COMMANDS = { discover, 'check-links': checkLinks }
+const COMMANDS = { discover, 'check-links': checkLinks, verify }
 
 if (!COMMANDS[cmd]) {
   console.error('usage: curate.mjs <discover|check-links> [options]')

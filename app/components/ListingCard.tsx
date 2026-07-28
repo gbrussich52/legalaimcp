@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { CATEGORY_LABELS, PRICING_LABELS } from '@/lib/constants'
 import { sanitizeLogoUrl } from '@/lib/logo-url'
+import { VerifiedBadge } from './VerifiedBadge'
 import type { ListingCardData } from '@/lib/types'
 
 export function ListingCard({ listing }: { listing: ListingCardData }) {
@@ -49,11 +50,7 @@ export function ListingCard({ listing }: { listing: ListingCardData }) {
         <span className="text-xs bg-amber-50 text-gold-text rounded-full px-2.5 py-1">
           {pricingLabel}
         </span>
-        {listing.verified && (
-          <span className="text-xs bg-green-50 text-green-700 rounded-full px-2.5 py-1">
-            Verified
-          </span>
-        )}
+        <VerifiedBadge verified={listing.verified} verifiedAt={listing.verified_at} />
       </div>
     </Link>
   )

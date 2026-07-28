@@ -99,13 +99,16 @@ export function Footer() {
           <p className="text-slate-400 text-sm font-body">
             © {currentYear} {SITE_NAME}. All rights reserved.
           </p>
-          {/* Affiliate disclosure reframed as transparency rather than fine
-              print — CRO rule #11 trust cluster. Same legal disclosure,
-              owned upfront. */}
+          {/* Funding disclosure, owned upfront rather than buried — CRO rule
+              #11 trust cluster. Previously read "Funded by affiliate
+              revenue," which described plumbing that was never built: no
+              affiliate network, no referral params on any outbound link.
+              Claiming revenue you don't earn is a worse disclosure than
+              none. Update this the day an affiliate link actually ships. */}
           <p className="text-slate-400 text-xs font-body">
-            Funded by affiliate revenue.{' '}
+            Funded by NYClaw.io.{' '}
             <span className="text-slate-500">
-              Your price is the same. No paid placements.
+              No paid placements, no affiliate links.
             </span>
           </p>
         </div>

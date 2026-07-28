@@ -37,9 +37,35 @@ export default function AboutPage() {
           </p>
 
           <p>
-            Every listing is manually reviewed. We describe tools in plain
+            New submissions are reviewed before they go live, and every
+            published link is re-checked automatically so dead tools get
+            pulled rather than quietly rotting. We describe tools in plain
             English, not jargon. We show you what each tool does, what it
             costs, and how it connects to your existing systems.
+          </p>
+
+          <h2 id="verified" className="font-display text-2xl font-bold text-navy scroll-mt-24">
+            What &ldquo;Verified&rdquo; means here
+          </h2>
+
+          <p>
+            It means one specific, checkable thing:{' '}
+            <strong className="text-navy">
+              on the date shown, an automated check confirmed every link on
+              that listing resolved
+            </strong>
+            . Nothing more. The check runs on a schedule, not once at launch,
+            and a listing that stops responding loses the badge on the next run
+            and is removed entirely after three consecutive failures.
+          </p>
+
+          <p>
+            It is deliberately <em>not</em> an endorsement, a security audit, or
+            legal or bar-compliance advice — those are judgments we&apos;re not
+            positioned to make, and a badge that quietly implies them is worth
+            less than no badge at all. Tools without the badge aren&apos;t
+            suspect; they&apos;re usually just behind bot protection that blocks
+            automated checks, which we treat as unknown rather than bad.
           </p>
 
           <p>

@@ -6,7 +6,6 @@ import { CATEGORY_LABELS, PRICING_LABELS } from '@/lib/constants'
 import {
   updateListingStatus,
   toggleListingFeatured,
-  toggleListingVerified,
   deleteListing,
   approveSubmission,
   rejectSubmission,
@@ -112,15 +111,21 @@ function ListingsTable({ listings }: { listings: Listing[] }) {
                   className="accent-navy"
                 />
               </td>
+              {/* Read-only: verification is earned by the link check, not
+                  granted here. See the note in admin/actions.ts. */}
               <td className="py-3 px-2 text-center">
-                <input
-                  type="checkbox"
-                  checked={listing.verified}
-                  onChange={(e) =>
-                    startTransition(() => toggleListingVerified(listing.id, e.target.checked))
-                  }
-                  className="accent-green-600"
-                />
+                {listing.verified && listing.verified_at ? (
+                  <span
+                    className="text-xs text-green-700"
+                    title={`Auto-verified ${new Date(listing.verified_at).toISOString().slice(0, 10)}`}
+                  >
+                    {new Date(listing.verified_at).toISOString().slice(0, 10)}
+                  </span>
+                ) : (
+                  <span className="text-xs text-slate-400" title="Not confirmed by the last link check">
+                    —
+                  </span>
+                )}
               </td>
               <td className="py-3 px-2 text-right">
                 <button

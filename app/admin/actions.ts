@@ -109,12 +109,18 @@ export async function toggleListingFeatured(id: string, featured: boolean) {
   revalidateAll()
 }
 
-export async function toggleListingVerified(id: string, verified: boolean) {
-  const db = await requireAdmin()
-  const { error } = await db.from('listings').update({ verified }).eq('id', id)
-  if (error) throw new Error(`Failed to update verified: ${error.message}`)
-  revalidateAll()
-}
+// NOTE: there is deliberately no toggleListingVerified action.
+//
+// `verified` is a claim about a check that ran, so the only thing entitled to
+// set it is the check — scripts/curate.mjs verify, which writes it together
+// with `verified_at`. When this was a hand-toggled checkbox it drifted into
+// meaning "brand I recognize": 12 listings carried the badge, none from a
+// check, and the badge sat next to homepage copy promising manual review while
+// nine listings pointed at domains that had never resolved.
+//
+// Removing the affordance is the fix. Leaving the action here with a comment
+// saying "don't use this" would have left the same drift one click away, and
+// the failure is silent — nobody notices a badge that was never earned.
 
 export async function deleteListing(id: string) {
   const db = await requireAdmin()

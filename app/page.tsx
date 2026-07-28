@@ -106,17 +106,17 @@ export default async function HomePage() {
             <span className="text-slate-600">·</span>
             <span>7 practice categories</span>
             <span className="text-slate-600">·</span>
-            <span>Manually reviewed</span>
+            <span>No paid placements</span>
             <span className="text-slate-600">·</span>
-            <span>Updated weekly</span>
+            <span>Free to browse</span>
           </div>
         </div>
       </section>
 
       {/* ── 2. Trust strip ── CRO #6/#7/#11 — clustered trust signals
           immediately under the primary CTA. Complements the hero stats bar
-          with the differentiation claims (no paid placements, attorney
-          curation) that the stats bar doesn't cover. */}
+          with the differentiation claims (who operates it, how links stay
+          honest) that the stats bar doesn't cover. */}
       <TrustStrip />
 
       {/* ── 3. How It Works ── */}
@@ -136,7 +136,8 @@ export default async function HomePage() {
               <h3 className="font-sans font-semibold text-navy text-lg mb-2">Find the right tool</h3>
               <p className="font-body text-charcoal/60 text-sm leading-relaxed">
                 Browse by practice area — contract review, legal research, client intake,
-                billing, and more. Every listing is reviewed by humans, not bots.
+                billing, and more. New submissions are reviewed before they go
+                live, and published links are re-checked automatically.
               </p>
             </div>
             <div className="text-center">

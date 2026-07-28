@@ -5,6 +5,7 @@ import { ExternalLink } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 import { SoftwareAppJsonLd } from '../../components/JsonLd'
 import { ListingCard } from '../../components/ListingCard'
+import { VerifiedBadge } from '../../components/VerifiedBadge'
 import { LeadGenCTA } from '../../components/LeadGenCTA'
 import { CATEGORY_LABELS, PRICING_LABELS, SITE_URL } from '@/lib/constants'
 import { sanitizeLogoUrl } from '@/lib/logo-url'
@@ -131,11 +132,11 @@ export default async function ListingDetailPage({
           <span className="text-xs bg-amber-50 text-gold-text rounded-full px-2.5 py-1">
             {pricingLabel}
           </span>
-          {listing.verified && (
-            <span className="text-xs bg-green-50 text-green-700 rounded-full px-2.5 py-1">
-              Verified
-            </span>
-          )}
+          <VerifiedBadge
+            verified={listing.verified}
+            verifiedAt={listing.verified_at}
+            showDate
+          />
           {listing.featured && (
             <span className="text-xs bg-navy text-white rounded-full px-2.5 py-1">Featured</span>
           )}

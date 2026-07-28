@@ -7,26 +7,34 @@ import { ShieldCheck, Sparkles, RefreshCw, Eye } from 'lucide-react'
 // Source-of-truth: every claim here must be defensible. We're not claiming
 // "trusted by 500 firms" until we have 500 firms to point at. Honest claims
 // compound; inflated claims nuke trust permanently (related: rule #9).
+//
+// 2026-07-28 — this list previously failed its own standard. It claimed
+// attorney curation (nobody here is an attorney), a "bar-compliance lens"
+// (no such review happens), and weekly updates (content sat ~3 weeks). Nine
+// listings pointing at domains that had never existed shipped under those
+// claims. Every item below is now something a reader could independently
+// check: no listing pays, the operator is named, link checks are a script in
+// this repo, and the site takes no money from readers.
 const TRUST_ITEMS = [
   {
     icon: Eye,
     label: 'No paid placements',
-    detail: 'Editorial picks only.',
+    detail: 'Nothing here is bought.',
   },
   {
     icon: ShieldCheck,
-    label: 'Curated by an attorney',
-    detail: 'Built by NYClaw.io.',
-  },
-  {
-    icon: Sparkles,
-    label: 'Bar-compliance lens',
-    detail: 'Each tool reviewed for risk.',
+    label: 'Built by an AI agency',
+    detail: 'NYClaw.io ships these systems.',
   },
   {
     icon: RefreshCw,
-    label: 'Updated weekly',
-    detail: 'New tools, fresh notes.',
+    label: 'Links checked automatically',
+    detail: 'Dead tools get pulled.',
+  },
+  {
+    icon: Sparkles,
+    label: 'Free to browse',
+    detail: 'No signup, no paywall.',
   },
 ] as const
 
