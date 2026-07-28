@@ -94,6 +94,27 @@ export function Footer() {
           </div>
         </div>
 
+        {/* Not-legal-advice notice.
+
+            This site publishes ethics-rule summaries (ABA Model Rules 1.1
+            cmt. 8 and 1.6 appear in the blog) and a bar-compliance checklist,
+            aimed squarely at practicing attorneys — while being operated by
+            engineers, not lawyers. Summarizing publicly available rules is
+            legal *information*, which non-lawyer publishers do routinely and
+            legitimately; it is not legal advice and not UPL. But saying so
+            out loud is what keeps the distinction clear to a reader, and the
+            site spent ~3.5 months implying attorney curation it never had.
+            Stating the limitation plainly costs nothing and is the cheapest
+            possible insurance against being read as something we're not. */}
+        <p className="text-slate-500 text-xs font-body border-t border-slate-700 pt-8 mb-6 leading-relaxed">
+          {SITE_NAME} is operated by engineers, not attorneys. Everything here —
+          listings, checklists, and articles summarizing bar rules — is
+          information about software, not legal advice, and does not create an
+          attorney-client relationship. Confirm any ethics or compliance
+          question against your own state bar&apos;s rules and opinions before
+          you rely on it.
+        </p>
+
         {/* Divider + bottom row */}
         <div className="border-t border-slate-700 pt-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
           <p className="text-slate-400 text-sm font-body">
