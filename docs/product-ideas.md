@@ -47,13 +47,16 @@ one most obviously suited to passive AI capture. Clio and TimeSolv own the
 incumbent slot, but they make you *log* time; the wedge is inferring it.
 
 ### CaseLaw Search MCP — federal + state case law from your AI assistant
-`legal_research` · free · open source
-**The one worth building first, for a reason unrelated to revenue.**
-legalaimcp.com is a directory of legal MCP servers that ships zero first-party
-tools. A genuinely useful open-source case-law MCP would give the directory a
-flagship, a reason to visit, and real authority for the AEO play — LLMs cite
-tools, not listings. Free and open by design; the return is distribution and
-credibility for the directory, not licence revenue.
+`legal_research` · ~~free · open source~~ · **RESOLVED 2026-07-28: DO NOT BUILD**
+The premise died on contact with research: Free Law Project shipped their own
+official hosted MCP server (`mcp.courtlistener.com`, May 2026), and FLP's terms
+prohibit membership-tier API access from powering commercial products. A clone
+adds nothing and a hosted commercial wrapper needs a negotiated agreement.
+The directory play won instead: the official server, a self-hostable community
+one (blakeox), and a citation-hallucination checker (john-walkoe) are now
+published listings. The "zero first-party tools" gap this entry existed to fix
+was closed separately — legalaimcp.com now runs its own MCP server
+(`com.legalaimcp/directory` in the official registry).
 
 ### ComplianceGuard — regulatory change monitoring by practice area
 `compliance` · freemium · domain taken, needs a new name
@@ -91,6 +94,10 @@ to respect the provider's terms of service.
 
 ## If you pick one
 
-Build **CaseLaw Search MCP** first. It is the only one where the payoff isn't
-just a new product — it makes an asset you already own credible, and it is the
-concrete thing the AEO strategy has been missing.
+~~Build **CaseLaw Search MCP** first.~~ **Superseded 2026-07-28** — see the
+CaseLaw entry above: the official first-party server made building it
+pointless, and the directory's first-party-tool gap was closed by shipping
+`com.legalaimcp/directory` instead. Of what remains, **DocketTrack** has the
+strongest commercial case (missed deadlines are malpractice; the buyer is the
+firm) — but hunt first: this list has now produced one build-avoided-by-search,
+and that lesson was cheap only because the search happened before the build.
