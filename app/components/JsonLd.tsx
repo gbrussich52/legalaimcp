@@ -102,3 +102,66 @@ export function ItemListJsonLd({
     />
   )
 }
+
+/**
+ * Serializes schema for a JSON-LD <script> tag. Escaping `<` (→ <) is
+ * the one injection vector JSON.stringify alone leaves open: a string
+ * containing "</script>" would otherwise terminate the tag early. Our content
+ * is authored, but the escape costs nothing and holds if that ever changes.
+ */
+const toJsonLd = (schema: object) => JSON.stringify(schema).replace(/</g, '\\u003c')
+
+/**
+ * FAQPage schema for category landing pages.
+ *
+ * Content comes from lib/category-content.ts — authored, static, and plain
+ * strings by design. FAQ rich results require the on-page text to match the
+ * schema text, which is another reason the content layer stores answers as
+ * strings rather than JSX: one source renders both.
+ */
+export function FAQJsonLd({ faqs }: { faqs: readonly { q: string; a: string }[] }) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  }
+
+  return (
+    <script
+      type="application/ld+json"
+      // Safe: authored static content from lib/category-content.ts, serialized
+      // with < escaped so no string can terminate the script tag early.
+      dangerouslySetInnerHTML={{ __html: toJsonLd(schema) }}
+    />
+  )
+}
+
+/** BreadcrumbList schema — pairs with the visible breadcrumb on category pages. */
+export function BreadcrumbJsonLd({
+  items,
+}: {
+  items: { name: string; path: string }[]
+}) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: `${SITE_URL}${item.path}`,
+    })),
+  }
+
+  return (
+    <script
+      type="application/ld+json"
+      // Safe: static route names and paths, serialized with < escaped.
+      dangerouslySetInnerHTML={{ __html: toJsonLd(schema) }}
+    />
+  )
+}
