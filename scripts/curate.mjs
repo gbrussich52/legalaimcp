@@ -256,25 +256,48 @@ async function checkLinks() {
   }
 
   const broken = []
+  const blocked = []
   for (const l of listings ?? []) {
     for (const [field, url] of [['external_url', l.external_url], ['mcp_repo_url', l.mcp_repo_url]]) {
       if (!url) continue
       const status = await probe(url)
-      const ok = typeof status === 'number' && status < 400
-      if (!ok) broken.push({ slug: l.slug, name: l.name, field, url, status })
-      process.stdout.write(ok ? '.' : 'X')
+      const row = { slug: l.slug, name: l.name, field, url, status }
+
+      if (typeof status === 'number' && status < 400) {
+        process.stdout.write('.')
+        continue
+      }
+      // 401/403/429 from a host that resolves is bot protection, not a dead
+      // link — Clio sits behind Cloudflare and refuses scripted clients. If
+      // these were reported as broken the report would cry wolf every run, and
+      // a check nobody trusts is a check nobody reads.
+      if (status === 403 || status === 401 || status === 429) {
+        blocked.push(row)
+        process.stdout.write('~')
+        continue
+      }
+      broken.push(row)
+      process.stdout.write('X')
     }
   }
   process.stdout.write('\n')
 
   log(`checked ${listings?.length ?? 0} published listing(s)`)
+
+  if (blocked.length) {
+    log(`${blocked.length} link(s) bot-blocked (host is alive, verify by hand if suspicious):`)
+    for (const b of blocked) log(`  [${b.status}] ${b.name} (${b.slug}): ${b.url}`)
+  }
+
   if (broken.length === 0) {
-    log('all links healthy')
+    log('no broken links')
+    if (has('json')) console.log(JSON.stringify({ broken, blocked }, null, 2))
     return
   }
+
   log(`${broken.length} BROKEN link(s):`)
   for (const b of broken) log(`  [${b.status}] ${b.name} (${b.slug}) ${b.field}: ${b.url}`)
-  if (has('json')) console.log(JSON.stringify(broken, null, 2))
+  if (has('json')) console.log(JSON.stringify({ broken, blocked }, null, 2))
   process.exitCode = 1
 }
 
