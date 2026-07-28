@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest run"
+    "test": "vitest run",
+    "curate:discover": "node scripts/curate.mjs discover",
+    "curate:links": "node scripts/curate.mjs check-links"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.102.1",
