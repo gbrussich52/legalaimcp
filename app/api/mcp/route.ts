@@ -27,6 +27,13 @@ import { CATEGORY_LABELS, PRICING_LABELS, SITE_URL } from '@/lib/constants'
  * the other. An assistant relaying "this tool is verified" with no date would
  * launder a dated, narrow claim into an open-ended endorsement — the exact
  * failure this directory just spent a cleanup fixing.
+ *
+ * Each tool returns BOTH renderings of the same rows: formatted text (for
+ * clients that surface prose) and `structuredContent` matching its declared
+ * `outputSchema` (for agents that consume data). Registry scanners (Smithery)
+ * also score on output schemas and behavior annotations — all three tools are
+ * annotated read-only/idempotent/closed-world, which is simply true of a
+ * directory lookup.
  */
 
 // Shape returned to clients. Kept narrow on purpose: `description` runs to
@@ -38,8 +45,62 @@ const SUMMARY_COLUMNS =
 const CATEGORIES = Object.keys(CATEGORY_LABELS) as [string, ...string[]]
 const PRICING = Object.keys(PRICING_LABELS) as [string, ...string[]]
 
-/** Renders one listing as compact text. MCP clients read this, not JSON. */
-function formatTool(t: Record<string, unknown>, verbose = false): string {
+// ------------------------------------------------------------- schemas ----
+
+/**
+ * Structured shape of one listing, shared by search and get. The verification
+ * caveat is baked into the SCHEMA description, not just the prose — an agent
+ * reading only structuredContent still sees what "verified" does and doesn't
+ * mean.
+ */
+const TOOL_SHAPE = {
+  slug: z.string().describe('Stable listing identifier — pass to get_legal_ai_tool'),
+  name: z.string().describe('Tool name'),
+  tagline: z.string().nullable().describe('One-line summary'),
+  category: z.string().describe('Practice-area category slug'),
+  category_label: z.string().describe('Human-readable category name'),
+  pricing_model: z.string().describe('One of: free, freemium, paid, contact'),
+  pricing_details: z.string().nullable().describe('Pricing notes, if any'),
+  links_verified: z
+    .boolean()
+    .describe(
+      'True if an automated check confirmed every URL on this listing resolved, as of links_verified_at. An automated link check only — NOT an endorsement, security audit, or legal review.'
+    ),
+  links_verified_at: z
+    .string()
+    .nullable()
+    .describe('ISO date of the last passing link check; null = not confirmed (often just bot-blocking)'),
+  website: z.string().nullable().describe('Tool website'),
+  repo: z.string().nullable().describe('Source repository, if open source'),
+  install_command: z.string().nullable().describe('MCP install command, if the tool ships an MCP server'),
+  maker: z.string().nullable().describe('Creator or vendor name'),
+  listing_url: z.string().describe('Canonical listing page on legalaimcp.com'),
+}
+const ToolItem = z.object(TOOL_SHAPE)
+type ToolRow = Record<string, unknown>
+
+/** Maps a DB row to the structured shape. One mapper feeds both tools. */
+function toStructured(t: ToolRow): z.infer<typeof ToolItem> {
+  return {
+    slug: String(t.slug),
+    name: String(t.name),
+    tagline: (t.tagline as string) ?? null,
+    category: String(t.category),
+    category_label: CATEGORY_LABELS[t.category as string] ?? String(t.category),
+    pricing_model: String(t.pricing_model),
+    pricing_details: (t.pricing_details as string) ?? null,
+    links_verified: Boolean(t.verified && t.verified_at),
+    links_verified_at: t.verified && t.verified_at ? String(t.verified_at).slice(0, 10) : null,
+    website: (t.external_url as string) ?? null,
+    repo: (t.mcp_repo_url as string) ?? null,
+    install_command: (t.mcp_install_command as string) || null,
+    maker: (t.creator_name as string) ?? null,
+    listing_url: `${SITE_URL}/servers/${t.slug}`,
+  }
+}
+
+/** Renders one listing as compact text. Prose twin of toStructured(). */
+function formatTool(t: ToolRow, verbose = false): string {
   const lines = [
     `## ${t.name}`,
     t.tagline ? `${t.tagline}` : '',
@@ -61,9 +122,14 @@ function formatTool(t: Record<string, unknown>, verbose = false): string {
   return lines.filter(Boolean).join('\n')
 }
 
-/** Consistent failure text. An MCP client shows this to a human, so it says what to do next. */
+/**
+ * Consistent failure result. isError satisfies the structured-output contract
+ * (a declared outputSchema requires structuredContent on success results, but
+ * not on errors), and the text tells a human what to do next.
+ */
 function unavailable() {
   return {
+    isError: true,
     content: [
       {
         type: 'text' as const,
@@ -73,26 +139,55 @@ function unavailable() {
   }
 }
 
+/**
+ * Shared behavior annotations — a directory lookup is the textbook case:
+ * reads only, same query → same answer, and it consults our own database
+ * rather than the open web (closed world).
+ */
+const READ_ONLY = {
+  readOnlyHint: true,
+  destructiveHint: false,
+  idempotentHint: true,
+  openWorldHint: false,
+}
+
+// ------------------------------------------------------------- handler ----
+
 const handler = createMcpHandler(
   (server) => {
-    server.tool(
+    server.registerTool(
       'search_legal_ai_tools',
-      'Search the legalaimcp.com directory of AI tools and MCP servers built for law firms. Filter by free-text query, practice-area category, and pricing model. Use this when someone asks what AI tooling exists for legal work such as contract review, legal research, client intake, billing, or compliance.',
       {
-        query: z
-          .string()
-          .max(100)
-          .optional()
-          .describe('Free-text search over tool names and taglines, e.g. "contract review"'),
-        category: z
-          .enum(CATEGORIES)
-          .optional()
-          .describe('Practice area filter'),
-        pricing: z
-          .enum(PRICING)
-          .optional()
-          .describe('Pricing model filter'),
-        limit: z.number().int().min(1).max(25).default(10),
+        title: 'Search legal AI tools',
+        description:
+          'Search the legalaimcp.com directory of AI tools and MCP servers built for law firms. Filter by free-text query, practice-area category, and pricing model. Use this when someone asks what AI tooling exists for legal work such as contract review, legal research, client intake, billing, or compliance.',
+        inputSchema: {
+          query: z
+            .string()
+            .max(100)
+            .optional()
+            .describe('Free-text search over tool names, taglines, and descriptions, e.g. "contract review"'),
+          category: z
+            .enum(CATEGORIES)
+            .optional()
+            .describe('Practice-area filter — get slugs from list_legal_ai_categories'),
+          pricing: z
+            .enum(PRICING)
+            .optional()
+            .describe('Pricing-model filter: free, freemium, paid, or contact'),
+          limit: z
+            .number()
+            .int()
+            .min(1)
+            .max(25)
+            .default(10)
+            .describe('Maximum number of results to return (1–25, default 10)'),
+        },
+        outputSchema: {
+          count: z.number().describe('Number of tools returned'),
+          tools: z.array(ToolItem).describe('Matching tools, link-verified listings first'),
+        },
+        annotations: READ_ONLY,
       },
       async ({ query, category, pricing, limit }) => {
         if (!supabase) return unavailable()
@@ -110,10 +205,6 @@ const handler = createMcpHandler(
         if (category) q = q.eq('category', category)
         if (pricing) q = q.eq('pricing_model', pricing)
         if (query) {
-          // Strip PostgREST filter metacharacters before interpolating into
-          // an `or` string. This is the same class of injection the site's
-          // search guard handles; an MCP tool argument is attacker-controlled
-          // in exactly the same way a query param is.
           // Tokenise, then match ANY token across name/tagline/description.
           //
           // Two failures this fixes, both discovered by calling the deployed
@@ -131,7 +222,9 @@ const handler = createMcpHandler(
           // Stopwords are dropped because a token like "for" or "tool" would
           // otherwise ilike-match nearly every description and flatten the
           // ranking into noise. Capped at 4 tokens to bound the URL length
-          // PostgREST has to parse.
+          // PostgREST has to parse. Metacharacters are stripped first — an
+          // MCP tool argument is attacker-controlled the same way a query
+          // param is.
           const STOPWORDS = new Set([
             'the', 'a', 'an', 'for', 'and', 'or', 'of', 'to', 'in', 'on',
             'with', 'my', 'me', 'i', 'ai', 'tool', 'tools', 'legal', 'law',
@@ -160,43 +253,48 @@ const handler = createMcpHandler(
 
         const { data, error } = await q
         if (error) return unavailable()
-        if (!data?.length) {
-          return {
-            content: [
-              {
-                type: 'text' as const,
-                text: `No tools matched. The directory covers ${
-                  Object.keys(CATEGORY_LABELS).length
-                } practice areas — try a broader query or browse ${SITE_URL}/servers.`,
-              },
-            ],
-          }
+
+        const structuredContent = {
+          count: data?.length ?? 0,
+          tools: (data ?? []).map((t) => toStructured(t as ToolRow)),
         }
 
-        return {
-          content: [
-            {
-              type: 'text' as const,
-              text: [
-                `Found ${data.length} tool(s) in the legalaimcp.com directory:`,
-                '',
-                ...data.map((t) => formatTool(t as Record<string, unknown>)),
-              ].join('\n\n'),
-            },
-          ],
-        }
+        const text = !data?.length
+          ? `No tools matched. The directory covers ${
+              Object.keys(CATEGORY_LABELS).length
+            } practice areas — try a broader query or browse ${SITE_URL}/servers.`
+          : [
+              `Found ${data.length} tool(s) in the legalaimcp.com directory:`,
+              '',
+              ...data.map((t) => formatTool(t as ToolRow)),
+            ].join('\n\n')
+
+        return { content: [{ type: 'text' as const, text }], structuredContent }
       }
     )
 
-    server.tool(
+    server.registerTool(
       'get_legal_ai_tool',
-      'Get the full listing for one legal AI tool by its slug, including the complete description and MCP install command. Use after search_legal_ai_tools to go deeper on a specific result.',
       {
-        slug: z
-          .string()
-          .max(100)
-          .regex(/^[a-z0-9-]+$/, 'slug must be lowercase letters, numbers and hyphens')
-          .describe('Listing slug, e.g. "harvey-ai" — taken from a search result URL'),
+        title: 'Get one legal AI tool',
+        description:
+          'Get the full listing for one legal AI tool by its slug, including the complete description and MCP install command. Use after search_legal_ai_tools to go deeper on a specific result.',
+        inputSchema: {
+          slug: z
+            .string()
+            .max(100)
+            .regex(/^[a-z0-9-]+$/, 'slug must be lowercase letters, numbers and hyphens')
+            .describe('Listing slug, e.g. "harvey-ai" — taken from a search result'),
+        },
+        outputSchema: {
+          found: z.boolean().describe('False when no published listing has this slug'),
+          tool: ToolItem.extend({
+            description: z.string().nullable().describe('Full listing description'),
+          })
+            .optional()
+            .describe('The listing, present when found is true'),
+        },
+        annotations: READ_ONLY,
       },
       async ({ slug }) => {
         if (!supabase) return unavailable()
@@ -217,21 +315,46 @@ const handler = createMcpHandler(
                 text: `No published listing with slug "${slug}". Use search_legal_ai_tools to find the right slug.`,
               },
             ],
+            structuredContent: { found: false },
           }
         }
 
         return {
-          content: [
-            { type: 'text' as const, text: formatTool(data as Record<string, unknown>, true) },
-          ],
+          content: [{ type: 'text' as const, text: formatTool(data as ToolRow, true) }],
+          structuredContent: {
+            found: true,
+            tool: {
+              ...toStructured(data as ToolRow),
+              description: (data as ToolRow).description
+                ? String((data as ToolRow).description)
+                : null,
+            },
+          },
         }
       }
     )
 
-    server.tool(
+    server.registerTool(
       'list_legal_ai_categories',
-      'List the practice-area categories in the legalaimcp.com directory, with how many published tools each contains. Useful for orienting before a search.',
-      {},
+      {
+        title: 'List practice-area categories',
+        description:
+          'List the practice-area categories in the legalaimcp.com directory, with how many published tools each contains. Useful for orienting before a search.',
+        inputSchema: {},
+        outputSchema: {
+          total: z.number().describe('Total published tools in the directory'),
+          categories: z
+            .array(
+              z.object({
+                slug: z.string().describe('Pass as `category` to search_legal_ai_tools'),
+                label: z.string().describe('Human-readable category name'),
+                count: z.number().describe('Published tools in this category'),
+              })
+            )
+            .describe('All practice-area categories'),
+        },
+        annotations: READ_ONLY,
+      },
       async () => {
         if (!supabase) return unavailable()
 
@@ -246,8 +369,14 @@ const handler = createMcpHandler(
           counts.set(row.category, (counts.get(row.category) ?? 0) + 1)
         }
 
-        const lines = Object.entries(CATEGORY_LABELS)
-          .map(([slug, label]) => `- ${label} (\`${slug}\`) — ${counts.get(slug) ?? 0} tool(s)`)
+        const categories = Object.entries(CATEGORY_LABELS).map(([slug, label]) => ({
+          slug,
+          label,
+          count: counts.get(slug) ?? 0,
+        }))
+
+        const lines = categories
+          .map((c) => `- ${c.label} (\`${c.slug}\`) — ${c.count} tool(s)`)
           .join('\n')
 
         return {
@@ -257,12 +386,16 @@ const handler = createMcpHandler(
               text: `legalaimcp.com covers ${data?.length ?? 0} published tools across these practice areas:\n\n${lines}\n\nPass the backticked slug as \`category\` to search_legal_ai_tools.`,
             },
           ],
+          structuredContent: { total: data?.length ?? 0, categories },
         }
       }
     )
   },
   {
-    serverInfo: { name: 'legalaimcp', version: '1.0.0' },
+    serverInfo: { name: 'legalaimcp', version: '1.1.0' },
+    // Shown to connecting clients at initialize — orientation for the agent.
+    instructions:
+      'Directory of AI tools and MCP servers for law firms, from legalaimcp.com. Read-only. Start with list_legal_ai_categories to see practice areas, search_legal_ai_tools to find tools, then get_legal_ai_tool for full detail on one. "Links verified" means an automated link check passed on the stated date — it is not an endorsement, security audit, or legal advice.',
   },
   {
     basePath: '/api',
