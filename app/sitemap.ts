@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next'
 import { supabase } from '@/lib/supabase'
 import { getAllPosts } from '@/lib/blog'
 import { SITE_URL } from '@/lib/constants'
+import { CATEGORY_CONTENT } from '@/lib/category-content'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const listings = supabase
@@ -52,7 +53,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly',
       priority: 0.7,
     },
+    {
+      // Flagship editorial roundup — the SEO format gap fix per the
+      // 2026-08-07 audit (BOF listicle pages competitors were winning with).
+      url: `${SITE_URL}/best/legal-mcp-servers`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    },
+    {
+      url: `${SITE_URL}/guides/connect-claude-to-courtlistener`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
   ]
+
+  const bestCategoryPages: MetadataRoute.Sitemap = Object.keys(CATEGORY_CONTENT).map((slug) => ({
+    url: `${SITE_URL}/best/${slug}-mcp-servers`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.75,
+  }))
 
   const listingPages: MetadataRoute.Sitemap = (listings || []).map(
     (l: { slug: string; updated_at: string }) => ({
@@ -79,5 +101,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }))
 
-  return [...staticPages, ...categoryPages, ...listingPages, ...blogPages]
+  return [...staticPages, ...bestCategoryPages, ...categoryPages, ...listingPages, ...blogPages]
 }
