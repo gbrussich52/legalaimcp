@@ -1,0 +1,31 @@
+{
+  "project": "legalaimcp",
+  "baseUrl": "http://localhost:3000",
+  "prodUrl": "https://legalaimcp.com",
+  "routes": [
+    "/",
+    "/servers",
+    "/servers/harvey-mcp",
+    "/servers/courtlistener-mcp",
+    "/best/legal-mcp-servers",
+    "/guides/connect-claude-to-harvey",
+    "/guides/connect-claude-to-courtlistener",
+    "/categories/legal-research",
+    "/blog",
+    "/mcp",
+    "/about",
+    "/submit",
+    "/sitemap.xml",
+    "/robots.txt"
+  ],
+  "coreFlows": ["directory", "guides", "mcp-server"],
+  "fileToFlow": {
+    "app/servers/": "directory",
+    "app/categories/": "directory",
+    "app/best/": "directory",
+    "app/guides/": "guides",
+    "app/blog/": "guides",
+    "app/api/mcp/": "mcp-server",
+    "app/submit/": "submissions"
+  }
+}
