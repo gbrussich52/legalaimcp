@@ -11,6 +11,23 @@ import { CATEGORY_LABELS, PRICING_LABELS, SITE_URL } from '@/lib/constants'
 import { sanitizeLogoUrl } from '@/lib/logo-url'
 import { LISTING_CARD_COLUMNS, type ListingCardData } from '@/lib/types'
 
+/**
+ * Listings that have a hand-written setup guide. Without this link the guides
+ * are orphans — nothing on the site pointed at them, which is the likeliest
+ * reason /guides/connect-claude-to-courtlistener never ranked despite matching
+ * its target query. Add a row here whenever a new guide ships.
+ */
+const SETUP_GUIDES: Record<string, { path: string; label: string }> = {
+  'courtlistener-mcp': {
+    path: '/guides/connect-claude-to-courtlistener',
+    label: 'How to connect Claude to CourtListener',
+  },
+  'harvey-mcp': {
+    path: '/guides/connect-claude-to-harvey',
+    label: 'How to connect Claude to Harvey AI',
+  },
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -149,6 +166,26 @@ export default async function ListingDetailPage({
           {listing.description}
         </p>
       </section>
+
+      {/* Setup guide, when we have written one for this listing */}
+      {SETUP_GUIDES[listing.slug] && (
+        <section className="mb-10 max-w-content">
+          <Link
+            href={SETUP_GUIDES[listing.slug].path}
+            className="flex items-center justify-between gap-4 rounded-lg border border-gold/40 bg-gold/5 px-5 py-4 transition-colors hover:border-gold"
+          >
+            <span>
+              <span className="block font-sans text-xs font-bold uppercase tracking-widest text-gold-text">
+                Setup guide
+              </span>
+              <span className="block font-body text-charcoal mt-1">
+                {SETUP_GUIDES[listing.slug].label}
+              </span>
+            </span>
+            <span aria-hidden="true" className="font-body text-gold-text">&rarr;</span>
+          </Link>
+        </section>
+      )}
 
       {/* Technical details */}
       {(listing.mcp_repo_url || listing.mcp_install_command) && (

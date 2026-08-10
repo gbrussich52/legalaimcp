@@ -26,6 +26,7 @@ const MODIFIED = {
   blogIndex: '2026-04-13',
   bestLegal: '2026-08-07',
   courtlistenerGuide: '2026-08-07',
+  harveyGuide: '2026-08-10',
   bestCategoryTemplate: '2026-08-07',
   categoryIndex: '2026-07-28',
 } as const
@@ -90,6 +91,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: `${SITE_URL}/guides/connect-claude-to-courtlistener`,
       lastModified: MODIFIED.courtlistenerGuide,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      // Harvey is the site's highest-impression query cluster in Search Console
+      // (harvey mcp + harvey ai mcp + harvey ai) with no guide behind it until
+      // now — see docs/seo/gsc-query-gap-2026-08-10.md in the portfolio repo.
+      url: `${SITE_URL}/guides/connect-claude-to-harvey`,
+      lastModified: MODIFIED.harveyGuide,
       changeFrequency: 'monthly',
       priority: 0.7,
     },
