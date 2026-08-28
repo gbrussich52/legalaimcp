@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 import { notFound } from 'next/navigation'
 import { LeadGenCTA } from '../../components/LeadGenCTA'
-import { BreadcrumbJsonLd } from '../../components/JsonLd'
+import { BreadcrumbJsonLd, FAQJsonLd } from '../../components/JsonLd'
 import { SITE_URL } from '@/lib/constants'
 
 /**
@@ -49,6 +49,30 @@ export const metadata: Metadata = {
   openGraph: { title: PAGE_TITLE, description: PAGE_DESCRIPTION, type: 'article' },
 }
 
+/**
+ * FAQPage content — each answer restates a fact already stated in the body
+ * copy below (prereqs / troubleshooting sections), never a new claim, so the
+ * schema text and the visible text never drift apart.
+ */
+const FAQS = [
+  {
+    q: 'Does the CourtListener MCP server require an API key?',
+    a: "No. It uses OAuth against your CourtListener account rather than a static API key — the first tool call from your client opens a browser sign-in, and the client stores the resulting session for future calls.",
+  },
+  {
+    q: 'Do I need a paid CourtListener account to use it?',
+    a: 'No, a free account is enough to get started. Free accounts have daily query limits; a paid Free Law Project membership raises the ceiling.',
+  },
+  {
+    q: "What do I check if my MCP client can't reach the CourtListener server?",
+    a: 'Confirm the transport is set to http and the endpoint is exactly right — a typo in either silently fails on most clients rather than erroring clearly. Also confirm the client was fully restarted after adding the server, since most clients require a restart to pick up a new entry.',
+  },
+  {
+    q: 'Where can I find the current install command for CourtListener MCP?',
+    a: 'The full listing at legalaimcp.com/servers/courtlistener-mcp always shows the current install command and pricing details.',
+  },
+] as const
+
 function Code({ children }: { children: string }) {
   return (
     <pre className="bg-navy text-slate-100 rounded-lg p-4 overflow-x-auto text-sm font-mono leading-relaxed">
@@ -82,6 +106,7 @@ export default async function ConnectCourtListenerGuidePage() {
           { name: 'Connect Claude to CourtListener', path: '/guides/connect-claude-to-courtlistener' },
         ]}
       />
+      <FAQJsonLd faqs={FAQS} />
 
       <main className="max-w-content mx-auto px-4 py-12">
         {/* Breadcrumb */}
@@ -221,6 +246,21 @@ export default async function ConnectCourtListenerGuidePage() {
                 window) to pick up a new server entry.
               </li>
             </ul>
+          </section>
+
+          {/* FAQ */}
+          <section className="border-t border-slate-200 pt-8">
+            <h2 className="font-display text-2xl font-bold text-navy mb-4">
+              Frequently asked questions
+            </h2>
+            <div className="space-y-5">
+              {FAQS.map((f) => (
+                <div key={f.q}>
+                  <h3 className="font-sans font-semibold text-navy">{f.q}</h3>
+                  <p className="font-body text-charcoal/70 leading-relaxed mt-1">{f.a}</p>
+                </div>
+              ))}
+            </div>
           </section>
         </div>
 

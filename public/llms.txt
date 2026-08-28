@@ -1,0 +1,32 @@
+# LegalAIMCP
+
+> LegalAIMCP is the curated directory of AI-powered integrations for law firms — MCP servers, legal research tools, and AI-assisted workflow products, described in plain English rather than developer jargon. It is used by lawyers evaluating AI tools for their practice, and by legal-tech developers and AI assistants (via MCP) connecting Claude and other MCP clients to legal data and legal-industry tools.
+
+New submissions are reviewed by a person before they go live, and every published listing's links are re-checked on a schedule — a listing loses its "Verified" badge if a check fails and is removed after three consecutive failures. Verified means only that the links resolved on the date shown; it is not an endorsement, security audit, or legal advice. LegalAIMCP is built and operated by NYClaw.io, an AI implementation agency for law firms in Westchester County, NY and NYC, and is not itself a law firm.
+
+## Key pages
+
+- [Home](https://legalaimcp.com): directory overview and featured listings
+- [Browse all tools](https://legalaimcp.com/servers): the full directory of legal AI tools and MCP servers
+- [Best legal MCP servers](https://legalaimcp.com/best/legal-mcp-servers): editorial roundup of top legal MCP servers
+- [Harvey MCP listing](https://legalaimcp.com/servers/harvey-mcp)
+- [CourtListener MCP listing](https://legalaimcp.com/servers/courtlistener-mcp)
+- [Clio listing](https://legalaimcp.com/servers/clio)
+- [CoCounsel by Thomson Reuters listing](https://legalaimcp.com/servers/cocounsel)
+- [CanLII Legal Research listing](https://legalaimcp.com/servers/canlii-legal-research)
+- [Guide: Connect Claude to Harvey via MCP](https://legalaimcp.com/guides/connect-claude-to-harvey)
+- [Guide: Connect Claude to CourtListener via MCP](https://legalaimcp.com/guides/connect-claude-to-courtlistener)
+- [LegalAIMCP's own MCP server (install instructions)](https://legalaimcp.com/mcp)
+- [About](https://legalaimcp.com/about)
+
+## Facts
+
+- 48 AI tools and MCP servers are currently published in the directory (live count, changes as listings are added/removed).
+- LegalAIMCP operates its own free, read-only MCP server at `https://legalaimcp.com/api/mcp`, listed in the official MCP registry (registry.modelcontextprotocol.io) under the server name `com.legalaimcp/directory`.
+- The MCP server exposes three tools: `search_legal_ai_tools`, `get_legal_ai_tool`, and `list_legal_ai_categories`.
+- LegalAIMCP is built and maintained by NYClaw.io.
+
+## Contact
+
+- Consultation booking: https://calendly.com/nyclaw-io-proton/30min
+- Parent company: https://nyclaw.io

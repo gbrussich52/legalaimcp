@@ -30,11 +30,51 @@ export function OrganizationJsonLd() {
     '@type': 'Organization',
     name: SITE_NAME,
     url: SITE_URL,
+    // Public GitHub profile behind the build + the repo for this site itself
+    // (github.com/gbrussich52/legalaimcp, verified public). Both are real,
+    // checkable URLs — no social profiles invented to pad this out.
+    sameAs: ['https://github.com/gbrussich52', 'https://github.com/gbrussich52/legalaimcp'],
     parentOrganization: {
       '@type': 'Organization',
       name: 'NYClaw.io',
       url: NYCLAW_URL,
     },
+    founder: {
+      '@type': 'Person',
+      name: 'Giani Brussich',
+      sameAs: [
+        'https://linkedin.com/in/gianib',
+        'https://github.com/gbrussich52',
+        'https://gianibrussich.com',
+      ],
+    },
+  }
+
+  return (
+    <script
+      type="application/ld+json"
+      // Safe: content is hardcoded server-side constants — never user input
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  )
+}
+
+/**
+ * SoftwareApplication schema for LegalAIMCP's own MCP server (the /mcp
+ * install page) — the site's only first-party product, distinct from the
+ * third-party listings SoftwareAppJsonLd below describes.
+ */
+export function McpServerJsonLd() {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: `${SITE_NAME} MCP Server`,
+    description:
+      'Free, read-only MCP server for searching the LegalAIMCP directory of AI tools for law firms from Claude, ChatGPT, or any MCP client. No API key or account required.',
+    applicationCategory: 'DeveloperApplication',
+    operatingSystem: 'Any',
+    url: `${SITE_URL}/mcp`,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
   }
 
   return (

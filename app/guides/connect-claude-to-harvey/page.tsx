@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 import { notFound } from 'next/navigation'
 import { LeadGenCTA } from '../../components/LeadGenCTA'
-import { BreadcrumbJsonLd } from '../../components/JsonLd'
+import { BreadcrumbJsonLd, FAQJsonLd } from '../../components/JsonLd'
 import { SITE_URL } from '@/lib/constants'
 
 /**
@@ -81,6 +81,33 @@ const TOOLS: { name: string; what: string }[] = [
   },
 ]
 
+/**
+ * FAQPage content — each answer restates a fact already stated in the body
+ * copy above (the "no public endpoint" section, prereqs, tool list,
+ * troubleshooting), never a new claim, so the schema text and the visible
+ * text never drift apart. The first Q&A is the load-bearing negative fact
+ * this whole guide exists to answer: Harvey does not publish an MCP
+ * endpoint URL.
+ */
+const FAQS = [
+  {
+    q: 'Does Harvey publish a public MCP endpoint URL?',
+    a: "No. Unlike CourtListener, Harvey's developer documentation specifies the transport and authentication method but does not publish a connection URL, and there is no claude mcp add one-liner for it. Access is granted per tenant, not published — your Harvey admin or representative provides the actual endpoint after enrollment.",
+  },
+  {
+    q: 'What authentication does Harvey MCP use?',
+    a: "OAuth over Streamable HTTP, scoped to your firm's Harvey tenant. The first tool call opens a browser sign-in against your Harvey account, and the client stores the resulting session — there is no static API key to paste or rotate.",
+  },
+  {
+    q: 'How many tools does Harvey MCP expose?',
+    a: 'Five: ask_harvey, ask_with_knowledge_source, list_knowledge_sources, list_vault_projects, and ask_about_vault. Tool visibility is per-role — Vault tools require the Vault permission on your Harvey role.',
+  },
+  {
+    q: 'Do I need an active Harvey account to use Harvey MCP?',
+    a: 'Yes. An active Harvey account and feature enrollment on your tenant are both required — this is a customer feature, not a free tier, and there is no way to trial the connector without being a Harvey customer.',
+  },
+] as const
+
 export default async function ConnectHarveyGuidePage() {
   const listing = await getListing()
   if (!listing) notFound()
@@ -97,6 +124,7 @@ export default async function ConnectHarveyGuidePage() {
           { name: 'Connect Claude to Harvey', path: '/guides/connect-claude-to-harvey' },
         ]}
       />
+      <FAQJsonLd faqs={FAQS} />
 
       <main className="max-w-content mx-auto px-4 py-12">
         {/* Breadcrumb */}
@@ -379,6 +407,21 @@ export default async function ConnectHarveyGuidePage() {
               matches what you see, Harvey&apos;s documentation is the authority, and we would
               like to hear about it so we can correct the page.
             </p>
+          </section>
+
+          {/* FAQ */}
+          <section className="border-t border-slate-200 pt-8">
+            <h2 className="font-display text-2xl font-bold text-navy mb-4">
+              Frequently asked questions
+            </h2>
+            <div className="space-y-5">
+              {FAQS.map((f) => (
+                <div key={f.q}>
+                  <h3 className="font-sans font-semibold text-navy">{f.q}</h3>
+                  <p className="font-body text-charcoal/70 leading-relaxed mt-1">{f.a}</p>
+                </div>
+              ))}
+            </div>
           </section>
         </div>
 
