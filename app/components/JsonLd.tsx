@@ -33,7 +33,7 @@ export function OrganizationJsonLd() {
     // Public GitHub profile behind the build + the repo for this site itself
     // (github.com/gbrussich52/legalaimcp, verified public). Both are real,
     // checkable URLs — no social profiles invented to pad this out.
-    sameAs: ['https://github.com/gbrussich52', 'https://github.com/gbrussich52/legalaimcp'],
+    sameAs: ['https://github.com/gbrussich52', 'https://github.com/gbrussich52/legalaimcp', 'https://glama.ai/mcp/connectors/com.legalaimcp/directory'],
     parentOrganization: {
       '@type': 'Organization',
       name: 'NYClaw.io',
