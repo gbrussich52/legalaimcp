@@ -57,26 +57,32 @@ export function scoreListing(
   return { score, matchedFactors }
 }
 
+/** Cheapest to most expensive. Ties within a tier (e.g. two "paid" tools) stay 0. */
+const PRICING_ORDER: Record<string, number> = { free: 0, freemium: 1, paid: 2, contact: 3 }
+
 /**
- * TODO(Giani): tie-break two listings that scored equally, using pricing fit
- * for the requested firm size. Domain call, not an engineering one — e.g.
- * should a solo practice see a free/freemium tool ranked ahead of an
- * equally-scored paid tool? Should a 20-attorney firm prefer "contact"
- * pricing (usually means dedicated/enterprise support) over freemium at a
- * tie? Return a negative number when `a` should rank before `b`, positive
- * when `b` should rank first, 0 for "no preference" (current default keeps
- * whatever order the DB query returned them in — verified-first).
- *
- * File: lib/recommend.ts. Covered by the tie-break tests in
- * lib/recommend.test.ts — flip the `.skip` on that describe block once this
- * has real logic.
+ * Tie-break two equally-scored listings by cost: cheaper wins, regardless of
+ * firm size. Giani's call (2026-08-29): "if it does the same thing and it's
+ * free, that's what I'm picking" — he doesn't know his buyers well enough to
+ * assume a large firm wants to pay more, so the ranking doesn't guess either.
+ * Willingness to pay for dedicated support is surfaced instead via
+ * `pricingSupportNote()`, not baked into the ranking.
  */
-export function pricingFitTiebreak(
-  a: ScorableListing,
-  b: ScorableListing,
-  firmSize: FirmSize
-): number {
-  return 0
+export function pricingFitTiebreak(a: ScorableListing, b: ScorableListing): number {
+  return (PRICING_ORDER[a.pricing_model] ?? 99) - (PRICING_ORDER[b.pricing_model] ?? 99)
+}
+
+/**
+ * Informational only — never affects score or rank. A paid/contact tier
+ * commonly bundles dedicated support that a free/freemium pick may not, and
+ * some firms value that enough to pay for it even though cost alone ranks
+ * it lower. Surfaced so the requester (or the agent relaying this) can weigh
+ * it, rather than the ranking silently deciding it for them.
+ */
+export function pricingSupportNote(pricingModel: string): string | null {
+  return pricingModel === 'paid' || pricingModel === 'contact'
+    ? 'Paid tier — often includes dedicated support that a free/freemium option may not.'
+    : null
 }
 
 export interface RankedListing<T extends ScorableListing> extends ScoreResult {
@@ -97,6 +103,6 @@ export function rankListings<T extends ScorableListing>(
   return listings
     .map((listing) => ({ listing, ...scoreListing(listing, practiceArea, firmSize) }))
     .filter((r) => r.score > 0)
-    .sort((a, b) => b.score - a.score || pricingFitTiebreak(a.listing, b.listing, firmSize))
+    .sort((a, b) => b.score - a.score || pricingFitTiebreak(a.listing, b.listing))
     .slice(0, limit)
 }

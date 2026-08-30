@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { scoreListing, rankListings, type ScorableListing } from './recommend'
+import { scoreListing, rankListings, pricingFitTiebreak, pricingSupportNote, type ScorableListing } from './recommend'
 
 function listing(overrides: Partial<ScorableListing> = {}): ScorableListing {
   return {
@@ -88,10 +88,11 @@ describe('rankListings', () => {
     expect(rankListings(listings, 'legal_research', 'solo', 3)).toHaveLength(3)
   })
 
-  it('preserves input order among equal scores (stable sort, no tiebreak logic yet)', () => {
-    const a = listing({ category: 'legal_research', pricing_model: 'free' })
-    const b = listing({ category: 'legal_research', pricing_model: 'contact' })
-    const ranked = rankListings([a, b], 'legal_research', 'solo')
+  it('breaks ties on cost, cheapest first, regardless of firm size', () => {
+    const cheap = listing({ category: 'legal_research', pricing_model: 'free' })
+    const pricey = listing({ category: 'legal_research', pricing_model: 'contact' })
+    // Reversed input order proves this is the tiebreak acting, not incidental DB order.
+    const ranked = rankListings([pricey, cheap], 'legal_research', 'large')
     expect(ranked.map((r) => r.listing.pricing_model)).toEqual(['free', 'contact'])
   })
 
@@ -101,9 +102,27 @@ describe('rankListings', () => {
   })
 })
 
-// TODO(Giani): once pricingFitTiebreak has real logic, un-skip and fill in
-// the expected ordering for these two cases (see the TODO in recommend.ts).
-describe.skip('pricingFitTiebreak', () => {
-  it.todo('ranks a free/freemium tool above an equally-scored paid tool for a solo firm')
-  it.todo('ranks a contact-pricing tool above an equally-scored freemium tool for a large firm')
+describe('pricingFitTiebreak', () => {
+  it('ranks free before freemium before paid before contact', () => {
+    expect(pricingFitTiebreak(listing({ pricing_model: 'free' }), listing({ pricing_model: 'paid' }))).toBeLessThan(0)
+    expect(
+      pricingFitTiebreak(listing({ pricing_model: 'freemium' }), listing({ pricing_model: 'contact' }))
+    ).toBeLessThan(0)
+  })
+
+  it('is a no-op between two listings on the same pricing tier', () => {
+    expect(pricingFitTiebreak(listing({ pricing_model: 'paid' }), listing({ pricing_model: 'paid' }))).toBe(0)
+  })
+})
+
+describe('pricingSupportNote', () => {
+  it('flags paid and contact tiers as often bundling dedicated support', () => {
+    expect(pricingSupportNote('paid')).toMatch(/dedicated support/)
+    expect(pricingSupportNote('contact')).toMatch(/dedicated support/)
+  })
+
+  it('returns null for free and freemium — nothing to weigh against cost', () => {
+    expect(pricingSupportNote('free')).toBeNull()
+    expect(pricingSupportNote('freemium')).toBeNull()
+  })
 })

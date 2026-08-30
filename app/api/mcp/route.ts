@@ -2,7 +2,7 @@ import { createMcpHandler } from 'mcp-handler'
 import { z } from 'zod'
 import { supabase } from '@/lib/supabase'
 import { CATEGORY_LABELS, PRICING_LABELS, SITE_URL } from '@/lib/constants'
-import { rankListings, FIRM_SIZES, type ScorableListing } from '@/lib/recommend'
+import { rankListings, pricingSupportNote, FIRM_SIZES, type ScorableListing } from '@/lib/recommend'
 
 /**
  * legalaimcp.com, exposed as an MCP server.
@@ -422,6 +422,12 @@ const handler = createMcpHandler(
                 matched_factors: z
                   .array(z.string())
                   .describe('The specific reasons this tool scored the way it did, e.g. category or firm-size match'),
+                pricing_note: z
+                  .string()
+                  .nullable()
+                  .describe(
+                    'Informational only, never affects rank: paid/contact tiers often bundle dedicated support that a free/freemium pick may not. Ties are broken by cost alone — this lets the requester weigh support separately.'
+                  ),
               })
             )
             .describe('Ranked highest-fit first. Empty when nothing in the directory matched either input.'),
@@ -449,6 +455,7 @@ const handler = createMcpHandler(
           ...toStructured(r.listing),
           score: r.score,
           matched_factors: r.matchedFactors,
+          pricing_note: pricingSupportNote(r.listing.pricing_model),
         }))
 
         const text = !recommendations.length
@@ -456,11 +463,14 @@ const handler = createMcpHandler(
           : [
               `Top ${recommendations.length} legal AI tool(s) for a ${firm_size}-size ${
                 CATEGORY_LABELS[practice_area]?.toLowerCase() ?? practice_area
-              } practice:`,
+              } practice. Ties are broken by lowest cost first:`,
               '',
-              ...ranked.map(
-                (r) => `${formatTool(r.listing as ToolRow)}\n- Score: ${r.score} (${r.matchedFactors.join('; ')})`
-              ),
+              ...ranked.map((r) => {
+                const note = pricingSupportNote(r.listing.pricing_model)
+                return `${formatTool(r.listing as ToolRow)}\n- Score: ${r.score} (${r.matchedFactors.join('; ')})${
+                  note ? `\n- Note: ${note}` : ''
+                }`
+              }),
             ].join('\n\n')
 
         return {
