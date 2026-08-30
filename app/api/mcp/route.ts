@@ -2,6 +2,7 @@ import { createMcpHandler } from 'mcp-handler'
 import { z } from 'zod'
 import { supabase } from '@/lib/supabase'
 import { CATEGORY_LABELS, PRICING_LABELS, SITE_URL } from '@/lib/constants'
+import { rankListings, FIRM_SIZES, type ScorableListing } from '@/lib/recommend'
 
 /**
  * legalaimcp.com, exposed as an MCP server.
@@ -390,12 +391,90 @@ const handler = createMcpHandler(
         }
       }
     )
+
+    server.registerTool(
+      'recommend_legal_ai_tools',
+      {
+        title: 'Recommend legal AI tools for a firm',
+        description:
+          'Rank legal AI tools by fit for a specific practice area and firm size, with a score and the matched factors behind it. Use this instead of search_legal_ai_tools when someone describes their firm (e.g. "solo family law practice" or "20-attorney litigation firm") and wants a recommendation, not just a list.',
+        inputSchema: {
+          practice_area: z
+            .enum(CATEGORIES)
+            .describe('Practice-area category slug — get slugs from list_legal_ai_categories'),
+          firm_size: z
+            .enum(FIRM_SIZES)
+            .describe('Firm size: solo, small (2-10 attorneys), mid (11-50), or large (50+)'),
+          limit: z
+            .number()
+            .int()
+            .min(1)
+            .max(5)
+            .default(5)
+            .describe('Maximum number of recommendations to return (1-5, default 5)'),
+        },
+        outputSchema: {
+          count: z.number().describe('Number of recommendations returned'),
+          recommendations: z
+            .array(
+              ToolItem.extend({
+                score: z.number().describe('Deterministic fit score — see matched_factors for how it was earned'),
+                matched_factors: z
+                  .array(z.string())
+                  .describe('The specific reasons this tool scored the way it did, e.g. category or firm-size match'),
+              })
+            )
+            .describe('Ranked highest-fit first. Empty when nothing in the directory matched either input.'),
+        },
+        annotations: READ_ONLY,
+      },
+      async ({ practice_area, firm_size, limit }) => {
+        if (!supabase) return unavailable()
+
+        const { data, error } = await supabase
+          .from('listings')
+          .select(`${SUMMARY_COLUMNS}, firm_size_fit`)
+          .eq('status', 'published')
+
+        if (error) return unavailable()
+
+        const ranked = rankListings(
+          (data ?? []) as (ToolRow & ScorableListing)[],
+          practice_area,
+          firm_size,
+          limit
+        )
+
+        const recommendations = ranked.map((r) => ({
+          ...toStructured(r.listing),
+          score: r.score,
+          matched_factors: r.matchedFactors,
+        }))
+
+        const text = !recommendations.length
+          ? `No published tools matched "${CATEGORY_LABELS[practice_area] ?? practice_area}" for a ${firm_size}-size firm. Try search_legal_ai_tools with a broader category.`
+          : [
+              `Top ${recommendations.length} legal AI tool(s) for a ${firm_size}-size ${
+                CATEGORY_LABELS[practice_area]?.toLowerCase() ?? practice_area
+              } practice:`,
+              '',
+              ...ranked.map(
+                (r) => `${formatTool(r.listing as ToolRow)}\n- Score: ${r.score} (${r.matchedFactors.join('; ')})`
+              ),
+            ].join('\n\n')
+
+        return {
+          content: [{ type: 'text' as const, text }],
+          structuredContent: { count: recommendations.length, recommendations },
+        }
+      }
+    )
   },
   {
-    serverInfo: { name: 'legalaimcp', version: '1.1.0' },
+    serverInfo: { name: 'legalaimcp', version: '1.2.0' },
     // Shown to connecting clients at initialize — orientation for the agent.
     instructions:
-      'Directory of AI tools and MCP servers for law firms, from legalaimcp.com. Read-only. Start with list_legal_ai_categories to see practice areas, search_legal_ai_tools to find tools, then get_legal_ai_tool for full detail on one. "Links verified" means an automated link check passed on the stated date — it is not an endorsement, security audit, or legal advice.',
+      'Directory of AI tools and MCP servers for law firms, from legalaimcp.com. Read-only. Start with list_legal_ai_categories to see practice areas, search_legal_ai_tools to find tools (or recommend_legal_ai_tools for a scored recommendation given a practice area + firm size), then get_legal_ai_tool for full detail on one. "Links verified" means an automated link check passed on the stated date — it is not an endorsement, security audit, or legal advice.',
   },
   {
     basePath: '/api',
