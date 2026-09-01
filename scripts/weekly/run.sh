@@ -27,6 +27,16 @@ echo "=== legalaimcp weekly — $STAMP ==="
 
 cd "$ROOT" || { echo "FATAL: cannot cd to $ROOT"; exit 1; }
 
+# 2026-09-01 (claude-fable-5-1): under launchd the Supabase CLI cannot see the
+# token it stored in the login keychain, so `supabase db query --linked` failed
+# every week with "Access token not provided" and the Verified badge silently
+# aged (improve-queue 2026-08-25). Read the same keychain item the CLI wrote and
+# hand it over as the env var the CLI documents. Value never touches the log.
+if [ -z "${SUPABASE_ACCESS_TOKEN:-}" ]; then
+  SUPABASE_ACCESS_TOKEN="$(security find-generic-password -s 'Supabase CLI' -a supabase -w 2>/dev/null || true)"
+  if [ -n "$SUPABASE_ACCESS_TOKEN" ]; then export SUPABASE_ACCESS_TOKEN; echo "token: keychain"; else echo "WARN: no Supabase access token (keychain read failed) — verify step will skip DB updates"; fi
+fi
+
 verify_status=0
 echo "--- verify ---"
 node scripts/curate.mjs verify || verify_status=$?
