@@ -31,3 +31,16 @@ npm test         # vitest run
 ```
 
 Requires Supabase project env vars (`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`) — see `.env.example`.
+
+## Cursor Agent Plugin
+
+Agent Plugins 1.0.0 packaging for the public MCP at `https://legalaimcp.com/api/mcp` (streamable-http, no auth).
+
+- `plugin.json` — manifest
+- `mcp.json` — remote server
+- `skills/legalaimcp/SKILL.md` — when to search vs recommend vs get
+
+Local Cursor IDE: copy those files to `~/.cursor/plugins/local/legalaimcp` and reload. Grok Bot does not load that folder; it only sees Cursor dashboard/marketplace installs.
+
+Submit the public repo URL at [cursor.com/marketplace/publish](https://cursor.com/marketplace/publish).
+
