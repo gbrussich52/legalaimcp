@@ -1,0 +1,14 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "legalaimcp",
+  "version": "1.0.0",
+  "description": "Directory of AI tools and MCP servers for law firms. Search, recommend, and look up listings from legalaimcp.com.",
+  "author": {
+    "name": "Giani Brussich",
+    "url": "https://legalaimcp.com"
+  },
+  "homepage": "https://legalaimcp.com",
+  "repository": "https://github.com/gbrussich52/legalaimcp",
+  "license": "MIT",
+  "keywords": ["legal", "mcp", "law-firms", "directory"]
+}
