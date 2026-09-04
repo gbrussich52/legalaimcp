@@ -7,6 +7,7 @@ import { SoftwareAppJsonLd } from '../../components/JsonLd'
 import { ListingCard } from '../../components/ListingCard'
 import { VerifiedBadge } from '../../components/VerifiedBadge'
 import { LeadGenCTA } from '../../components/LeadGenCTA'
+import { FeatureListingCTA } from '../../components/FeatureListingCTA'
 import { CATEGORY_LABELS, PRICING_LABELS, SITE_URL } from '@/lib/constants'
 import { sanitizeLogoUrl } from '@/lib/logo-url'
 import { LISTING_CARD_COLUMNS, type ListingCardData } from '@/lib/types'
@@ -155,7 +156,12 @@ export default async function ListingDetailPage({
             showDate
           />
           {listing.featured && (
-            <span className="text-xs bg-navy text-white rounded-full px-2.5 py-1">Featured</span>
+            <span
+              className="text-xs bg-navy text-white rounded-full px-2.5 py-1"
+              title="Sponsored or editorial Featured placement"
+            >
+              Featured
+            </span>
           )}
         </div>
       </div>
@@ -237,6 +243,15 @@ export default async function ListingDetailPage({
           </a>
         </div>
       )}
+
+
+      {/* Featured / sponsored CTA — published listings only (this page is published-only) */}
+      <FeatureListingCTA
+        listingId={listing.id}
+        slug={listing.slug}
+        alreadyFeatured={Boolean(listing.featured)}
+        featuredUntil={listing.featured_until ?? null}
+      />
 
       {/* Tags */}
       {listing.tags && listing.tags.length > 0 && (

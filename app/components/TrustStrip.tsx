@@ -1,8 +1,8 @@
 import { ShieldCheck, Sparkles, RefreshCw, Eye } from 'lucide-react'
 
 // Trust signals immediately under the hero. Covers CRO rules #6 (social proof),
-// #7 (cognitive bias stack — "no paid placement" leverages skepticism into
-// trust), and #11 (clustered trust signals near the primary CTA).
+// #7 (cognitive bias stack — honest sponsored labeling beats a false
+// "no paid" claim), and #11 (clustered trust signals near the primary CTA).
 //
 // Source-of-truth: every claim here must be defensible. We're not claiming
 // "trusted by 500 firms" until we have 500 firms to point at. Honest claims
@@ -18,8 +18,8 @@ import { ShieldCheck, Sparkles, RefreshCw, Eye } from 'lucide-react'
 const TRUST_ITEMS = [
   {
     icon: Eye,
-    label: 'No paid placements',
-    detail: 'Nothing here is bought.',
+    label: 'Sponsored Featured labeled',
+    detail: 'Paid bumps get a clear badge.',
   },
   {
     icon: ShieldCheck,

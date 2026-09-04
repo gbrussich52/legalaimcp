@@ -106,7 +106,7 @@ export default async function HomePage() {
             <span className="text-slate-600">·</span>
             <span>7 practice categories</span>
             <span className="text-slate-600">·</span>
-            <span>No paid placements</span>
+            <span>Featured labeled when sponsored</span>
             <span className="text-slate-600">·</span>
             <span>Free to browse</span>
           </div>
@@ -170,10 +170,10 @@ export default async function HomePage() {
           <div className="flex items-end justify-between mb-2">
             <div>
               <p className="font-sans text-xs font-bold uppercase tracking-widest text-gold-text mb-2">
-                Featured
+                Featured · Sponsored labeled
               </p>
               <h2 className="font-display text-3xl font-bold text-navy">
-                Handpicked AI integrations
+                Featured AI integrations
               </h2>
             </div>
             <Link

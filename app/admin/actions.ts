@@ -102,9 +102,17 @@ export async function updateListingStatus(id: string, status: 'published' | 'pen
   revalidateAll()
 }
 
+/**
+ * Manual / editorial Featured toggle.
+ * Enabling with featured_until = null means indefinite editorial placement.
+ * Paid bumps set a concrete featured_until via the Stripe webhook.
+ */
 export async function toggleListingFeatured(id: string, featured: boolean) {
   const db = await requireAdmin()
-  const { error } = await db.from('listings').update({ featured }).eq('id', id)
+  const { error } = await db
+    .from('listings')
+    .update({ featured, featured_until: null })
+    .eq('id', id)
   if (error) throw new Error(`Failed to update featured: ${error.message}`)
   revalidateAll()
 }

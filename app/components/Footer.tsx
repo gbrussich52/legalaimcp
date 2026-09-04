@@ -129,7 +129,7 @@ export function Footer() {
           <p className="text-slate-400 text-xs font-body">
             Funded by NYClaw.io.{' '}
             <span className="text-slate-500">
-              No paid placements, no affiliate links.
+              Featured placements are labeled; no affiliate links.
             </span>
           </p>
         </div>

@@ -51,6 +51,14 @@ export function ListingCard({ listing }: { listing: ListingCardData }) {
           {pricingLabel}
         </span>
         <VerifiedBadge verified={listing.verified} verifiedAt={listing.verified_at} />
+        {listing.featured && (
+          <span
+            className="text-xs bg-navy text-white rounded-full px-2.5 py-1"
+            title="Sponsored or editorial Featured placement"
+          >
+            Featured
+          </span>
+        )}
       </div>
     </Link>
   )
