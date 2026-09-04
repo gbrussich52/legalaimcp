@@ -106,13 +106,21 @@ describe('submitListing — validation rejections', () => {
     expect(listingData).not.toHaveProperty('verified')
   })
 
-  it('stores XSS payloads as inert data (no mutation, no rejection)', async () => {
-    const { inserted } = makeClient()
+  it('rejects angle brackets in short display fields (name, tagline, creator_name)', async () => {
+    makeClient()
     const payload = '<img src=x onerror=alert(1)> Legal Tool'
-    const res = await submitListing(PREV, makeFormData({ name: payload }))
+    for (const field of ['name', 'tagline', 'creator_name'] as const) {
+      const res = await submitListing(PREV, makeFormData({ [field]: payload + ' padding text' }))
+      expect(res.success).toBe(false)
+    }
+  })
+
+  it('stores XSS-shaped long text as inert data (output encoding happens at render)', async () => {
+    const { inserted } = makeClient()
+    const payload = '<img src=x onerror=alert(1)> ' + 'A legitimate description of the tool. '.repeat(3)
+    const res = await submitListing(PREV, makeFormData({ description: payload }))
     expect(res.success).toBe(true)
-    // Stored verbatim — output encoding is React's job at render time
-    expect((inserted[0].listing_data as Record<string, unknown>).name).toBe(payload)
+    expect((inserted[0].listing_data as Record<string, unknown>).description).toBe(payload)
   })
 })
 
