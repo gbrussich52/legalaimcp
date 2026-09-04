@@ -37,7 +37,13 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Invalid signature' }, { status: 400 })
   }
 
-  if (event.type === 'checkout.session.completed') {
+  // completed fires for every finished Checkout, including delayed-payment
+  // methods that have not settled yet; async_payment_succeeded fires when those
+  // settle. applyFeaturedPurchase grants only when payment_status === 'paid'.
+  if (
+    event.type === 'checkout.session.completed' ||
+    event.type === 'checkout.session.async_payment_succeeded'
+  ) {
     const session = event.data.object as Stripe.Checkout.Session
     try {
       await applyFeaturedPurchase(session)
@@ -51,6 +57,11 @@ export async function POST(req: Request) {
 }
 
 async function applyFeaturedPurchase(session: Stripe.Checkout.Session) {
+  if (session.payment_status !== 'paid') {
+    console.warn('[stripe/webhook] session not paid, not granting featured', session.id, session.payment_status)
+    return
+  }
+
   const listingId = session.metadata?.listing_id
   const slug = session.metadata?.slug
   if (!listingId) {

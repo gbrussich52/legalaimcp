@@ -1,5 +1,6 @@
 import { SITE_NAME, SITE_URL, NYCLAW_URL } from '@/lib/constants'
 import type { Listing } from '@/lib/types'
+import { toJsonLd } from '@/lib/json-ld'
 
 export function WebSiteJsonLd() {
   const schema = {
@@ -18,8 +19,7 @@ export function WebSiteJsonLd() {
   return (
     <script
       type="application/ld+json"
-      // Safe: content is hardcoded server-side constants and structured JSON-LD — never user input
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: toJsonLd(schema) }}
     />
   )
 }
@@ -53,8 +53,7 @@ export function OrganizationJsonLd() {
   return (
     <script
       type="application/ld+json"
-      // Safe: content is hardcoded server-side constants — never user input
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: toJsonLd(schema) }}
     />
   )
 }
@@ -80,8 +79,7 @@ export function McpServerJsonLd() {
   return (
     <script
       type="application/ld+json"
-      // Safe: content is hardcoded server-side constants — never user input
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: toJsonLd(schema) }}
     />
   )
 }
@@ -108,8 +106,7 @@ export function SoftwareAppJsonLd({ listing }: { listing: Listing }) {
   return (
     <script
       type="application/ld+json"
-      // Safe: listing data comes from our own Supabase DB (server-side), never raw user HTML
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: toJsonLd(schema) }}
     />
   )
 }
@@ -137,19 +134,10 @@ export function ItemListJsonLd({
   return (
     <script
       type="application/ld+json"
-      // Safe: data is serialized to JSON (no raw HTML) and comes from our own Supabase DB
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: toJsonLd(schema) }}
     />
   )
 }
-
-/**
- * Serializes schema for a JSON-LD <script> tag. Escaping `<` (→ <) is
- * the one injection vector JSON.stringify alone leaves open: a string
- * containing "</script>" would otherwise terminate the tag early. Our content
- * is authored, but the escape costs nothing and holds if that ever changes.
- */
-const toJsonLd = (schema: object) => JSON.stringify(schema).replace(/</g, '\\u003c')
 
 /**
  * FAQPage schema for category landing pages.
@@ -173,8 +161,6 @@ export function FAQJsonLd({ faqs }: { faqs: readonly { q: string; a: string }[] 
   return (
     <script
       type="application/ld+json"
-      // Safe: authored static content from lib/category-content.ts, serialized
-      // with < escaped so no string can terminate the script tag early.
       dangerouslySetInnerHTML={{ __html: toJsonLd(schema) }}
     />
   )
@@ -200,7 +186,6 @@ export function BreadcrumbJsonLd({
   return (
     <script
       type="application/ld+json"
-      // Safe: static route names and paths, serialized with < escaped.
       dangerouslySetInnerHTML={{ __html: toJsonLd(schema) }}
     />
   )

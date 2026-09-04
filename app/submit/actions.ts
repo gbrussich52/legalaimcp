@@ -23,9 +23,17 @@ const httpUrl = z
     { message: 'URL must use http or https' },
   )
 
+/** Short display fields that end up in titles, JSON-LD and metadata: no markup. */
+const noAngleBrackets = (max: number, min: number) =>
+  z
+    .string()
+    .min(min)
+    .max(max)
+    .refine((s) => !/[<>]/.test(s), { message: 'Angle brackets are not allowed' })
+
 const submissionSchema = z.object({
-  name: z.string().min(2).max(100),
-  tagline: z.string().min(10).max(120),
+  name: noAngleBrackets(100, 2),
+  tagline: noAngleBrackets(120, 10),
   category: z.enum([
     'document_processing',
     'case_management',
@@ -41,7 +49,7 @@ const submissionSchema = z.object({
   pricing_model: z.enum(['free', 'freemium', 'paid', 'contact']),
   pricing_details: z.string().optional(),
   description: z.string().min(50).max(2000),
-  creator_name: z.string().min(2).max(100),
+  creator_name: noAngleBrackets(100, 2),
   submitter_email: z.string().email(),
   creator_url: httpUrl.optional().or(z.literal('')),
 })
