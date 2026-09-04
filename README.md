@@ -34,14 +34,14 @@ Requires Supabase project env vars (`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUP
 
 ## Featured placements
 
-Optional paid **Featured** bump: **$79 for 30 days** (peer directories often charge ~$99). It only boosts browse sort + a Featured badge; **MCP search stays free**. Listings themselves never require payment to appear.
+Optional paid **Featured** bump: **$69 for 30 days** (peer directories often charge ~$99). It only boosts browse sort + a Featured badge; **MCP search stays free**. Listings themselves never require payment to appear.
 
 - Checkout: `POST /api/stripe/checkout` with `{ listing_id }` or `{ slug }`
 - Webhook: `POST /api/stripe/webhook` (`checkout.session.completed`)
 - Expire cron: `GET /api/cron/expire-featured` with `Authorization: Bearer $CRON_SECRET`
 - Pricing page: `/pricing`
 
-Scaffold only until you create a Stripe Price ($79 one-time), wire the webhook, and set Vercel env (`STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `STRIPE_PRICE_FEATURED_30D`, `CRON_SECRET`). Never commit live Stripe secrets.
+Scaffold only until you create a Stripe Price ($69 one-time), wire the webhook, and set Vercel env (`STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `STRIPE_PRICE_FEATURED_30D`, `CRON_SECRET`). Never commit live Stripe secrets.
 
 ## Cursor Agent Plugin
 
