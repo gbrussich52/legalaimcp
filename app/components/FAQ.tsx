@@ -48,7 +48,7 @@ const FAQ_ITEMS = [
         <Link href="/pricing" className="text-gold-text font-semibold hover:underline">
           Featured placements
         </Link>{' '}
-        ($79 / 30 days) buy a sort boost and a Featured badge; those are labeled
+        ($69 / 30 days) buy a sort boost and a Featured badge; those are labeled
         on the listing. There are no affiliate links. Core funding still comes
         from{' '}
         <Link href={NYCLAW_URL} className="text-gold-text font-semibold hover:underline" target="_blank" rel="noopener noreferrer">

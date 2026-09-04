@@ -36,7 +36,7 @@ export async function POST(req: Request) {
   const priceId = getStripePriceFeatured30d()
   if (!priceId) {
     return NextResponse.json(
-      { error: 'STRIPE_PRICE_FEATURED_30D is not set. Create a $79 Price in Stripe and add the id to env.' },
+      { error: 'STRIPE_PRICE_FEATURED_30D is not set. Create a $69 Price in Stripe and add the id to env.' },
       { status: 503 },
     )
   }
