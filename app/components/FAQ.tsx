@@ -44,14 +44,17 @@ const FAQ_ITEMS = [
     q: 'How is this directory funded? Are listings paid?',
     a: (
       <>
-        No tool pays to appear, and right now the directory earns nothing at
-        all — there are no affiliate links and no sponsorships. It&apos;s funded by{' '}
+        Listing itself is free — no tool pays just to appear. Optional{' '}
+        <Link href="/pricing" className="text-gold-text font-semibold hover:underline">
+          Featured placements
+        </Link>{' '}
+        ($79 / 30 days) buy a sort boost and a Featured badge; those are labeled
+        on the listing. There are no affiliate links. Core funding still comes
+        from{' '}
         <Link href={NYCLAW_URL} className="text-gold-text font-semibold hover:underline" target="_blank" rel="noopener noreferrer">
           NYClaw.io
         </Link>
-        , the AI agency that builds it, because we work in this space and
-        needed the map ourselves. If that ever changes, we&apos;ll label the paid
-        or affiliate links on the listing itself — not just in the footer.
+        , the AI agency that builds the directory. MCP search stays free.
       </>
     ),
   },

@@ -27,6 +27,14 @@ export interface Listing {
   logo_url: string | null
   featured: boolean
   /**
+   * When a paid Featured bump expires. Null + featured=true means editorial
+   * indefinite (admin toggle). Null + featured=false means not featured.
+   */
+  featured_until: string | null
+  stripe_checkout_session_id: string | null
+  stripe_payment_intent_id: string | null
+  featured_purchased_at: string | null
+  /**
    * Automated link-resolution check passed as of `verified_at`. Set only by
    * scripts/curate.mjs — never by hand, and never by the admin UI. Reading it
    * without `verified_at` is meaningless: the pair is the claim.
@@ -51,11 +59,11 @@ export interface Listing {
 export type ListingCardData = Pick<
   Listing,
   | 'id' | 'slug' | 'name' | 'tagline' | 'category' | 'pricing_model'
-  | 'verified' | 'verified_at' | 'logo_url'
+  | 'verified' | 'verified_at' | 'logo_url' | 'featured'
 >
 
 export const LISTING_CARD_COLUMNS =
-  'id, slug, name, tagline, category, pricing_model, verified, verified_at, logo_url'
+  'id, slug, name, tagline, category, pricing_model, verified, verified_at, logo_url, featured'
 
 export interface Category {
   slug: string
@@ -72,5 +80,15 @@ export interface Submission {
   submitter_name: string
   status: 'pending' | 'approved' | 'rejected'
   notes: string | null
+  created_at: string
+}
+
+export interface ListingPayment {
+  id: string
+  listing_id: string
+  stripe_session_id: string
+  amount_cents: number
+  currency: string
+  status: string
   created_at: string
 }

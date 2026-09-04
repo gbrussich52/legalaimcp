@@ -67,6 +67,7 @@ function ListingsTable({ listings }: { listings: Listing[] }) {
             <th className="text-left py-3 px-2 font-sans font-semibold text-charcoal/50 text-xs uppercase tracking-wider">Pricing</th>
             <th className="text-left py-3 px-2 font-sans font-semibold text-charcoal/50 text-xs uppercase tracking-wider">Status</th>
             <th className="text-center py-3 px-2 font-sans font-semibold text-charcoal/50 text-xs uppercase tracking-wider">Featured</th>
+            <th className="text-left py-3 px-2 font-sans font-semibold text-charcoal/50 text-xs uppercase tracking-wider">Until</th>
             <th className="text-center py-3 px-2 font-sans font-semibold text-charcoal/50 text-xs uppercase tracking-wider">Verified</th>
             <th className="text-right py-3 px-2 font-sans font-semibold text-charcoal/50 text-xs uppercase tracking-wider">Actions</th>
           </tr>
@@ -105,11 +106,19 @@ function ListingsTable({ listings }: { listings: Listing[] }) {
                 <input
                   type="checkbox"
                   checked={listing.featured}
+                  title="Manual featured sets featured_until=null (editorial indefinite)"
                   onChange={(e) =>
                     startTransition(() => toggleListingFeatured(listing.id, e.target.checked))
                   }
                   className="accent-navy"
                 />
+              </td>
+              <td className="py-3 px-2 text-xs text-charcoal/60 whitespace-nowrap">
+                {listing.featured
+                  ? listing.featured_until
+                    ? new Date(listing.featured_until).toLocaleDateString()
+                    : 'Editorial'
+                  : '—'}
               </td>
               {/* Read-only: verification is earned by the link check, not
                   granted here. See the note in admin/actions.ts. */}
