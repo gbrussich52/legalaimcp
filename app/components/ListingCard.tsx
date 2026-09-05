@@ -12,7 +12,7 @@ export function ListingCard({ listing }: { listing: ListingCardData }) {
   const logoSrc = sanitizeLogoUrl(listing.logo_url)
 
   return (
-    <Link href={`/servers/${listing.slug}`} className="card group block">
+    <Link href={`/servers/${listing.slug}`} className="card group block min-w-0">
       {/* Header row: logo + text */}
       <div className="flex items-start gap-4">
         {/* Logo or initial-letter fallback */}

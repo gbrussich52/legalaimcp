@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
+import { countListingsByCategory } from '@/lib/category-counts'
 import { ListingCard } from './components/ListingCard'
 import { CategoryCard } from './components/CategoryCard'
 import { LeadGenCTA } from './components/LeadGenCTA'
@@ -51,10 +52,7 @@ export default async function HomePage() {
       ])
     : [null, null, null]
 
-  const categoryCounts: Record<string, number> = {}
-  for (const row of countData ?? []) {
-    categoryCounts[row.category] = (categoryCounts[row.category] ?? 0) + 1
-  }
+  const categoryCounts = countListingsByCategory(countData ?? [])
 
   // Sort Featured tools by price anchor (high → low) so visitor brain anchors
   // on the expensive options before reaching the free ones. CRO rule #10.
