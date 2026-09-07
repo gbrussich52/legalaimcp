@@ -65,6 +65,25 @@ export type ListingCardData = Pick<
 export const LISTING_CARD_COLUMNS =
   'id, slug, name, tagline, category, pricing_model, verified, verified_at, logo_url, featured'
 
+/**
+ * Subset of Listing needed to render the public /servers/[slug] detail page.
+ * Excludes internal-only columns (stripe_checkout_session_id,
+ * stripe_payment_intent_id, featured_purchased_at, source, status,
+ * created_at, updated_at, creator_name, creator_url) that the page never
+ * reads — those have no reason to leave the database for a public request.
+ * Keep LISTING_DETAIL_COLUMNS in sync with this type.
+ */
+export type ListingDetailData = Pick<
+  Listing,
+  | 'id' | 'slug' | 'name' | 'tagline' | 'description' | 'category'
+  | 'mcp_repo_url' | 'mcp_install_command' | 'external_url'
+  | 'pricing_model' | 'pricing_details' | 'tags' | 'logo_url'
+  | 'featured' | 'featured_until' | 'verified' | 'verified_at'
+>
+
+export const LISTING_DETAIL_COLUMNS =
+  'id, slug, name, tagline, description, category, mcp_repo_url, mcp_install_command, external_url, pricing_model, pricing_details, tags, logo_url, featured, featured_until, verified, verified_at'
+
 export interface Category {
   slug: string
   name: string
@@ -72,6 +91,12 @@ export interface Category {
   icon: string
   display_order: number
 }
+
+export const CATEGORY_COLUMNS = 'slug, name, description, icon, display_order'
+
+/** Every column of Listing — the admin dashboard genuinely needs the full row. */
+export const LISTING_ADMIN_COLUMNS =
+  'id, name, slug, tagline, description, category, mcp_repo_url, mcp_install_command, external_url, pricing_model, pricing_details, tags, logo_url, featured, featured_until, stripe_checkout_session_id, stripe_payment_intent_id, featured_purchased_at, verified, verified_at, source, status, creator_name, creator_url, created_at, updated_at'
 
 export interface Submission {
   id: string
@@ -82,6 +107,10 @@ export interface Submission {
   notes: string | null
   created_at: string
 }
+
+/** Every column of Submission — the admin dashboard genuinely needs the full row. */
+export const SUBMISSION_COLUMNS =
+  'id, listing_data, submitter_email, submitter_name, status, notes, created_at'
 
 export interface ListingPayment {
   id: string

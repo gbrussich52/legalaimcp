@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 import { isAdminAuthenticated } from '@/lib/admin-auth'
 import { getAdminClient } from '@/lib/supabase-admin'
-import type { Listing, Submission } from '@/lib/types'
+import { LISTING_ADMIN_COLUMNS, SUBMISSION_COLUMNS, type Listing, type Submission } from '@/lib/types'
 import { AdminDashboard } from './components/AdminDashboard'
 
 export const metadata = { title: 'Admin Dashboard', robots: { index: false } }
@@ -17,8 +17,12 @@ export default async function AdminPage() {
   try {
     const db = getAdminClient()
     const [listingsRes, submissionsRes] = await Promise.all([
-      db.from('listings').select('*').order('featured', { ascending: false }).order('name'),
-      db.from('submissions').select('*').order('created_at', { ascending: false }),
+      db
+        .from('listings')
+        .select(LISTING_ADMIN_COLUMNS)
+        .order('featured', { ascending: false })
+        .order('name'),
+      db.from('submissions').select(SUBMISSION_COLUMNS).order('created_at', { ascending: false }),
     ])
 
     if (listingsRes.error) throw new Error(listingsRes.error.message)

@@ -7,7 +7,12 @@ import { LeadGenCTA } from '../../components/LeadGenCTA'
 import { ItemListJsonLd, FAQJsonLd, BreadcrumbJsonLd } from '../../components/JsonLd'
 import { SITE_URL } from '@/lib/constants'
 import { CATEGORY_CONTENT } from '@/lib/category-content'
-import { LISTING_CARD_COLUMNS, type ListingCardData, type Category } from '@/lib/types'
+import {
+  LISTING_CARD_COLUMNS,
+  CATEGORY_COLUMNS,
+  type ListingCardData,
+  type Category,
+} from '@/lib/types'
 
 /**
  * Category landing pages — the site's long-tail SEO surface.
@@ -73,7 +78,7 @@ export default async function CategoryPage({
   // ('document-processing'); the listings enum uses underscores.
   const categoryEnum = slug.replace(/-/g, '_')
   const [categoryRes, listingsRes, siblingsRes] = await Promise.all([
-    supabase.from('categories').select('*').eq('slug', slug).single<Category>(),
+    supabase.from('categories').select(CATEGORY_COLUMNS).eq('slug', slug).single<Category>(),
     supabase
       .from('listings')
       .select(LISTING_CARD_COLUMNS)

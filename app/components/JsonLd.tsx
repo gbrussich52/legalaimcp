@@ -84,7 +84,11 @@ export function McpServerJsonLd() {
   )
 }
 
-export function SoftwareAppJsonLd({ listing }: { listing: Listing }) {
+export function SoftwareAppJsonLd({
+  listing,
+}: {
+  listing: Pick<Listing, 'pricing_model' | 'pricing_details' | 'name' | 'tagline' | 'slug'>
+}) {
   const offers =
     listing.pricing_model === 'free'
       ? { '@type': 'Offer', price: '0', priceCurrency: 'USD' }

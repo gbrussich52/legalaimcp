@@ -10,7 +10,12 @@ import { TrustStrip } from './components/TrustStrip'
 import { ChecklistOptin } from './components/ChecklistOptin'
 import { FAQ } from './components/FAQ'
 import { getAllPosts } from '@/lib/blog'
-import { LISTING_CARD_COLUMNS, type ListingCardData, type Category } from '@/lib/types'
+import {
+  LISTING_CARD_COLUMNS,
+  CATEGORY_COLUMNS,
+  type ListingCardData,
+  type Category,
+} from '@/lib/types'
 
 export const metadata: Metadata = {
   title: 'LegalAIMCP — AI Integrations for Law Firms',
@@ -41,7 +46,7 @@ export default async function HomePage() {
           .then((r) => r.data),
         supabase
           .from('categories')
-          .select('*')
+          .select(CATEGORY_COLUMNS)
           .order('display_order')
           .then((r) => r.data),
         supabase

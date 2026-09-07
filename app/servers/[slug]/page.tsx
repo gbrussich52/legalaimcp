@@ -10,7 +10,12 @@ import { LeadGenCTA } from '../../components/LeadGenCTA'
 import { FeatureListingCTA } from '../../components/FeatureListingCTA'
 import { CATEGORY_LABELS, PRICING_LABELS, SITE_URL } from '@/lib/constants'
 import { sanitizeLogoUrl } from '@/lib/logo-url'
-import { LISTING_CARD_COLUMNS, type ListingCardData } from '@/lib/types'
+import {
+  LISTING_CARD_COLUMNS,
+  LISTING_DETAIL_COLUMNS,
+  type ListingCardData,
+  type ListingDetailData,
+} from '@/lib/types'
 
 /**
  * Listings that have a hand-written setup guide. Without this link the guides
@@ -79,10 +84,10 @@ export default async function ListingDetailPage({
 
   const { data: listing } = await supabase
     .from('listings')
-    .select('*')
+    .select(LISTING_DETAIL_COLUMNS)
     .eq('slug', slug)
     .eq('status', 'published')
-    .single()
+    .single<ListingDetailData>()
 
   if (!listing) notFound()
 
