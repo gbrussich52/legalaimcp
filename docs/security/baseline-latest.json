@@ -1,0 +1,165 @@
+{
+  "repo": "legalaimcp",
+  "generated_by": "scripts/gates/app-security-baseline.py",
+  "items": [
+    {
+      "item": 1,
+      "name": "Hide API keys",
+      "status": "pass",
+      "evidence": [],
+      "note": ""
+    },
+    {
+      "item": 2,
+      "name": "Purge secrets from Git",
+      "status": "manual",
+      "evidence": [],
+      "note": "gitleaks not on PATH. Run: brew install gitleaks && gitleaks detect -s /Users/gianibrussich/project-claude/legalaimcp --no-banner"
+    },
+    {
+      "item": 3,
+      "name": "Expose only the public DB key",
+      "status": "pass",
+      "evidence": [],
+      "note": ""
+    },
+    {
+      "item": 4,
+      "name": "Enable row-level security",
+      "status": "pass",
+      "evidence": [],
+      "note": ""
+    },
+    {
+      "item": 5,
+      "name": "Encrypt sensitive data",
+      "status": "pass",
+      "evidence": [],
+      "note": "no obviously sensitive column names found"
+    },
+    {
+      "item": 6,
+      "name": "Enforce server-side auth",
+      "status": "manual",
+      "evidence": [
+        "4 API route(s) under (src/)app/api/**"
+      ],
+      "note": "Needs semantic review \u2014 see security-reviewer agent, Boundary 2."
+    },
+    {
+      "item": 7,
+      "name": "Lock record access (IDOR)",
+      "status": "manual",
+      "evidence": [
+        "app/admin/actions.ts:100",
+        "app/admin/actions.ts:115",
+        "app/admin/actions.ts:135",
+        "app/admin/actions.ts:156",
+        "app/admin/actions.ts:243",
+        "app/admin/actions.ts:252",
+        "app/api/stripe/checkout/route.ts:64",
+        "app/api/stripe/webhook/route.ts:121"
+      ],
+      "note": "Hints only, not a verdict \u2014 see security-reviewer agent, Boundary 2/5."
+    },
+    {
+      "item": 8,
+      "name": "Block field tampering / Validate all input (Zod boundaries)",
+      "status": "pass",
+      "evidence": [],
+      "note": ""
+    },
+    {
+      "item": 9,
+      "name": "Secure session cookies",
+      "status": "pass",
+      "evidence": [],
+      "note": ""
+    },
+    {
+      "item": 10,
+      "name": "Hash passwords",
+      "status": "n/a",
+      "evidence": [],
+      "note": "Supabase Auth handles hashing; no custom password column"
+    },
+    {
+      "item": 11,
+      "name": "Rate limit login",
+      "status": "pass",
+      "evidence": [],
+      "note": "no custom auth API routes \u2014 Supabase Auth's built-in rate limits apply"
+    },
+    {
+      "item": 12,
+      "name": "Add bot protection",
+      "status": "manual",
+      "evidence": [
+        "app/admin/login/page.tsx",
+        "app/admin/page.tsx",
+        "app/components/ChecklistOptin.tsx",
+        "app/components/HeroSearch.tsx",
+        "app/components/SubmitForm.tsx"
+      ],
+      "note": "Weak signal (honeypot fields can be named anything) \u2014 confirm by hand."
+    },
+    {
+      "item": 13,
+      "name": "Parameterize queries",
+      "status": "pass",
+      "evidence": [],
+      "note": ""
+    },
+    {
+      "item": 14,
+      "name": "Validate all input",
+      "status": "pass",
+      "evidence": [],
+      "note": ""
+    },
+    {
+      "item": 15,
+      "name": "Escape user content",
+      "status": "fail",
+      "evidence": [
+        "app/blog/[slug]/page.tsx"
+      ],
+      "note": ""
+    },
+    {
+      "item": 16,
+      "name": "Restrict file uploads",
+      "status": "n/a",
+      "evidence": [],
+      "note": ""
+    },
+    {
+      "item": 17,
+      "name": "Trim API responses (no select('*'))",
+      "status": "pass",
+      "evidence": [],
+      "note": ""
+    },
+    {
+      "item": 18,
+      "name": "Add security headers",
+      "status": "pass",
+      "evidence": [],
+      "note": ""
+    },
+    {
+      "item": 19,
+      "name": "Force HTTPS",
+      "status": "pass",
+      "evidence": [],
+      "note": ""
+    },
+    {
+      "item": 20,
+      "name": "Scan dependencies",
+      "status": "pass",
+      "evidence": [],
+      "note": ""
+    }
+  ]
+}

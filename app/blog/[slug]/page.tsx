@@ -78,6 +78,7 @@ export default async function BlogPostPage({
         </div>
 
         {/* Article content — safe: sourced from our own lib/blog.ts, not user input */}
+        {/* baseline:15 renders checked-in HTML from lib/blog.ts only; no CMS or user path reaches this sink */}
         <article
           className="prose prose-slate prose-headings:font-display prose-headings:text-navy prose-a:text-gold-text prose-a:no-underline hover:prose-a:underline prose-strong:text-navy max-w-none font-body"
           dangerouslySetInnerHTML={articleHtml}
