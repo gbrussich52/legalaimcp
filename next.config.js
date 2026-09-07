@@ -4,9 +4,9 @@ const nextConfig = {
 
   /**
    * Security headers applied to all routes.
-   * CSP is deferred to Wave 3 — it requires an audit of all inline scripts and
-   * third-party origins (Vercel Analytics, fonts, etc.) before it can be set
-   * without breaking the app.
+   * CSP below deliberately has no script-src/connect-src so it cannot break
+   * Stripe, Supabase, analytics, or inline Next scripts — tightening
+   * script-src is a later task (2026-09-07 security-fix batch).
    */
   async headers() {
     return [
@@ -36,6 +36,19 @@ const nextConfig = {
             // Disable all sensitive browser features that the site does not use.
             key: 'Permissions-Policy',
             value: 'camera=(), microphone=(), geolocation=()',
+          },
+          {
+            // Force HTTPS on every future visit, including subdomains.
+            key: 'Strict-Transport-Security',
+            value: 'max-age=63072000; includeSubDomains; preload',
+          },
+          {
+            // Narrow, non-breaking baseline: blocks the site being framed
+            // elsewhere, blocks base-tag hijacking, and blocks plugin
+            // embeds — without touching script-src/connect-src.
+            key: 'Content-Security-Policy',
+            value:
+              "frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests",
           },
         ],
       },
