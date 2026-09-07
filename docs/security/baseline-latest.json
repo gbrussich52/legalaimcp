@@ -120,11 +120,11 @@
     {
       "item": 15,
       "name": "Escape user content",
-      "status": "fail",
+      "status": "manual",
       "evidence": [
-        "app/blog/[slug]/page.tsx"
+        "app/blog/[slug]/page.tsx \u2014 renders checked-in HTML from lib/blog.ts only; no CMS or user path reaches this sink"
       ],
-      "note": ""
+      "note": "annotated trusted sinks need a human read each cycle"
     },
     {
       "item": 16,
