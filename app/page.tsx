@@ -20,7 +20,7 @@ import {
 export const metadata: Metadata = {
   title: 'LegalAIMCP — AI Integrations for Law Firms',
   description:
-    'The curated directory of AI-powered MCP integrations for law firms. Find tools for contract review, case management, legal research, client intake, and more.',
+    'Find legal AI tools and MCP servers, then plan one workflow for your firm. Free directory and workflow planner, with implementation support from NYClaw.',
   alternates: { canonical: 'https://legalaimcp.com' },
 }
 
@@ -76,14 +76,14 @@ export default async function HomePage() {
       <section className="bg-gradient-to-b from-navy to-[#1E293B] text-white py-24 px-6 text-center">
         <div className="max-w-4xl mx-auto">
           <span className="inline-block bg-white/10 border border-white/20 text-white/80 text-xs font-sans font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6">
-            The MCP Directory for Legal
+            Legal AI tools & workflow planning
           </span>
           <h1 className="font-display text-5xl sm:text-6xl font-bold leading-tight">
-            Connect AI to your<br />law firm&apos;s tools.
+            Find the right AI tools.<br />Put them to work.
           </h1>
           <p className="text-xl text-slate-300 max-w-2xl mx-auto mt-5 font-body leading-relaxed">
-            Find MCP integrations that plug AI directly into your case management,
-            document review, legal research, and billing workflows — no IT department needed.
+            Explore legal AI tools and MCP servers. Start with one task, check what
+            your existing software can do, and build a practical plan for your firm.
           </p>
 
           <HeroSearch />
@@ -96,16 +96,16 @@ export default async function HomePage() {
               Browse All Tools →
             </Link>
             <Link
-              href="/submit"
+              href="/workflow-plan"
               className="border border-white/30 text-white hover:bg-white/10 px-6 py-3 rounded-lg font-sans font-semibold transition-colors"
             >
-              Submit a Tool
+              Build my workflow plan
             </Link>
           </div>
 
           {/* Stats bar */}
           <div className="mt-10 flex flex-wrap gap-6 justify-center text-sm text-slate-400 font-body">
-            <span>{totalTools > 0 ? `${totalTools}+` : '18+'} tools listed</span>
+            <span>{totalTools > 0 ? `${totalTools} tools listed` : 'Free tool directory'}</span>
             <span className="text-slate-600">·</span>
             <span>7 practice categories</span>
             <span className="text-slate-600">·</span>
@@ -129,7 +129,7 @@ export default async function HomePage() {
             How it works
           </p>
           <h2 className="font-display text-3xl font-bold text-navy text-center">
-            AI that actually knows your practice
+            From tool research to a working process
           </h2>
           <div className="mt-12 grid md:grid-cols-3 gap-8">
             <div className="text-center">
@@ -147,20 +147,20 @@ export default async function HomePage() {
               <div className="h-14 w-14 rounded-2xl bg-navy/5 flex items-center justify-center mx-auto mb-4">
                 <span className="font-display text-2xl font-bold text-navy">2</span>
               </div>
-              <h3 className="font-sans font-semibold text-navy text-lg mb-2">Connect in minutes</h3>
+              <h3 className="font-sans font-semibold text-navy text-lg mb-2">Check the connection</h3>
               <p className="font-body text-charcoal/60 text-sm leading-relaxed">
-                MCP integrations plug directly into Claude, ChatGPT, or your existing AI
-                assistant. No IT team, no long implementations, no custom code.
+                Some listings offer MCP connections; others are standalone AI products.
+                Check vendor documentation, plan requirements, and data access before setup.
               </p>
             </div>
             <div className="text-center">
               <div className="h-14 w-14 rounded-2xl bg-navy/5 flex items-center justify-center mx-auto mb-4">
                 <span className="font-display text-2xl font-bold text-navy">3</span>
               </div>
-              <h3 className="font-sans font-semibold text-navy text-lg mb-2">Let AI handle the rote work</h3>
+              <h3 className="font-sans font-semibold text-navy text-lg mb-2">Test one workflow</h3>
               <p className="font-body text-charcoal/60 text-sm leading-relaxed">
-                Research, drafting, intake, and deadline tracking run in the background while
-                you focus on the work that actually requires a lawyer.
+                Start with fictional data and a person reviewing the output. Measure time
+                saved, corrections, and ongoing cost before expanding the pilot.
               </p>
             </div>
           </div>
@@ -173,7 +173,7 @@ export default async function HomePage() {
           <div className="flex items-end justify-between mb-2">
             <div>
               <p className="font-sans text-xs font-bold uppercase tracking-widest text-gold-text mb-2">
-                Featured · Sponsored labeled
+                Featured tools
               </p>
               <h2 className="font-display text-3xl font-bold text-navy">
                 Featured AI integrations
@@ -266,8 +266,8 @@ export default async function HomePage() {
               </p>
               <p className="font-body text-charcoal/70 mt-4 leading-relaxed">
                 Think of it as USB-C for AI. Instead of copying data between systems, MCP lets
-                your AI read, search, and act on your data in real time — through secure,
-                permission-controlled connections. The AI comes to your data. Not the other way around.
+                your AI read, search, and act through connected tools. The server and AI provider
+                determine where data goes. MCP alone does not guarantee privacy or keep data local.
               </p>
               <Link
                 href="/blog/what-is-mcp-for-law-firms"

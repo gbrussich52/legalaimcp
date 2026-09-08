@@ -163,9 +163,9 @@ export default async function ListingDetailPage({
           {listing.featured && (
             <span
               className="text-xs bg-navy text-white rounded-full px-2.5 py-1"
-              title="Sponsored or editorial Featured placement"
+              title={listing.featured_until ? "Paid placement" : "Editorial selection"}
             >
-              Featured
+              {listing.featured_until ? 'Sponsored' : 'Featured'}
             </span>
           )}
         </div>

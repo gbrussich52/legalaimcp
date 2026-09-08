@@ -18,7 +18,7 @@ import { CATEGORY_CONTENT } from '@/lib/category-content'
  * Bump a date when that page's content meaningfully changes.
  */
 const MODIFIED = {
-  home: '2026-07-28',
+  home: '2026-09-08',
   servers: '2026-08-07',
   mcp: '2026-07-28',
   submit: '2026-06-10',
@@ -46,6 +46,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     : null
 
   const staticPages: MetadataRoute.Sitemap = [
+    { url: `${SITE_URL}/workflow-plan`, lastModified: '2026-09-08', changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE_URL}/workflow-assessment`, lastModified: '2026-09-08', changeFrequency: 'monthly', priority: 0.7 },
     { url: SITE_URL, lastModified: MODIFIED.home, changeFrequency: 'weekly', priority: 1 },
     { url: `${SITE_URL}/pricing`, lastModified: MODIFIED.home, changeFrequency: 'monthly', priority: 0.6 },
     {

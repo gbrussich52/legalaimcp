@@ -36,7 +36,7 @@ export function ChecklistOptin({ source = 'homepage_checklist', variant = 'hero'
           Your checklist is ready.
         </h3>
         <p className="font-body text-charcoal/70 mt-2">
-          We&apos;ll also email you a copy — but you can read it right now.
+          Open the checklist below and save it for your next vendor conversation.
         </p>
         <Link
           href="/checklist"
@@ -45,7 +45,7 @@ export function ChecklistOptin({ source = 'homepage_checklist', variant = 'hero'
           Open my checklist →
         </Link>
         <p className="text-xs text-charcoal/50 mt-4">
-          One email per week. Unsubscribe anytime.
+          You can read and print it immediately.
         </p>
       </div>
     )
@@ -71,8 +71,8 @@ export function ChecklistOptin({ source = 'homepage_checklist', variant = 'hero'
             10 questions to ask before adopting any AI tool at your firm.
           </h3>
           <p className="font-body text-charcoal/70 mt-2 text-sm leading-relaxed">
-            The one-pager attorneys use to vet AI tools for bar compliance, client data privacy,
-            and actual ROI. Skip the demos that waste your week.
+            A practical list of questions about client data, vendor policies, and cost.
+            Use it to prepare for a vendor conversation and your own professional review.
           </p>
         </div>
       </div>
@@ -93,7 +93,7 @@ export function ChecklistOptin({ source = 'homepage_checklist', variant = 'hero'
           disabled={isPending}
           className="btn-primary disabled:opacity-50 whitespace-nowrap"
         >
-          {isPending ? 'Sending…' : 'Send me the checklist →'}
+          {isPending ? 'Saving…' : 'Open my checklist →'}
         </button>
       </form>
 
@@ -105,7 +105,8 @@ export function ChecklistOptin({ source = 'homepage_checklist', variant = 'hero'
 
       {/* Micro-reassurance — covers rule #14 objection preemption inline */}
       <p className="text-xs text-charcoal/50 mt-3 font-body">
-        No spam. Unsubscribe anytime. We never sell your email.
+        Submitting stores your email with LegalAIMCP. We never sell your email.{' '}
+        <Link href="/checklist" className="underline">Read without signing up →</Link>
       </p>
     </div>
   )

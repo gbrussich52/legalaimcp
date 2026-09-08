@@ -72,11 +72,11 @@ export default function RootLayout({
 
         {/* Sticky header nav */}
         <header className="sticky top-0 z-50 bg-warm-white/95 backdrop-blur-sm border-b border-slate-100">
-          <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
             {/* Left: Wordmark */}
             <Link
               href="/"
-              className="font-display text-xl font-bold text-navy"
+              className="font-display text-lg sm:text-xl font-bold text-navy shrink-0"
             >
               LegalAIMCP
             </Link>
@@ -111,18 +111,16 @@ export default function RootLayout({
                 Blog
               </Link>
               <Link
-                href="/about"
+                href="/workflow-plan"
                 className="font-sans text-sm text-charcoal hover:text-gold-text transition-colors"
               >
-                About
+                Free workflow plan
               </Link>
               <Link
-                href="https://calendly.com/nyclaw-io-proton/30min"
+                href="/workflow-assessment"
                 className="btn-primary text-sm"
-                target="_blank"
-                rel="noopener noreferrer"
               >
-                Book a Call →
+                Get setup help →
               </Link>
             </nav>
 
@@ -135,12 +133,10 @@ export default function RootLayout({
                 Browse
               </Link>
               <Link
-                href="https://calendly.com/nyclaw-io-proton/30min"
-                className="btn-primary text-xs"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/workflow-assessment"
+                className="btn-primary text-xs !px-3 whitespace-nowrap"
               >
-                Book a Call
+                Setup help
               </Link>
             </nav>
           </div>

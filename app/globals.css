@@ -23,3 +23,10 @@
     @apply py-20 px-6;
   }
 }
+
+@media print {
+  body > header, body > footer { display: none !important; }
+  body { background: white; color: black; }
+  main { max-width: none !important; padding: 0 !important; }
+  section { break-inside: auto; }
+}

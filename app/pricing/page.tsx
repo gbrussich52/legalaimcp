@@ -39,13 +39,13 @@ export default function PricingPage() {
           </span>
         </p>
         <p className="font-body text-sm text-charcoal/60 mb-6">
-          Peer directories often charge ~$99 for a similar 30-day placement.
-          We undercut at {PRICE_DISPLAY}.
+          One payment. No automatic renewal. Placement does not guarantee
+          impressions, clicks, leads, or sales.
         </p>
         <ul className="space-y-2 font-body text-charcoal/80 mb-8">
           <li>✓ Sort boost on /servers, category pages, and homepage Featured grid</li>
           <li>✓ Featured badge on the listing (labeled as sponsored)</li>
-          <li>✓ Does not affect MCP tool search results ranking beyond the same sort flag</li>
+          <li>✓ Featured sort priority also applies to MCP directory search</li>
           <li>✓ No affiliate links required; one Checkout payment</li>
         </ul>
         <Link href="/servers" className="btn-primary inline-flex">
@@ -62,14 +62,13 @@ export default function PricingPage() {
             open Stripe Checkout.
           </li>
           <li>
-            After payment, webhook sets <code>featured=true</code> for 30 days.
-            An optional cron clears expired bumps.
+            After payment is confirmed, the placement runs for 30 days.
           </li>
         </ol>
         <p>
-          Editorial Featured (admin toggle with no expiry) can still exist for
-          hand-picked tools — those are labeled the same way. Paid bumps always
-          carry an expiry.
+          Editorial picks are labeled Featured. Paid placements are labeled
+          Sponsored and have an expiry date. Neither label is an endorsement
+          of security, legal accuracy, or suitability for your firm.
         </p>
         <p>
           <Link href="/submit" className="text-gold-text font-semibold hover:underline">

@@ -32,11 +32,10 @@ const FAQ_ITEMS = [
     q: 'Is my client data safe with MCP tools?',
     a: (
       <>
-        It depends on the tool — and that&apos;s the question this directory exists
-        to answer. Each listing notes whether the tool processes data locally,
-        sends it to a third-party model, or supports BYOK (bring-your-own-key).
-        Our free checklist walks you through the exact data-privacy questions
-        to ask every vendor before you sign.
+        MCP does not guarantee privacy or keep data on your computer. Check each
+        vendor&apos;s retention, model-training, hosting, and access policies.
+        Our directory is not a security audit; the free checklist gives you
+        questions to take to the vendor and your firm&apos;s reviewer.
       </>
     ),
   },
@@ -62,11 +61,10 @@ const FAQ_ITEMS = [
     q: 'I run a solo practice — is this overkill for me?',
     a: (
       <>
-        No. Most of the highest-leverage AI tools for law firms are *more*
-        useful for solos than for BigLaw, because you have less paralegal
-        support to absorb the grunt work. We filter for solo-friendly pricing
-        (most picks have Free or Freemium tiers) and we mark which tools
-        require a tech team to install.
+        Start with one repetitive task and the software you already have.
+        You can filter listings by pricing model, but confirm current costs
+        and setup requirements with the vendor. Our free workflow planner
+        helps define a small pilot before you commit.
       </>
     ),
   },

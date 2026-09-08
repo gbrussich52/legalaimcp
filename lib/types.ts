@@ -59,11 +59,11 @@ export interface Listing {
 export type ListingCardData = Pick<
   Listing,
   | 'id' | 'slug' | 'name' | 'tagline' | 'category' | 'pricing_model'
-  | 'verified' | 'verified_at' | 'logo_url' | 'featured'
+  | 'verified' | 'verified_at' | 'logo_url' | 'featured' | 'featured_until'
 >
 
 export const LISTING_CARD_COLUMNS =
-  'id, slug, name, tagline, category, pricing_model, verified, verified_at, logo_url, featured'
+  'id, slug, name, tagline, category, pricing_model, verified, verified_at, logo_url, featured, featured_until'
 
 /**
  * Subset of Listing needed to render the public /servers/[slug] detail page.
