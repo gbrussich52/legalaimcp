@@ -164,6 +164,14 @@ export default async function HomePage() {
               </p>
             </div>
           </div>
+          <div className="mt-12 border border-slate-200 rounded-2xl bg-slate-50 p-6 sm:p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div>
+              <p className="font-sans text-xs font-bold uppercase tracking-widest text-gold-text">Free document check</p>
+              <h3 className="font-display text-2xl font-bold text-navy mt-2">Check document metadata in your browser</h3>
+              <p className="font-body text-charcoal/70 mt-2 max-w-2xl">See missing items, conflicting metadata, and duplicate entries in a fictional document set. Edit the checklist to try your own redacted example.</p>
+            </div>
+            <Link href="/document-check" className="btn-primary shrink-0">Try the document check demo →</Link>
+          </div>
         </div>
       </section>
 

@@ -15,3 +15,9 @@ classification: PUBLIC
 A subscriber insert was described as email delivery; MCP was described as keeping data private by design; Sponsored and editorial Featured were rendered alike. Corrected the buyer journey and added `lib/conversion-integrity.test.ts` to prevent those claims returning. Link verification proves URL resolution, not integration compatibility. New workflow briefs explicitly distinguish a planning template from a tested implementation.
 
 A successful build without network access silently generated fewer pages because database queries returned empty results. Verified the network-enabled artifact includes 96 pages, not just a successful exit code. Analytics imports also do not establish collection: verify project activation and plan support before claiming a working funnel. No new scheduled loop; regression coverage is part of the existing test gate.
+
+## 2026-09-08 — An editable workflow must invalidate its previous result
+
+Moving from a fixed-ID prototype to editable document metadata adds state transitions that pure domain tests cannot see. Every edit, addition, deletion, example replacement, and clear action must invalidate the displayed result. Browser checks cover those transitions; the document-check domain and integrity tests cover the underlying semantics and data-flow boundary.
+
+An explicit document association is stronger evidence than filename similarity. Do not flag a different filename as incorrect when the user deliberately linked it to the request. Omitted optional metadata is not checked, and duplicates or missing expected values require review. Tests in lib/document-check.test.ts preserve these distinctions; lib/document-check-integrity.test.ts gates unintended uploads, persistence, or input telemetry.

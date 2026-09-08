@@ -10,6 +10,9 @@ const MAIN_CATEGORIES = [
 
 const RESOURCES = [
   { href: '/servers', label: 'Browse All Tools' },
+  { href: '/document-check', label: 'Document Check Demo' },
+  { href: '/workflow-plan', label: 'Free Workflow Plan' },
+  { href: '/workflow-assessment', label: 'Workflow Assessment' },
   { href: '/submit', label: 'Submit a Tool' },
   { href: '/blog', label: 'Blog' },
   { href: '/about', label: 'About' },

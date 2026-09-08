@@ -23,6 +23,11 @@ export default function AssessmentPage() {
         <li><strong>A written recommendation:</strong> configure existing software, buy a tool, build an integration, or leave the process manual. Implementation is quoted separately.</li>
       </ul>
     </section>
+    <section className="my-12 grid md:grid-cols-3 gap-5">
+      <div className="bg-slate-50 border border-slate-200 rounded-xl p-5"><h2 className="font-display text-xl font-bold text-navy">One approved checklist</h2><p className="mt-3 text-sm text-charcoal/70 leading-relaxed">We start with one document or intake checklist your team already understands.</p></div>
+      <div className="bg-slate-50 border border-slate-200 rounded-xl p-5"><h2 className="font-display text-xl font-bold text-navy">Ten redacted examples</h2><p className="mt-3 text-sm text-charcoal/70 leading-relaxed">We define ten authorized, redacted or fictional examples for staff review before any broader pilot.</p></div>
+      <div className="bg-slate-50 border border-slate-200 rounded-xl p-5"><h2 className="font-display text-xl font-bold text-navy">Useful signals</h2><p className="mt-3 text-sm text-charcoal/70 leading-relaxed">We compare useful findings, staff time, and false alarms so the next decision has a clear record.</p></div>
+    </section>
     <section className="grid sm:grid-cols-2 gap-8 my-12">
       <div><h2 className="font-display text-2xl font-bold text-navy">A useful first project</h2><p className="mt-3 text-charcoal/75">Start with inquiry follow-up, missing-document requests, or invoice preparation. We define a draft-and-review process with a measurable starting point.</p></div>
       <div><h2 className="font-display text-2xl font-bold text-navy">Clear boundaries</h2><p className="mt-3 text-charcoal/75">The assessment covers software and process design. It does not include legal advice, ethics certification, autonomous conflict decisions, or court-deadline management.</p></div>
@@ -30,7 +35,9 @@ export default function AssessmentPage() {
     <section className="border-t border-slate-200 pt-8 space-y-5">
       <h2 className="font-display text-2xl font-bold text-navy">Before the call</h2>
       <p>Bring the names of your software, a description of one repetitive task, and a rough monthly volume. Use fictional examples. Do not send client records or account credentials.</p>
+      <p>Any paid pilot or implementation starts with a written scope and fee. The fit call is free, and no paid work begins from this page.</p>
       <p>NYClaw builds and funds LegalAIMCP and may quote the implementation. The assessment is not an independent legal or security audit. Vendor subscriptions and support arrangements are agreed separately.</p>
+      <p><Link className="text-gold-text font-semibold underline" href="/document-check">Try the document check demo →</Link></p>
       <p><Link className="text-gold-text font-semibold underline" href="/workflow-plan">Build a free workflow plan first →</Link></p>
     </section>
   </main>
