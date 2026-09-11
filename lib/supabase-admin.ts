@@ -5,9 +5,9 @@
  *
  * NEVER import this in client components or public-facing pages.
  */
-import { createClient, type SupabaseClient } from '@supabase/supabase-js'
+import { createSchemaClient, type SchemaClient } from './supabase'
 
-export function getAdminClient(): SupabaseClient {
+export function getAdminClient(): SchemaClient {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY
 
@@ -17,7 +17,7 @@ export function getAdminClient(): SupabaseClient {
     )
   }
 
-  return createClient(url, key, {
+  return createSchemaClient(url, key, {
     auth: { persistSession: false, autoRefreshToken: false },
   })
 }
