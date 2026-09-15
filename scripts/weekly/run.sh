@@ -25,7 +25,9 @@ mkdir -p "$LOG_DIR"
 STAMP="$(date '+%Y-%m-%d %H:%M:%S')"
 echo "=== legalaimcp weekly — $STAMP ==="
 
-cd "$ROOT" || { echo "FATAL: cannot cd to $ROOT"; exit 1; }
+cd "$ROOT" || { echo "FATAL: cannot cd to $ROOT"; exit 2; }
+
+node scripts/weekly/health.mjs "$LOG_DIR/weekly-health.json" || exit 2
 
 # 2026-09-01 (claude-fable-5-1): under launchd the Supabase CLI cannot see the
 # token it stored in the login keychain, so `supabase db query --linked` failed
@@ -34,7 +36,7 @@ cd "$ROOT" || { echo "FATAL: cannot cd to $ROOT"; exit 1; }
 # hand it over as the env var the CLI documents. Value never touches the log.
 if [ -z "${SUPABASE_ACCESS_TOKEN:-}" ]; then
   SUPABASE_ACCESS_TOKEN="$(security find-generic-password -s 'Supabase CLI' -a supabase -w 2>/dev/null || true)"
-  if [ -n "$SUPABASE_ACCESS_TOKEN" ]; then export SUPABASE_ACCESS_TOKEN; echo "token: keychain"; else echo "WARN: no Supabase access token (keychain read failed) — verify step will skip DB updates"; fi
+  if [ -n "$SUPABASE_ACCESS_TOKEN" ]; then export SUPABASE_ACCESS_TOKEN; echo "token: keychain"; else echo "WARN: no Supabase access token (keychain read failed) — verify step may fail DB updates"; fi
 fi
 
 verify_status=0
@@ -48,6 +50,13 @@ elif [ "$verify_status" -ne 0 ]; then
 fi
 
 echo "--- discover ---"
-node scripts/curate.mjs discover || echo "ERROR: discover failed with status $?"
+discover_status=0
+node scripts/curate.mjs discover || discover_status=$?
+if [ "$discover_status" -ne 0 ]; then echo "ERROR: discover failed with status $discover_status"; fi
 
 echo "=== done $(date '+%Y-%m-%d %H:%M:%S') ==="
+
+node scripts/weekly/health.mjs "$LOG_DIR/weekly-health.json" "$verify_status" "$discover_status" || exit 2
+
+if [ "$verify_status" -gt 1 ] || [ "$discover_status" -ne 0 ]; then exit 2; fi
+exit 0

@@ -86,10 +86,8 @@ export async function POST(req: Request) {
     )
   }
 
-  const origin =
-    req.headers.get('origin') ||
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    SITE_URL
+  // Checkout returns to this product, never to a caller-supplied Origin.
+  const origin = SITE_URL
 
   try {
     const session = await stripe.checkout.sessions.create({

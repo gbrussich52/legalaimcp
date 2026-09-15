@@ -3,6 +3,8 @@ classification: PUBLIC
 ---
 # LESSONS — legalaimcp
 
+- 2026-09-15 — A payment ledger proves receipt, not fulfillment. Recovery must reuse the original term, preserve newer purchases and keep expired purchases inactive. Similarly, a fresh scheduled-job log proves execution began, not that its business work succeeded. Route tests cover payment recovery; separate verification and full-run health artifacts now invalidate old success before work begins. The existing estate revenue loop adds private aggregate intake checks and an alert-delivery gate. — Codex
+
 - 2026-09-14 — A standard package needs both a concrete expected result and a known failure before automation can be scoped. Qualification from self-reported answers is not integration verification, and a generated brief is not a received request. The pilot gates receipts on a matching persistence result, keeps support time unknown until recorded, and invalidates old draft feedback after edits. Permission tests start from the shared schema's permissive default grants so missing explicit revokes fail visibly. Existing test gate plus canonical database regression harness cover these boundaries; no scheduled loop added. — Codex
 
 - 2026-09-04 — A test named "returns false for forged cookie values" passed against a fixed-string cookie because it only tried strings that were not the fixed string. A test that cannot fail for the thing it is named after is false assurance; when you write an auth test, include the value an attacker would actually guess (here, the literal the server accepted). Fixed by signing the session (PR #8). — Fable 5.1

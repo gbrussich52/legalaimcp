@@ -37,9 +37,12 @@ import { promisify } from 'node:util'
 import path from 'node:path'
 import process from 'node:process'
 import { createClient } from '@supabase/supabase-js'
+import { withVerifyHealth } from './weekly/health.mjs'
 
 const run = promisify(execFile)
 const ROOT = path.resolve(import.meta.dirname, '..')
+const HEALTH_FILE = path.join(ROOT, 'scripts', 'weekly', 'logs', 'verify-health.json')
+const PROJECT_REF = 'bzrdzchrdthyrhdsodla'
 const SEEN_FILE = path.join(ROOT, 'scripts', 'curate-seen.json')
 
 const argv = process.argv.slice(2)
@@ -62,10 +65,12 @@ async function loadEnv() {
     const m = line.match(/^([A-Z_][A-Z0-9_]*)=(.*)$/)
     if (m) out[m[1]] = m[2].replace(/^["']|["']$/g, '')
   }
+  if (!process.env.SUPABASE_ACCESS_TOKEN && out.SUPABASE_ACCESS_TOKEN) process.env.SUPABASE_ACCESS_TOKEN = out.SUPABASE_ACCESS_TOKEN
   const url = out.NEXT_PUBLIC_SUPABASE_URL
   const key = out.NEXT_PUBLIC_SUPABASE_ANON_KEY
   if (!url || !key) throw new Error('Missing NEXT_PUBLIC_SUPABASE_URL / ANON_KEY in .env.local')
-  return createClient(url, key)
+  if (new URL(url).hostname !== `${PROJECT_REF}.supabase.co`) throw new Error('Unexpected database project')
+  return createClient(url, key, { db: { schema: 'legalaimcp' } })
 }
 
 // ------------------------------------------------------------- discovery ----
@@ -106,7 +111,7 @@ async function ghSearch(query, limit) {
     'search', 'repos', query,
     '--limit', String(limit),
     '--json', 'fullName,description,url,stargazersCount,isArchived,isFork,language,owner,updatedAt',
-  ])
+  ], { timeout: 45000, killSignal: 'SIGKILL' })
   return JSON.parse(stdout)
 }
 
@@ -171,6 +176,7 @@ async function discover() {
     .select('name, mcp_repo_url, external_url')
   if (error) throw new Error(`Supabase read failed: ${error.message}`)
 
+  if (!Array.isArray(listings) || listings.length === 0) throw new Error('No directory listings; discovery context incomplete')
   const known = new Set()
   for (const l of listings ?? []) {
     for (const u of [l.mcp_repo_url, l.external_url]) {
@@ -183,11 +189,13 @@ async function discover() {
   log(`${listings?.length ?? 0} published listings, ${seen.repos.length} previously proposed`)
 
   const found = new Map()
+  let discoveryFailures = 0
   for (const q of QUERIES) {
     let repos = []
     try {
       repos = await ghSearch(q, perQuery)
     } catch (e) {
+      discoveryFailures++
       log(`  query failed "${q}": ${e.message.split('\n')[0]}`)
       continue
     }
@@ -200,6 +208,8 @@ async function discover() {
       found.set(key, r)
     }
   }
+
+  if (discoveryFailures) throw new Error('Discovery query failed; sample incomplete')
 
   log(`${found.size} new candidate(s) after dedupe and quality filter`)
   if (found.size === 0) return
@@ -215,6 +225,7 @@ async function discover() {
   }
 
   let inserted = 0
+  let insertFailures = 0
   for (const r of candidates) {
     const listing_data = toListing(r)
     const { error: insErr } = await supabase.from('submissions').insert({
@@ -224,6 +235,7 @@ async function discover() {
       notes: `Auto-discovered from GitHub (${r.stargazersCount}★, updated ${String(r.updatedAt).slice(0, 10)}). Verify the tool is real and legal-specific before approving.`,
     })
     if (insErr) {
+      insertFailures++
       log(`  insert failed for ${r.fullName}: ${insErr.message}`)
       continue
     }
@@ -232,6 +244,7 @@ async function discover() {
   }
 
   await writeFile(SEEN_FILE, JSON.stringify({ repos: [...new Set(seen.repos)] }, null, 2))
+  if (insertFailures) throw new Error('Some discovery submissions could not be saved')
   log(`queued ${inserted} submission(s) for review at /admin`)
 }
 
@@ -345,8 +358,10 @@ const MAX_FAILURES = 3
  * reaches it — but the escaping stays as defense in depth.
  */
 async function sql(query) {
-  const { stdout } = await run('supabase', ['db', 'query', '--linked', query], {
+  const { stdout } = await run('supabase', ['db', 'query', '--linked', '--project-ref', PROJECT_REF, query], {
     maxBuffer: 10 * 1024 * 1024,
+    timeout: 45000,
+    killSignal: 'SIGKILL',
   })
   return stdout
 }
@@ -365,6 +380,8 @@ async function verify() {
     .select('id, name, slug, external_url, mcp_repo_url, verified, link_failures')
     .eq('status', 'published')
   if (error) throw new Error(`Supabase read failed: ${error.message}`)
+
+  if (!Array.isArray(listings) || listings.length === 0) throw new Error('No published listings; verification incomplete')
 
   log(`verifying ${listings?.length ?? 0} published listing(s)`)
 
@@ -429,7 +446,7 @@ async function verify() {
 
   if (alive.length) {
     statements.push(
-      `UPDATE listings SET verified = TRUE, verified_at = NOW(), link_failures = 0
+      `UPDATE legalaimcp.listings SET verified = TRUE, verified_at = NOW(), link_failures = 0
        WHERE id IN (${alive.map((l) => uuid(l.id)).join(',')});`
     )
   }
@@ -438,28 +455,25 @@ async function verify() {
     // makes a present-tense claim, so it should not survive a failed check
     // even while we wait out the pull threshold.
     statements.push(
-      `UPDATE listings SET verified = FALSE, link_failures = link_failures + 1
+      `UPDATE legalaimcp.listings SET verified = FALSE, link_failures = link_failures + 1
        WHERE id IN (${dead.map((l) => uuid(l.id)).join(',')});`
     )
   }
   if (toPull.length) {
     statements.push(
-      `UPDATE listings SET status = 'rejected'
+      `UPDATE legalaimcp.listings SET status = 'rejected'
        WHERE id IN (${toPull.map((l) => uuid(l.id)).join(',')});`
     )
   }
 
-  if (statements.length === 0) {
-    log('nothing to write')
-    return
-  }
-
-  await sql(statements.join('\n'))
+  const counts = { checked: listings.length, alive: alive.length, blocked: blocked.length, dead: dead.length, unpublished: toPull.length }
+  if (statements.length) await sql(`BEGIN;\n${statements.join('\n')}\nCOMMIT;`)
   log(`wrote: ${alive.length} verified, ${dead.length} failed, ${toPull.length} unpublished`)
 
   // Non-zero exit so a scheduled run surfaces in launchd logs as needing a
   // human look, rather than succeeding quietly while listings disappear.
   if (toPull.length) process.exitCode = 1
+  return counts
 }
 
 // ------------------------------------------------------------------ main ----
@@ -471,7 +485,9 @@ if (!COMMANDS[cmd]) {
   process.exit(2)
 }
 
-COMMANDS[cmd]().catch((err) => {
-  console.error('[curate] FAILED:', err.message)
-  process.exit(1)
+const execute = () => COMMANDS[cmd]()
+const task = cmd === 'verify' ? withVerifyHealth(execute, { file: HEALTH_FILE, dryRun: has('dry-run') }) : execute()
+task.catch(() => {
+  console.error('[curate] FAILED: maintenance incomplete; check configuration and service availability')
+  process.exitCode = 2
 })

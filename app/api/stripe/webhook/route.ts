@@ -71,19 +71,13 @@ async function applyFeaturedPurchase(session: Stripe.Checkout.Session) {
 
   const db = getAdminClient()
 
-  // Idempotent: unique on stripe_session_id — skip if we already recorded this session.
-  const { data: existing } = await db
-    .from('listing_payments')
-    .select('id')
-    .eq('stripe_session_id', session.id)
-    .maybeSingle()
+  // A ledger row proves payment was recorded, not that listing fulfillment succeeded.
+  const readPayment = () => db.from('listing_payments')
+    .select('listing_id,status,created_at').eq('stripe_session_id', session.id).maybeSingle()
+  const { data: existing, error: lookupError } = await readPayment()
+  if (lookupError) throw new Error('Payment lookup failed')
+  let payment = existing
 
-  if (existing) {
-    return
-  }
-
-  const now = new Date()
-  const featuredUntil = new Date(now.getTime() + FEATURED_DURATION_DAYS * 24 * 60 * 60 * 1000)
   const paymentIntentId =
     typeof session.payment_intent === 'string'
       ? session.payment_intent
@@ -95,33 +89,50 @@ async function applyFeaturedPurchase(session: Stripe.Checkout.Session) {
       : FEATURED_PRICE_CENTS
   const currency = (session.currency || 'usd').toLowerCase()
 
-  const { error: payErr } = await db.from('listing_payments').insert({
-    listing_id: listingId,
-    stripe_session_id: session.id,
-    amount_cents: amountCents,
-    currency,
-    status: 'completed',
-  })
-
-  if (payErr) {
-    // Unique violation = concurrent duplicate delivery — treat as success.
-    if (payErr.code === '23505') return
-    throw new Error(`listing_payments insert failed: ${payErr.message}`)
+  if (!payment) {
+    const { data: inserted, error: payErr } = await db.from('listing_payments').insert({
+      listing_id: listingId,
+      stripe_session_id: session.id,
+      amount_cents: amountCents,
+      currency,
+      status: 'completed',
+    }).select('listing_id,status,created_at').single()
+    if (payErr && payErr.code !== '23505') throw new Error('Payment recording failed')
+    if (payErr) {
+      const { data: winner, error: retryError } = await readPayment()
+      if (retryError) throw new Error('Concurrent payment lookup failed')
+      payment = winner
+    } else payment = inserted
   }
+  if (!payment || payment.listing_id !== listingId || payment.status !== 'completed' ||
+    !Number.isFinite(Date.parse(payment.created_at))) throw new Error('Invalid payment evidence')
+  const purchasedAt = payment.created_at
+  const featuredUntil = new Date(Date.parse(purchasedAt) + FEATURED_DURATION_DAYS * 24 * 60 * 60 * 1000)
 
-  const { error: listErr } = await db
+  const { data: updated, error: listErr } = await db
     .from('listings')
     .update({
-      featured: true,
+      featured: featuredUntil.getTime() > Date.now(),
       featured_until: featuredUntil.toISOString(),
       stripe_checkout_session_id: session.id,
       stripe_payment_intent_id: paymentIntentId,
-      featured_purchased_at: now.toISOString(),
+      featured_purchased_at: purchasedAt,
     })
     .eq('id', listingId)
+    .or(`featured_purchased_at.is.null,featured_purchased_at.lte.${purchasedAt}`)
+    .select('id')
+    .maybeSingle()
 
   if (listErr) {
-    throw new Error(`listings featured update failed: ${listErr.message}`)
+    throw new Error('Listing fulfillment failed')
+  }
+
+  if (!updated) {
+    // A newer purchase wins. A missing listing or unreadable state needs a retry.
+    const { data: current, error: currentError } = await db.from('listings')
+      .select('featured_purchased_at').eq('id', listingId).maybeSingle()
+    if (currentError || !current || Date.parse(current.featured_purchased_at) < Date.parse(purchasedAt) ||
+      !Number.isFinite(Date.parse(current.featured_purchased_at))) throw new Error('Listing fulfillment unconfirmed')
   }
 
   console.info(
