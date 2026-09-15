@@ -9,6 +9,7 @@ const MAIN_CATEGORIES = [
 ]
 
 const RESOURCES = [
+  { href: '/pilot?source=directory', label: 'Workflow Monitoring Pilot' },
   { href: '/servers', label: 'Browse All Tools' },
   { href: '/document-check', label: 'Document Check Demo' },
   { href: '/workflow-plan', label: 'Free Workflow Plan' },

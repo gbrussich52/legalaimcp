@@ -3,6 +3,7 @@ import { isAdminAuthenticated } from '@/lib/admin-auth'
 import { getAdminClient } from '@/lib/supabase-admin'
 import { LISTING_ADMIN_COLUMNS, SUBMISSION_COLUMNS, type Listing, type Submission } from '@/lib/types'
 import { AdminDashboard } from './components/AdminDashboard'
+import Link from 'next/link'
 
 export const metadata = { title: 'Admin Dashboard', robots: { index: false } }
 
@@ -78,6 +79,7 @@ export default async function AdminPage() {
         </div>
       </div>
 
+      <p className="mb-6"><Link href="/admin/pilots" className="text-gold-text font-semibold underline">Review workflow monitoring pilot requests</Link></p>
       <AdminDashboard listings={listings} submissions={submissions} />
     </section>
   )

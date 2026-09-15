@@ -109,6 +109,12 @@ export default function McpPage() {
             </ul>
           </div>
 
+          <div className="rounded-xl bg-navy p-6 sm:p-8 text-white">
+            <h2 className="font-display text-2xl">Already running an AI integration?</h2>
+            <p className="mt-3 text-slate-200">Scope a monitoring pilot that checks whether it still returns the results your team expects. Start with fictional examples and one read-only workflow.</p>
+            <Link href="/pilot?source=mcp" className="inline-block mt-5 rounded-lg bg-white px-5 py-3 font-semibold text-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4">Explore the monitoring pilot</Link>
+          </div>
+
           <div className="border-t border-slate-200 pt-8">
             <h2 className="font-display text-2xl font-bold text-navy mb-3">
               What it does and doesn&apos;t do
