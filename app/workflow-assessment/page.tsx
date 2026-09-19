@@ -13,7 +13,7 @@ export default function AssessmentPage() {
     <p className="text-xs font-semibold uppercase tracking-widest text-gold-text">For solo and small law firms · Delivered by NYClaw</p>
     <h1 className="font-display text-4xl sm:text-5xl font-bold text-navy mt-4">One workflow. A clear plan before you buy more software.</h1>
     <p className="text-xl text-charcoal/70 leading-relaxed mt-6">You have tools. You still spend time chasing documents, following up on inquiries, or preparing invoices. A workflow assessment identifies what you can improve with your current setup and what would need an integration.</p>
-    <div className="mt-8"><AssessmentBooking /><p className="text-sm text-charcoal/60 mt-3">The initial fit call is free. Assessment scope and a fixed fee are agreed in writing before paid work begins. No payment is taken here.</p></div>
+    <div className="mt-8"><AssessmentBooking /><p className="text-sm text-charcoal/75 mt-3">The initial fit call is free. Assessment scope and a fixed fee are agreed in writing before paid work begins. No payment is taken here.</p></div>
     <section className="my-12 bg-white border border-slate-200 rounded-2xl p-6 sm:p-8">
       <h2 className="font-display text-2xl font-bold text-navy">What the assessment delivers</h2>
       <ul className="mt-5 space-y-4 list-disc pl-5">

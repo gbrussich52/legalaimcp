@@ -33,22 +33,22 @@ export function WorkflowPlanner() {
     <div className="mt-10 grid lg:grid-cols-[320px_1fr] gap-8 items-start">
       <form onSubmit={generate} className="bg-white border border-slate-200 rounded-2xl p-6 space-y-5 print:hidden">
         <label className="block font-sans font-semibold text-sm">1. What takes too much time?
-          <select className={field} value={workflow} onChange={(e) => setWorkflow(e.target.value as Workflow)}>
+          <select required className={field} value={workflow} onChange={(e) => setWorkflow(e.target.value as Workflow)}>
             {Object.entries(WORKFLOWS).map(([key, value]) => <option key={key} value={key}>{value.label}</option>)}
           </select>
         </label>
         <label className="block font-sans font-semibold text-sm">2. What do you use today?
-          <select className={field} value={system} onChange={(e) => setSystem(e.target.value as typeof system)}>
+          <select required className={field} value={system} onChange={(e) => setSystem(e.target.value as typeof system)}>
             {SYSTEMS.map((item) => <option key={item}>{item}</option>)}
           </select>
         </label>
         <label className="block font-sans font-semibold text-sm">3. How will you set it up?
-          <select className={field} value={support} onChange={(e) => setSupport(e.target.value as typeof support)}>
+          <select required className={field} value={support} onChange={(e) => setSupport(e.target.value as typeof support)}>
             {SUPPORT_LEVELS.map((item) => <option key={item}>{item}</option>)}
           </select>
         </label>
         <button className="btn-primary w-full" type="submit">Build my workflow plan →</button>
-        <p className="text-xs text-charcoal/60">Your selections and estimates stay in this page. No client or firm details are collected here.</p>
+        <p className="text-xs text-charcoal/75">Your selections and estimates stay in this page. No client or firm details are collected here.</p>
       </form>
 
       {!selected || !plan ? (
@@ -60,14 +60,14 @@ export function WorkflowPlanner() {
             <li>Where a person reviews the work.</li>
             <li>A small test before using real matters.</li>
           </ul>
-          <p className="mt-8 text-sm text-charcoal/60">Save the result as a PDF, share it with your team, or bring it to a workflow assessment.</p>
+          <p className="mt-8 text-sm text-charcoal/75">Save the result as a PDF, share it with your team, or bring it to a workflow assessment.</p>
         </section>
       ) : (
         <section className="rounded-2xl bg-white border border-slate-200 p-6 sm:p-8 space-y-7" aria-label="Your workflow plan">
           <div>
             <p className="text-xs uppercase tracking-widest font-semibold text-gold-text">Your pilot brief · {plan.system}</p>
             <h2 ref={resultRef} tabIndex={-1} className="font-display text-3xl font-bold text-navy mt-3 focus:outline-none">{selected.outcome}</h2>
-            <p className="mt-3 text-sm text-charcoal/60">{selected.label} · {plan.support}. Prepared in your browser; not reviewed by our team.</p>
+            <p className="mt-3 text-sm text-charcoal/75">{selected.label} · {plan.support}. Prepared in your browser; not reviewed by our team.</p>
           </div>
           <div><h3 className="font-semibold text-navy">Start with what you own</h3><p className="mt-2 text-charcoal/75">{systemAdvice(plan.system)}</p></div>
           <div><h3 className="font-semibold text-navy">A workflow to test</h3><ol className="list-decimal pl-5 mt-3 space-y-2">{selected.steps.map((step) => <li key={step}>{step}</li>)}</ol></div>
@@ -84,7 +84,7 @@ export function WorkflowPlanner() {
             <p className="mt-4 text-navy font-semibold" role="status">
               {estimate ? estimate.improved ? `Estimated capacity freed: ${estimate.monthlyHours.toFixed(1)} hours per month.` : 'These estimates show no time saving. Simplify the pilot or choose a different task.' : 'Enter three valid estimates to calculate potential time savings.'}
             </p>
-            <p className="text-xs text-charcoal/60 mt-2">Tasks × (minutes now − minutes with pilot) ÷ 60. Capacity is not revenue or cash savings. Software, setup, maintenance, and how you use the time determine the return.</p>
+            <p className="text-xs text-charcoal/75 mt-2">Tasks × (minutes now − minutes with pilot) ÷ 60. Capacity is not revenue or cash savings. Software, setup, maintenance, and how you use the time determine the return.</p>
           </fieldset>
           <div className="border-t border-slate-200 pt-6 print:hidden">
             <h3 className="font-display text-xl font-semibold text-navy">{plan.support === 'I need setup help' ? 'Want help turning this into a working process?' : 'Ready to check the available tools?'}</h3>
@@ -95,7 +95,7 @@ export function WorkflowPlanner() {
               <button type="button" className="text-sm font-semibold underline py-3" onClick={() => window.print()}>Print / save PDF</button>
             </div>
           </div>
-          <p className="text-xs text-charcoal/60">LegalAIMCP is operated by NYClaw, an implementation agency. This plan is software guidance, not legal advice or a compliance certification. Review dated vendor documentation and your firm’s requirements before connecting client data.</p>
+          <p className="text-xs text-charcoal/75">LegalAIMCP is operated by NYClaw, an implementation agency. This plan is software guidance, not legal advice or a compliance certification. Review dated vendor documentation and your firm’s requirements before connecting client data.</p>
         </section>
       )}
     </div>

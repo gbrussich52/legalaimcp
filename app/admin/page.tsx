@@ -43,7 +43,7 @@ export default async function AdminPage() {
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="font-display text-3xl font-bold text-navy">Admin Dashboard</h1>
-          <p className="font-body text-charcoal/60 mt-1">Manage listings and review submissions</p>
+          <p className="font-body text-charcoal/75 mt-1">Manage listings and review submissions</p>
         </div>
         <form action="/admin/logout" method="POST">
           <button className="text-sm text-charcoal/50 hover:text-charcoal font-sans transition-colors">

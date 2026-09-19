@@ -118,9 +118,9 @@ export default function RootLayout({
               </Link>
               <Link
                 href="/workflow-assessment"
-                className="btn-primary text-sm"
+                className="font-sans text-sm font-semibold text-gold-text underline decoration-1 underline-offset-2 hover:text-navy transition-colors"
               >
-                Get setup help →
+                Get setup help
               </Link>
             </nav>
 
@@ -134,9 +134,9 @@ export default function RootLayout({
               </Link>
               <Link
                 href="/workflow-assessment"
-                className="btn-primary text-xs !px-3 whitespace-nowrap"
+                className="font-sans text-xs font-semibold text-gold-text underline decoration-1 underline-offset-2 whitespace-nowrap"
               >
-                Setup help
+                Get setup help
               </Link>
             </nav>
           </div>

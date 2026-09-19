@@ -36,7 +36,7 @@ export function ListingCard({ listing }: { listing: ListingCardData }) {
           <p className="font-sans font-semibold text-navy group-hover:text-gold-text truncate">
             {listing.name}
           </p>
-          <p className="text-sm text-charcoal/60 line-clamp-2 font-body mt-0.5">
+          <p className="text-sm text-charcoal/75 line-clamp-2 font-body mt-0.5">
             {listing.tagline}
           </p>
         </div>

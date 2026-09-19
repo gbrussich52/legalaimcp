@@ -112,7 +112,7 @@ function MetadataFields({ draft, prefix, labelPrefix, onChange }: { draft: Draft
           <input id={fieldId(prefix, draft.uiId, 'pages')} className={inputClass} value={draft.pages} onChange={change('pages')} placeholder="Example: 14" inputMode="numeric" maxLength={5} />
         </label>
       </div>
-      <p className="mt-3 text-xs leading-relaxed text-charcoal/60">Leave fields blank when the checklist does not require them. For received documents, a blank value means unknown and can be flagged when the request expects it. Dates must use YYYY-MM-DD; version and page values must be whole numbers.</p>
+      <p className="mt-3 text-xs leading-relaxed text-charcoal/75">Leave fields blank when the checklist does not require them. For received documents, a blank value means unknown and can be flagged when the request expects it. Dates must use YYYY-MM-DD; version and page values must be whole numbers.</p>
     </details>
   )
 }
@@ -280,7 +280,7 @@ export default function DocumentCheckForm() {
           <p className="text-sm leading-relaxed text-charcoal/70">Add the documents your fictional checklist expects. Use redacted names and metadata only.</p>
           <ol className="space-y-4">{requested.map((row, index) => <RequestedRow key={row.uiId} row={row} index={index} onChange={(field, value) => updateRequested(row.uiId, field, value)} onRemove={() => removeRequested(row.uiId)} canRemove={requested.length > 1} />)}</ol>
           <button type="button" className={buttonClass} onClick={addRequested} disabled={requested.length >= MAX_REQUESTED}>+ Add requested document</button>
-          <p className="text-xs text-charcoal/60">{requested.length} of {MAX_REQUESTED} requested documents</p>
+          <p className="text-xs text-charcoal/75">{requested.length} of {MAX_REQUESTED} requested documents</p>
         </fieldset>
 
         <fieldset className="space-y-4 border-t border-slate-200 pt-8">
@@ -289,7 +289,7 @@ export default function DocumentCheckForm() {
           {received.length === 0 && <p role="status" className="rounded-lg border border-dashed border-slate-300 px-4 py-5 text-sm text-charcoal/65">No received documents yet. Add one when you have a fictional item to reconcile.</p>}
           <ol className="space-y-4">{received.map((row, index) => <ReceivedRow key={row.uiId} row={row} index={index} requested={requested} onChange={(field, value) => updateReceived(row.uiId, field, value)} onRemove={() => removeReceived(row.uiId)} canRemove />)}</ol>
           <button type="button" className={buttonClass} onClick={addReceived} disabled={received.length >= MAX_RECEIVED}>+ Add received document</button>
-          <p className="text-xs text-charcoal/60">{received.length} of {MAX_RECEIVED} received documents</p>
+          <p className="text-xs text-charcoal/75">{received.length} of {MAX_RECEIVED} received documents</p>
         </fieldset>
 
         <div className="flex flex-wrap items-center gap-3 border-t border-slate-200 pt-6">
@@ -304,7 +304,7 @@ export default function DocumentCheckForm() {
           <input id="enable-browser-agent" type="checkbox" className="mt-1 h-4 w-4 accent-navy" checked={agentEnabled} onChange={(event) => setAgentEnabled(event.target.checked)} />
           <span>Enable my browser agent for this demo<span className="mt-1 block font-normal leading-relaxed text-charcoal/65">An enabled browser agent receives results for the metadata it supplies. It cannot read your existing fields through this tool.</span></span>
         </label>
-        <p className="mt-3 text-xs leading-relaxed text-charcoal/60" role="status" aria-live="polite">{agentStatus === 'registered' ? 'Browser agent is enabled for this page.' : agentStatus === 'unavailable' ? 'This browser does not support the optional agent. You can still check documents manually.' : agentStatus === 'error' ? 'The optional browser agent could not be enabled. Manual checking is still available.' : 'Manual checking remains available when the browser agent is disabled.'}</p>
+        <p className="mt-3 text-xs leading-relaxed text-charcoal/75" role="status" aria-live="polite">{agentStatus === 'registered' ? 'Browser agent is enabled for this page.' : agentStatus === 'unavailable' ? 'This browser does not support the optional agent. You can still check documents manually.' : agentStatus === 'error' ? 'The optional browser agent could not be enabled. Manual checking is still available.' : 'Manual checking remains available when the browser agent is disabled.'}</p>
       </section>
 
       {result && <ResultPanel result={result} received={received} resultRef={resultRef} />}
@@ -328,15 +328,15 @@ function ResultPanel({ result, received, resultRef }: { result: DocumentCheckRes
       <h2 id="check-result-heading" ref={resultRef} tabIndex={-1} className="mt-3 font-display text-3xl font-bold text-navy focus:outline-none">{hasIssues ? 'Review the document set' : 'No issues found in this set'}</h2>
       <p className="mt-3 text-sm leading-relaxed text-charcoal/70">{hasIssues ? 'The checklist has items that need a person to confirm, correct, or request.' : 'Every requested document has one matching received document with the metadata supplied.'}</p>
       <dl className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-5">
-        {Object.entries({ Requested: result.summary.requested, Received: result.summary.received, Missing: result.summary.missing, 'Needs review': result.summary.needsReview, Matched: result.summary.matched }).map(([label, value]) => <div key={label} className="rounded-lg bg-slate-50 p-3"><dt className="text-xs text-charcoal/60">{label}</dt><dd className="mt-1 text-xl font-semibold text-navy">{value}</dd></div>)}
+        {Object.entries({ Requested: result.summary.requested, Received: result.summary.received, Missing: result.summary.missing, 'Needs review': result.summary.needsReview, Matched: result.summary.matched }).map(([label, value]) => <div key={label} className="rounded-lg bg-slate-50 p-3"><dt className="text-xs text-charcoal/75">{label}</dt><dd className="mt-1 text-xl font-semibold text-navy">{value}</dd></div>)}
       </dl>
       <ul className="mt-6 space-y-4" aria-label="Requested document findings">
-        {result.items.map((item) => <li key={item.requestId} className="border-t border-slate-200 pt-4"><div className="flex flex-wrap items-baseline justify-between gap-2"><h3 className="font-semibold text-navy min-w-0 max-w-full">{item.name}</h3><span className="text-sm font-semibold text-gold-text">{statusLabel(item.status)}</span></div><p className="mt-1 text-xs text-charcoal/60">Received: {item.receivedIds.length ? item.receivedIds.map(receivedName).join(', ') : 'None'}</p>{item.findings.length > 0 && <ul className="mt-3 space-y-2 text-sm leading-relaxed text-charcoal">{item.findings.map((finding, index) => <li key={`${finding.code}-${finding.field}-${index}`}><span className="font-semibold text-navy">{findingLabel(finding.field)}:</span> {finding.message}</li>)}</ul>}</li>)}
+        {result.items.map((item) => <li key={item.requestId} className="border-t border-slate-200 pt-4"><div className="flex flex-wrap items-baseline justify-between gap-2"><h3 className="font-semibold text-navy min-w-0 max-w-full">{item.name}</h3><span className="text-sm font-semibold text-gold-text">{statusLabel(item.status)}</span></div><p className="mt-1 text-xs text-charcoal/75">Received: {item.receivedIds.length ? item.receivedIds.map(receivedName).join(', ') : 'None'}</p>{item.findings.length > 0 && <ul className="mt-3 space-y-2 text-sm leading-relaxed text-charcoal">{item.findings.map((finding, index) => <li key={`${finding.code}-${finding.field}-${index}`}><span className="font-semibold text-navy">{findingLabel(finding.field)}:</span> {finding.message}</li>)}</ul>}</li>)}
       </ul>
       {result.unassignedIds.length > 0 && <p className="mt-5 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm leading-relaxed text-amber-950"><strong>Unassigned received documents:</strong> {result.unassignedIds.map(receivedName).join(', ')}. Choose a requested document above if the relationship can be confirmed.</p>}
       <div className="mt-6 border-t border-slate-200 pt-5"><h3 className="font-semibold text-navy">Scope of this check</h3><ul className="mt-2 space-y-1 text-xs leading-relaxed text-charcoal/65">{result.limitations.map((limitation) => <li key={limitation}>• {limitation}</li>)}</ul></div>
       <div className="mt-7 rounded-xl bg-navy p-5 text-white"><h3 className="font-display text-xl font-semibold">Need to decide what to fix first?</h3><p className="mt-2 text-sm leading-relaxed text-slate-300">Bring a fictional example to a workflow assessment and scope the review steps, software, and human handoffs.</p><Link href="/workflow-assessment" className="mt-4 inline-block rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-navy hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-white/60">See the workflow assessment →</Link></div>
-      <p className="mt-5 text-xs leading-relaxed text-charcoal/60">This browser-only demo checks the metadata you enter. It does not determine legal sufficiency, completeness of a matter, or compliance.</p>
+      <p className="mt-5 text-xs leading-relaxed text-charcoal/75">This browser-only demo checks the metadata you enter. It does not determine legal sufficiency, completeness of a matter, or compliance.</p>
     </section>
   )
 }

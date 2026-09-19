@@ -20,9 +20,9 @@ import { CATEGORY_CONTENT } from '@/lib/category-content'
  * `verified` signal the rest of the site uses — no separate hand-picked list.
  */
 
-const PAGE_TITLE = 'The Best Legal MCP Servers in 2026 (From the Official Registry)'
+const PAGE_TITLE = 'The Best Legal MCP Servers in 2026'
 const PAGE_DESCRIPTION =
-  'The top legal AI tools and MCP servers, ranked from our 48-tool directory — the same data behind our own MCP server, which is listed in the official Model Context Protocol registry. Not a hand-picked blog list.'
+  'The top legal AI tools and MCP servers, ranked from our 48-tool directory — the same data behind our own MCP server in the official MCP registry.'
 
 export const metadata: Metadata = {
   title: PAGE_TITLE,
@@ -120,7 +120,7 @@ export default async function BestLegalMcpServersPage() {
             ))}
           </ol>
         ) : (
-          <p className="font-body text-charcoal/60 text-center py-16">
+          <p className="font-body text-charcoal/75 text-center py-16">
             The directory is temporarily unavailable.{' '}
             <Link href="/servers" className="text-gold-text font-semibold hover:underline">
               Browse the full list

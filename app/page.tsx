@@ -90,16 +90,16 @@ export default async function HomePage() {
 
           <div className="mt-6 flex flex-wrap gap-4 justify-center">
             <Link
-              href="/servers"
+              href="/workflow-plan"
               className="bg-white text-navy font-sans font-semibold px-6 py-3 rounded-lg hover:bg-slate-100 transition-colors"
             >
-              Browse All Tools →
+              Build my workflow plan
             </Link>
             <Link
-              href="/workflow-plan"
+              href="/servers"
               className="border border-white/30 text-white hover:bg-white/10 px-6 py-3 rounded-lg font-sans font-semibold transition-colors"
             >
-              Build my workflow plan
+              Browse All Tools →
             </Link>
           </div>
 
@@ -137,7 +137,7 @@ export default async function HomePage() {
                 <span className="font-display text-2xl font-bold text-navy">1</span>
               </div>
               <h3 className="font-sans font-semibold text-navy text-lg mb-2">Find the right tool</h3>
-              <p className="font-body text-charcoal/60 text-sm leading-relaxed">
+              <p className="font-body text-charcoal/75 text-sm leading-relaxed">
                 Browse by practice area — contract review, legal research, client intake,
                 billing, and more. New submissions are reviewed before they go
                 live, and published links are re-checked automatically.
@@ -148,7 +148,7 @@ export default async function HomePage() {
                 <span className="font-display text-2xl font-bold text-navy">2</span>
               </div>
               <h3 className="font-sans font-semibold text-navy text-lg mb-2">Check the connection</h3>
-              <p className="font-body text-charcoal/60 text-sm leading-relaxed">
+              <p className="font-body text-charcoal/75 text-sm leading-relaxed">
                 Some listings offer MCP connections; others are standalone AI products.
                 Check vendor documentation, plan requirements, and data access before setup.
               </p>
@@ -158,7 +158,7 @@ export default async function HomePage() {
                 <span className="font-display text-2xl font-bold text-navy">3</span>
               </div>
               <h3 className="font-sans font-semibold text-navy text-lg mb-2">Test one workflow</h3>
-              <p className="font-body text-charcoal/60 text-sm leading-relaxed">
+              <p className="font-body text-charcoal/75 text-sm leading-relaxed">
                 Start with fictional data and a person reviewing the output. Measure time
                 saved, corrections, and ongoing cost before expanding the pilot.
               </p>
@@ -221,7 +221,7 @@ export default async function HomePage() {
           <h2 className="font-display text-3xl font-bold text-navy text-center">
             Browse by practice area
           </h2>
-          <p className="text-center text-charcoal/60 font-body mt-2 text-base">
+          <p className="text-center text-charcoal/75 font-body mt-2 text-base">
             Tools organized by how lawyers actually work.
           </p>
 
@@ -342,7 +342,7 @@ export default async function HomePage() {
                   <h3 className="font-display text-lg font-bold text-navy group-hover:text-gold-text transition-colors leading-snug">
                     {post.title}
                   </h3>
-                  <p className="font-body text-charcoal/60 text-sm mt-2 leading-relaxed line-clamp-2">
+                  <p className="font-body text-charcoal/75 text-sm mt-2 leading-relaxed line-clamp-2">
                     {post.description}
                   </p>
                 </Link>

@@ -121,9 +121,17 @@ export function Footer() {
 
         {/* Divider + bottom row */}
         <div className="border-t border-slate-700 pt-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
-          <p className="text-slate-400 text-sm font-body">
-            © {currentYear} {SITE_NAME}. All rights reserved.
-          </p>
+          <div className="flex items-center gap-4">
+            <p className="text-slate-400 text-sm font-body">
+              © {currentYear} {SITE_NAME}. All rights reserved.
+            </p>
+            <Link href="/privacy" className="text-slate-400 text-sm font-body hover:text-white transition-colors">
+              Privacy
+            </Link>
+            <Link href="/terms" className="text-slate-400 text-sm font-body hover:text-white transition-colors">
+              Terms
+            </Link>
+          </div>
           {/* Funding disclosure, owned upfront rather than buried — CRO rule
               #11 trust cluster. Previously read "Funded by affiliate
               revenue," which described plumbing that was never built: no

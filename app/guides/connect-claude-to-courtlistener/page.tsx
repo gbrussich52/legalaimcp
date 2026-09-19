@@ -38,9 +38,9 @@ async function getListing(): Promise<GuideListing | null> {
   return data ?? null
 }
 
-const PAGE_TITLE = 'How to Connect Claude to CourtListener via MCP (Setup Guide)'
+const PAGE_TITLE = 'How to Connect Claude to CourtListener via MCP'
 const PAGE_DESCRIPTION =
-  "Step-by-step setup for the official CourtListener MCP server: install command, authentication, and how to query millions of court opinions and dockets directly from Claude."
+  "Step-by-step setup for the official CourtListener MCP server: install command, authentication, and how to query court opinions and dockets from Claude."
 
 export const metadata: Metadata = {
   title: PAGE_TITLE,

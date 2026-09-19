@@ -38,7 +38,7 @@ export default function PricingPage() {
             / 30 days
           </span>
         </p>
-        <p className="font-body text-sm text-charcoal/60 mb-6">
+        <p className="font-body text-sm text-charcoal/75 mb-6">
           One payment. No automatic renewal. Placement does not guarantee
           impressions, clicks, leads, or sales.
         </p>

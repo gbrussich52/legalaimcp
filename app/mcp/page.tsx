@@ -17,7 +17,7 @@ const ENDPOINT = `${SITE_URL}/api/mcp`
 
 export const metadata: Metadata = {
   title: `MCP Server — Query ${SITE_NAME} From Your AI Assistant`,
-  description: `Connect Claude, ChatGPT, or any MCP client to the ${SITE_NAME} directory of legal AI tools. Free, read-only, no API key. Search 45+ AI tools and MCP servers built for law firms.`,
+  description: `Connect Claude, ChatGPT, or any MCP client to the ${SITE_NAME} directory of legal AI tools. Free, read-only, no API key. Search 45+ tools for law firms.`,
   alternates: { canonical: `${SITE_URL}/mcp` },
 }
 

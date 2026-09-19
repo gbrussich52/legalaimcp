@@ -57,7 +57,7 @@ export function TrustStrip() {
                 <p className="font-sans text-sm font-semibold text-navy leading-tight">
                   {label}
                 </p>
-                <p className="font-body text-xs text-charcoal/60 leading-tight mt-0.5">
+                <p className="font-body text-xs text-charcoal/75 leading-tight mt-0.5">
                   {detail}
                 </p>
               </div>

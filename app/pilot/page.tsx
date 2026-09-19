@@ -4,7 +4,7 @@ import { PilotForm } from './form'
 
 export const metadata: Metadata = {
   title: 'AI Workflow Reliability Pilot',
-  description: 'Scope a four-week pilot to check one legal AI integration, catch empty or stale results, and produce evidence your team can review. Prepare your brief before sending a request.',
+  description: 'Scope a four-week pilot to check one legal AI integration, catch empty or stale results, and produce evidence your team can review before sending a request.',
   alternates: { canonical: 'https://legalaimcp.com/pilot' },
 }
 

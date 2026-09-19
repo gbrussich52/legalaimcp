@@ -65,7 +65,7 @@ export function FeatureListingCTA({
         <p className="font-sans text-sm font-semibold text-navy">
           Featured through {new Date(featuredUntil as string).toLocaleDateString()}
         </p>
-        <p className="font-body text-xs text-charcoal/60 mt-1">
+        <p className="font-body text-xs text-charcoal/75 mt-1">
           Sponsored placement — sort boost + badge. Renew from this page after it expires.
         </p>
       </div>
@@ -79,7 +79,7 @@ export function FeatureListingCTA({
           <p className="font-sans text-sm font-semibold text-navy">
             Feature this listing — {PRICE_LABEL} / 30 days
           </p>
-          <p className="font-body text-xs text-charcoal/60 mt-1">
+          <p className="font-body text-xs text-charcoal/75 mt-1">
             Sponsored sort boost + Featured badge. MCP search stays free.{' '}
             <Link href="/pricing" className="text-gold-text hover:underline">
               Details

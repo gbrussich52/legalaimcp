@@ -264,7 +264,7 @@ export default async function ListingDetailPage({
           {listing.tags.map((tag: string) => (
             <span
               key={tag}
-              className="bg-slate-100 text-xs rounded-full px-2.5 py-1 text-charcoal/60"
+              className="bg-slate-100 text-xs rounded-full px-2.5 py-1 text-charcoal/75"
             >
               {tag}
             </span>

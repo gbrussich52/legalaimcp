@@ -73,7 +73,7 @@ export default async function BlogPostPage({
           <h1 className="font-display text-4xl font-bold text-navy leading-tight">
             {post.title}
           </h1>
-          <p className="font-body text-lg text-charcoal/60 mt-3">{post.description}</p>
+          <p className="font-body text-lg text-charcoal/75 mt-3">{post.description}</p>
           <p className="font-body text-sm text-charcoal/40 mt-4">By {post.author}</p>
         </div>
 

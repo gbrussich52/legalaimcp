@@ -145,7 +145,7 @@ export default async function BestCategoryPage({
             ))}
           </ol>
         ) : (
-          <p className="font-body text-charcoal/60 text-center py-16">
+          <p className="font-body text-charcoal/75 text-center py-16">
             No tools in this category yet.{' '}
             <Link href="/submit" className="text-gold-text font-semibold hover:underline">
               Know one that belongs here?

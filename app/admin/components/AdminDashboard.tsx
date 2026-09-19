@@ -84,7 +84,7 @@ function ListingsTable({ listings }: { listings: Listing[] }) {
                   {CATEGORY_LABELS[listing.category] ?? listing.category}
                 </span>
               </td>
-              <td className="py-3 px-2 text-charcoal/60">
+              <td className="py-3 px-2 text-charcoal/75">
                 {PRICING_LABELS[listing.pricing_model] ?? listing.pricing_model}
               </td>
               <td className="py-3 px-2">
@@ -113,7 +113,7 @@ function ListingsTable({ listings }: { listings: Listing[] }) {
                   className="accent-navy"
                 />
               </td>
-              <td className="py-3 px-2 text-xs text-charcoal/60 whitespace-nowrap">
+              <td className="py-3 px-2 text-xs text-charcoal/75 whitespace-nowrap">
                 {listing.featured
                   ? listing.featured_until
                     ? new Date(listing.featured_until).toLocaleDateString()
@@ -176,7 +176,7 @@ function SubmissionsTable({ submissions }: { submissions: Submission[] }) {
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1 min-w-0">
                 <p className="font-sans font-semibold text-navy">{data.name || 'Untitled'}</p>
-                <p className="text-sm text-charcoal/60 font-body mt-1">{data.tagline || ''}</p>
+                <p className="text-sm text-charcoal/75 font-body mt-1">{data.tagline || ''}</p>
                 <div className="flex gap-3 mt-2 text-xs text-charcoal/40 font-body">
                   <span>From: {sub.submitter_name} ({sub.submitter_email})</span>
                   <span>{new Date(sub.created_at).toLocaleDateString()}</span>

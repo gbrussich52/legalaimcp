@@ -45,7 +45,7 @@ export default function BlogPage() {
               <h2 className="font-display text-xl font-bold text-navy group-hover:text-gold-text transition-colors">
                 {post.title}
               </h2>
-              <p className="font-body text-charcoal/60 mt-2 leading-relaxed">
+              <p className="font-body text-charcoal/75 mt-2 leading-relaxed">
                 {post.description}
               </p>
             </Link>
