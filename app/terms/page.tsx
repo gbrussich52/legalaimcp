@@ -120,7 +120,9 @@ export default function TermsPage() {
             <h2 className="font-display text-2xl font-semibold text-navy mb-4">Contact</h2>
             <p className="text-base text-charcoal/75 leading-relaxed">
               Questions about these terms can be sent through the{' '}
-              <Link className="text-gold-text underline" href="/submit">/submit</Link> form.
+              <Link className="text-gold-text underline" href="/submit">/submit</Link> form or by
+              emailing{' '}
+              <a className="text-gold-text underline" href="mailto:hello@legalaimcp.com">hello@legalaimcp.com</a>.
             </p>
           </div>
 

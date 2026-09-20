@@ -93,8 +93,9 @@ export default function PrivacyPage() {
             <p className="text-base text-charcoal/75 leading-relaxed">
               To have information you submitted removed or corrected, send the details through the{' '}
               <Link className="text-gold-text underline" href="/submit">/submit</Link> form and note
-              that it&apos;s a privacy request rather than a new listing. We&apos;ll act on it
-              promptly.
+              that it&apos;s a privacy request rather than a new listing, or email{' '}
+              <a className="text-gold-text underline" href="mailto:hello@legalaimcp.com">hello@legalaimcp.com</a>.
+              We&apos;ll act on it promptly.
             </p>
           </div>
 
