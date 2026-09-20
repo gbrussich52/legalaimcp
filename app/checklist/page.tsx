@@ -56,7 +56,7 @@ export default function ChecklistPage() {
           <h1 className="font-display text-4xl sm:text-5xl font-bold text-navy leading-tight">
             10 questions to ask before adopting any AI tool at your firm.
           </h1>
-          <p className="font-body text-lg text-charcoal/70 mt-4 leading-relaxed">
+          <p className="font-body text-lg text-charcoal/75 mt-4 leading-relaxed">
             Run any vendor through this list. If you can&apos;t get a clear answer
             to a question, that&apos;s your answer. Print, fork, or paste into your
             firm&apos;s vendor-intake doc.

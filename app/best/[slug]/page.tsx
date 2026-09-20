@@ -103,7 +103,7 @@ export default async function BestCategoryPage({
       <main className="max-w-content mx-auto px-4 py-12">
         {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="mb-6">
-          <ol className="flex flex-wrap items-center gap-1.5 font-body text-sm text-charcoal/50">
+          <ol className="flex flex-wrap items-center gap-1.5 font-body text-sm text-charcoal/80">
             <li>
               <Link href="/" className="hover:text-gold-text transition-colors">Home</Link>
             </li>
@@ -122,7 +122,7 @@ export default async function BestCategoryPage({
             Ranked
           </p>
           <h1 className="font-display text-4xl font-bold text-navy leading-tight">{pageTitle}</h1>
-          <p className="font-body text-lg text-charcoal/70 mt-4 leading-relaxed">
+          <p className="font-body text-lg text-charcoal/75 mt-4 leading-relaxed">
             The top-ranked tools in this category from our directory, ordered
             by verification status and featured placement. For the full
             buyer&apos;s guide — what this category covers, what to check

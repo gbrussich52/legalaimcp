@@ -30,7 +30,7 @@ export function AdminDashboard({
         <button
           onClick={() => setTab('listings')}
           className={`px-4 py-2 rounded-md text-sm font-sans font-medium transition-colors ${
-            tab === 'listings' ? 'bg-white text-navy shadow-sm' : 'text-charcoal/50 hover:text-charcoal'
+            tab === 'listings' ? 'bg-white text-navy shadow-sm' : 'text-charcoal/80 hover:text-charcoal'
           }`}
         >
           Listings ({listings.length})
@@ -38,7 +38,7 @@ export function AdminDashboard({
         <button
           onClick={() => setTab('submissions')}
           className={`px-4 py-2 rounded-md text-sm font-sans font-medium transition-colors ${
-            tab === 'submissions' ? 'bg-white text-navy shadow-sm' : 'text-charcoal/50 hover:text-charcoal'
+            tab === 'submissions' ? 'bg-white text-navy shadow-sm' : 'text-charcoal/80 hover:text-charcoal'
           }`}
         >
           Submissions {pendingCount > 0 && <span className="ml-1 bg-gold-text text-white text-xs rounded-full px-1.5 py-0.5">{pendingCount}</span>}
@@ -62,14 +62,14 @@ function ListingsTable({ listings }: { listings: Listing[] }) {
       <table className="w-full text-sm">
         <thead>
           <tr className="border-b border-slate-200">
-            <th className="text-left py-3 px-2 font-sans font-semibold text-charcoal/50 text-xs uppercase tracking-wider">Name</th>
-            <th className="text-left py-3 px-2 font-sans font-semibold text-charcoal/50 text-xs uppercase tracking-wider">Category</th>
-            <th className="text-left py-3 px-2 font-sans font-semibold text-charcoal/50 text-xs uppercase tracking-wider">Pricing</th>
-            <th className="text-left py-3 px-2 font-sans font-semibold text-charcoal/50 text-xs uppercase tracking-wider">Status</th>
-            <th className="text-center py-3 px-2 font-sans font-semibold text-charcoal/50 text-xs uppercase tracking-wider">Featured</th>
-            <th className="text-left py-3 px-2 font-sans font-semibold text-charcoal/50 text-xs uppercase tracking-wider">Until</th>
-            <th className="text-center py-3 px-2 font-sans font-semibold text-charcoal/50 text-xs uppercase tracking-wider">Verified</th>
-            <th className="text-right py-3 px-2 font-sans font-semibold text-charcoal/50 text-xs uppercase tracking-wider">Actions</th>
+            <th className="text-left py-3 px-2 font-sans font-semibold text-charcoal/80 text-xs uppercase tracking-wider">Name</th>
+            <th className="text-left py-3 px-2 font-sans font-semibold text-charcoal/80 text-xs uppercase tracking-wider">Category</th>
+            <th className="text-left py-3 px-2 font-sans font-semibold text-charcoal/80 text-xs uppercase tracking-wider">Pricing</th>
+            <th className="text-left py-3 px-2 font-sans font-semibold text-charcoal/80 text-xs uppercase tracking-wider">Status</th>
+            <th className="text-center py-3 px-2 font-sans font-semibold text-charcoal/80 text-xs uppercase tracking-wider">Featured</th>
+            <th className="text-left py-3 px-2 font-sans font-semibold text-charcoal/80 text-xs uppercase tracking-wider">Until</th>
+            <th className="text-center py-3 px-2 font-sans font-semibold text-charcoal/80 text-xs uppercase tracking-wider">Verified</th>
+            <th className="text-right py-3 px-2 font-sans font-semibold text-charcoal/80 text-xs uppercase tracking-wider">Actions</th>
           </tr>
         </thead>
         <tbody className={isPending ? 'opacity-50' : ''}>
@@ -161,7 +161,7 @@ function SubmissionsTable({ submissions }: { submissions: Submission[] }) {
 
   if (submissions.length === 0) {
     return (
-      <p className="text-charcoal/50 font-body text-center py-12">
+      <p className="text-charcoal/80 font-body text-center py-12">
         No submissions yet.
       </p>
     )
@@ -182,7 +182,7 @@ function SubmissionsTable({ submissions }: { submissions: Submission[] }) {
                   <span>{new Date(sub.created_at).toLocaleDateString()}</span>
                 </div>
                 {data.description && (
-                  <p className="text-sm text-charcoal/50 font-body mt-3 line-clamp-3">
+                  <p className="text-sm text-charcoal/80 font-body mt-3 line-clamp-3">
                     {data.description}
                   </p>
                 )}

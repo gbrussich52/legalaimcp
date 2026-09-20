@@ -69,7 +69,7 @@ export default async function BestLegalMcpServersPage() {
       <main className="max-w-content mx-auto px-4 py-12">
         {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="mb-6">
-          <ol className="flex flex-wrap items-center gap-1.5 font-body text-sm text-charcoal/50">
+          <ol className="flex flex-wrap items-center gap-1.5 font-body text-sm text-charcoal/80">
             <li>
               <Link href="/" className="hover:text-gold-text transition-colors">Home</Link>
             </li>
@@ -90,7 +90,7 @@ export default async function BestLegalMcpServersPage() {
           <h1 className="font-display text-4xl md:text-5xl font-bold text-navy leading-tight">
             The Best Legal MCP Servers in 2026
           </h1>
-          <p className="font-body text-lg text-charcoal/70 mt-5 leading-relaxed">
+          <p className="font-body text-lg text-charcoal/75 mt-5 leading-relaxed">
             LegalAIMCP runs its own MCP server, and it&apos;s listed in the
             official Model Context Protocol registry — the same open registry
             Claude, Smithery, and Glama pull from. This roundup is pulled from
@@ -98,7 +98,7 @@ export default async function BestLegalMcpServersPage() {
             featured and verified signals used everywhere else on this site.
             It isn&apos;t a list assembled for a blog post.
           </p>
-          <p className="font-body text-sm text-charcoal/50 mt-4">
+          <p className="font-body text-sm text-charcoal/80 mt-4">
             Ranked from our{' '}
             <Link href="/servers" className="text-gold-text font-semibold hover:underline">
               full directory of AI tools for law firms

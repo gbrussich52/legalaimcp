@@ -277,7 +277,7 @@ export default function DocumentCheckForm() {
         </div>
         <fieldset className="space-y-4">
           <legend className="font-display text-2xl font-semibold text-navy">1. What should be present?</legend>
-          <p className="text-sm leading-relaxed text-charcoal/70">Add the documents your fictional checklist expects. Use redacted names and metadata only.</p>
+          <p className="text-sm leading-relaxed text-charcoal/75">Add the documents your fictional checklist expects. Use redacted names and metadata only.</p>
           <ol className="space-y-4">{requested.map((row, index) => <RequestedRow key={row.uiId} row={row} index={index} onChange={(field, value) => updateRequested(row.uiId, field, value)} onRemove={() => removeRequested(row.uiId)} canRemove={requested.length > 1} />)}</ol>
           <button type="button" className={buttonClass} onClick={addRequested} disabled={requested.length >= MAX_REQUESTED}>+ Add requested document</button>
           <p className="text-xs text-charcoal/75">{requested.length} of {MAX_REQUESTED} requested documents</p>
@@ -285,7 +285,7 @@ export default function DocumentCheckForm() {
 
         <fieldset className="space-y-4 border-t border-slate-200 pt-8">
           <legend className="font-display text-2xl font-semibold text-navy">2. What arrived?</legend>
-          <p className="text-sm leading-relaxed text-charcoal/70">Add what you received and choose the exact requested document for each item. Leave it unassigned when the relationship is unknown.</p>
+          <p className="text-sm leading-relaxed text-charcoal/75">Add what you received and choose the exact requested document for each item. Leave it unassigned when the relationship is unknown.</p>
           {received.length === 0 && <p role="status" className="rounded-lg border border-dashed border-slate-300 px-4 py-5 text-sm text-charcoal/65">No received documents yet. Add one when you have a fictional item to reconcile.</p>}
           <ol className="space-y-4">{received.map((row, index) => <ReceivedRow key={row.uiId} row={row} index={index} requested={requested} onChange={(field, value) => updateReceived(row.uiId, field, value)} onRemove={() => removeReceived(row.uiId)} canRemove />)}</ol>
           <button type="button" className={buttonClass} onClick={addReceived} disabled={received.length >= MAX_RECEIVED}>+ Add received document</button>
@@ -326,7 +326,7 @@ function ResultPanel({ result, received, resultRef }: { result: DocumentCheckRes
     <section className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 break-words" aria-labelledby="check-result-heading">
       <p className="text-xs font-semibold uppercase tracking-widest text-gold-text">Local check result</p>
       <h2 id="check-result-heading" ref={resultRef} tabIndex={-1} className="mt-3 font-display text-3xl font-bold text-navy focus:outline-none">{hasIssues ? 'Review the document set' : 'No issues found in this set'}</h2>
-      <p className="mt-3 text-sm leading-relaxed text-charcoal/70">{hasIssues ? 'The checklist has items that need a person to confirm, correct, or request.' : 'Every requested document has one matching received document with the metadata supplied.'}</p>
+      <p className="mt-3 text-sm leading-relaxed text-charcoal/75">{hasIssues ? 'The checklist has items that need a person to confirm, correct, or request.' : 'Every requested document has one matching received document with the metadata supplied.'}</p>
       <dl className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-5">
         {Object.entries({ Requested: result.summary.requested, Received: result.summary.received, Missing: result.summary.missing, 'Needs review': result.summary.needsReview, Matched: result.summary.matched }).map(([label, value]) => <div key={label} className="rounded-lg bg-slate-50 p-3"><dt className="text-xs text-charcoal/75">{label}</dt><dd className="mt-1 text-xl font-semibold text-navy">{value}</dd></div>)}
       </dl>

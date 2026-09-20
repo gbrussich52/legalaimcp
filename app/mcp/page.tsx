@@ -89,7 +89,7 @@ export default function McpPage() {
             <h2 className="font-display text-2xl font-bold text-navy mb-3">
               Claude Desktop, Cursor, and other MCP clients
             </h2>
-            <p className="font-body text-charcoal/70 mb-3 leading-relaxed">
+            <p className="font-body text-charcoal/75 mb-3 leading-relaxed">
               Add this to your client&apos;s MCP configuration file:
             </p>
             <Code>{CLIENT_JSON}</Code>
@@ -101,7 +101,7 @@ export default function McpPage() {
               {TOOLS.map((t) => (
                 <li key={t.name} className="border border-slate-200 rounded-lg p-4">
                   <code className="font-mono text-sm text-navy font-semibold">{t.name}</code>
-                  <p className="font-body text-charcoal/70 text-sm mt-1.5 leading-relaxed">
+                  <p className="font-body text-charcoal/75 text-sm mt-1.5 leading-relaxed">
                     {t.desc}
                   </p>
                 </li>
@@ -119,7 +119,7 @@ export default function McpPage() {
             <h2 className="font-display text-2xl font-bold text-navy mb-3">
               What it does and doesn&apos;t do
             </h2>
-            <div className="font-body text-charcoal/70 space-y-3 leading-relaxed">
+            <div className="font-body text-charcoal/75 space-y-3 leading-relaxed">
               <p>
                 It is read-only. It serves exactly the listings this website
                 already publishes, so it can reach nothing that loading a page

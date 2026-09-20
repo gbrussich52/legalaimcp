@@ -12,7 +12,7 @@ export default function AssessmentPage() {
   return <main className="max-w-4xl mx-auto px-6 py-16">
     <p className="text-xs font-semibold uppercase tracking-widest text-gold-text">For solo and small law firms · Delivered by NYClaw</p>
     <h1 className="font-display text-4xl sm:text-5xl font-bold text-navy mt-4">One workflow. A clear plan before you buy more software.</h1>
-    <p className="text-xl text-charcoal/70 leading-relaxed mt-6">You have tools. You still spend time chasing documents, following up on inquiries, or preparing invoices. A workflow assessment identifies what you can improve with your current setup and what would need an integration.</p>
+    <p className="text-xl text-charcoal/75 leading-relaxed mt-6">You have tools. You still spend time chasing documents, following up on inquiries, or preparing invoices. A workflow assessment identifies what you can improve with your current setup and what would need an integration.</p>
     <div className="mt-8"><AssessmentBooking /><p className="text-sm text-charcoal/75 mt-3">The initial fit call is free. Assessment scope and a fixed fee are agreed in writing before paid work begins. No payment is taken here.</p></div>
     <section className="my-12 bg-white border border-slate-200 rounded-2xl p-6 sm:p-8">
       <h2 className="font-display text-2xl font-bold text-navy">What the assessment delivers</h2>
@@ -24,9 +24,9 @@ export default function AssessmentPage() {
       </ul>
     </section>
     <section className="my-12 grid md:grid-cols-3 gap-5">
-      <div className="bg-slate-50 border border-slate-200 rounded-xl p-5"><h2 className="font-display text-xl font-bold text-navy">One approved checklist</h2><p className="mt-3 text-sm text-charcoal/70 leading-relaxed">We start with one document or intake checklist your team already understands.</p></div>
-      <div className="bg-slate-50 border border-slate-200 rounded-xl p-5"><h2 className="font-display text-xl font-bold text-navy">Ten redacted examples</h2><p className="mt-3 text-sm text-charcoal/70 leading-relaxed">We define ten authorized, redacted or fictional examples for staff review before any broader pilot.</p></div>
-      <div className="bg-slate-50 border border-slate-200 rounded-xl p-5"><h2 className="font-display text-xl font-bold text-navy">Useful signals</h2><p className="mt-3 text-sm text-charcoal/70 leading-relaxed">We compare useful findings, staff time, and false alarms so the next decision has a clear record.</p></div>
+      <div className="bg-slate-50 border border-slate-200 rounded-xl p-5"><h2 className="font-display text-xl font-bold text-navy">One approved checklist</h2><p className="mt-3 text-sm text-charcoal/75 leading-relaxed">We start with one document or intake checklist your team already understands.</p></div>
+      <div className="bg-slate-50 border border-slate-200 rounded-xl p-5"><h2 className="font-display text-xl font-bold text-navy">Ten redacted examples</h2><p className="mt-3 text-sm text-charcoal/75 leading-relaxed">We define ten authorized, redacted or fictional examples for staff review before any broader pilot.</p></div>
+      <div className="bg-slate-50 border border-slate-200 rounded-xl p-5"><h2 className="font-display text-xl font-bold text-navy">Useful signals</h2><p className="mt-3 text-sm text-charcoal/75 leading-relaxed">We compare useful findings, staff time, and false alarms so the next decision has a clear record.</p></div>
     </section>
     <section className="grid sm:grid-cols-2 gap-8 my-12">
       <div><h2 className="font-display text-2xl font-bold text-navy">A useful first project</h2><p className="mt-3 text-charcoal/75">Start with inquiry follow-up, missing-document requests, or invoice preparation. We define a draft-and-review process with a measurable starting point.</p></div>

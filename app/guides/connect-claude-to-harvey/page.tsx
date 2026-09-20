@@ -129,7 +129,7 @@ export default async function ConnectHarveyGuidePage() {
       <main className="max-w-content mx-auto px-4 py-12">
         {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="mb-6">
-          <ol className="flex flex-wrap items-center gap-1.5 font-body text-sm text-charcoal/50">
+          <ol className="flex flex-wrap items-center gap-1.5 font-body text-sm text-charcoal/80">
             <li>
               <Link href="/" className="hover:text-gold-text transition-colors">Home</Link>
             </li>
@@ -150,7 +150,7 @@ export default async function ConnectHarveyGuidePage() {
           <h1 className="font-display text-4xl font-bold text-navy leading-tight">
             How to Connect Claude to Harvey AI via MCP
           </h1>
-          <p className="font-body text-lg text-charcoal/70 mt-4 leading-relaxed">
+          <p className="font-body text-lg text-charcoal/75 mt-4 leading-relaxed">
             {listing.tagline}. This guide covers what{' '}
             {listing.creator_url ? (
               <a
@@ -224,7 +224,7 @@ export default async function ConnectHarveyGuidePage() {
             <h2 className="font-display text-2xl font-bold text-navy mb-3">
               1. Get your tenant enrolled
             </h2>
-            <p className="font-body text-charcoal/70 leading-relaxed">
+            <p className="font-body text-charcoal/75 leading-relaxed">
               Ask your Harvey admin or representative to enable MCP access for your
               account and to confirm which knowledge sources and Vault projects your role can
               reach. Do this before touching any client configuration. Two of the four failures
@@ -240,7 +240,7 @@ export default async function ConnectHarveyGuidePage() {
             </h2>
             {claudeCodeCommand ? (
               <>
-                <p className="font-body text-charcoal/70 mb-3 leading-relaxed">
+                <p className="font-body text-charcoal/75 mb-3 leading-relaxed">
                   Run this in your terminal:
                 </p>
                 <pre className="bg-navy text-slate-100 rounded-lg p-4 overflow-x-auto text-sm font-mono leading-relaxed">
@@ -248,7 +248,7 @@ export default async function ConnectHarveyGuidePage() {
                 </pre>
               </>
             ) : (
-              <p className="font-body text-charcoal/70 leading-relaxed">
+              <p className="font-body text-charcoal/75 leading-relaxed">
                 Harvey supplies the connection details with your enrollment rather than
                 publishing them. Use the endpoint your admin or representative gives you, set the
                 transport to HTTP, and let the client handle the OAuth handshake. We deliberately
@@ -272,7 +272,7 @@ export default async function ConnectHarveyGuidePage() {
             <h2 className="font-display text-2xl font-bold text-navy mb-3">
               3. Authenticate
             </h2>
-            <p className="font-body text-charcoal/70 leading-relaxed">
+            <p className="font-body text-charcoal/75 leading-relaxed">
               The first tool call opens a browser sign-in against your Harvey account. Approve it
               there and the client stores the session. There is no static API key to paste and
               none to rotate. Access follows your Harvey user, so removing someone in Harvey
@@ -285,7 +285,7 @@ export default async function ConnectHarveyGuidePage() {
             <h2 className="font-display text-2xl font-bold text-navy mb-3">
               4. The tools you can call
             </h2>
-            <p className="font-body text-charcoal/70 mb-4 leading-relaxed">
+            <p className="font-body text-charcoal/75 mb-4 leading-relaxed">
               Harvey MCP exposes {TOOLS.length} tools. Knowing the names is useful for prompting: you can
               tell Claude which one to reach for instead of hoping it picks correctly.
             </p>
@@ -293,7 +293,7 @@ export default async function ConnectHarveyGuidePage() {
               {TOOLS.map((tool) => (
                 <div key={tool.name}>
                   <dt className="font-mono text-sm font-semibold text-navy">{tool.name}</dt>
-                  <dd className="font-body text-charcoal/70 leading-relaxed mt-1">{tool.what}</dd>
+                  <dd className="font-body text-charcoal/75 leading-relaxed mt-1">{tool.what}</dd>
                 </div>
               ))}
             </dl>
@@ -304,7 +304,7 @@ export default async function ConnectHarveyGuidePage() {
             <h2 className="font-display text-2xl font-bold text-navy mb-3">
               5. Test it
             </h2>
-            <p className="font-body text-charcoal/70 leading-relaxed">
+            <p className="font-body text-charcoal/75 leading-relaxed">
               Call <code className="font-mono text-sm">list_knowledge_sources</code> first. It is the
               cheapest way to prove the whole chain works — enrollment, OAuth, and tool routing —
               and it returns your entitlements, so you learn what your role can reach at the same
@@ -348,14 +348,14 @@ export default async function ConnectHarveyGuidePage() {
             <h2 className="font-display text-2xl font-bold text-navy mb-4">
               Harvey MCP vs. the open legal servers
             </h2>
-            <p className="font-body text-charcoal/70 leading-relaxed">
+            <p className="font-body text-charcoal/75 leading-relaxed">
               Harvey MCP and the open legal servers solve different problems, and a firm can
               reasonably run both. Harvey MCP brings
               your firm&apos;s own Harvey work — Vault documents, licensed research sources — into
               whichever assistant you already use. Because Harvey lists an active Harvey account as a
               prerequisite, there is no way to trial the connector without being a Harvey customer.
             </p>
-            <p className="font-body text-charcoal/70 leading-relaxed mt-3">
+            <p className="font-body text-charcoal/75 leading-relaxed mt-3">
               The{' '}
               <Link href="/servers/courtlistener-mcp" className="text-gold-text font-semibold hover:underline">
                 official CourtListener MCP
@@ -377,7 +377,7 @@ export default async function ConnectHarveyGuidePage() {
             <h2 className="font-display text-2xl font-bold text-navy mb-4">
               Sources and what we verified
             </h2>
-            <p className="font-body text-charcoal/70 leading-relaxed">
+            <p className="font-body text-charcoal/75 leading-relaxed">
               The transport, the OAuth requirement, the five tool names, the role-based
               permissions, and the enrollment step all come from Harvey&apos;s own
               developer documentation at{' '}
@@ -393,7 +393,7 @@ export default async function ConnectHarveyGuidePage() {
               and vendor details render live from this site&apos;s directory listing, so they
               change when the listing does.
             </p>
-            <p className="font-body text-charcoal/70 leading-relaxed mt-3">
+            <p className="font-body text-charcoal/75 leading-relaxed mt-3">
               Two things here are our reading, not Harvey&apos;s words. The first is that the
               absence of a published endpoint is a deliberate access-control decision. Harvey
               documents the OAuth-and-enrollment model but never explains the omission, so we are
@@ -402,7 +402,7 @@ export default async function ConnectHarveyGuidePage() {
               tenant, and it matches the order Harvey tells you to work in, but we have not
               reproduced it on an unenrolled account.
             </p>
-            <p className="font-body text-charcoal/70 leading-relaxed mt-3">
+            <p className="font-body text-charcoal/75 leading-relaxed mt-3">
               Harvey can change any of this without notice. If anything on this page no longer
               matches what you see, Harvey&apos;s documentation is the authority, and we would
               like to hear about it so we can correct the page.
@@ -418,7 +418,7 @@ export default async function ConnectHarveyGuidePage() {
               {FAQS.map((f) => (
                 <div key={f.q}>
                   <h3 className="font-sans font-semibold text-navy">{f.q}</h3>
-                  <p className="font-body text-charcoal/70 leading-relaxed mt-1">{f.a}</p>
+                  <p className="font-body text-charcoal/75 leading-relaxed mt-1">{f.a}</p>
                 </div>
               ))}
             </div>
@@ -427,7 +427,7 @@ export default async function ConnectHarveyGuidePage() {
 
         {/* Related */}
         <section className="mt-14 border-t border-slate-200 pt-10 max-w-3xl">
-          <p className="font-body text-charcoal/70">
+          <p className="font-body text-charcoal/75">
             See the{' '}
             <Link href={`/servers/${SLUG}`} className="text-gold-text font-semibold hover:underline">
               full Harvey MCP listing

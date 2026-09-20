@@ -45,7 +45,7 @@ export default function SubmitForm() {
       <div className="flex flex-col items-center gap-5 py-16 text-center">
         <CheckCircle2 className="w-14 h-14 text-green-500" strokeWidth={1.5} />
         <h2 className="font-display text-2xl font-bold text-navy">Submission received!</h2>
-        <p className="font-body text-charcoal/70 max-w-sm">
+        <p className="font-body text-charcoal/75 max-w-sm">
           We review every submission within 48 hours. You'll hear from us at the email you provided.
         </p>
         <Link
@@ -136,7 +136,7 @@ export default function SubmitForm() {
                       ? 'bg-navy text-white'
                       : isDone
                       ? 'bg-navy/20 text-navy'
-                      : 'bg-slate-100 text-charcoal/50'
+                      : 'bg-slate-100 text-charcoal/80'
                   }`}
                 >
                   {num}

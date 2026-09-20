@@ -113,7 +113,7 @@ export default async function ListingDetailPage({
       <SoftwareAppJsonLd listing={listing} />
 
       {/* Breadcrumb */}
-      <nav className="text-sm font-body text-charcoal/50 mb-8">
+      <nav className="text-sm font-body text-charcoal/80 mb-8">
         <Link href="/servers" className="hover:text-gold-text transition-colors">
           Browse Tools
         </Link>
@@ -143,7 +143,7 @@ export default async function ListingDetailPage({
             <h1 className="font-display text-4xl font-bold text-navy leading-tight">
               {listing.name}
             </h1>
-            <p className="font-body text-lg text-charcoal/70 mt-2">{listing.tagline}</p>
+            <p className="font-body text-lg text-charcoal/75 mt-2">{listing.tagline}</p>
           </div>
         </div>
 
@@ -207,7 +207,7 @@ export default async function ListingDetailPage({
           <div className="mt-4 space-y-4">
             {listing.mcp_repo_url && (
               <div>
-                <p className="text-xs text-charcoal/50 font-sans mb-1 uppercase tracking-wide">
+                <p className="text-xs text-charcoal/80 font-sans mb-1 uppercase tracking-wide">
                   MCP Repository
                 </p>
                 <a
@@ -222,7 +222,7 @@ export default async function ListingDetailPage({
             )}
             {listing.mcp_install_command && (
               <div>
-                <p className="text-xs text-charcoal/50 font-sans mb-1 uppercase tracking-wide">
+                <p className="text-xs text-charcoal/80 font-sans mb-1 uppercase tracking-wide">
                   Install Command
                 </p>
                 <code className="block bg-slate-100 rounded px-3 py-2 font-mono text-sm text-charcoal break-all">

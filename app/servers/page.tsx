@@ -93,11 +93,11 @@ export default async function BrowsePage({
         Browse AI Tools for Law Firms
       </h1>
       {totalCount > 0 && (
-        <p className="text-sm text-charcoal/50 font-body mb-2">
+        <p className="text-sm text-charcoal/80 font-body mb-2">
           {totalCount} tool{totalCount !== 1 ? 's' : ''} available
         </p>
       )}
-      <p className="text-sm text-charcoal/50 font-body mb-8">
+      <p className="text-sm text-charcoal/80 font-body mb-8">
         Not sure where to start?{' '}
         <Link href="/best/legal-mcp-servers" className="text-gold-text font-semibold hover:underline">
           See our ranked picks: The Best Legal MCP Servers in 2026 →
@@ -120,7 +120,7 @@ export default async function BrowsePage({
           ))}
         </div>
       ) : (
-        <div className="text-center py-20 text-charcoal/50 font-body">
+        <div className="text-center py-20 text-charcoal/80 font-body">
           <p className="text-lg">No tools found matching your criteria.</p>
           <p className="text-sm mt-2">Try adjusting your search or filters.</p>
         </div>

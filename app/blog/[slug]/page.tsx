@@ -47,7 +47,7 @@ export default async function BlogPostPage({
     <main className="section-padding">
       <div className="max-w-content mx-auto">
         {/* Breadcrumb */}
-        <nav className="text-sm font-body text-charcoal/50 mb-8">
+        <nav className="text-sm font-body text-charcoal/80 mb-8">
           <Link href="/blog" className="hover:text-gold-text transition-colors">
             Blog
           </Link>

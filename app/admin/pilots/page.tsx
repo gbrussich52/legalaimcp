@@ -38,7 +38,7 @@ export default async function PilotQueue({ searchParams }: { searchParams: Promi
       {rows.map(row => <article key={row.id} className="border-t border-slate-200 py-8">
         <div className="flex flex-wrap justify-between gap-3"><h2 className="font-display text-2xl text-navy">{field(row, 'organization')}</h2><p>{row.qualification === 'standard' ? 'Fits proposed scope · review required' : 'Needs scoping'}</p></div>
         <p className="mt-2 break-words">{field(row, 'name')} · {row.email}</p>
-        <p className="text-sm text-charcoal/70 mt-1">{row.created_at} · Reference {row.id}</p>
+        <p className="text-sm text-charcoal/75 mt-1">{row.created_at} · Reference {row.id}</p>
         <dl className="grid sm:grid-cols-2 gap-5 my-6">
           {['workflow', 'endpoint', 'access', 'readOnly', 'sampleInput', 'expectedResult', 'failureExample', 'pricingInterest', 'source'].map(key => <div key={key}><dt className="font-semibold">{{ workflow: 'Workflow', endpoint: 'Endpoint (not contacted)', access: 'Access', readOnly: 'Read-only', sampleInput: 'Fictional input', expectedResult: 'Expected result', failureExample: 'Expected failure', pricingInterest: 'Pricing interest', source: 'Source' }[key]}</dt><dd className="mt-1 whitespace-pre-wrap break-words">{field(row, key) || 'Not provided'}</dd></div>)}
         </dl>

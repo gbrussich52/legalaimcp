@@ -88,7 +88,7 @@ export function WorkflowPlanner() {
           </fieldset>
           <div className="border-t border-slate-200 pt-6 print:hidden">
             <h3 className="font-display text-xl font-semibold text-navy">{plan.support === 'I need setup help' ? 'Want help turning this into a working process?' : 'Ready to check the available tools?'}</h3>
-            <p className="mt-2 text-sm text-charcoal/70">{plan.support === 'I need setup help' ? 'A NYClaw workflow assessment checks feasibility and gives you a written scope before any implementation.' : 'Use the directory to explore options, then confirm features and permissions with each vendor.'}</p>
+            <p className="mt-2 text-sm text-charcoal/75">{plan.support === 'I need setup help' ? 'A NYClaw workflow assessment checks feasibility and gives you a written scope before any implementation.' : 'Use the directory to explore options, then confirm features and permissions with each vendor.'}</p>
             <div className="flex flex-wrap gap-4 mt-5 items-center">
               <Link href="/workflow-assessment" className="btn-primary">See the assessment →</Link>
               <Link href={`/categories/${selected.category}`} className="text-gold-text font-semibold underline">Explore relevant tools</Link>

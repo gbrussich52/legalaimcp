@@ -21,7 +21,7 @@ export default function PricingPage() {
       <h1 className="font-display text-4xl font-bold text-navy mb-4">
         Get in front of law firms looking for AI tools
       </h1>
-      <p className="font-body text-lg text-charcoal/70 leading-relaxed mb-10">
+      <p className="font-body text-lg text-charcoal/75 leading-relaxed mb-10">
         Listing in the directory is free. Featured is an optional paid bump:
         higher sort on browse pages and a clear Featured / Sponsored badge.
         The public MCP search endpoint stays free for everyone — Featured never
@@ -34,7 +34,7 @@ export default function PricingPage() {
         </p>
         <p className="font-display text-5xl font-bold text-navy mb-2">
           {PRICE_DISPLAY}
-          <span className="text-lg font-sans font-medium text-charcoal/50 ml-2">
+          <span className="text-lg font-sans font-medium text-charcoal/80 ml-2">
             / 30 days
           </span>
         </p>
@@ -53,7 +53,7 @@ export default function PricingPage() {
         </Link>
       </div>
 
-      <section className="font-body text-charcoal/70 space-y-4 text-sm leading-relaxed">
+      <section className="font-body text-charcoal/75 space-y-4 text-sm leading-relaxed">
         <h2 className="font-display text-xl font-bold text-navy">How it works</h2>
         <ol className="list-decimal list-inside space-y-2">
           <li>Publish a listing (free submit + admin review).</li>

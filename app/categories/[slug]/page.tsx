@@ -115,7 +115,7 @@ export default async function CategoryPage({
       <main className="max-w-content mx-auto px-4 py-12">
         {/* Breadcrumb — visible counterpart of the BreadcrumbList schema */}
         <nav aria-label="Breadcrumb" className="mb-6">
-          <ol className="flex flex-wrap items-center gap-1.5 font-body text-sm text-charcoal/50">
+          <ol className="flex flex-wrap items-center gap-1.5 font-body text-sm text-charcoal/80">
             <li>
               <Link href="/" className="hover:text-gold-text transition-colors">Home</Link>
             </li>
@@ -134,13 +134,13 @@ export default async function CategoryPage({
             {content ? content.headline : category.name}
           </h1>
           {category.description && (
-            <p className="font-body text-lg text-charcoal/70 max-w-content">
+            <p className="font-body text-lg text-charcoal/75 max-w-content">
               {category.description}
             </p>
           )}
           {/* Live counts only — both derived from the rows below, so this
               line can never claim more than the page shows. */}
-          <p className="font-body text-sm text-charcoal/50 mt-3">
+          <p className="font-body text-sm text-charcoal/80 mt-3">
             {safeListings.length} tool{safeListings.length === 1 ? '' : 's'} listed
             {verifiedCount > 0 && (
               <>

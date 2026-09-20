@@ -168,7 +168,7 @@ export default async function HomePage() {
             <div>
               <p className="font-sans text-xs font-bold uppercase tracking-widest text-gold-text">Free document check</p>
               <h3 className="font-display text-2xl font-bold text-navy mt-2">Check document metadata in your browser</h3>
-              <p className="font-body text-charcoal/70 mt-2 max-w-2xl">See missing items, conflicting metadata, and duplicate entries in a fictional document set. Edit the checklist to try your own redacted example.</p>
+              <p className="font-body text-charcoal/75 mt-2 max-w-2xl">See missing items, conflicting metadata, and duplicate entries in a fictional document set. Edit the checklist to try your own redacted example.</p>
             </div>
             <Link href="/document-check" className="btn-primary shrink-0">Try the document check demo →</Link>
           </div>
@@ -202,7 +202,7 @@ export default async function HomePage() {
               ))}
             </div>
           ) : (
-            <p className="mt-10 text-charcoal/50 font-body">
+            <p className="mt-10 text-charcoal/80 font-body">
               Coming soon — we&apos;re curating the best legal AI tools.
             </p>
           )}
@@ -236,7 +236,7 @@ export default async function HomePage() {
               ))}
             </div>
           ) : (
-            <p className="mt-10 text-charcoal/50 font-body text-center">
+            <p className="mt-10 text-charcoal/80 font-body text-center">
               Categories coming soon.
             </p>
           )}
@@ -272,7 +272,7 @@ export default async function HomePage() {
                 AI assistants connect directly to your existing tools — case management, document
                 storage, billing software, and more.
               </p>
-              <p className="font-body text-charcoal/70 mt-4 leading-relaxed">
+              <p className="font-body text-charcoal/75 mt-4 leading-relaxed">
                 Think of it as USB-C for AI. Instead of copying data between systems, MCP lets
                 your AI read, search, and act through connected tools. The server and AI provider
                 determine where data goes. MCP alone does not guarantee privacy or keep data local.

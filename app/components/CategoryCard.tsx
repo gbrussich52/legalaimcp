@@ -33,7 +33,7 @@ export function CategoryCard({ category, count }: { category: Category; count: n
         <IconComponent className="w-6 h-6 text-navy group-hover:text-gold-text" strokeWidth={1.5} />
       </div>
       <p className="font-sans font-semibold text-navy text-sm">{category.name}</p>
-      <p className="text-xs text-charcoal/50 mt-0.5">{count} tools</p>
+      <p className="text-xs text-charcoal/80 mt-0.5">{count} tools</p>
     </Link>
   )
 }

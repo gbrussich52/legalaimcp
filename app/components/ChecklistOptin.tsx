@@ -35,7 +35,7 @@ export function ChecklistOptin({ source = 'homepage_checklist', variant = 'hero'
         <h3 className="font-display text-2xl font-bold text-navy mt-4">
           Your checklist is ready.
         </h3>
-        <p className="font-body text-charcoal/70 mt-2">
+        <p className="font-body text-charcoal/75 mt-2">
           Open the checklist below and save it for your next vendor conversation.
         </p>
         <Link
@@ -44,7 +44,7 @@ export function ChecklistOptin({ source = 'homepage_checklist', variant = 'hero'
         >
           Open my checklist →
         </Link>
-        <p className="text-xs text-charcoal/50 mt-4">
+        <p className="text-xs text-charcoal/80 mt-4">
           You can read and print it immediately.
         </p>
       </div>
@@ -70,7 +70,7 @@ export function ChecklistOptin({ source = 'homepage_checklist', variant = 'hero'
           <h3 className="font-display text-2xl font-bold text-navy mt-1 leading-tight">
             10 questions to ask before adopting any AI tool at your firm.
           </h3>
-          <p className="font-body text-charcoal/70 mt-2 text-sm leading-relaxed">
+          <p className="font-body text-charcoal/75 mt-2 text-sm leading-relaxed">
             A practical list of questions about client data, vendor policies, and cost.
             Use it to prepare for a vendor conversation and your own professional review.
           </p>
@@ -104,7 +104,7 @@ export function ChecklistOptin({ source = 'homepage_checklist', variant = 'hero'
       )}
 
       {/* Micro-reassurance — covers rule #14 objection preemption inline */}
-      <p className="text-xs text-charcoal/50 mt-3 font-body">
+      <p className="text-xs text-charcoal/80 mt-3 font-body">
         Submitting stores your email with LegalAIMCP. We never sell your email.{' '}
         <Link href="/checklist" className="underline">Read without signing up →</Link>
       </p>

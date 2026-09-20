@@ -23,7 +23,7 @@ export default async function FeaturedCancelPage({
       <h1 className="font-display text-3xl font-bold text-navy mb-4">
         No charge was made
       </h1>
-      <p className="font-body text-charcoal/70 leading-relaxed mb-8">
+      <p className="font-body text-charcoal/75 leading-relaxed mb-8">
         You left Stripe Checkout before paying. Your listing is unchanged. You
         can start Featured checkout again anytime from the listing page.
       </p>

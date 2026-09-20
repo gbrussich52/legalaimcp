@@ -111,7 +111,7 @@ export default async function ConnectCourtListenerGuidePage() {
       <main className="max-w-content mx-auto px-4 py-12">
         {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="mb-6">
-          <ol className="flex flex-wrap items-center gap-1.5 font-body text-sm text-charcoal/50">
+          <ol className="flex flex-wrap items-center gap-1.5 font-body text-sm text-charcoal/80">
             <li>
               <Link href="/" className="hover:text-gold-text transition-colors">Home</Link>
             </li>
@@ -132,7 +132,7 @@ export default async function ConnectCourtListenerGuidePage() {
           <h1 className="font-display text-4xl font-bold text-navy leading-tight">
             How to Connect Claude to CourtListener via MCP
           </h1>
-          <p className="font-body text-lg text-charcoal/70 mt-4 leading-relaxed">
+          <p className="font-body text-lg text-charcoal/75 mt-4 leading-relaxed">
             {listing.tagline} This guide walks through connecting{' '}
             {listing.creator_url ? (
               <a
@@ -169,13 +169,13 @@ export default async function ConnectCourtListenerGuidePage() {
             </h2>
             {claudeCodeCommand ? (
               <>
-                <p className="font-body text-charcoal/70 mb-3 leading-relaxed">
+                <p className="font-body text-charcoal/75 mb-3 leading-relaxed">
                   Run this in your terminal:
                 </p>
                 <Code>{claudeCodeCommand}</Code>
               </>
             ) : (
-              <p className="font-body text-charcoal/70 leading-relaxed">
+              <p className="font-body text-charcoal/75 leading-relaxed">
                 See the{' '}
                 <Link href={`/servers/${SLUG}`} className="text-gold-text font-semibold hover:underline">
                   full listing
@@ -190,7 +190,7 @@ export default async function ConnectCourtListenerGuidePage() {
             <h2 className="font-display text-2xl font-bold text-navy mb-3">
               Or: Claude Desktop, Cursor, and other MCP clients
             </h2>
-            <p className="font-body text-charcoal/70 mb-3 leading-relaxed">
+            <p className="font-body text-charcoal/75 mb-3 leading-relaxed">
               Add this to your client&apos;s MCP configuration file:
             </p>
             <Code>{clientJson}</Code>
@@ -201,7 +201,7 @@ export default async function ConnectCourtListenerGuidePage() {
             <h2 className="font-display text-2xl font-bold text-navy mb-3">
               2. Authenticate
             </h2>
-            <p className="font-body text-charcoal/70 leading-relaxed">
+            <p className="font-body text-charcoal/75 leading-relaxed">
               The server uses OAuth against your CourtListener account rather
               than a static API key. The first tool call from your client
               triggers a browser sign-in flow — approve it there, and the
@@ -214,7 +214,7 @@ export default async function ConnectCourtListenerGuidePage() {
             <h2 className="font-display text-2xl font-bold text-navy mb-3">
               3. Test it
             </h2>
-            <p className="font-body text-charcoal/70 leading-relaxed">
+            <p className="font-body text-charcoal/75 leading-relaxed">
               Once connected, ask Claude something you&apos;d normally search
               CourtListener for directly — a case name, a circuit split
               question, or a docket lookup. A working connection returns
@@ -257,7 +257,7 @@ export default async function ConnectCourtListenerGuidePage() {
               {FAQS.map((f) => (
                 <div key={f.q}>
                   <h3 className="font-sans font-semibold text-navy">{f.q}</h3>
-                  <p className="font-body text-charcoal/70 leading-relaxed mt-1">{f.a}</p>
+                  <p className="font-body text-charcoal/75 leading-relaxed mt-1">{f.a}</p>
                 </div>
               ))}
             </div>
@@ -266,7 +266,7 @@ export default async function ConnectCourtListenerGuidePage() {
 
         {/* Related */}
         <section className="mt-14 border-t border-slate-200 pt-10 max-w-3xl">
-          <p className="font-body text-charcoal/70">
+          <p className="font-body text-charcoal/75">
             See the{' '}
             <Link href={`/servers/${SLUG}`} className="text-gold-text font-semibold hover:underline">
               full CourtListener MCP listing

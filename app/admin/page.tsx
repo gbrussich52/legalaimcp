@@ -46,7 +46,7 @@ export default async function AdminPage() {
           <p className="font-body text-charcoal/75 mt-1">Manage listings and review submissions</p>
         </div>
         <form action="/admin/logout" method="POST">
-          <button className="text-sm text-charcoal/50 hover:text-charcoal font-sans transition-colors">
+          <button className="text-sm text-charcoal/80 hover:text-charcoal font-sans transition-colors">
             Sign Out
           </button>
         </form>
@@ -67,15 +67,15 @@ export default async function AdminPage() {
       <div className="grid grid-cols-3 gap-4 mb-10">
         <div className="card-bordered text-center py-6">
           <p className="font-display text-3xl font-bold text-navy">{published}</p>
-          <p className="text-sm text-charcoal/50 font-sans mt-1">Published Listings</p>
+          <p className="text-sm text-charcoal/80 font-sans mt-1">Published Listings</p>
         </div>
         <div className="card-bordered text-center py-6">
           <p className="font-display text-3xl font-bold text-gold-text">{pendingSubs}</p>
-          <p className="text-sm text-charcoal/50 font-sans mt-1">Pending Submissions</p>
+          <p className="text-sm text-charcoal/80 font-sans mt-1">Pending Submissions</p>
         </div>
         <div className="card-bordered text-center py-6">
           <p className="font-display text-3xl font-bold text-charcoal/40">{listings.length}</p>
-          <p className="text-sm text-charcoal/50 font-sans mt-1">Total Listings (all statuses)</p>
+          <p className="text-sm text-charcoal/80 font-sans mt-1">Total Listings (all statuses)</p>
         </div>
       </div>
 

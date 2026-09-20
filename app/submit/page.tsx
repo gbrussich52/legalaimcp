@@ -13,7 +13,7 @@ export default function SubmitPage() {
     <div className="py-20 px-6">
       <div className="max-w-2xl mx-auto">
         <h1 className="font-display text-4xl font-bold text-navy mb-3">Submit a Tool</h1>
-        <p className="font-body text-charcoal/70 mb-10">
+        <p className="font-body text-charcoal/75 mb-10">
           Built an MCP server or AI integration for legal professionals? We&apos;d love to list it.
           Every submission is manually reviewed for quality.
         </p>

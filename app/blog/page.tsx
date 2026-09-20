@@ -18,7 +18,7 @@ export default function BlogPage() {
         <h1 className="font-display text-4xl font-bold text-navy">
           Legal AI Blog
         </h1>
-        <p className="font-body text-lg text-charcoal/70 mt-3">
+        <p className="font-body text-lg text-charcoal/75 mt-3">
           Insights, guides, and tool reviews for law firms navigating AI.
         </p>
 
