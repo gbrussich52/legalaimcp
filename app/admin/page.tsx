@@ -74,7 +74,7 @@ export default async function AdminPage() {
           <p className="text-sm text-charcoal/80 font-sans mt-1">Pending Submissions</p>
         </div>
         <div className="card-bordered text-center py-6">
-          <p className="font-display text-3xl font-bold text-charcoal/40">{listings.length}</p>
+          <p className="font-display text-3xl font-bold text-charcoal/75">{listings.length}</p>
           <p className="text-sm text-charcoal/80 font-sans mt-1">Total Listings (all statuses)</p>
         </div>
       </div>

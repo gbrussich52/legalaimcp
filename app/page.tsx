@@ -337,7 +337,7 @@ export default async function HomePage() {
                     <span className="text-xs bg-slate-100 text-charcoal rounded-full px-2.5 py-1 font-sans">
                       {post.category}
                     </span>
-                    <span className="text-xs text-charcoal/40 font-body">{post.readingTime}</span>
+                    <span className="text-xs text-charcoal/75 font-body">{post.readingTime}</span>
                   </div>
                   <h3 className="font-display text-lg font-bold text-navy group-hover:text-gold-text transition-colors leading-snug">
                     {post.title}

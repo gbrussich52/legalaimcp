@@ -77,7 +77,7 @@ function ListingsTable({ listings }: { listings: Listing[] }) {
             <tr key={listing.id} className="border-b border-slate-100 hover:bg-slate-50/50">
               <td className="py-3 px-2">
                 <p className="font-sans font-medium text-navy">{listing.name}</p>
-                <p className="text-xs text-charcoal/40 mt-0.5">{listing.slug}</p>
+                <p className="text-xs text-charcoal/75 mt-0.5">{listing.slug}</p>
               </td>
               <td className="py-3 px-2">
                 <span className="text-xs bg-slate-100 text-charcoal rounded-full px-2 py-0.5">
@@ -177,7 +177,7 @@ function SubmissionsTable({ submissions }: { submissions: Submission[] }) {
               <div className="flex-1 min-w-0">
                 <p className="font-sans font-semibold text-navy">{data.name || 'Untitled'}</p>
                 <p className="text-sm text-charcoal/75 font-body mt-1">{data.tagline || ''}</p>
-                <div className="flex gap-3 mt-2 text-xs text-charcoal/40 font-body">
+                <div className="flex gap-3 mt-2 text-xs text-charcoal/75 font-body">
                   <span>From: {sub.submitter_name} ({sub.submitter_email})</span>
                   <span>{new Date(sub.created_at).toLocaleDateString()}</span>
                 </div>

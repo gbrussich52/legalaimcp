@@ -30,7 +30,7 @@ export default async function FeaturedSuccessPage({
         changes after a few minutes, email support with your session id.
       </p>
       {params.session_id && (
-        <p className="font-mono text-xs text-charcoal/40 mb-8 break-all">
+        <p className="font-mono text-xs text-charcoal/75 mb-8 break-all">
           Session: {params.session_id}
         </p>
       )}

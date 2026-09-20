@@ -33,14 +33,14 @@ export default function BlogPage() {
                 <span className="text-xs bg-slate-100 text-charcoal rounded-full px-2.5 py-1 font-sans">
                   {post.category}
                 </span>
-                <span className="text-xs text-charcoal/40 font-body">
+                <span className="text-xs text-charcoal/75 font-body">
                   {new Date(post.date).toLocaleDateString('en-US', {
                     month: 'long',
                     day: 'numeric',
                     year: 'numeric',
                   })}
                 </span>
-                <span className="text-xs text-charcoal/40 font-body">{post.readingTime}</span>
+                <span className="text-xs text-charcoal/75 font-body">{post.readingTime}</span>
               </div>
               <h2 className="font-display text-xl font-bold text-navy group-hover:text-gold-text transition-colors">
                 {post.title}

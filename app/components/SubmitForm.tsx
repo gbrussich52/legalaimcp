@@ -143,7 +143,7 @@ export default function SubmitForm() {
                 </span>
                 <span
                   className={`text-sm font-sans font-medium hidden sm:block transition-colors ${
-                    isActive ? 'text-navy' : isDone ? 'text-navy/60' : 'text-charcoal/40'
+                    isActive ? 'text-navy' : isDone ? 'text-navy/60' : 'text-charcoal/75'
                   }`}
                 >
                   {s.label}
@@ -179,7 +179,7 @@ export default function SubmitForm() {
           <div>
             <label className={labelCls} htmlFor="tagline">
               Tagline <span className="text-red-500">*</span>
-              <span className="ml-2 font-normal text-charcoal/40">{fields.tagline.length}/120</span>
+              <span className="ml-2 font-normal text-charcoal/75">{fields.tagline.length}/120</span>
             </label>
             <input
               id="tagline"
@@ -231,7 +231,7 @@ export default function SubmitForm() {
       {step === 2 && (
         <div className="flex flex-col gap-6">
           <div>
-            <label className={labelCls} htmlFor="mcp_repo_url">MCP Repository URL <span className="text-charcoal/40 font-normal">(optional)</span></label>
+            <label className={labelCls} htmlFor="mcp_repo_url">MCP Repository URL <span className="text-charcoal/75 font-normal">(optional)</span></label>
             <input
               id="mcp_repo_url"
               name="mcp_repo_url"
@@ -245,7 +245,7 @@ export default function SubmitForm() {
           </div>
 
           <div>
-            <label className={labelCls} htmlFor="mcp_install_command">Install Command <span className="text-charcoal/40 font-normal">(optional)</span></label>
+            <label className={labelCls} htmlFor="mcp_install_command">Install Command <span className="text-charcoal/75 font-normal">(optional)</span></label>
             <input
               id="mcp_install_command"
               name="mcp_install_command"
@@ -275,7 +275,7 @@ export default function SubmitForm() {
 
           {fields.pricing_model !== 'free' && (
             <div>
-              <label className={labelCls} htmlFor="pricing_details">Pricing Details <span className="text-charcoal/40 font-normal">(optional)</span></label>
+              <label className={labelCls} htmlFor="pricing_details">Pricing Details <span className="text-charcoal/75 font-normal">(optional)</span></label>
               <input
                 id="pricing_details"
                 name="pricing_details"
@@ -291,7 +291,7 @@ export default function SubmitForm() {
           <div>
             <label className={labelCls} htmlFor="description">
               Description <span className="text-red-500">*</span>
-              <span className="ml-2 font-normal text-charcoal/40">{fields.description.length}/2000</span>
+              <span className="ml-2 font-normal text-charcoal/75">{fields.description.length}/2000</span>
             </label>
             <textarea
               id="description"
@@ -343,7 +343,7 @@ export default function SubmitForm() {
           </div>
 
           <div>
-            <label className={labelCls} htmlFor="creator_url">Your Website <span className="text-charcoal/40 font-normal">(optional)</span></label>
+            <label className={labelCls} htmlFor="creator_url">Your Website <span className="text-charcoal/75 font-normal">(optional)</span></label>
             <input
               id="creator_url"
               name="creator_url"

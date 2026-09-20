@@ -17,7 +17,7 @@ export default async function FeaturedCancelPage({
 
   return (
     <main className="max-w-xl mx-auto px-4 py-20 text-center">
-      <p className="font-sans text-xs font-bold uppercase tracking-widest text-charcoal/40 mb-2">
+      <p className="font-sans text-xs font-bold uppercase tracking-widest text-charcoal/75 mb-2">
         Checkout canceled
       </p>
       <h1 className="font-display text-3xl font-bold text-navy mb-4">

@@ -46,7 +46,7 @@ export function LeadGenCTA() {
           </Link>
         </div>
 
-        <p className="mt-5 text-xs text-slate-500 font-body">
+        <p className="mt-5 text-xs text-slate-400 font-body">
           Serving law firms in Westchester County, NYC, and remotely nationwide.
           No commitment required for the initial call.
         </p>

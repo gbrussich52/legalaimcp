@@ -34,7 +34,7 @@ export function SearchBar() {
   return (
     <div className="relative w-full">
       <Search
-        className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal/40 pointer-events-none"
+        className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal/60 pointer-events-none"
         aria-hidden="true"
       />
       <input

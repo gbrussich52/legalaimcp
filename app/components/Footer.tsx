@@ -110,7 +110,7 @@ export function Footer() {
             site spent ~3.5 months implying attorney curation it never had.
             Stating the limitation plainly costs nothing and is the cheapest
             possible insurance against being read as something we're not. */}
-        <p className="text-slate-500 text-xs font-body border-t border-slate-700 pt-8 mb-6 leading-relaxed">
+        <p className="text-slate-400 text-xs font-body border-t border-slate-700 pt-8 mb-6 leading-relaxed">
           {SITE_NAME} is operated by engineers, not attorneys. Everything here —
           listings, checklists, and articles summarizing bar rules — is
           information about software, not legal advice, and does not create an
@@ -140,7 +140,7 @@ export function Footer() {
               none. Update this the day an affiliate link actually ships. */}
           <p className="text-slate-400 text-xs font-body">
             Funded by NYClaw.io.{' '}
-            <span className="text-slate-500">
+            <span className="text-slate-400">
               Featured placements are labeled; no affiliate links.
             </span>
           </p>

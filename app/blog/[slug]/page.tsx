@@ -61,20 +61,20 @@ export default async function BlogPostPage({
             <span className="text-xs bg-slate-100 text-charcoal rounded-full px-2.5 py-1 font-sans">
               {post.category}
             </span>
-            <span className="text-xs text-charcoal/40 font-body">
+            <span className="text-xs text-charcoal/75 font-body">
               {new Date(post.date).toLocaleDateString('en-US', {
                 month: 'long',
                 day: 'numeric',
                 year: 'numeric',
               })}
             </span>
-            <span className="text-xs text-charcoal/40 font-body">{post.readingTime}</span>
+            <span className="text-xs text-charcoal/75 font-body">{post.readingTime}</span>
           </div>
           <h1 className="font-display text-4xl font-bold text-navy leading-tight">
             {post.title}
           </h1>
           <p className="font-body text-lg text-charcoal/75 mt-3">{post.description}</p>
-          <p className="font-body text-sm text-charcoal/40 mt-4">By {post.author}</p>
+          <p className="font-body text-sm text-charcoal/75 mt-4">By {post.author}</p>
         </div>
 
         {/* Article content — safe: sourced from our own lib/blog.ts, not user input */}
