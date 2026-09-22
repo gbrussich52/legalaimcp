@@ -1,0 +1,33 @@
+# legalaimcp/map.yaml, hand-written facts scripts/map/genprojectmap.py cannot detect from
+# disk. Edit this file, not the generated MAP.md next to it. Schema: see
+# scripts/map/projectmap_lib.py module docstring. Regenerate MAP.md after editing:
+#   python3 scripts/map/genprojectmap.py legalaimcp
+
+purpose: Legal AI MCP server, live and listed in the official MCP registry
+tier: T0
+status: Live. CaseLaw = DO-NOT-BUILD
+stack: Next.js 15.5, TypeScript, Supabase, Tailwind 3
+relates_to:
+  - nyclaw-website
+  - mcp-servers
+
+# One row per public-facing channel: kind is site|youtube|facebook|etsy|email|x|
+# tiktok|discord|other. status is live|building|planned|paused.
+channels:
+  - kind: other
+    name: Official MCP registry listing
+    url: "https://legalaimcp.com"
+    status: live
+
+services:
+  supabase_schema: null
+  stripe_account: null
+  meta_ad_account: null
+  domains:
+    - legalaimcp.com
+  other: []
+
+revenue_status: Live, listed in the official MCP registry. Income tracked in docs/ops/health-legalaimcp-income.json.
+next_action: Not on record in memory, check the project's own docs for the current next step.
+notes:
+  - CaseLaw feature is a standing DO-NOT-BUILD.
