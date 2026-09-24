@@ -32,6 +32,10 @@ const SETUP_GUIDES: Record<string, { path: string; label: string }> = {
     path: '/guides/connect-claude-to-harvey',
     label: 'How to connect Claude to Harvey AI',
   },
+  'clio': {
+    path: '/guides/connect-claude-to-clio',
+    label: 'How to connect Claude to Clio',
+  },
 }
 
 export async function generateMetadata({

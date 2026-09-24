@@ -16,6 +16,7 @@ New submissions are reviewed by a person before they go live, and every publishe
 - [CanLII Legal Research listing](https://legalaimcp.com/servers/canlii-legal-research)
 - [Guide: Connect Claude to Harvey via MCP](https://legalaimcp.com/guides/connect-claude-to-harvey)
 - [Guide: Connect Claude to CourtListener via MCP](https://legalaimcp.com/guides/connect-claude-to-courtlistener)
+- [Guide: Connect Claude to Clio via MCP](https://legalaimcp.com/guides/connect-claude-to-clio) — Clio has no official MCP server; covers the two open-source community servers that connect it
 - [LegalAIMCP's own MCP server (install instructions)](https://legalaimcp.com/mcp)
 - [About](https://legalaimcp.com/about)
 
@@ -23,7 +24,7 @@ New submissions are reviewed by a person before they go live, and every publishe
 
 - 48 AI tools and MCP servers are currently published in the directory (live count, changes as listings are added/removed).
 - LegalAIMCP operates its own free, read-only MCP server at `https://legalaimcp.com/api/mcp`, listed in the official MCP registry (registry.modelcontextprotocol.io) under the server name `com.legalaimcp/directory`.
-- The MCP server exposes three tools: `search_legal_ai_tools`, `get_legal_ai_tool`, and `list_legal_ai_categories`.
+- The MCP server exposes four tools: `search_legal_ai_tools`, `get_legal_ai_tool`, `list_legal_ai_categories`, and `recommend_legal_ai_tools`.
 - LegalAIMCP is built and maintained by NYClaw.io.
 
 ## Contact

@@ -29,6 +29,7 @@ const MODIFIED = {
   bestLegal: '2026-08-07',
   courtlistenerGuide: '2026-08-07',
   harveyGuide: '2026-08-10',
+  clioGuide: '2026-09-24',
   bestCategoryTemplate: '2026-08-07',
   categoryIndex: '2026-07-28',
 } as const
@@ -109,6 +110,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       // now — see docs/seo/gsc-query-gap-2026-08-10.md in the portfolio repo.
       url: `${SITE_URL}/guides/connect-claude-to-harvey`,
       lastModified: MODIFIED.harveyGuide,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      // Kill-test guide, 2026-09-24: Clio has no official MCP server (confirmed
+      // via clio.com + the live listing row), so this covers the two real
+      // open-source community servers instead of an enrollment flow.
+      url: `${SITE_URL}/guides/connect-claude-to-clio`,
+      lastModified: MODIFIED.clioGuide,
       changeFrequency: 'monthly',
       priority: 0.7,
     },

@@ -28,6 +28,10 @@ export function OrganizationJsonLd() {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    // Stable @id so this entity can be referenced from other JSON-LD blocks
+    // (and merged across sites) instead of re-declared each time. Added
+    // 2026-09-24 alongside the founder @id link below, same reasoning.
+    '@id': `${SITE_URL}/#organization`,
     name: SITE_NAME,
     url: SITE_URL,
     // Public GitHub profile behind the build + the repo for this site itself
@@ -41,6 +45,10 @@ export function OrganizationJsonLd() {
     },
     founder: {
       '@type': 'Person',
+      // @id points at the same Person entity gianibrussich.com declares at
+      // that fragment, so this founder reference and that site's own
+      // Person schema resolve to one entity instead of two unlinked ones.
+      '@id': 'https://gianibrussich.com/#person',
       name: 'Giani Brussich',
       sameAs: [
         'https://linkedin.com/in/gianib',

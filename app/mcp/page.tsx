@@ -34,6 +34,10 @@ const TOOLS = [
     name: 'list_legal_ai_categories',
     desc: 'The practice areas covered, with a live count of tools in each.',
   },
+  {
+    name: 'recommend_legal_ai_tools',
+    desc: 'Rank tools by fit for a practice area and firm size, with a score and the matched factors behind it.',
+  },
 ]
 
 const CLAUDE_CODE = `claude mcp add --transport http legalaimcp ${ENDPOINT}`
