@@ -239,7 +239,9 @@ export default async function ConnectClioGuidePage() {
               <li>Read the server&apos;s source before installing it — both are MIT-licensed and small enough to review in an afternoon.</li>
               <li>Start read-only if the server offers it (oktopeak&apos;s does).</li>
               <li>Confirm your firm&apos;s policy on third-party tools touching client data in Clio before connecting either server to a production account, not a sandbox.</li>
-              <li>{listing.pricing_details && `You will need a Clio plan the API scope you want requires — ${listing.pricing_details}.`}</li>
+              {listing.pricing_details && (
+                <li>Clio API access depends on your Clio plan — {listing.pricing_details}.</li>
+              )}
             </ul>
           </section>
 
