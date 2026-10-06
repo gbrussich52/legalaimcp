@@ -37,6 +37,7 @@ export default function AssessmentPage() {
       <p>Bring the names of your software, a description of one repetitive task, and a rough monthly volume. Use fictional examples. Do not send client records or account credentials.</p>
       <p>Any paid pilot or implementation starts with a written scope and fee. The fit call is free, and no paid work begins from this page.</p>
       <p>NYClaw builds and funds LegalAIMCP and may quote the implementation. The assessment is not an independent legal or security audit. Vendor subscriptions and support arrangements are agreed separately.</p>
+      <p><a className="text-gold-text font-semibold underline" href="https://nyclaw.io/law-firm-workflows?utm_source=legalaimcp&utm_medium=referral&utm_campaign=law_firm_workflows">See NYClaw’s law-firm workflows and a fictional expected output →</a></p>
       <p><Link className="text-gold-text font-semibold underline" href="/document-check">Try the document check demo →</Link></p>
       <p><Link className="text-gold-text font-semibold underline" href="/workflow-plan">Build a free workflow plan first →</Link></p>
     </section>
