@@ -1,4 +1,4 @@
-import { SITE_NAME, SITE_URL, NYCLAW_URL } from '@/lib/constants'
+import { SITE_NAME, SITE_URL, NYCLAW_URL, SITE_LAST_MODIFIED } from '@/lib/constants'
 import type { Listing } from '@/lib/types'
 import { toJsonLd } from '@/lib/json-ld'
 
@@ -9,6 +9,7 @@ export function WebSiteJsonLd() {
     name: SITE_NAME,
     url: SITE_URL,
     description: 'The curated directory of AI-powered integrations for law firms.',
+    dateModified: SITE_LAST_MODIFIED,
     publisher: {
       '@type': 'Organization',
       name: 'NYClaw.io',
@@ -38,6 +39,13 @@ export function OrganizationJsonLd() {
     // (github.com/gbrussich52/legalaimcp, verified public). Both are real,
     // checkable URLs — no social profiles invented to pad this out.
     sameAs: ['https://github.com/gbrussich52', 'https://github.com/gbrussich52/legalaimcp', 'https://glama.ai/mcp/connectors/com.legalaimcp/directory'],
+    // hello@legalaimcp.com is the contact address already published on
+    // /privacy and /terms; no phone or street address exists in the repo.
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer support',
+      email: 'hello@legalaimcp.com',
+    },
     parentOrganization: {
       '@type': 'Organization',
       name: 'NYClaw.io',

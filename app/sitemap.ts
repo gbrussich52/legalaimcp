@@ -18,7 +18,7 @@ import { CATEGORY_CONTENT } from '@/lib/category-content'
  * Bump a date when that page's content meaningfully changes.
  */
 const MODIFIED = {
-  home: '2026-09-08',
+  home: '2026-10-15', // homepage FAQPage JSON-LD added
   privacy: '2026-09-19',
   terms: '2026-09-19',
   servers: '2026-08-07',
@@ -54,7 +54,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/workflow-plan`, lastModified: '2026-09-08', changeFrequency: 'monthly', priority: 0.8 },
     { url: `${SITE_URL}/workflow-assessment`, lastModified: '2026-09-08', changeFrequency: 'monthly', priority: 0.7 },
     { url: SITE_URL, lastModified: MODIFIED.home, changeFrequency: 'weekly', priority: 1 },
-    { url: `${SITE_URL}/pricing`, lastModified: MODIFIED.home, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${SITE_URL}/pricing`, lastModified: '2026-09-08', changeFrequency: 'monthly', priority: 0.6 },
     { url: `${SITE_URL}/privacy`, lastModified: MODIFIED.privacy, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${SITE_URL}/terms`, lastModified: MODIFIED.terms, changeFrequency: 'yearly', priority: 0.3 },
     {
