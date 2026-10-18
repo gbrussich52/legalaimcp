@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { NYCLAW_URL } from '@/lib/constants'
+import { FAQJsonLd } from './JsonLd'
 
 // Objection preemption per CRO rule #14. The five questions below are the
 // top objections an attorney has BEFORE they trust a "directory of AI tools"
@@ -13,6 +14,7 @@ import { NYCLAW_URL } from '@/lib/constants'
 const FAQ_ITEMS = [
   {
     q: 'Are these AI tools actually vetted?',
+    text: "Partly — and it's worth knowing exactly how far it goes. Listings are compiled and reviewed by NYClaw.io, an AI implementation agency. We confirm the tool exists, the maker is real, and the link resolves — and we re-check every published link automatically, so dead tools get pulled instead of quietly rotting. What we don't do is legal or bar-compliance review. We're engineers, not attorneys. Our free checklist walks you through that side yourself.",
     a: (
       <>
         Partly — and it&apos;s worth knowing exactly how far it goes. Listings are
@@ -30,6 +32,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'Is my client data safe with MCP tools?',
+    text: "MCP does not guarantee privacy or keep data on your computer. Check each vendor's retention, model-training, hosting, and access policies. Our directory is not a security audit; the free checklist gives you questions to take to the vendor and your firm's reviewer.",
     a: (
       <>
         MCP does not guarantee privacy or keep data on your computer. Check each
@@ -41,6 +44,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'How is this directory funded? Are listings paid?',
+    text: 'Listing itself is free — no tool pays just to appear. Optional Featured placements ($69 / 30 days) buy a sort boost and a Featured badge; those are labeled on the listing. There are no affiliate links. Core funding still comes from NYClaw.io, the AI agency that builds the directory. MCP search stays free.',
     a: (
       <>
         Listing itself is free — no tool pays just to appear. Optional{' '}
@@ -59,6 +63,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'I run a solo practice — is this overkill for me?',
+    text: 'Start with one repetitive task and the software you already have. You can filter listings by pricing model, but confirm current costs and setup requirements with the vendor. Our free workflow planner helps define a small pilot before you commit.',
     a: (
       <>
         Start with one repetitive task and the software you already have.
@@ -70,6 +75,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'What if I need something custom, not off-the-shelf?',
+    text: "Talk to NYClaw.io. That's the AI agency that builds and funds this directory — they build private AI integrations for firms whose workflow doesn't match any off-the-shelf tool. (Disclosure: NYClaw funds this site.)",
     a: (
       <>
         Talk to{' '}
@@ -84,9 +90,15 @@ const FAQ_ITEMS = [
   },
 ] as const
 
+// Plain-text twin of the JSX answers above, for FAQPage JSON-LD. Rich results
+// need the schema text to match what is visible, so keep `text` in step with
+// `a` when editing either.
+const FAQ_SCHEMA = FAQ_ITEMS.map(({ q, text }) => ({ q, a: text }))
+
 export function FAQ() {
   return (
     <section className="section-padding bg-warm-white">
+      <FAQJsonLd faqs={FAQ_SCHEMA} />
       <div className="max-w-3xl mx-auto px-6">
         <div className="text-center mb-10">
           <p className="font-sans text-xs font-bold uppercase tracking-widest text-gold-text mb-2">

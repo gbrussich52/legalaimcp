@@ -1,5 +1,8 @@
 export const SITE_NAME = 'LegalAIMCP'
 export const SITE_URL = 'https://legalaimcp.com'
+// Latest meaningful content change site-wide; feeds WebSite JSON-LD dateModified.
+// Bump with the dates in app/sitemap.ts.
+export const SITE_LAST_MODIFIED = '2026-10-17'
 export const SITE_DESCRIPTION = 'The curated directory of AI-powered integrations for law firms.'
 
 export const NYCLAW_URL = 'https://nyclaw.io'
