@@ -18,15 +18,15 @@ import { CATEGORY_CONTENT } from '@/lib/category-content'
  * Bump a date when that page's content meaningfully changes.
  */
 const MODIFIED = {
-  home: '2026-10-15', // homepage FAQPage JSON-LD added
+  home: '2026-10-17',
   privacy: '2026-09-19',
   terms: '2026-09-19',
   servers: '2026-08-07',
-  mcp: '2026-07-28',
+  mcp: '2026-10-17',
   submit: '2026-06-10',
   about: '2026-07-28',
   blogIndex: '2026-04-13',
-  bestLegal: '2026-08-07',
+  bestLegal: '2026-10-17',
   courtlistenerGuide: '2026-08-07',
   harveyGuide: '2026-08-10',
   clioGuide: '2026-09-24',
@@ -54,7 +54,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/workflow-plan`, lastModified: '2026-09-08', changeFrequency: 'monthly', priority: 0.8 },
     { url: `${SITE_URL}/workflow-assessment`, lastModified: '2026-09-08', changeFrequency: 'monthly', priority: 0.7 },
     { url: SITE_URL, lastModified: MODIFIED.home, changeFrequency: 'weekly', priority: 1 },
-    { url: `${SITE_URL}/pricing`, lastModified: '2026-09-08', changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${SITE_URL}/pricing`, lastModified: '2026-09-20', changeFrequency: 'monthly', priority: 0.6 },
     { url: `${SITE_URL}/privacy`, lastModified: MODIFIED.privacy, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${SITE_URL}/terms`, lastModified: MODIFIED.terms, changeFrequency: 'yearly', priority: 0.3 },
     {
