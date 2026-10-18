@@ -31,3 +31,7 @@ An explicit document association is stronger evidence than filename similarity. 
 ## 2026-10-06 — Make the owned service path explicit
 
 Directory traffic alone is not qualified company demand. Link the existing assessment explanation to a focused service page with a concrete fictional output and campaign attribution, while retaining written scope/fee boundaries. Gate: review the rendered referral link and verify its production destination before claiming distribution; actual paid acceptance remains separate evidence.
+
+## 2026-10-17 — Search wording must match the connection users receive
+
+Changed the homepage, existing legal-MCP comparison page, and owned-server setup page. Previously the homepage H1 omitted the legal/MCP topic, the comparison called sponsored-first ordering a best-of ranking, and setup grouped Claude Desktop with generic HTTP JSON clients. Pages now name the directory boundary, explain ordering before the listings, and give separate Claude account connector instructions plus a read-only test prompt. Titles, social metadata and meaningful sitemap dates match the changed pages; no new routes, claims of legal research access, or dependencies. Verification: existing tests/build and deployed page read-back.

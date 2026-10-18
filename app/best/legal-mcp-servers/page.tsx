@@ -8,21 +8,9 @@ import { LISTING_CARD_COLUMNS, type ListingCardData } from '@/lib/types'
 import { SITE_URL } from '@/lib/constants'
 import { CATEGORY_CONTENT } from '@/lib/category-content'
 
-/**
- * The flagship roundup page — the format gap this site had against
- * competitors (Spellbook, fast.io) who win "best MCP servers for legal"
- * searches with listicle pages despite having no comparable underlying data.
- * This site has a real 48-tool directory and its own MCP server listed in
- * the official Model Context Protocol registry; it just hadn't published
- * that data as a roundup. This page does, without inventing anything the
- * directory doesn't already know: every blurb below is the listing's own
- * tagline, and ranking pulls straight from the same `featured` /
- * `verified` signal the rest of the site uses — no separate hand-picked list.
- */
-
-const PAGE_TITLE = 'The Best Legal MCP Servers in 2026'
+const PAGE_TITLE = 'Legal MCP Servers & AI Tools: Compare Before Setup'
 const PAGE_DESCRIPTION =
-  'The top legal AI tools and MCP servers, ranked from our 48-tool directory — the same data behind our own MCP server in the official MCP registry.'
+  'Compare legal MCP servers and AI tools by workflow, pricing, and connection requirements. Understand listing order and link checks before choosing.'
 
 export const metadata: Metadata = {
   title: PAGE_TITLE,
@@ -31,7 +19,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: PAGE_TITLE,
     description: PAGE_DESCRIPTION,
-    type: 'article',
+    type: 'website',
+    url: `${SITE_URL}/best/legal-mcp-servers`,
   },
 }
 
@@ -57,12 +46,12 @@ export default async function BestLegalMcpServersPage() {
 
   return (
     <>
-      <ItemListJsonLd listings={listings} name="The Best Legal MCP Servers" />
+      <ItemListJsonLd listings={listings} name="Legal MCP Servers and AI Tools" />
       <BreadcrumbJsonLd
         items={[
           { name: 'Home', path: '/' },
           { name: 'Browse Tools', path: '/servers' },
-          { name: 'Best Legal MCP Servers', path: '/best/legal-mcp-servers' },
+          { name: 'Compare Legal MCP Servers', path: '/best/legal-mcp-servers' },
         ]}
       />
 
@@ -78,32 +67,32 @@ export default async function BestLegalMcpServersPage() {
               <Link href="/servers" className="hover:text-gold-text transition-colors">Browse Tools</Link>
             </li>
             <li aria-hidden="true">/</li>
-            <li aria-current="page" className="text-charcoal">Best Legal MCP Servers</li>
+            <li aria-current="page" className="text-charcoal">Compare Legal MCP Servers</li>
           </ol>
         </nav>
 
         {/* Header */}
         <div className="mb-10 max-w-3xl">
           <p className="font-sans text-xs font-bold uppercase tracking-widest text-gold-text mb-3">
-            Updated 2026
+            Reviewed October 17, 2026
           </p>
           <h1 className="font-display text-4xl md:text-5xl font-bold text-navy leading-tight">
-            The Best Legal MCP Servers in 2026
+            Compare legal MCP servers and AI tools
           </h1>
           <p className="font-body text-lg text-charcoal/75 mt-5 leading-relaxed">
-            LegalAIMCP runs its own MCP server, and it&apos;s listed in the
-            official Model Context Protocol registry — the same open registry
-            Claude, Smithery, and Glama pull from. This roundup is pulled from
-            the 48-tool directory that server serves, ranked by the same
-            featured and verified signals used everywhere else on this site.
-            It isn&apos;t a list assembled for a blog post.
+            A legal MCP server exposes tools to an AI assistant through Model Context Protocol.
+            A standalone legal AI product may have no MCP connection. This directory includes
+            both: check each listing&apos;s repository, install instructions, and vendor documentation
+            before assuming it works with your client.
           </p>
           <p className="font-body text-sm text-charcoal/80 mt-4">
-            Ranked from our{' '}
+            Selected from our{' '}
             <Link href="/servers" className="text-gold-text font-semibold hover:underline">
               full directory of AI tools for law firms
             </Link>
-            . Every listing below has a full profile with pricing, install
+            . Featured listings appear first, then listings whose links passed a check, then name.
+            This is directory ordering, not a performance ranking; paid Featured placements can affect
+            position. Every listing below has a profile with pricing, install
             instructions where applicable, and{' '}
             <Link href="/about#verified" className="text-gold-text font-semibold hover:underline">
               our verification status
@@ -112,11 +101,27 @@ export default async function BestLegalMcpServersPage() {
           </p>
         </div>
 
-        {/* Ranked roundup */}
+        <section className="mb-10 max-w-3xl font-body text-charcoal/80 space-y-3">
+          <h2 className="font-display text-2xl font-bold text-navy">How to choose a legal MCP server</h2>
+          <p>Start with one workflow: <Link href="/categories/legal-research" className="text-gold-text underline">legal research</Link>,{' '}
+            <Link href="/categories/document-processing" className="text-gold-text underline">document processing</Link>, or{' '}
+            <Link href="/categories/case-management" className="text-gold-text underline">case management</Link>.
+            Confirm jurisdiction and source coverage for research, and file formats and permissions for document work.</p>
+          <p>Check who maintains the server, whether the vendor supports it, the transport your
+            client accepts, authentication, and any separate product subscription. A free MCP
+            connector does not make the connected product free.</p>
+          <p>A link-check badge confirms that URLs resolved on the stated date. It does not test
+            security, legal accuracy, or compatibility. Review data handling before using client
+            information and test with fictional examples first.</p>
+          <p>To search these listings from your assistant, <Link href="/mcp" className="text-gold-text underline">connect our free directory MCP server</Link>.
+            It returns tool listings, not case law or access to your firm&apos;s systems.</p>
+        </section>
+
+        {/* Directory order, not an editorial quality ranking. */}
         {listings.length > 0 ? (
           <ol className="space-y-5">
-            {listings.map((listing, i) => (
-              <RoundupItem key={listing.id} listing={listing} rank={i + 1} />
+            {listings.map((listing) => (
+              <RoundupItem key={listing.id} listing={listing} />
             ))}
           </ol>
         ) : (
@@ -139,8 +144,8 @@ export default async function BestLegalMcpServersPage() {
               <Link href="/mcp" className="text-gold-text font-semibold hover:underline">
                 own MCP server
               </Link>
-              . Ranking is not manual: it follows a firm&apos;s featured status
-              in the directory, then whether an automated check most recently
+              . Ordering is not a quality score: it follows a firm&apos;s featured status
+              in the directory (including paid placements), then whether an automated check most recently
               confirmed the listing&apos;s links resolve, then name.
             </p>
             <p>

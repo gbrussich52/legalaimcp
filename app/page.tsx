@@ -18,10 +18,15 @@ import {
 } from '@/lib/types'
 
 export const metadata: Metadata = {
-  title: 'LegalAIMCP — AI Integrations for Law Firms',
+  title: { absolute: 'Legal MCP Servers & AI Tools for Law Firms | LegalAIMCP' },
   description:
-    'Find legal AI tools and MCP servers, then plan one workflow for your firm. Free directory and workflow planner, with implementation support from NYClaw.',
+    'Compare legal MCP servers and AI tools for law firms by practice area and pricing. Connect our free read-only directory server or plan one workflow.',
   alternates: { canonical: 'https://legalaimcp.com' },
+  openGraph: {
+    title: 'Legal MCP Servers & AI Tools for Law Firms',
+    description: 'Compare legal AI listings by practice area and pricing, or connect the free read-only directory MCP server.',
+    url: 'https://legalaimcp.com',
+  },
 }
 
 // Pricing-tier sort key for the Featured grid — implements CRO rule #10
@@ -79,11 +84,21 @@ export default async function HomePage() {
             Legal AI tools & workflow planning
           </span>
           <h1 className="font-display text-5xl sm:text-6xl font-bold leading-tight">
-            Find the right AI tools.<br />Put them to work.
+            Legal MCP servers and<br />AI tools for law firms.
           </h1>
           <p className="text-xl text-slate-300 max-w-2xl mx-auto mt-5 font-body leading-relaxed">
             Explore legal AI tools and MCP servers. Start with one task, check what
             your existing software can do, and build a practical plan for your firm.
+          </p>
+
+          <p className="font-body text-slate-300 mt-4 max-w-2xl mx-auto">
+            LegalAIMCP is a directory, with its own read-only MCP server for finding tools.
+            It does not connect to your case files or provide legal research itself.
+          </p>
+          <p className="mt-4 font-sans text-sm">
+            <Link href="/best/legal-mcp-servers" className="underline underline-offset-4">Compare legal MCP servers and AI tools</Link>
+            {' · '}
+            <Link href="/mcp" className="underline underline-offset-4">Connect the directory to Claude</Link>
           </p>
 
           <HeroSearch />
@@ -297,8 +312,8 @@ export default async function HomePage() {
               <div className="bg-green-50 border border-green-100 rounded-xl p-5">
                 <p className="font-sans font-semibold text-green-800 text-sm mb-2">With MCP</p>
                 <p className="font-body text-green-700 text-sm leading-relaxed">
-                  Ask your AI assistant a question. It reads your case files, searches case law,
-                  and drafts the memo — in one step.
+                  A connected assistant can use the tools a server exposes, within the access you
+                  grant. Capabilities vary by server; review sources and outputs before relying on them.
                 </p>
               </div>
             </div>

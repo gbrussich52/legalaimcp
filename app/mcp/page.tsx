@@ -16,9 +16,14 @@ import { McpServerJsonLd } from '../components/JsonLd'
 const ENDPOINT = `${SITE_URL}/api/mcp`
 
 export const metadata: Metadata = {
-  title: `MCP Server — Query ${SITE_NAME} From Your AI Assistant`,
-  description: `Connect Claude, ChatGPT, or any MCP client to the ${SITE_NAME} directory of legal AI tools. Free, read-only, no API key. Search 45+ tools for law firms.`,
+  title: `Legal AI Directory MCP Server: Claude Setup`,
+  description: `Connect Claude, ChatGPT, or any MCP client to the ${SITE_NAME} directory of legal AI tools. Free, read-only, no API key. Find tools for law firms.`,
   alternates: { canonical: `${SITE_URL}/mcp` },
+  openGraph: {
+    title: 'Legal AI Directory MCP Server: Claude Setup',
+    description: 'Connect to the free read-only LegalAIMCP directory. Search published legal AI listings; no API key or account required.',
+    url: `${SITE_URL}/mcp`,
+  },
 }
 
 const TOOLS = [
@@ -69,7 +74,7 @@ export default function McpPage() {
             For AI assistants
           </p>
           <h1 className="font-display text-4xl md:text-5xl font-bold leading-tight">
-            Query this directory from your AI assistant
+            Connect the LegalAIMCP directory MCP server
           </h1>
           <p className="font-body text-slate-300 mt-5 text-lg leading-relaxed">
             {SITE_NAME} runs its own MCP server. Connect it once and your
@@ -78,6 +83,10 @@ export default function McpPage() {
           </p>
           <p className="font-body text-slate-400 mt-3 text-sm">
             Free · read-only · no API key · no account
+          </p>
+          <p className="font-body text-slate-300 mt-4">
+            This server searches public tool listings. It does not search case law, access
+            client files, or connect your firm to the products it lists.
           </p>
         </div>
       </section>
@@ -91,12 +100,42 @@ export default function McpPage() {
 
           <div>
             <h2 className="font-display text-2xl font-bold text-navy mb-3">
-              Claude Desktop, Cursor, and other MCP clients
+              Claude web and Claude Desktop
             </h2>
             <p className="font-body text-charcoal/75 mb-3 leading-relaxed">
-              Add this to your client&apos;s MCP configuration file:
+              Open Customize → Connectors → Add custom connector, enter LegalAIMCP
+              as the name, and use this remote server URL. Choose No sign in when
+              prompted, then enable the connector in your conversation. Team and
+              Enterprise accounts may require an owner to add it first.
+            </p>
+            <Code>{ENDPOINT}</Code>
+            <p className="font-body text-charcoal/75 mt-3">
+              Remote connectors use your Claude account; do not paste the HTTP JSON
+              below into claude_desktop_config.json. Follow{' '}
+              <a href="https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp" className="text-gold-text underline">Claude&apos;s current connector instructions</a>.
+            </p>
+          </div>
+
+          <div>
+            <h2 className="font-display text-2xl font-bold text-navy mb-3">Other HTTP MCP clients</h2>
+            <p className="font-body text-charcoal/75 mb-3">
+              For clients that support this mcpServers HTTP configuration format,
+              use the example below. Other clients require their own settings format.
             </p>
             <Code>{CLIENT_JSON}</Code>
+          </div>
+
+          <div>
+            <h2 className="font-display text-2xl font-bold text-navy mb-3">Test the connection</h2>
+            <p className="font-body text-charcoal/75">
+              Ask: “Use LegalAIMCP to find legal research tools and show each listing&apos;s
+              link-check date.” Expect directory listings, not case citations. If no tools
+              appear, confirm that your client supports Streamable HTTP and that the connector
+              is enabled. Do not send confidential client information in search queries.
+            </p>
+            <p className="font-body mt-3">
+              Prefer browsing? <Link href="/best/legal-mcp-servers" className="text-gold-text underline">Compare legal MCP servers and AI tools</Link>.
+            </p>
           </div>
 
           <div>
