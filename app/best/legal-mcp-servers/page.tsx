@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   description: PAGE_DESCRIPTION,
   alternates: { canonical: `${SITE_URL}/best/legal-mcp-servers` },
   openGraph: {
+    images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630, alt: 'LegalAIMCP — legal AI tools and MCP servers' }],
     title: PAGE_TITLE,
     description: PAGE_DESCRIPTION,
     type: 'website',

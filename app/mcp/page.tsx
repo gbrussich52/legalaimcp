@@ -20,6 +20,7 @@ export const metadata: Metadata = {
   description: `Connect Claude, ChatGPT, or any MCP client to the ${SITE_NAME} directory of legal AI tools. Free, read-only, no API key. Find tools for law firms.`,
   alternates: { canonical: `${SITE_URL}/mcp` },
   openGraph: {
+    images: [{ url: `${SITE_URL}/opengraph-image`, width: 1200, height: 630, alt: 'LegalAIMCP — legal AI tools and MCP servers' }],
     title: 'Legal AI Directory MCP Server: Claude Setup',
     description: 'Connect to the free read-only LegalAIMCP directory. Search published legal AI listings; no API key or account required.',
     url: `${SITE_URL}/mcp`,

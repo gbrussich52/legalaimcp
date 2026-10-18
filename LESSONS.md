@@ -35,3 +35,7 @@ Directory traffic alone is not qualified company demand. Link the existing asses
 ## 2026-10-17 — Search wording must match the connection users receive
 
 Changed the homepage, existing legal-MCP comparison page, and owned-server setup page. Previously the homepage H1 omitted the legal/MCP topic, the comparison called sponsored-first ordering a best-of ranking, and setup grouped Claude Desktop with generic HTTP JSON clients. Pages now name the directory boundary, explain ordering before the listings, and give separate Claude account connector instructions plus a read-only test prompt. Titles, social metadata and meaningful sitemap dates match the changed pages; no new routes, claims of legal research access, or dependencies. Preserved the concurrent FAQ/contact schema release and aligned its site-wide content date. Verification: existing tests/build and deployed page read-back.
+
+### 2026-10-17 — Preserve social images with page-level Open Graph metadata
+
+Production read-back found that page-specific Open Graph objects on the MCP setup and comparison pages omitted the root file-based social image. Added the existing absolute image URL explicitly to both pages; no image redesign or new asset. Lesson: inspect metadata on every changed public URL, because homepage image inheritance does not prove nested-page image coverage.
