@@ -25,12 +25,12 @@ export async function withVerifyHealth(run, { file, dryRun = false } = {}) {
 }
 
 /** Record combined weekly outcomes; null exits represent an incomplete run. */
-export async function writeWeeklyHealth(file, verifyExit = null, discoverExit = null) {
+export async function writeWeeklyHealth(file, verifyExit = null, discoverExit = null, informationExit = null) {
   const validExit = value => value === null || (Number.isInteger(value) && value >= 0 && value <= 255)
-  if (!validExit(verifyExit) || !validExit(discoverExit)) throw new Error('Invalid exit status')
+  if (!validExit(verifyExit) || !validExit(discoverExit) || !validExit(informationExit)) throw new Error('Invalid exit status')
   const result = { checkedAt: new Date().toISOString(),
-    ok: [0, 1].includes(verifyExit) && discoverExit === 0, verifyExit, discoverExit,
-    errorCode: verifyExit === null || discoverExit === null ? 'IN_PROGRESS' : null }
+    ok: [0, 1].includes(verifyExit) && discoverExit === 0 && informationExit === 0, verifyExit, discoverExit, informationExit,
+    errorCode: verifyExit === null || discoverExit === null || informationExit === null ? 'IN_PROGRESS' : null }
   await mkdir(path.dirname(file), { recursive: true })
   const temp = `${file}.${process.pid}.tmp`
   await writeFile(temp, JSON.stringify(result, null, 2) + '\n')
@@ -40,8 +40,8 @@ export async function writeWeeklyHealth(file, verifyExit = null, discoverExit = 
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
   try {
-    const [file, verify, discover] = process.argv.slice(2)
+    const [file, verify, discover, information] = process.argv.slice(2)
     if (!file) throw new Error('Missing output')
-    await writeWeeklyHealth(file, verify === undefined ? null : Number(verify), discover === undefined ? null : Number(discover))
+    await writeWeeklyHealth(file, verify === undefined ? null : Number(verify), discover === undefined ? null : Number(discover), information === undefined ? null : Number(information))
   } catch { console.error('Weekly health evidence could not be saved'); process.exitCode = 2 }
 }

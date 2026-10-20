@@ -33,11 +33,11 @@ test('weekly wrapper attempts both phases, propagates failures and accepts norma
  try {
   const original=await readFile(new URL('./run.sh',import.meta.url),'utf8')
   const runner=path.join(dir,'run.sh');await writeFile(runner,original.replace('ROOT="/Users/gianibrussich/project-claude/legalaimcp"',`ROOT="${dir}"`))
-  const node=path.join(dir,'node');await writeFile(node,'#!/bin/bash\nif [ "$1" = scripts/weekly/health.mjs ]; then echo HEALTH_WRITE_\"$#\"; exit 0; fi\nif [ "$2" = verify ]; then exit "$VERIFY_STATUS"; fi\nif [ "$2" = discover ]; then echo DISCOVER_RAN; exit "$DISCOVER_STATUS"; fi\nexit 9\n');await chmod(node,0o755)
-  for(const [verify,discover,expected] of [[0,0,0],[1,0,0],[2,0,2],[0,2,2],[2,2,2]]){
+  const node=path.join(dir,'node');await writeFile(node,'#!/bin/bash\nif [ "$1" = scripts/weekly/health.mjs ]; then echo HEALTH_WRITE_\"$#\"; exit 0; fi\nif [ "$1" = scripts/weekly/information.mjs ]; then echo INFORMATION_RAN; exit "${INFORMATION_STATUS:-0}"; fi\nif [ "$2" = verify ]; then exit "$VERIFY_STATUS"; fi\nif [ "$2" = discover ]; then echo DISCOVER_RAN; exit "$DISCOVER_STATUS"; fi\nexit 9\n');await chmod(node,0o755)
+  for(const [verify,discover,information,expected] of [[0,0,0,0],[1,0,0,0],[2,0,0,2],[0,2,0,2],[2,2,0,2],[0,0,2,2]]){
    let result
-   try{result=await execute('bash',[runner],{env:{...process.env,PATH:`${dir}:${process.env.PATH}`,SUPABASE_ACCESS_TOKEN:'synthetic-placeholder',VERIFY_STATUS:String(verify),DISCOVER_STATUS:String(discover)}});result.code=0}catch(error){result=error}
-   assert.equal(result.code,expected);assert.match(result.stdout,/DISCOVER_RAN/);assert.match(result.stdout,/HEALTH_WRITE_2/);assert.match(result.stdout,/HEALTH_WRITE_4/)
+   try{result=await execute('bash',[runner],{env:{...process.env,PATH:`${dir}:${process.env.PATH}`,SUPABASE_ACCESS_TOKEN:'synthetic-placeholder',VERIFY_STATUS:String(verify),DISCOVER_STATUS:String(discover),INFORMATION_STATUS:String(information)}});result.code=0}catch(error){result=error}
+   assert.equal(result.code,expected);assert.match(result.stdout,/DISCOVER_RAN/);assert.match(result.stdout,/INFORMATION_RAN/);assert.match(result.stdout,/HEALTH_WRITE_2/);assert.match(result.stdout,/HEALTH_WRITE_5/)
   }
  } finally {await rm(dir,{recursive:true,force:true})}
 })
@@ -54,12 +54,17 @@ test('curation targets shared schema/project and bounds database subprocess',asy
 test('weekly artifact invalidates prior completion and only succeeds when both phases do',async()=>{
  const dir=await mkdtemp(path.join(tmpdir(),'weekly-health-'));const file=path.join(dir,'weekly-health.json')
  try {
-  await writeWeeklyHealth(file,0,0)
+  await writeWeeklyHealth(file,0,0,0)
   await writeWeeklyHealth(file)
   let result=JSON.parse(await readFile(file,'utf8'));assert.equal(result.ok,false);assert.equal(result.errorCode,'IN_PROGRESS');assert.equal(result.verifyExit,null)
   for(const [verify,discover,ok] of [[0,0,true],[1,0,true],[2,0,false],[0,2,false],[2,2,false]]){
-   await writeWeeklyHealth(file,verify,discover);result=JSON.parse(await readFile(file,'utf8'))
+   await writeWeeklyHealth(file,verify,discover,0);result=JSON.parse(await readFile(file,'utf8'))
    assert.equal(result.ok,ok);assert.equal(result.verifyExit,verify);assert.equal(result.discoverExit,discover);assert.ok(Date.parse(result.checkedAt))
   }
  } finally {await rm(dir,{recursive:true,force:true})}
+})
+
+test('third-phase failure and a missing third-phase completion cannot yield weekly success',async()=>{
+ const dir=await mkdtemp(path.join(tmpdir(),'information-health-'));const file=path.join(dir,'weekly.json')
+ try{for(const information of [null,2]){const result=await writeWeeklyHealth(file,0,0,information);assert.equal(result.ok,false);assert.equal(result.informationExit,information)}}finally{await rm(dir,{recursive:true,force:true})}
 })
