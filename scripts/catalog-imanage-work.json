@@ -1,0 +1,25 @@
+{
+  "classification": "PUBLIC",
+  "reviewed_at": "2026-10-19",
+  "source_url": "https://docs.imanage.com/ai/mcpserver-user-help/en-US/Adding_MCP_connectors_for_Claude.html",
+  "listing": {
+    "name": "iManage Work",
+    "slug": "imanage-work",
+    "tagline": "Document and email management with vendor-documented MCP connectors for AI assistants.",
+    "description": "iManage Work provides document and email management. Its vendor documents an iManage Work connector in Claude and custom MCP connectors for search, Insight+ and Tracker. Setup requires an eligible iManage account; organization administrators may need to enable access. The vendor describes read permissions by default, with available tools controlled by administrator configuration. Custom URLs vary by connector and company subdomain, so use the official setup documentation. LegalAIMCP has reviewed those instructions, not authenticated or tested a customer account.",
+    "category": "document_processing",
+    "external_url": "https://docs.imanage.com/ai/mcpserver-user-help/en-US/Adding_MCP_connectors_for_Claude.html",
+    "mcp_repo_url": null,
+    "mcp_install_command": null,
+    "pricing_model": "contact",
+    "pricing_details": "Requires iManage Work access. Confirm MCP availability and subscription requirements with your administrator or vendor.",
+    "tags": ["imanage", "document-management", "email-management", "mcp", "official-connector"],
+    "creator_name": "iManage",
+    "creator_url": "https://imanage.com",
+    "source": "curated",
+    "status": "published",
+    "featured": false,
+    "verified": false,
+    "verified_at": null
+  }
+}

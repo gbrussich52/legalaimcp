@@ -1,5 +1,6 @@
 import { createMcpHandler } from 'mcp-handler'
 import { z } from 'zod'
+import { ToolItem, toStructured, formatTool, type ToolRow } from '@/lib/mcp-results'
 import { supabase } from '@/lib/supabase'
 import { CATEGORY_LABELS, PRICING_LABELS, SITE_URL } from '@/lib/constants'
 import { rankListings, pricingSupportNote, FIRM_SIZES, type ScorableListing } from '@/lib/recommend'
@@ -54,75 +55,6 @@ const PRICING = Object.keys(PRICING_LABELS) as [string, ...string[]]
  * reading only structuredContent still sees what "verified" does and doesn't
  * mean.
  */
-const TOOL_SHAPE = {
-  slug: z.string().describe('Stable listing identifier — pass to get_legal_ai_tool'),
-  name: z.string().describe('Tool name'),
-  tagline: z.string().nullable().describe('One-line summary'),
-  category: z.string().describe('Practice-area category slug'),
-  category_label: z.string().describe('Human-readable category name'),
-  pricing_model: z.string().describe('One of: free, freemium, paid, contact'),
-  pricing_details: z.string().nullable().describe('Pricing notes, if any'),
-  links_verified: z
-    .boolean()
-    .describe(
-      'True if an automated check confirmed every URL on this listing resolved, as of links_verified_at. An automated link check only — NOT an endorsement, security audit, or legal review.'
-    ),
-  links_verified_at: z
-    .string()
-    .nullable()
-    .describe('ISO date of the last passing link check; null = not confirmed (often just bot-blocking)'),
-  website: z.string().nullable().describe('Tool website'),
-  repo: z.string().nullable().describe('Source repository, if open source'),
-  install_command: z.string().nullable().describe('MCP install command, if the tool ships an MCP server'),
-  maker: z.string().nullable().describe('Creator or vendor name'),
-  listing_url: z.string().describe('Canonical listing page on legalaimcp.com'),
-}
-const ToolItem = z.object(TOOL_SHAPE)
-type ToolRow = Record<string, unknown>
-
-/** Maps a DB row to the structured shape. One mapper feeds both tools. */
-function toStructured(t: ToolRow): z.infer<typeof ToolItem> {
-  return {
-    slug: String(t.slug),
-    name: String(t.name),
-    tagline: (t.tagline as string) ?? null,
-    category: String(t.category),
-    category_label: CATEGORY_LABELS[t.category as string] ?? String(t.category),
-    pricing_model: String(t.pricing_model),
-    pricing_details: (t.pricing_details as string) ?? null,
-    links_verified: Boolean(t.verified && t.verified_at),
-    links_verified_at: t.verified && t.verified_at ? String(t.verified_at).slice(0, 10) : null,
-    website: (t.external_url as string) ?? null,
-    repo: (t.mcp_repo_url as string) ?? null,
-    install_command: (t.mcp_install_command as string) || null,
-    maker: (t.creator_name as string) ?? null,
-    listing_url: `${SITE_URL}/servers/${t.slug}`,
-  }
-}
-
-/** Renders one listing as compact text. Prose twin of toStructured(). */
-function formatTool(t: ToolRow, verbose = false): string {
-  const lines = [
-    `## ${t.name}`,
-    t.tagline ? `${t.tagline}` : '',
-    `- Category: ${CATEGORY_LABELS[t.category as string] ?? t.category}`,
-    `- Pricing: ${PRICING_LABELS[t.pricing_model as string] ?? t.pricing_model}${
-      t.pricing_details ? ` — ${t.pricing_details}` : ''
-    }`,
-    t.creator_name ? `- Maker: ${t.creator_name}` : '',
-    // The date is not decoration. See the note at the top of this file.
-    t.verified && t.verified_at
-      ? `- Links verified: ${String(t.verified_at).slice(0, 10)} (automated link check only — not an endorsement, security audit, or legal review)`
-      : `- Links verified: not confirmed (usually means the site blocks automated checks, not that the tool is bad)`,
-    t.external_url ? `- Website: ${t.external_url}` : '',
-    t.mcp_repo_url ? `- Repo: ${t.mcp_repo_url}` : '',
-    t.mcp_install_command ? `- Install: \`${t.mcp_install_command}\`` : '',
-    `- Listing: ${SITE_URL}/servers/${t.slug}`,
-  ]
-  if (verbose && t.description) lines.push('', String(t.description))
-  return lines.filter(Boolean).join('\n')
-}
-
 /**
  * Consistent failure result. isError satisfies the structured-output contract
  * (a declared outputSchema requires structuredContent on success results, but
@@ -481,10 +413,10 @@ const handler = createMcpHandler(
     )
   },
   {
-    serverInfo: { name: 'legalaimcp', version: '1.2.0' },
+    serverInfo: { name: 'legalaimcp', version: '1.3.0' },
     // Shown to connecting clients at initialize — orientation for the agent.
     instructions:
-      'Directory of AI tools and MCP servers for law firms, from legalaimcp.com. Read-only. Start with list_legal_ai_categories to see practice areas, search_legal_ai_tools to find tools (or recommend_legal_ai_tools for a scored recommendation given a practice area + firm size), then get_legal_ai_tool for full detail on one. "Links verified" means an automated link check passed on the stated date — it is not an endorsement, security audit, or legal advice.',
+      'Directory of AI tools and MCP servers for law firms, from legalaimcp.com. Read-only. Start with list_legal_ai_categories to see practice areas, search_legal_ai_tools to find tools (or recommend_legal_ai_tools for a scored recommendation given a practice area + firm size), then get_legal_ai_tool for full detail on one. "Links verified" means an automated link check passed on the stated date — it is not an endorsement, security audit, or legal advice. When present, connection contains reviewed setup documentation with source/date/permission notes; customer_account_tested is false. A null connection means no reviewed guide is attached.',
   },
   {
     basePath: '/api',

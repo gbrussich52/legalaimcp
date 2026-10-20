@@ -105,8 +105,6 @@ export default async function BrowsePage({
         </Link>
       </p>
 
-      {!q && !category && !pricing && currentPage === 1 && <SoftwareConnectionShortlist />}
-
       {/* Search + filter controls */}
       <div className="flex flex-col sm:flex-row gap-3 mb-8">
         <div className="flex-1">
@@ -114,6 +112,8 @@ export default async function BrowsePage({
         </div>
         <ListingFilters />
       </div>
+
+      {!q && !category && !pricing && currentPage === 1 && <SoftwareConnectionShortlist />}
 
       {/* Listings grid */}
       {listings.length > 0 ? (

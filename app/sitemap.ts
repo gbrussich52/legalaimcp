@@ -22,7 +22,7 @@ const MODIFIED = {
   privacy: '2026-09-19',
   terms: '2026-09-19',
   servers: '2026-10-19',
-  mcp: '2026-10-17',
+  mcp: '2026-10-19',
   submit: '2026-06-10',
   about: '2026-07-28',
   blogIndex: '2026-04-13',

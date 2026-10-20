@@ -34,7 +34,7 @@ const TOOLS = [
   },
   {
     name: 'get_legal_ai_tool',
-    desc: 'Full listing for one tool, including description and install command.',
+    desc: 'Full listing with reviewed connection sources, setup requirements and permission notes where available. Customer-account compatibility is not tested.',
   },
   {
     name: 'list_legal_ai_categories',
@@ -141,6 +141,7 @@ export default function McpPage() {
 
           <div>
             <h2 className="font-display text-2xl font-bold text-navy mb-4">What you get</h2>
+            <p className="font-body text-charcoal/75 mb-4">Search, detail and recommendation results include connection documentation where reviewed: official or community status, source link, review date, requirements, permissions and setup. A null connection means no reviewed guide is attached. These are directory references, not authenticated connections to your software.</p>
             <ul className="space-y-3">
               {TOOLS.map((t) => (
                 <li key={t.name} className="border border-slate-200 rounded-lg p-4">
