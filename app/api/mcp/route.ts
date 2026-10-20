@@ -1,3 +1,5 @@
+import { registerLegalChatgptApp } from '@/lib/chatgpt-app'
+import { boundedMcpRequest } from '@/lib/chatgpt-http'
 import { createMcpHandler } from 'mcp-handler'
 import { z } from 'zod'
 import { ToolItem, toStructured, formatTool, type ToolRow } from '@/lib/mcp-results'
@@ -88,6 +90,7 @@ const READ_ONLY = {
 
 const handler = createMcpHandler(
   (server) => {
+    registerLegalChatgptApp(server)
     server.registerTool(
       'search_legal_ai_tools',
       {
@@ -413,10 +416,10 @@ const handler = createMcpHandler(
     )
   },
   {
-    serverInfo: { name: 'legalaimcp', version: '1.3.0' },
+    serverInfo: { name: 'legalaimcp', version: '1.4.0' },
     // Shown to connecting clients at initialize — orientation for the agent.
     instructions:
-      'Directory of AI tools and MCP servers for law firms, from legalaimcp.com. Read-only. Start with list_legal_ai_categories to see practice areas, search_legal_ai_tools to find tools (or recommend_legal_ai_tools for a scored recommendation given a practice area + firm size), then get_legal_ai_tool for full detail on one. "Links verified" means an automated link check passed on the stated date — it is not an endorsement, security audit, or legal advice. When present, connection contains reviewed setup documentation with source/date/permission notes; customer_account_tested is false. A null connection means no reviewed guide is attached.',
+      'Directory of AI tools and MCP servers for law firms, from legalaimcp.com. Read-only. For a workflow-based sourced comparison, use build_legal_ai_shortlist; it accepts fixed choices only, never client documents or matter facts. Start with list_legal_ai_categories to see practice areas, search_legal_ai_tools to find tools (or recommend_legal_ai_tools for a scored recommendation given a practice area + firm size), then get_legal_ai_tool for full detail on one. "Links verified" means an automated link check passed on the stated date — it is not an endorsement, security audit, or legal advice. When present, connection contains reviewed setup documentation with source/date/permission notes; customer_account_tested is false. A null connection means no reviewed guide is attached.',
   },
   {
     basePath: '/api',
@@ -428,4 +431,8 @@ const handler = createMcpHandler(
   }
 )
 
-export { handler as GET, handler as POST }
+async function guardedHandler(request: Request) {
+  const bounded = await boundedMcpRequest(request)
+  return bounded instanceof Response ? bounded : handler(bounded)
+}
+export { guardedHandler as GET, guardedHandler as POST }

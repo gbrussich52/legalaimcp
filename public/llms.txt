@@ -22,12 +22,18 @@ New submissions are reviewed by a person before they go live, and every publishe
 
 ## Facts
 
-- 48 AI tools and MCP servers are currently published in the directory (live count, changes as listings are added/removed).
+- The published catalog count changes as listings are added/removed; query list_legal_ai_categories for the current total.
 - LegalAIMCP operates its own free, read-only MCP server at `https://legalaimcp.com/api/mcp`, listed in the official MCP registry (registry.modelcontextprotocol.io) under the server name `com.legalaimcp/directory`.
-- The MCP server exposes four tools: `search_legal_ai_tools`, `get_legal_ai_tool`, `list_legal_ai_categories`, and `recommend_legal_ai_tools`.
+- The MCP server exposes five tools: `build_legal_ai_shortlist`, `search_legal_ai_tools`, `get_legal_ai_tool`, `list_legal_ai_categories`, and `recommend_legal_ai_tools`.
 - LegalAIMCP is built and maintained by NYClaw.io.
 
 ## Contact
 
 - Consultation booking: https://calendly.com/nyclaw-io-proton/30min
 - Parent company: https://nyclaw.io
+
+## ChatGPT workflow desk
+
+- [Free workflow desk](https://legalaimcp.com/chatgpt): compare a small sourced shortlist by workflow and firm size, with a free-only filter. Requires no account.
+- [App privacy](https://legalaimcp.com/chatgpt/privacy) and [support](https://legalaimcp.com/chatgpt/support).
+- The inline widget and web preview distinguish catalog retrieval time, documentation review date and automated link checks. Customer-account and ChatGPT compatibility are not tested. The app never accepts client documents, connects accounts, executes commands, provides legal advice or makes purchases.

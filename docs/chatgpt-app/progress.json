@@ -1,0 +1,81 @@
+{
+  "title": "LegalAIMCP ChatGPT workflow desk",
+  "items": [
+    {
+      "id": "P1-01",
+      "phase": "1",
+      "title": "Inspect endpoint, catalog, sensors and source queue",
+      "status": "done",
+      "acceptance": "Inspect endpoint, catalog, sensors and source queue",
+      "evidence": "docs/chatgpt-app/README.md: current four-tool endpoint and dated sensor observations recorded"
+    },
+    {
+      "id": "P1-02",
+      "phase": "1",
+      "title": "Choose official protocol and existing catalog approach",
+      "status": "done",
+      "acceptance": "Choose official protocol and existing catalog approach",
+      "evidence": "docs/chatgpt-app/README.md: official SDK hunt and compatibility grounds"
+    },
+    {
+      "id": "P2-01",
+      "phase": "2",
+      "title": "Implement bounded real-catalog shortlist and preserve clients",
+      "status": "done",
+      "acceptance": "Implement bounded real-catalog shortlist and preserve clients",
+      "evidence": "lib/chatgpt-shortlist.ts; lib/chatgpt-app.ts; strict schemas and official SDK transports"
+    },
+    {
+      "id": "P2-02",
+      "phase": "2",
+      "title": "Deliver widget, web preview and accurate support/privacy",
+      "status": "done",
+      "acceptance": "Deliver widget, web preview and accurate support/privacy",
+      "evidence": "chatgpt-widget/; app/chatgpt/; same generated interface, no upsells"
+    },
+    {
+      "id": "P2-03",
+      "phase": "2",
+      "title": "Prepare listing, review cases and reproducible package",
+      "status": "done",
+      "acceptance": "Prepare listing, review cases and reproducible package",
+      "evidence": "scripts/package-chatgpt.py: 3-file ZIP built twice with identical SHA-256; plugin manifest has exactly 5 positive/3 negative cases"
+    },
+    {
+      "id": "P3-01",
+      "phase": "3",
+      "title": "Run tests, type checks, real catalog build and protocol smoke",
+      "status": "done",
+      "acceptance": "Run tests, type checks, real catalog build and protocol smoke",
+      "evidence": "docs/chatgpt-app/VERIFICATION.md: 257 Vitest + 24 Node tests; tsc; real-catalog build/gate; official SDK HTTP smoke"
+    },
+    {
+      "id": "P3-02",
+      "phase": "3",
+      "title": "Inspect visual interaction and record verification",
+      "status": "done",
+      "acceptance": "Inspect visual interaction and record verification",
+      "evidence": "docs/chatgpt-app/screenshots/: desktop/mobile Chrome; 49 real listings; no console/CSP errors or horizontal overflow; local production walkthrough recorded"
+    },
+    {
+      "id": "P3-03",
+      "phase": "3",
+      "title": "Manager independent review and publication gate",
+      "status": "blocked",
+      "acceptance": "Manager independent review and publication gate",
+      "evidence": "Manager owns security review/deployment; no publication attempted"
+    }
+  ],
+  "history": [
+    {
+      "at": "2026-10-20T19:11:19.994598+00:00",
+      "done": 4,
+      "total": 8
+    },
+    {
+      "at": "2026-10-20T19:16:05.794439+00:00",
+      "done": 7,
+      "total": 8
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+# Release verification — October 20, 2026
+
+This is local implementation evidence, not a production release or ChatGPT portal approval.
+
+- **Regression:** `npm test` passed 257 Vitest tests across 29 files and 24 Node maintenance tests. The added app tests cover strict input/URL/extra-key rejection, ranking and free-only behavior, published-row/cap/deadline enforcement, retrieval failures, origin/body byte and five-second deadline limits, SDK tool/resource metadata and protocol, self-contained text-safe rendering, and web HTTP 400/503 behavior.
+- **Types:** `tsc --noEmit` passed.
+- **Build:** real public-catalog `npm run build` passed on Next 15.5.28, including the existing `check-catalog-artifacts.mjs` gate (49 listing pages). A disconnected build correctly failed that existing gate rather than showing a substituted catalog. A build that overlapped dependency updates was discarded; the clean rerun passed.
+- **Actual local HTTP protocol:** official SDK client initialized, listed all five tools, read the `text/html;profile=mcp-app` resource, called five shortlist workflows against 49 published records, and called legacy `search_legal_ai_tools` successfully. Contract/intake/research returned three, documents returned five, and free-only billing returned zero. Extra URL input returned MCP error. Hostile/deceptive Origins returned 403; an actual 32,769-byte body returned 413.
+- **Browser:** installed Chrome rendered the real catalog preview at 1200px desktop and 390px mobile, including an empty free-only billing result. No console/page errors, CSP violations or mobile horizontal overflow were observed. Screenshots are in `screenshots/`. Contract ranking prioritizes name/tagline task evidence ahead of generic description mentions.
+- **Package:** the allowlisted ZIP contains exactly `plugin.json`, `mcp.json` and `assets/chatgpt-icon.png`. Two builds have identical SHA-256 `5a2c79cf4a4f37b3ae2756cacdc2aa808fb475f387db9c818b2baff0b2bb85d0`. It has one remote no-auth server, a 30-character subtitle, support/privacy/terms URLs and exactly five positive plus three negative manifest cases. Both manifest files also passed their fetched official Agent Plugins JSON schemas. No source server, environment file, dependencies, registered-app placeholder, hook, schedule or credentials are included.
+- **Setup:** estate Codex health check ran with Python 3.13 and returned zero critical findings / zero warnings.
+
+## Material limits and release gates
+
+The existing source collector’s October 20 observation is incomplete (Ironclad source unreadable; Registry lookups failed). No source-review or link-check date was advanced by this change. Catalog retrieval and source verification are separate. Income sensing was green separately; this is no revenue or conversion claim.
+
+Compatible dependency fixes reduced the initial 19 audit findings (including one critical proxy-address issue) to 10 (7 high / 3 moderate), with no critical findings remaining. Remaining findings involve the pinned MCP SDK OAuth-client path and Tailwind/PostCSS build dependencies. The app uses no OAuth/client credentials or user-supplied build patterns. A complete fix would require broader peer/major migrations; independent security review remains required before deployment. No audit check was weakened or hidden.
+
+Real ChatGPT-host rendering, a reviewer-accessible demo recording URL, independent manager security acceptance, deployment, production smoke tests and directory submission remain open. A local production-preview walkthrough was recorded with installed Chrome and the existing system FFmpeg as `dist/legalaimcp-review-demo.mp4`; it is not yet hosted at a reviewer-accessible URL. The production-preview run also returned the same contract picks, an honest free-only billing empty state and zero browser errors. Do not claim an installed or published ChatGPT app from local SDK/preview tests. No account connections, paid-service promotion, legal advice, client-document intake, writes, arbitrary remote fetches, database migrations or new recurring work were added.
+
+Create is implemented; local Verify has the evidence above. Distribute and ChatGPT-host Sense remain open. The progress dashboard reflects implementation evidence, while manager acceptance remains separate.

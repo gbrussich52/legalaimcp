@@ -55,3 +55,7 @@ Local Cursor IDE: copy those files to `~/.cursor/plugins/local/legalaimcp` and r
 
 Submit the public repo URL at [cursor.com/marketplace/publish](https://cursor.com/marketplace/publish).
 
+
+## ChatGPT workflow desk
+
+The free `/chatgpt` preview and inline MCP Apps widget use the existing hosted endpoint. `build_legal_ai_shortlist` adds sourced workflow comparisons, setup evidence, distinct review/check dates and safe trial steps alongside the four existing directory tools. No account, client-document intake or purchases. See [app/review notes](docs/chatgpt-app/README.md) and [verification](docs/chatgpt-app/VERIFICATION.md). Build a clean submission ZIP with `npm run chatgpt:package`; publication remains a separate review gate.
