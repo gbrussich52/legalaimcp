@@ -1,7 +1,18 @@
+import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import { getSoftwareConnection, SOFTWARE_CONNECTIONS } from './connections'
 
 describe('reviewed software connection evidence', () => {
+  it('keeps the new software record aligned with its evidence and without unearned badges', () => {
+    const record = JSON.parse(readFileSync(new URL('../scripts/catalog-imanage-work.json', import.meta.url), 'utf8'))
+    const evidence = getSoftwareConnection(record.listing.slug)
+    expect(evidence?.source).toBe(record.source_url)
+    expect(evidence?.reviewed).toBe(record.reviewed_at)
+    expect(record.listing.verified).toBe(false)
+    expect(record.listing.verified_at).toBeNull()
+    expect(record.listing.featured).toBe(false)
+    expect(record.listing.mcp_install_command).toBeNull()
+  })
   it('keeps aliases on the same reviewed source instead of conflicting setup paths', () => {
     expect(getSoftwareConnection('harvey-ai')).toBe(getSoftwareConnection('harvey-mcp'))
     expect(getSoftwareConnection('clio')).toBe(getSoftwareConnection('clio-matter-manager'))

@@ -46,7 +46,7 @@ export function SoftwareConnectionShortlist() {
       <p className="font-sans text-xs font-bold uppercase tracking-widest text-gold-text">Software connections</p>
       <h2 id="connections-heading" className="font-display text-2xl font-bold text-navy mt-2">Start with a documented setup path</h2>
       <p className="font-body text-sm text-charcoal/80 mt-3 max-w-3xl">Choose the software you use to see requirements, permissions and source documentation. These are reviewed setup references, not security audits or proof that your account is connected.</p>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mt-6">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-6">
         {SOFTWARE_CONNECTIONS.map(connection => (
           <Link key={connection.name} href={`/servers/${connection.slugs[0]}#connection-heading`} className="rounded-xl border border-slate-200 bg-white p-4 hover:border-navy/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-navy">
             <span className="block font-sans font-semibold text-navy">{connection.name} →</span>

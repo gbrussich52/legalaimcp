@@ -1,0 +1,9 @@
+{
+  "classification": "PUBLIC",
+  "reviewed_at": "2026-10-19",
+  "source_url": "https://supabase.com/docs/guides/ai-tools/mcp",
+  "slug": "supabase-legal-mcp",
+  "previous_install_command": "npx @anthropic-ai/create-mcp supabase-legal",
+  "corrected_install_command": null,
+  "reason": "The vendor documents remote HTTP/OAuth setup, not this legacy generated install command. Remove the unsupported command rather than invent a replacement that could grant account-wide access."
+}

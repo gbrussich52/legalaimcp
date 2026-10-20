@@ -15,6 +15,18 @@ export interface SoftwareConnection {
 
 export const SOFTWARE_CONNECTIONS: readonly SoftwareConnection[] = [
   {
+    slugs: ['imanage-work'],
+    name: 'iManage Work',
+    kind: 'official',
+    workflow: 'Find and work with governed document and email content through iManage connectors.',
+    requirements: 'An eligible iManage Work account. Team and Enterprise Claude organizations may require an administrator to enable the connector.',
+    permissions: 'The vendor documents read permissions by default. Available tools depend on administrator configuration; review the authorization screen before granting access.',
+    setup: 'In Claude connector settings, search for iManage Work, connect, and sign in with your iManage account. Custom connector URLs depend on the connector and any company subdomain; use the vendor instructions rather than guessing a tenant URL.',
+    source: 'https://docs.imanage.com/ai/mcpserver-user-help/en-US/Adding_MCP_connectors_for_Claude.html',
+    sourceLabel: 'iManage connector documentation',
+    reviewed: '2026-10-19',
+  },
+  {
     slugs: ['courtlistener-mcp'],
     name: 'CourtListener',
     kind: 'official',

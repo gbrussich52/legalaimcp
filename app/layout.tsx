@@ -81,8 +81,8 @@ export default function RootLayout({
               LegalAIMCP
             </Link>
 
-            {/* Right: Desktop nav (md+) */}
-            <nav className="hidden md:flex items-center gap-6">
+            {/* Right: Desktop nav (lg+) */}
+            <nav className="hidden lg:flex items-center gap-6">
               <Link
                 href="/servers"
                 className="font-sans text-sm text-charcoal hover:text-gold-text transition-colors"
@@ -124,8 +124,8 @@ export default function RootLayout({
               </Link>
             </nav>
 
-            {/* Right: Mobile nav (< md) */}
-            <nav className="flex md:hidden items-center gap-3">
+            {/* Right: Mobile/tablet nav (< lg) */}
+            <nav className="flex lg:hidden items-center gap-3">
               <Link
                 href="/servers"
                 className="font-sans text-sm text-charcoal hover:text-gold-text transition-colors"
