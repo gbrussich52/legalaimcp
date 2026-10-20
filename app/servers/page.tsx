@@ -9,6 +9,7 @@ import { ItemListJsonLd } from '../components/JsonLd'
 import { LISTING_CARD_COLUMNS, type ListingCardData } from '@/lib/types'
 import { CATEGORY_LABELS, PRICING_LABELS } from '@/lib/constants'
 import { sanitizeSearchQuery } from '@/lib/search'
+import { SoftwareConnectionShortlist } from '../components/SoftwareConnection'
 
 const PAGE_SIZE = 12
 
@@ -100,9 +101,11 @@ export default async function BrowsePage({
       <p className="text-sm text-charcoal/80 font-body mb-8">
         Not sure where to start?{' '}
         <Link href="/best/legal-mcp-servers" className="text-gold-text font-semibold hover:underline">
-          See our ranked picks: The Best Legal MCP Servers in 2026 →
+          Compare legal MCP servers and AI tools →
         </Link>
       </p>
+
+      {!q && !category && !pricing && currentPage === 1 && <SoftwareConnectionShortlist />}
 
       {/* Search + filter controls */}
       <div className="flex flex-col sm:flex-row gap-3 mb-8">

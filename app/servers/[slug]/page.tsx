@@ -10,6 +10,7 @@ import { LeadGenCTA } from '../../components/LeadGenCTA'
 import { FeatureListingCTA } from '../../components/FeatureListingCTA'
 import { CATEGORY_LABELS, PRICING_LABELS, SITE_URL } from '@/lib/constants'
 import { sanitizeLogoUrl } from '@/lib/logo-url'
+import { SoftwareConnectionDetails } from '../../components/SoftwareConnection'
 import {
   LISTING_CARD_COLUMNS,
   LISTING_DETAIL_COLUMNS,
@@ -181,6 +182,8 @@ export default async function ListingDetailPage({
           {listing.description}
         </p>
       </section>
+
+      <SoftwareConnectionDetails slug={listing.slug} />
 
       {/* Setup guide, when we have written one for this listing */}
       {SETUP_GUIDES[listing.slug] && (

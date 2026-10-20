@@ -39,3 +39,7 @@ Changed the homepage, existing legal-MCP comparison page, and owned-server setup
 ### 2026-10-17 — Preserve social images with page-level Open Graph metadata
 
 Production read-back found that page-specific Open Graph objects on the MCP setup and comparison pages omitted the root file-based social image. Added the existing absolute image URL explicitly to both pages; no image redesign or new asset. Lesson: inspect metadata on every changed public URL, because homepage image inheritance does not prove nested-page image coverage.
+
+## 2026-10-19 — Document the software connection, not just its URL
+
+Added source-backed connection panels for CourtListener, Harvey, Ironclad and community Clio software, covering six existing listing pages, plus a Browse shortlist. Updated the existing Harvey guide to the vendor’s current connector-directory flow. Other profiles explicitly state when MCP setup documentation has not been reviewed. Previously a URL-resolution badge and optional command were the only connection guidance. The new panels distinguish official/publisher documentation from community implementations, explain prerequisites and write permissions, and date the documentation review separately from link checks. No customer accounts connected, no database changes, and no claim of end-to-end integration testing. Reuses existing profiles and vendor instructions instead of building a legal-data connector.
