@@ -7,19 +7,9 @@ import { BreadcrumbJsonLd, FAQJsonLd } from '../../components/JsonLd'
 import { SITE_URL } from '@/lib/constants'
 
 /**
- * Setup guide for Harvey MCP. Same live-data contract as the CourtListener
- * guide: name/tagline/pricing/creator come from the Supabase listing row
- * (slug: harvey-mcp) rather than being restated here, so the page cannot
- * drift from the directory.
- *
- * The load-bearing fact on this page is a negative one, and it is deliberate:
- * Harvey publishes no MCP endpoint URL and no install command
- * (developers.harvey.ai/guides/harvey_mcp, checked 2026-08-10). Access is
- * OAuth over Streamable HTTP against a tenant your Harvey admin has to enroll.
- * Search traffic for "harvey mcp" is people hunting for a URL to paste; the
- * useful answer is that there isn't a public one and why. Do not add a
- * fabricated endpoint or `claude mcp add` line here if the listing row is
- * still null — render the enrollment path instead.
+ * Listing identity/pricing come from the published directory row. Setup follows
+ * Harvey's documented Claude connector-directory flow (reviewed 2026-10-19).
+ * Never invent an endpoint or install command when the row has none.
  */
 
 const SLUG = 'harvey-mcp'
@@ -48,7 +38,7 @@ async function getListing(): Promise<GuideListing | null> {
 const PAGE_TITLE = 'How to Connect Claude to Harvey AI via MCP (Setup Guide)'
 /** Kept under ~160 chars so Google does not truncate it in results. */
 const PAGE_DESCRIPTION =
-  'Harvey MCP has no public endpoint URL — access is OAuth through admin enrollment. The setup path, the five tools it exposes, and what to check when it fails.'
+  'Connect Claude to Harvey through its connector settings. Check account access, OAuth requirements, available tools and vendor setup documentation.'
 
 export const metadata: Metadata = {
   title: PAGE_TITLE,
@@ -57,7 +47,7 @@ export const metadata: Metadata = {
   openGraph: { title: PAGE_TITLE, description: PAGE_DESCRIPTION, type: 'article' },
 }
 
-/** Tool names as published in Harvey's developer docs, checked 2026-08-10. */
+/** Tool names as published in Harvey's developer docs, checked 2026-10-19. */
 const TOOLS: { name: string; what: string }[] = [
   {
     name: 'ask_harvey',
@@ -81,18 +71,11 @@ const TOOLS: { name: string; what: string }[] = [
   },
 ]
 
-/**
- * FAQPage content — each answer restates a fact already stated in the body
- * copy above (the "no public endpoint" section, prereqs, tool list,
- * troubleshooting), never a new claim, so the schema text and the visible
- * text never drift apart. The first Q&A is the load-bearing negative fact
- * this whole guide exists to answer: Harvey does not publish an MCP
- * endpoint URL.
- */
+/** Visible FAQs and schema share the current setup/account guidance. */
 const FAQS = [
   {
-    q: 'Does Harvey publish a public MCP endpoint URL?',
-    a: "No. Unlike CourtListener, Harvey's developer documentation specifies the transport and authentication method but does not publish a connection URL, and there is no claude mcp add one-liner for it. Access is granted per tenant, not published — your Harvey admin or representative provides the actual endpoint after enrollment.",
+    q: 'How do I connect Claude to Harvey MCP?',
+    a: 'Open Claude connector settings, find Harvey, connect and sign in with your Harvey account. Enable the connector for your conversation. Check with your Harvey administrator if MCP access is not enabled.',
   },
   {
     q: 'What authentication does Harvey MCP use?',
@@ -173,25 +156,17 @@ export default async function ConnectHarveyGuidePage() {
           {/* The thing people are actually searching for */}
           <section className="rounded-lg border border-gold/40 bg-gold/5 p-6">
             <h2 className="font-display text-2xl font-bold text-navy mb-3">
-              First: there is no public endpoint URL
+              Start with the Harvey connector in Claude
             </h2>
             <p className="font-body text-charcoal/80 leading-relaxed">
-              Harvey MCP is not a paste-a-URL server the way{' '}
-              <Link href="/guides/connect-claude-to-courtlistener" className="text-gold-text font-semibold hover:underline">
-                CourtListener
-              </Link>{' '}
-              is. Harvey&apos;s developer documentation specifies the transport and the
-              authentication method but does not publish a connection URL, and there is
-              no <code className="font-mono text-sm">claude mcp add</code> one-liner for it.
-              Harvey does not explain the omission, but it fits how the product is gated: access
-              is granted per tenant, not published.
+              Harvey&apos;s current instructions for Claude web and Desktop use the connector
+              directory: open connector settings, search for Harvey, connect and authenticate.
+              Enable it in your conversation. You do not need to guess an endpoint URL for this path.
             </p>
             <p className="font-body text-charcoal/80 leading-relaxed mt-3">
-              The connection is <strong className="text-navy">OAuth over Streamable HTTP</strong>,
-              scoped to your firm&apos;s Harvey tenant. Your client authenticates as{' '}
-              <em>you</em>, against your firm&apos;s account — so the setup path runs through
-              your Harvey admin or representative. There is no config file you can write on your
-              own that gets around that.
+              You still need an eligible Harvey account and MCP access. If the feature is
+              unavailable, ask your Harvey administrator or representative. Available tools
+              and research sources depend on your permissions.
             </p>
           </section>
 
@@ -208,8 +183,8 @@ export default async function ConnectHarveyGuidePage() {
               <li>
                 Feature enrollment on your tenant. Harvey&apos;s documentation is explicit that
                 you should check with your Harvey admin or representative to confirm you are
-                enrolled. We expect an unenrolled account to fail at sign-in rather than at
-                config time, though we have not tested that directly.
+                enrolled. The exact error and tool availability depend on the client and account; we have not
+                tested a customer tenant.
               </li>
               <li>
                 Role permissions per tool. Vault tools require the Vault permission on your
@@ -249,11 +224,9 @@ export default async function ConnectHarveyGuidePage() {
               </>
             ) : (
               <p className="font-body text-charcoal/75 leading-relaxed">
-                Harvey supplies the connection details with your enrollment rather than
-                publishing them. Use the endpoint your admin or representative gives you, set the
-                transport to HTTP, and let the client handle the OAuth handshake. We deliberately
-                do not print a URL here — a guessed endpoint fails silently on most clients, which
-                is worse than having none. Harvey&apos;s current documentation is at{' '}
+                For Claude web or Desktop, use the Harvey entry in connector settings. For other
+                supported clients, follow Harvey&apos;s client-specific setup instructions and let
+                the client complete OAuth. Harvey&apos;s current documentation is at{' '}
                 <a
                   href={docsUrl}
                   target="_blank"
