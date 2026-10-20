@@ -7,11 +7,13 @@
 # the copy on the site becomes false within a few weeks as `verified_at` ages —
 # so treat a silent failure here as a content bug, not just a cron blip.
 #
-# Two steps, deliberately in this order:
+# Three steps, deliberately in this order:
 #   1. verify   — probe every published listing, earn/lose the badge, pull
 #                 anything unreachable 3 runs in a row. Accuracy first.
 #   2. discover — sweep GitHub for new legal MCP servers into the /admin review
 #                 queue. Coverage second, and only ever as a proposal.
+#   3. information — vendor source changes, Registry proposals, production MCP
+#                    health and a persistent local improvement report. No model.
 #
 # Not fatal-on-error between steps: a GitHub rate limit should not stop the
 # link check from having run, and vice versa.
@@ -54,9 +56,14 @@ discover_status=0
 node scripts/curate.mjs discover || discover_status=$?
 if [ "$discover_status" -ne 0 ]; then echo "ERROR: discover failed with status $discover_status"; fi
 
+echo "--- information ---"
+information_status=0
+node scripts/weekly/information.mjs || information_status=$?
+if [ "$information_status" -ne 0 ]; then echo "ERROR: information collection incomplete; inspect scripts/weekly/logs/improve-queue.md"; fi
+
 echo "=== done $(date '+%Y-%m-%d %H:%M:%S') ==="
 
-node scripts/weekly/health.mjs "$LOG_DIR/weekly-health.json" "$verify_status" "$discover_status" || exit 2
+node scripts/weekly/health.mjs "$LOG_DIR/weekly-health.json" "$verify_status" "$discover_status" "$information_status" || exit 2
 
-if [ "$verify_status" -gt 1 ] || [ "$discover_status" -ne 0 ]; then exit 2; fi
+if [ "$verify_status" -gt 1 ] || [ "$discover_status" -ne 0 ] || [ "$information_status" -ne 0 ]; then exit 2; fi
 exit 0

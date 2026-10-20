@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest run",
+    "test": "vitest run && node --test scripts/weekly/*.test.mjs",
+    "information:check": "node scripts/weekly/information.mjs",
+    "information:validate": "node scripts/weekly/information.mjs validate",
     "curate:discover": "node scripts/curate.mjs discover",
     "curate:links": "node scripts/curate.mjs check-links",
     "postbuild": "node scripts/check-catalog-artifacts.mjs"
