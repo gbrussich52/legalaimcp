@@ -47,7 +47,7 @@
       "title": "Run tests, type checks, real catalog build and protocol smoke",
       "status": "done",
       "acceptance": "Run tests, type checks, real catalog build and protocol smoke",
-      "evidence": "docs/chatgpt-app/VERIFICATION.md: 257 Vitest + 24 Node tests; tsc; real-catalog build/gate; official SDK HTTP smoke"
+      "evidence": "docs/chatgpt-app/VERIFICATION.md: 261 Vitest + 24 Node tests; tsc; real-catalog build/gate; batch rejected before DB; fresh audit evidence"
     },
     {
       "id": "P3-02",
@@ -74,6 +74,16 @@
     },
     {
       "at": "2026-10-20T19:16:05.794439+00:00",
+      "done": 7,
+      "total": 8
+    },
+    {
+      "at": "2026-10-20T19:21:33.052690+00:00",
+      "done": 6,
+      "total": 8
+    },
+    {
+      "at": "2026-10-20T19:22:22.641874+00:00",
       "done": 7,
       "total": 8
     }

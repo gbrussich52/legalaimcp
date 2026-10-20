@@ -7,3 +7,5 @@ The endpoint now rejects untrusted browser origins and oversized POST bodies bef
 Compatible dependency updates also removed the existing critical proxy-address advisory and reduced the dependency audit from 19 to 10 findings. Remaining MCP SDK and build-tool advisories require independent security review; no major transport or styling migration was forced.
 
 The published deployment remains unchanged until review. See `docs/chatgpt-app/VERIFICATION.md` for executed checks and remaining release gates.
+
+Independent security review found that the pinned SDK accepted a small JSON-RPC batch and dispatched every member despite the byte cap. The request boundary now parses the bounded JSON once, requires a single object, rejects top-level arrays, and limits nesting to 12 levels and total object/array members to 256 before SDK traversal. Route tests prove that a 100-tool batch and excessive structures return HTTP 400 before any database access, while ordinary initialization remains compatible.
