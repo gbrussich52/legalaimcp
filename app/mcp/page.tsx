@@ -29,6 +29,10 @@ export const metadata: Metadata = {
 
 const TOOLS = [
   {
+    name: 'build_legal_ai_shortlist',
+    desc: 'A sourced software shortlist for a legal-team workflow, with dated setup evidence and a safe trial checklist. Includes an inline comparison widget in compatible hosts.',
+  },
+  {
     name: 'search_legal_ai_tools',
     desc: 'Search the directory by free text, practice area, and pricing model.',
   },
@@ -135,7 +139,7 @@ export default function McpPage() {
               is enabled. Do not send confidential client information in search queries.
             </p>
             <p className="font-body mt-3">
-              Prefer browsing? <Link href="/best/legal-mcp-servers" className="text-gold-text underline">Compare legal MCP servers and AI tools</Link>.
+              Try the free <Link href="/chatgpt" className="text-gold-text underline">workflow desk preview</Link>, or browse our <Link href="/best/legal-mcp-servers" className="text-gold-text underline">comparison of legal MCP servers and AI tools</Link>.
             </p>
           </div>
 
