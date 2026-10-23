@@ -8,11 +8,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        navy: '#0F172A',
-        'warm-white': '#FAFAF8',
-        'gold-display': '#B8860B',
-        'gold-text': '#7A5200',
-        charcoal: '#334155',
+        navy: 'rgb(var(--rgb-navy) / <alpha-value>)',
+        'warm-white': 'rgb(var(--rgb-warm-white) / <alpha-value>)',
+        'gold-display': 'rgb(var(--rgb-gold-display) / <alpha-value>)',
+        'gold-text': 'rgb(var(--rgb-gold-text) / <alpha-value>)',
+        'navy-deep': 'rgb(var(--rgb-navy-deep) / <alpha-value>)',
+        charcoal: 'rgb(var(--rgb-charcoal) / <alpha-value>)',
       },
       fontFamily: {
         display: ['var(--font-fraunces)', 'Georgia', 'serif'],

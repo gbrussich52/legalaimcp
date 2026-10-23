@@ -145,7 +145,7 @@ export default async function ConnectClioGuidePage() {
 
         {/* Header */}
         <div className="mb-10 max-w-3xl">
-          <p className="font-sans text-xs font-bold uppercase tracking-widest text-gold-text mb-3">
+          <p className="font-sans text-xs font-bold text-gold-text mb-3">
             Setup guide
           </p>
           <h1 className="font-display text-4xl font-bold text-navy leading-tight">

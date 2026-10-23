@@ -75,7 +75,7 @@ export default function McpPage() {
       <McpServerJsonLd />
       <section className="bg-navy text-white py-16 px-6">
         <div className="max-w-3xl mx-auto">
-          <p className="font-sans text-xs font-bold uppercase tracking-widest text-gold-text mb-3">
+          <p className="font-sans text-xs font-bold text-gold-text mb-3">
             For AI assistants
           </p>
           <h1 className="font-display text-4xl md:text-5xl font-bold leading-tight">

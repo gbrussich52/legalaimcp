@@ -101,7 +101,7 @@ export default async function BrowsePage({
       <p className="text-sm text-charcoal/80 font-body mb-8">
         Not sure where to start?{' '}
         <Link href="/best/legal-mcp-servers" className="text-gold-text font-semibold hover:underline">
-          Compare legal MCP servers and AI tools →
+          Compare legal MCP servers and AI tools
         </Link>
       </p>
 

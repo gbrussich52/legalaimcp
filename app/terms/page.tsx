@@ -12,7 +12,7 @@ export default function TermsPage() {
   return (
     <main className="bg-warm-white">
       <section className="max-w-3xl mx-auto px-6 py-20">
-        <p className="font-sans text-xs font-bold uppercase tracking-widest text-gold-text mb-3">
+        <p className="font-sans text-xs font-bold text-gold-text mb-3">
           Effective September 19, 2026
         </p>
         <h1 className="font-display text-4xl sm:text-5xl font-bold text-navy mb-6">Terms of Use</h1>

@@ -42,7 +42,7 @@ export function ChecklistOptin({ source = 'homepage_checklist', variant = 'hero'
           href="/checklist"
           className="btn-primary inline-block mt-6"
         >
-          Open my checklist →
+          Open my checklist
         </Link>
         <p className="text-xs text-charcoal/80 mt-4">
           You can read and print it immediately.
@@ -64,7 +64,7 @@ export function ChecklistOptin({ source = 'homepage_checklist', variant = 'hero'
           <Mail className="w-5 h-5 text-gold-text" strokeWidth={2} />
         </div>
         <div>
-          <p className="font-sans text-xs font-bold uppercase tracking-widest text-gold-text">
+          <p className="font-sans text-xs font-bold text-gold-text">
             Free Checklist
           </p>
           <h3 className="font-display text-2xl font-bold text-navy mt-1 leading-tight">
@@ -93,7 +93,7 @@ export function ChecklistOptin({ source = 'homepage_checklist', variant = 'hero'
           disabled={isPending}
           className="btn-primary disabled:opacity-50 whitespace-nowrap"
         >
-          {isPending ? 'Saving…' : 'Open my checklist →'}
+          {isPending ? 'Saving…' : 'Open my checklist'}
         </button>
       </form>
 
@@ -106,7 +106,7 @@ export function ChecklistOptin({ source = 'homepage_checklist', variant = 'hero'
       {/* Micro-reassurance — covers rule #14 objection preemption inline */}
       <p className="text-xs text-charcoal/80 mt-3 font-body">
         Submitting stores your email with LegalAIMCP. We never sell your email.{' '}
-        <Link href="/checklist" className="underline">Read without signing up →</Link>
+        <Link href="/checklist" className="underline">Read without signing up</Link>
       </p>
     </div>
   )

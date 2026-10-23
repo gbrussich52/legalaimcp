@@ -78,9 +78,9 @@ export default async function HomePage() {
   return (
     <main>
       {/* ── 1. Hero ── Keeps the existing redesign (HeroSearch + stats bar). */}
-      <section className="bg-gradient-to-b from-navy to-[#1E293B] text-white py-24 px-6 text-center">
+      <section className="bg-gradient-to-b from-navy to-navy-deep text-white py-24 px-6 text-center">
         <div className="max-w-4xl mx-auto">
-          <span className="inline-block bg-white/10 border border-white/20 text-white/80 text-xs font-sans font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6">
+          <span className="inline-block bg-white/10 border border-white/20 text-white/80 text-xs font-sans font-semibold px-4 py-1.5 rounded-full mb-6">
             Legal AI tools & workflow planning
           </span>
           <h1 className="font-display text-5xl sm:text-6xl font-bold leading-tight">
@@ -114,7 +114,7 @@ export default async function HomePage() {
               href="/servers"
               className="border border-white/30 text-white hover:bg-white/10 px-6 py-3 rounded-lg font-sans font-semibold transition-colors"
             >
-              Browse All Tools →
+              Browse All Tools
             </Link>
           </div>
 
@@ -140,7 +140,7 @@ export default async function HomePage() {
       {/* ── 3. How It Works ── */}
       <section className="bg-white py-16 px-6">
         <div className="max-w-5xl mx-auto">
-          <p className="font-sans text-xs font-bold uppercase tracking-widest text-gold-text text-center mb-2">
+          <p className="font-sans text-xs font-bold text-gold-text text-center mb-2">
             How it works
           </p>
           <h2 className="font-display text-3xl font-bold text-navy text-center">
@@ -181,11 +181,11 @@ export default async function HomePage() {
           </div>
           <div className="mt-12 border border-slate-200 rounded-2xl bg-slate-50 p-6 sm:p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
-              <p className="font-sans text-xs font-bold uppercase tracking-widest text-gold-text">Free document check</p>
+              <p className="font-sans text-xs font-bold text-gold-text">Free document check</p>
               <h3 className="font-display text-2xl font-bold text-navy mt-2">Check document metadata in your browser</h3>
               <p className="font-body text-charcoal/75 mt-2 max-w-2xl">See missing items, conflicting metadata, and duplicate entries in a fictional document set. Edit the checklist to try your own redacted example.</p>
             </div>
-            <Link href="/document-check" className="btn-primary shrink-0">Try the document check demo →</Link>
+            <Link href="/document-check" className="btn-primary shrink-0">Try the document check demo</Link>
           </div>
         </div>
       </section>
@@ -195,7 +195,7 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-end justify-between mb-2">
             <div>
-              <p className="font-sans text-xs font-bold uppercase tracking-widest text-gold-text mb-2">
+              <p className="font-sans text-xs font-bold text-gold-text mb-2">
                 Featured tools
               </p>
               <h2 className="font-display text-3xl font-bold text-navy">
@@ -206,7 +206,7 @@ export default async function HomePage() {
               href="/servers"
               className="font-sans text-sm font-semibold text-gold-text hover:underline hidden sm:block"
             >
-              View all →
+              View all
             </Link>
           </div>
 
@@ -224,7 +224,7 @@ export default async function HomePage() {
 
           <div className="mt-8 sm:hidden">
             <Link href="/servers" className="text-gold-text font-sans font-semibold text-sm hover:underline">
-              View all tools →
+              View all tools
             </Link>
           </div>
         </div>
@@ -276,7 +276,7 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <p className="font-sans text-xs font-bold uppercase tracking-widest text-gold-text mb-3">
+              <p className="font-sans text-xs font-bold text-gold-text mb-3">
                 The technology
               </p>
               <h2 className="font-display text-3xl font-bold text-navy">
@@ -296,7 +296,7 @@ export default async function HomePage() {
                 href="/blog/what-is-mcp-for-law-firms"
                 className="text-gold-text font-sans font-semibold inline-block mt-6 hover:underline"
               >
-                Read the full explainer →
+                Read the full explainer
               </Link>
             </div>
 
@@ -327,7 +327,7 @@ export default async function HomePage() {
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex items-end justify-between mb-8">
               <div>
-                <p className="font-sans text-xs font-bold uppercase tracking-widest text-gold-text mb-2">
+                <p className="font-sans text-xs font-bold text-gold-text mb-2">
                   From the blog
                 </p>
                 <h2 className="font-display text-3xl font-bold text-navy">
@@ -338,7 +338,7 @@ export default async function HomePage() {
                 href="/blog"
                 className="font-sans text-sm font-semibold text-gold-text hover:underline hidden sm:block"
               >
-                All articles →
+                All articles
               </Link>
             </div>
             <div className="grid md:grid-cols-3 gap-6">

@@ -74,7 +74,7 @@ export default async function BestLegalMcpServersPage() {
 
         {/* Header */}
         <div className="mb-10 max-w-3xl">
-          <p className="font-sans text-xs font-bold uppercase tracking-widest text-gold-text mb-3">
+          <p className="font-sans text-xs font-bold text-gold-text mb-3">
             Reviewed October 17, 2026
           </p>
           <h1 className="font-display text-4xl md:text-5xl font-bold text-navy leading-tight">
@@ -162,7 +162,7 @@ export default async function BestLegalMcpServersPage() {
         {/* Category cross-links */}
         {categoryLinks.length > 0 && (
           <section className="mt-14 border-t border-slate-200 pt-10">
-            <h2 className="font-sans text-xs font-bold uppercase tracking-widest text-gold-text mb-4">
+            <h2 className="font-sans text-xs font-bold text-gold-text mb-4">
               Best by practice area
             </h2>
             <div className="flex flex-wrap gap-2">
