@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function AssessmentPage() {
   return <main className="max-w-4xl mx-auto px-6 py-16">
-    <p className="text-xs font-semibold uppercase tracking-widest text-gold-text">For solo and small law firms · Delivered by NYClaw</p>
+    <p className="text-xs font-semibold text-gold-text">For solo and small law firms · Delivered by NYClaw</p>
     <h1 className="font-display text-4xl sm:text-5xl font-bold text-navy mt-4">One workflow. A clear plan before you buy more software.</h1>
     <p className="text-xl text-charcoal/75 leading-relaxed mt-6">You have tools. You still spend time chasing documents, following up on inquiries, or preparing invoices. A workflow assessment identifies what you can improve with your current setup and what would need an integration.</p>
     <div className="mt-8"><AssessmentBooking /><p className="text-sm text-charcoal/75 mt-3">The initial fit call is free. Assessment scope and a fixed fee are agreed in writing before paid work begins. No payment is taken here.</p></div>
@@ -37,9 +37,9 @@ export default function AssessmentPage() {
       <p>Bring the names of your software, a description of one repetitive task, and a rough monthly volume. Use fictional examples. Do not send client records or account credentials.</p>
       <p>Any paid pilot or implementation starts with a written scope and fee. The fit call is free, and no paid work begins from this page.</p>
       <p>NYClaw builds and funds LegalAIMCP and may quote the implementation. The assessment is not an independent legal or security audit. Vendor subscriptions and support arrangements are agreed separately.</p>
-      <p><a className="text-gold-text font-semibold underline" href="https://nyclaw.io/law-firm-workflows?utm_source=legalaimcp&utm_medium=referral&utm_campaign=law_firm_workflows">See NYClaw’s law-firm workflows and a fictional expected output →</a></p>
-      <p><Link className="text-gold-text font-semibold underline" href="/document-check">Try the document check demo →</Link></p>
-      <p><Link className="text-gold-text font-semibold underline" href="/workflow-plan">Build a free workflow plan first →</Link></p>
+      <p><a className="text-gold-text font-semibold underline" href="https://nyclaw.io/law-firm-workflows?utm_source=legalaimcp&utm_medium=referral&utm_campaign=law_firm_workflows">See NYClaw’s law-firm workflows and a fictional expected output</a></p>
+      <p><Link className="text-gold-text font-semibold underline" href="/document-check">Try the document check demo</Link></p>
+      <p><Link className="text-gold-text font-semibold underline" href="/workflow-plan">Build a free workflow plan first</Link></p>
     </section>
   </main>
 }

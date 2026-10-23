@@ -270,7 +270,7 @@ export default function DocumentCheckForm() {
       <form onSubmit={check} autoComplete="off" className="space-y-8">
         <div className="flex flex-wrap items-center gap-3 rounded-xl border border-slate-200 bg-white p-4">
           <span className="w-full text-sm font-semibold text-navy sm:w-auto">Start with a fictional set:</span>
-          <button type="submit" className="btn-primary">Check this set →</button>
+          <button type="submit" className="btn-primary">Check this set</button>
           <button type="button" className={buttonClass} onClick={() => loadExample(DOCUMENT_CHECK_EXAMPLE)}>Load deficient example</button>
           <button type="button" className={buttonClass} onClick={() => loadExample(DOCUMENT_CHECK_CLEAN_EXAMPLE)}>Load clean example</button>
           <button type="button" className={buttonClass} onClick={clear}>Clear all</button>
@@ -293,7 +293,7 @@ export default function DocumentCheckForm() {
         </fieldset>
 
         <div className="flex flex-wrap items-center gap-3 border-t border-slate-200 pt-6">
-          <button type="submit" className="btn-primary">Check documents →</button>
+          <button type="submit" className="btn-primary">Check documents</button>
         </div>
         {validationError && <p role="alert" className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm leading-relaxed text-red-900">{validationError}</p>}
       </form>
@@ -324,7 +324,7 @@ function ResultPanel({ result, received, resultRef }: { result: DocumentCheckRes
   }
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 break-words" aria-labelledby="check-result-heading">
-      <p className="text-xs font-semibold uppercase tracking-widest text-gold-text">Local check result</p>
+      <p className="text-xs font-semibold text-gold-text">Local check result</p>
       <h2 id="check-result-heading" ref={resultRef} tabIndex={-1} className="mt-3 font-display text-3xl font-bold text-navy focus:outline-none">{hasIssues ? 'Review the document set' : 'No issues found in this set'}</h2>
       <p className="mt-3 text-sm leading-relaxed text-charcoal/75">{hasIssues ? 'The checklist has items that need a person to confirm, correct, or request.' : 'Every requested document has one matching received document with the metadata supplied.'}</p>
       <dl className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-5">
@@ -335,7 +335,7 @@ function ResultPanel({ result, received, resultRef }: { result: DocumentCheckRes
       </ul>
       {result.unassignedIds.length > 0 && <p className="mt-5 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm leading-relaxed text-amber-950"><strong>Unassigned received documents:</strong> {result.unassignedIds.map(receivedName).join(', ')}. Choose a requested document above if the relationship can be confirmed.</p>}
       <div className="mt-6 border-t border-slate-200 pt-5"><h3 className="font-semibold text-navy">Scope of this check</h3><ul className="mt-2 space-y-1 text-xs leading-relaxed text-charcoal/65">{result.limitations.map((limitation) => <li key={limitation}>• {limitation}</li>)}</ul></div>
-      <div className="mt-7 rounded-xl bg-navy p-5 text-white"><h3 className="font-display text-xl font-semibold">Need to decide what to fix first?</h3><p className="mt-2 text-sm leading-relaxed text-slate-300">Bring a fictional example to a workflow assessment and scope the review steps, software, and human handoffs.</p><Link href="/workflow-assessment" className="mt-4 inline-block rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-navy hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-white/60">See the workflow assessment →</Link></div>
+      <div className="mt-7 rounded-xl bg-navy p-5 text-white"><h3 className="font-display text-xl font-semibold">Need to decide what to fix first?</h3><p className="mt-2 text-sm leading-relaxed text-slate-300">Bring a fictional example to a workflow assessment and scope the review steps, software, and human handoffs.</p><Link href="/workflow-assessment" className="mt-4 inline-block rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-navy hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-white/60">See the workflow assessment</Link></div>
       <p className="mt-5 text-xs leading-relaxed text-charcoal/75">This browser-only demo checks the metadata you enter. It does not determine legal sufficiency, completeness of a matter, or compliance.</p>
     </section>
   )

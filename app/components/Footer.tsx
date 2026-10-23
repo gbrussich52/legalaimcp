@@ -37,7 +37,7 @@ export function Footer() {
 
           {/* Col 2: Categories */}
           <div>
-            <p className="font-sans font-semibold text-sm uppercase tracking-wider text-slate-300 mb-3">
+            <p className="font-sans font-semibold text-sm text-slate-300 mb-3">
               Categories
             </p>
             <ul className="space-y-2">
@@ -56,7 +56,7 @@ export function Footer() {
 
           {/* Col 3: Resources */}
           <div>
-            <p className="font-sans font-semibold text-sm uppercase tracking-wider text-slate-300 mb-3">
+            <p className="font-sans font-semibold text-sm text-slate-300 mb-3">
               Resources
             </p>
             <ul className="space-y-2">
@@ -75,7 +75,7 @@ export function Footer() {
 
           {/* Col 4: Built by */}
           <div>
-            <p className="font-sans font-semibold text-sm uppercase tracking-wider text-slate-300 mb-3">
+            <p className="font-sans font-semibold text-sm text-slate-300 mb-3">
               Built by
             </p>
             <Link
@@ -93,7 +93,7 @@ export function Footer() {
               href={NYCLAW_CONTACT}
               className="text-slate-400 text-sm font-body hover:text-white transition-colors mt-2 inline-block"
             >
-              Get a consultation →
+              Get a consultation
             </Link>
           </div>
         </div>

@@ -118,7 +118,7 @@ export default async function BestCategoryPage({
 
         {/* Header */}
         <div className="mb-10 max-w-3xl">
-          <p className="font-sans text-xs font-bold uppercase tracking-widest text-gold-text mb-3">
+          <p className="font-sans text-xs font-bold text-gold-text mb-3">
             Ranked
           </p>
           <h1 className="font-display text-4xl font-bold text-navy leading-tight">{pageTitle}</h1>
@@ -155,7 +155,7 @@ export default async function BestCategoryPage({
 
         {/* Cross-link back to the flagship roundup and every other category */}
         <section className="mt-14 border-t border-slate-200 pt-10">
-          <h2 className="font-sans text-xs font-bold uppercase tracking-widest text-gold-text mb-4">
+          <h2 className="font-sans text-xs font-bold text-gold-text mb-4">
             More rankings
           </h2>
           <div className="flex flex-wrap gap-2">

@@ -60,7 +60,7 @@ export function RoundupItem({
             href={`/servers/${listing.slug}`}
             className="inline-block mt-4 text-sm font-sans font-semibold text-gold-text hover:underline"
           >
-            View full listing →
+            View full listing
           </Link>
         </div>
       </div>

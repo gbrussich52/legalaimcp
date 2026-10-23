@@ -47,7 +47,7 @@ export function WorkflowPlanner() {
             {SUPPORT_LEVELS.map((item) => <option key={item}>{item}</option>)}
           </select>
         </label>
-        <button className="btn-primary w-full" type="submit">Build my workflow plan →</button>
+        <button className="btn-primary w-full" type="submit">Build my workflow plan</button>
         <p className="text-xs text-charcoal/75">Your selections and estimates stay in this page. No client or firm details are collected here.</p>
       </form>
 
@@ -65,7 +65,7 @@ export function WorkflowPlanner() {
       ) : (
         <section className="rounded-2xl bg-white border border-slate-200 p-6 sm:p-8 space-y-7" aria-label="Your workflow plan">
           <div>
-            <p className="text-xs uppercase tracking-widest font-semibold text-gold-text">Your pilot brief · {plan.system}</p>
+            <p className="text-xs font-semibold text-gold-text">Your pilot brief · {plan.system}</p>
             <h2 ref={resultRef} tabIndex={-1} className="font-display text-3xl font-bold text-navy mt-3 focus:outline-none">{selected.outcome}</h2>
             <p className="mt-3 text-sm text-charcoal/75">{selected.label} · {plan.support}. Prepared in your browser; not reviewed by our team.</p>
           </div>
@@ -90,7 +90,7 @@ export function WorkflowPlanner() {
             <h3 className="font-display text-xl font-semibold text-navy">{plan.support === 'I need setup help' ? 'Want help turning this into a working process?' : 'Ready to check the available tools?'}</h3>
             <p className="mt-2 text-sm text-charcoal/75">{plan.support === 'I need setup help' ? 'A NYClaw workflow assessment checks feasibility and gives you a written scope before any implementation.' : 'Use the directory to explore options, then confirm features and permissions with each vendor.'}</p>
             <div className="flex flex-wrap gap-4 mt-5 items-center">
-              <Link href="/workflow-assessment" className="btn-primary">See the assessment →</Link>
+              <Link href="/workflow-assessment" className="btn-primary">See the assessment</Link>
               <Link href={`/categories/${selected.category}`} className="text-gold-text font-semibold underline">Explore relevant tools</Link>
               <button type="button" className="text-sm font-semibold underline py-3" onClick={() => window.print()}>Print / save PDF</button>
             </div>

@@ -4,7 +4,7 @@ export function LeadGenCTA() {
   return (
     <div className="bg-navy rounded-2xl p-10 text-white">
       <div className="max-w-3xl">
-        <p className="font-sans text-xs font-bold uppercase tracking-widest text-slate-400 mb-3">
+        <p className="font-sans text-xs font-bold text-slate-400 mb-3">
           A practical next step
         </p>
         <h3 className="font-display text-3xl font-bold leading-snug">
@@ -36,13 +36,13 @@ export function LeadGenCTA() {
             href="/workflow-assessment"
             className="bg-white text-navy font-sans font-semibold px-6 py-3 rounded-lg hover:bg-slate-100 transition-colors inline-block"
           >
-            See the workflow assessment →
+            See the workflow assessment
           </Link>
           <Link
             href="/workflow-plan"
             className="font-sans font-semibold text-slate-400 hover:text-white transition-colors self-center text-sm"
           >
-            Build a free plan first →
+            Build a free plan first
           </Link>
         </div>
 

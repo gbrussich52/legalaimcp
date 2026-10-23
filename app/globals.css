@@ -1,11 +1,54 @@
+/* Hallmark · built: the project · redesign: polish · theme: brand (navy, warm white, gold) · genre: modern-minimal · 2026-10-23 */
+/* Hallmark · critique: system hygiene only (tokens, overflow clip, labels, states); layout and copy untouched */
+:root {
+  --color-navy: #0F172A;
+  --color-navy-deep: #1E293B;
+  --color-warm-white: #FAFAF8;
+  --color-gold-display: #B8860B;
+  --color-gold-text: #7A5200;
+  --color-charcoal: #334155;
+  --color-ink: #0F172A;
+  /* channel forms of the same colours, so Tailwind opacity modifiers keep working */
+  --rgb-navy: 15 23 42;
+  --rgb-navy-deep: 30 41 59;
+  --rgb-warm-white: 250 250 248;
+  --rgb-gold-display: 184 134 11;
+  --rgb-gold-text: 122 82 0;
+  --rgb-charcoal: 51 65 85;
+}
+
+html,
+body {
+  overflow-x: clip;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :where(a, button, summary, input, select, textarea, [tabindex]):focus-visible {
+    outline: 2px solid var(--color-gold-text);
+    outline-offset: 2px;
+  }
+  button:active,
+  a:active {
+    opacity: 0.88;
+  }
+  [class*='font-display'] {
+    overflow-wrap: break-word;
+    min-width: 0;
+  }
+  .tabular,
+  table {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
 @layer components {
   /* Primary CTA button — navy background */
   .btn-primary {
-    @apply bg-navy text-white font-sans font-semibold px-6 py-3 rounded-lg transition-colors hover:bg-slate-800;
+    @apply bg-navy text-white font-sans font-semibold px-6 py-3 rounded-lg transition-colors hover:bg-slate-800 active:bg-slate-900;
   }
 
   /* Base card — clean white */
@@ -26,7 +69,7 @@
 
 @media print {
   body > header, body > footer { display: none !important; }
-  body { background: white; color: black; }
+  body { background: var(--color-warm-white); color: var(--color-ink); }
   main { max-width: none !important; padding: 0 !important; }
   section { break-inside: auto; }
 }

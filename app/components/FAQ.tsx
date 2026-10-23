@@ -101,7 +101,7 @@ export function FAQ() {
       <FAQJsonLd faqs={FAQ_SCHEMA} />
       <div className="max-w-3xl mx-auto px-6">
         <div className="text-center mb-10">
-          <p className="font-sans text-xs font-bold uppercase tracking-widest text-gold-text mb-2">
+          <p className="font-sans text-xs font-bold text-gold-text mb-2">
             Common Questions
           </p>
           <h2 className="font-display text-3xl font-bold text-navy">
@@ -121,7 +121,7 @@ export function FAQ() {
                   <span>{q}</span>
                   <span
                     aria-hidden="true"
-                    className="text-2xl text-gold-text group-open:rotate-45 transition-transform leading-none"
+                    className="text-2xl text-gold-text group-open:rotate-45 motion-safe:transition-transform leading-none"
                   >
                     +
                   </span>

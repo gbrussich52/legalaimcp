@@ -50,7 +50,7 @@ export default function ChecklistPage() {
       <article className="max-w-3xl mx-auto">
         {/* Eyebrow + title — make the page feel deliverable, not webpage-y */}
         <header className="mb-10 print:mb-6">
-          <p className="font-sans text-xs font-bold uppercase tracking-widest text-gold-text mb-2">
+          <p className="font-sans text-xs font-bold text-gold-text mb-2">
             AI Tool Selection Checklist · v1
           </p>
           <h1 className="font-display text-4xl sm:text-5xl font-bold text-navy leading-tight">
@@ -100,7 +100,7 @@ export default function ChecklistPage() {
         {/* Post-conversion momentum per CRO rule #17 — the visitor JUST opted
             in. They're at peak intent. Don't waste it with a dead-end. */}
         <aside className="mt-14 print:hidden rounded-2xl bg-navy text-white p-8">
-          <p className="font-sans text-xs font-bold uppercase tracking-widest text-gold-display">
+          <p className="font-sans text-xs font-bold text-gold-display">
             Next step
           </p>
           <h3 className="font-display text-2xl font-bold mt-2 leading-tight">
@@ -116,7 +116,7 @@ export default function ChecklistPage() {
             rel="noopener noreferrer"
             className="btn-primary inline-block mt-6 bg-gold-display text-navy hover:bg-gold-display/90"
           >
-            Book my free 30-minute review →
+            Book my free 30-minute review
           </a>
         </aside>
 

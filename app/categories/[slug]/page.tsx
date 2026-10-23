@@ -211,7 +211,7 @@ export default async function CategoryPage({
                       <span>{q}</span>
                       <span
                         aria-hidden="true"
-                        className="text-2xl text-gold-text group-open:rotate-45 transition-transform leading-none"
+                        className="text-2xl text-gold-text group-open:rotate-45 motion-safe:transition-transform leading-none"
                       >
                         +
                       </span>
@@ -228,7 +228,7 @@ export default async function CategoryPage({
             mesh instead of seven dead ends. */}
         {siblings.length > 0 && (
           <section className="mt-16 border-t border-slate-200 pt-10">
-            <h2 className="font-sans text-xs font-bold uppercase tracking-widest text-gold-text mb-4">
+            <h2 className="font-sans text-xs font-bold text-gold-text mb-4">
               Other practice areas
             </h2>
             <div className="flex flex-wrap gap-2">

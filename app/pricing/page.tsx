@@ -15,7 +15,7 @@ const PRICE_DISPLAY = `$${(FEATURED_PRICE_CENTS / 100).toFixed(0)}`
 export default function PricingPage() {
   return (
     <main className="max-w-3xl mx-auto px-4 py-16">
-      <p className="font-sans text-xs font-bold uppercase tracking-widest text-gold-text mb-2">
+      <p className="font-sans text-xs font-bold text-gold-text mb-2">
         Featured placements
       </p>
       <h1 className="font-display text-4xl font-bold text-navy mb-4">
@@ -29,7 +29,7 @@ export default function PricingPage() {
       </p>
 
       <div className="rounded-2xl border border-gold/40 bg-gold/5 p-8 mb-10">
-        <p className="font-sans text-sm font-semibold text-gold-text uppercase tracking-wide mb-2">
+        <p className="font-sans text-sm font-semibold text-gold-text mb-2">
           30-day Featured bump
         </p>
         <p className="font-display text-5xl font-bold text-navy mb-2">
@@ -49,7 +49,7 @@ export default function PricingPage() {
           <li>✓ No affiliate links required; one Checkout payment</li>
         </ul>
         <Link href="/servers" className="btn-primary inline-flex">
-          Pick a published listing →
+          Pick a published listing
         </Link>
       </div>
 

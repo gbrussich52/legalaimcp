@@ -44,7 +44,7 @@ export default function AboutPage() {
             costs, and how it connects to your existing systems.
           </p>
 
-          <h2 id="verified" className="font-display text-2xl font-bold text-navy scroll-mt-24">
+          <h2 id="verified" className="font-display text-2xl font-bold text-navy scroll-mt-24 break-words min-w-0">
             What &ldquo;Verified&rdquo; means here
           </h2>
 
@@ -99,13 +99,13 @@ export default function AboutPage() {
               rel="noopener noreferrer"
               className="btn-primary"
             >
-              Book a Free Consultation →
+              Book a Free Consultation
             </a>
             <Link
               href="/servers"
               className="font-sans font-semibold text-gold-text hover:underline self-center"
             >
-              Browse Available Tools →
+              Browse Available Tools
             </Link>
           </div>
         </div>

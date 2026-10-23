@@ -18,7 +18,7 @@ export default async function FeaturedSuccessPage({
 
   return (
     <main className="max-w-xl mx-auto px-4 py-20 text-center">
-      <p className="font-sans text-xs font-bold uppercase tracking-widest text-gold-text mb-2">
+      <p className="font-sans text-xs font-bold text-gold-text mb-2">
         Payment received
       </p>
       <h1 className="font-display text-3xl font-bold text-navy mb-4">

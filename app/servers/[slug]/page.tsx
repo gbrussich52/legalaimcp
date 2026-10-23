@@ -193,7 +193,7 @@ export default async function ListingDetailPage({
             className="flex items-center justify-between gap-4 rounded-lg border border-gold/40 bg-gold/5 px-5 py-4 transition-colors hover:border-gold"
           >
             <span>
-              <span className="block font-sans text-xs font-bold uppercase tracking-widest text-gold-text">
+              <span className="block font-sans text-xs font-bold text-gold-text">
                 Setup guide
               </span>
               <span className="block font-body text-charcoal mt-1">
@@ -214,7 +214,7 @@ export default async function ListingDetailPage({
           <div className="mt-4 space-y-4">
             {listing.mcp_repo_url && (
               <div>
-                <p className="text-xs text-charcoal/80 font-sans mb-1 uppercase tracking-wide">
+                <p className="text-xs text-charcoal/80 font-sans mb-1">
                   MCP Repository
                 </p>
                 <a
@@ -229,7 +229,7 @@ export default async function ListingDetailPage({
             )}
             {listing.mcp_install_command && (
               <div>
-                <p className="text-xs text-charcoal/80 font-sans mb-1 uppercase tracking-wide">
+                <p className="text-xs text-charcoal/80 font-sans mb-1">
                   Install Command
                 </p>
                 <code className="block bg-slate-100 rounded px-3 py-2 font-mono text-sm text-charcoal break-all">
