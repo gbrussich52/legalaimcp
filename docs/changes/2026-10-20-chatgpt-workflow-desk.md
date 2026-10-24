@@ -9,3 +9,10 @@ Compatible dependency updates also removed the existing critical proxy-address a
 The published deployment remains unchanged until review. See `docs/chatgpt-app/VERIFICATION.md` for executed checks and remaining release gates.
 
 Independent security review found that the pinned SDK accepted a small JSON-RPC batch and dispatched every member despite the byte cap. The request boundary now parses the bounded JSON once, requires a single object, rejects top-level arrays, and limits nesting to 12 levels and total object/array members to 256 before SDK traversal. Route tests prove that a 100-tool batch and excessive structures return HTTP 400 before any database access, while ordinary initialization remains compatible.
+
+
+## October23 — public publisher domain verification
+
+Add OpenAI Platform’s public origin-root ownership challenge for this existing MCP hostname. The saved public submission draft cannot complete its connection/domain checks without this file. It is an intentionally public verification value, not an access credential. No user data, authentication, billing or application behavior changes. Net growth is required by the publisher verification protocol; no new loop or service.
+
+The app privacy notice previously described only the shortlist’s fixed filters. It now also discloses the existing public catalog tools’ search words, category/pricing filters and listing identifiers, with the same no-client-data boundary. Data use/storage claims remain unchanged.
