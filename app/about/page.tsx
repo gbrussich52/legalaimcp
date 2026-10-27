@@ -45,7 +45,7 @@ export default function AboutPage() {
           </p>
 
           <h2 id="verified" className="font-display text-2xl font-bold text-navy scroll-mt-24">
-            What &ldquo;Verified&rdquo; means here
+            What &ldquo;Links checked&rdquo; means here
           </h2>
 
           <p>
@@ -54,7 +54,10 @@ export default function AboutPage() {
               on the date shown, an automated check confirmed every link on
               that listing resolved
             </strong>
-            . Nothing more. The check runs on a schedule, not once at launch,
+            . It does not verify product identity, advertised features or MCP support.
+            New publication and republishing also require a separate, dated primary-source review
+            of the exact listing claims. Older listings remain subject to that review; the link badge does not imply they passed it.
+            The link check runs on a schedule, not once at launch,
             and a listing that stops responding loses the badge on the next run
             and is removed entirely after three consecutive failures.
           </p>

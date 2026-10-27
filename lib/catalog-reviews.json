@@ -1,0 +1,34 @@
+{
+  "reviews": [
+    {
+      "slug": "imanage-work",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex — primary documentation review for catalog correction",
+      "listing_sha256": "d6cce281a04b971d4256301c3401dc4c0d035c19d43f388f4c75139de9ca112d",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://docs.imanage.com/ai/mcpserver-user-help/en-US/Adding_MCP_connectors_for_Claude.html",
+          "kind": "vendor",
+          "sha256": "0363d4de47faebef719c3ffc66aed1835887e1d98eac0e60055c15e7fb75f6b8",
+          "quote": "Currently, only read permissions are available and selected by default."
+        },
+        {
+          "url": "https://imanage.com/imanage-products/document-email-management/work/",
+          "kind": "vendor",
+          "sha256": "5f83d6b6e473cd2754550dcc4626058525da85dce5ad3516f7299bfd7019b4ed",
+          "quote": "Yes, iManage includes the industry-leading email management solution"
+        }
+      ]
+    }
+  ],
+  "blocked_domains": [
+    "deadlinewatch.com"
+  ],
+  "blocked_slugs": [
+    "deadlinewatch-mcp"
+  ]
+}
