@@ -1,0 +1,13 @@
+# Source-backed catalog correction
+
+The previous catalog mixed real products with unestablished names, unrelated domains, generic tools described as legal products, obsolete prices and unsupported capabilities. Link uptime had been mistaken for content evidence. All 59 records now have an explicit disposition: 42 source-backed published products, eight pending and nine previously rejected records retained unpublished. Unsupported private descriptions and outbound links were cleared from withheld records; originals are preserved in a private before-snapshot for recovery.
+
+Each published record has a named/date-bound review, exact approved public copy, primary-source URLs, supporting excerpts and source fingerprints. Pages expose source links and the review date; MCP outputs expose the same evidence without claiming customer-account, security or legal-output testing. Unknown firm-size suitability stays unknown. All untested installer commands were removed. Existing URL slugs remain stable while display names and maintainer attribution are corrected explicitly.
+
+Seven additional entries were withheld after the earlier DeadlineWatch correction: ClientIntake AI, ClientPortal AI, ConflictCheck AI, CourtListener Research MCP, LegalChat Receptionist, RedlineAI and Nerq AI Compliance Intelligence. Reasons include domain parking, unestablished product identity and contradictory current scope; withholding does not claim every product can never exist.
+
+Six articles and three setup guides were corrected. False MCP data-locality/security promises, invented prices, unsupported rankings and tool counts were removed. Corroborated launch dates were preserved. Guides, listing setup cards and MCP connection output now share one reviewed connection record. Every article has source references and a visible revision date.
+
+Bulk imports are protected by the canonical database migration and a tested atomic importer. Before-status and before-claims conflicts cause whole-batch rollback. Quarantine revokes approval. No IDs, payment history or customer data were deleted. The existing weekly verifier gains deterministic source-change checks; no new timer, model or paid API is introduced. The standing identity/relevance/claim rule applies across all estate projects.
+
+Verification includes full application checks, real disposable PostgreSQL trigger/grant/import tests, a rollback-only production probe, exact readback of all 59 corrected rows and independent live primary-source checks. Release receipts distinguish tested code, applied database changes, public deployment and installed/signed scheduled execution. See docs/catalog-review.md for the contract and trust limits.

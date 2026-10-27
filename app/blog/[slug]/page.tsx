@@ -23,6 +23,7 @@ export async function generateMetadata({
       description: post.description,
       type: 'article',
       publishedTime: post.date,
+      modifiedTime: post.updatedDate ?? post.date,
     },
   }
 }
@@ -75,6 +76,7 @@ export default async function BlogPostPage({
           </h1>
           <p className="font-body text-lg text-charcoal/75 mt-3">{post.description}</p>
           <p className="font-body text-sm text-charcoal/75 mt-4">By {post.author}</p>
+          {post.updatedDate && <p className="font-body text-sm text-charcoal/75 mt-2">Sources and wording reviewed <time dateTime={post.updatedDate}>{post.updatedDate}</time></p>}
         </div>
 
         {/* Article content — safe: sourced from our own lib/blog.ts, not user input */}

@@ -6,7 +6,7 @@ const row = { slug: 'ironclad', name: 'Ironclad', category: 'document_processing
 describe('MCP connection evidence', () => {
   it('returns documented permissions without claiming account compatibility or passing link checks', () => {
     const result = ToolItem.parse(toStructured(row))
-    expect(result.connection).toMatchObject({ type: 'official', customer_account_tested: false, documentation_reviewed_at: '2026-10-19' })
+    expect(result.connection).toMatchObject({ type: 'official', customer_account_tested: false, documentation_reviewed_at: '2026-10-27' })
     expect(result.connection?.permissions).toContain('create and update')
     expect(result.links_verified).toBe(false)
     expect(result.links_verified_at).toBeNull()

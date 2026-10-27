@@ -7,7 +7,7 @@ import { getAdminClient } from '@/lib/supabase-admin'
 import { isSameOriginRequest } from '@/lib/origin'
 import { CATEGORY_LABELS, PRICING_LABELS } from '@/lib/constants'
 import { z } from 'zod'
-import { assertCatalogReview } from '@/lib/catalog-review'
+import { assertCatalogReview, storeCatalogReview } from '@/lib/catalog-review'
 import { LISTING_ADMIN_COLUMNS } from '@/lib/types'
 
 /**
@@ -103,6 +103,7 @@ export async function updateListingStatus(id: string, status: 'published' | 'pen
     const { data: listing, error } = await db.from('listings').select(LISTING_ADMIN_COLUMNS).eq('id', id).single()
     if (error || !listing) throw new Error('Listing not found')
     await assertCatalogReview(listing)
+    await storeCatalogReview(db, listing)
   }
   const { error } = await db.from('listings').update({ status }).eq('id', id)
   if (error) throw new Error(`Failed to update status: ${error.message}`)
@@ -246,6 +247,7 @@ export async function approveSubmission(submissionId: string) {
     creator_url: v ? v.creator_url || null : safeHttpUrl(data.creator_url),
   }
   await assertCatalogReview(candidate)
+  await storeCatalogReview(db, candidate)
   const { error: insertErr } = await db.from('listings').insert(candidate)
   if (insertErr) throw new Error(`Failed to create listing: ${insertErr.message}`)
 

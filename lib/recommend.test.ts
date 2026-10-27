@@ -116,9 +116,9 @@ describe('pricingFitTiebreak', () => {
 })
 
 describe('pricingSupportNote', () => {
-  it('flags paid and contact tiers as often bundling dedicated support', () => {
-    expect(pricingSupportNote('paid')).toMatch(/dedicated support/)
-    expect(pricingSupportNote('contact')).toMatch(/dedicated support/)
+  it('asks for current vendor terms rather than promising support', () => {
+    expect(pricingSupportNote('paid')).toMatch(/Confirm current commercial terms/)
+    expect(pricingSupportNote('contact')).toMatch(/Confirm current commercial terms/)
   })
 
   it('returns null for free and freemium — nothing to weigh against cost', () => {

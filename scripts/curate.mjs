@@ -38,6 +38,7 @@ import path from 'node:path'
 import process from 'node:process'
 import { createClient } from '@supabase/supabase-js'
 import { withVerifyHealth } from './weekly/health.mjs'
+import { auditPublishedCatalog } from './import-reviewed-catalog.mjs'
 
 const run = promisify(execFile)
 const ROOT = path.resolve(import.meta.dirname, '..')
@@ -374,6 +375,9 @@ const uuid = (v) => {
 async function verify() {
   const dryRun = has('dry-run')
   const supabase = await loadEnv()
+  const sourceAudit = await auditPublishedCatalog(supabase, { output: dryRun ? false : undefined })
+  if (!sourceAudit.ok) throw new Error('Primary-source review failed; inspect scripts/weekly/logs/catalog-health.json and catalog-improve.md')
+  log(`primary claims: ${sourceAudit.checked} reviewed; ${sourceAudit.sourceRequests} source requests; no automatic claim or review-date changes`)
 
   const { data: listings, error } = await supabase
     .from('listings')

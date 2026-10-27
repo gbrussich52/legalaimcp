@@ -2,6 +2,7 @@
 import { z } from 'zod'
 import { CATEGORY_LABELS, PRICING_LABELS, SITE_URL } from './constants'
 import { getSoftwareConnection } from './connections'
+import { getCatalogEvidence } from './catalog-evidence'
 
 const TOOL_SHAPE = {
   slug: z.string().describe('Stable listing identifier — pass to get_legal_ai_tool'),
@@ -25,6 +26,12 @@ const TOOL_SHAPE = {
   install_command: z.string().nullable().describe('MCP install command, if the tool ships an MCP server'),
   maker: z.string().nullable().describe('Creator or vendor name'),
   listing_url: z.string().describe('Canonical listing page on legalaimcp.com'),
+  source_review: z.object({
+    reviewed_at: z.string(),
+    source_urls: z.array(z.string().url()),
+    scope: z.literal('public_documentation'),
+    customer_account_tested: z.literal(false),
+  }).nullable().describe('Dated primary-source review for the matching published claims. This is not a runtime, security or legal-output test.'),
   connection: z.object({
     type: z.enum(['official', 'community']),
     source_url: z.string().url(),
@@ -65,6 +72,7 @@ export function toStructured(t: ToolRow): z.infer<typeof ToolItem> {
     install_command: (t.mcp_install_command as string) || null,
     maker: (t.creator_name as string) ?? null,
     listing_url: `${SITE_URL}/servers/${t.slug}`,
+    source_review: getCatalogEvidence(t),
   }
 }
 
@@ -88,6 +96,8 @@ export function formatTool(t: ToolRow, verbose = false): string {
     `- Listing: ${SITE_URL}/servers/${t.slug}`,
   ]
   const connection = getSoftwareConnection(String(t.slug))
+  const evidence = getCatalogEvidence(t)
+  if (evidence) lines.push(`- Public documentation reviewed: ${evidence.reviewed_at}; customer-account operation not tested`, ...evidence.source_urls.map(url => `- Primary source: ${url}`))
   if (connection) {
     lines.push(`- Connection: ${connection.kind === 'official' ? 'vendor/publisher documented' : 'community implementation'}; documentation reviewed ${connection.reviewed}; customer account not tested`, `- Setup source: ${connection.source}`)
     if (verbose) lines.push(`- Requirements: ${connection.requirements}`, `- Permissions: ${connection.permissions}`, `- Setup: ${connection.setup}`)

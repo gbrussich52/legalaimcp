@@ -14,7 +14,9 @@
     "chatgpt:build": "node scripts/build-chatgpt-widget.mjs",
     "prebuild": "npm run chatgpt:build",
     "predev": "npm run chatgpt:build",
-    "chatgpt:package": "python3 scripts/package-chatgpt.py"
+    "chatgpt:package": "python3 scripts/package-chatgpt.py",
+    "catalog:import": "node scripts/import-reviewed-catalog.mjs",
+    "catalog:verify": "node --env-file=.env.local scripts/import-reviewed-catalog.mjs --audit"
   },
   "dependencies": {
     "@modelcontextprotocol/ext-apps": "1.3.2",

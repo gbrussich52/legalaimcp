@@ -59,4 +59,13 @@ describe('publication evidence gate', () => {
     const review = { ...approved(), listing_sha256: catalogFingerprint(plain), mcp_confirmed: false }
     await expect(assertCatalogReview(plain, { reviews: [review], fetcher, now })).rejects.toThrow('confirmed')
   })
+  it('accepts a legitimate digit-prefixed vendor hostname',async()=>{
+    const review=approved();review.sources[0].url='https://1102tools.com/docs'
+    await expect(assertCatalogReview(listing,{reviews:[review],fetcher,now})).resolves.toBeUndefined()
+  })
+  it('does not turn an explicit negative MCP disclaimer into a positive integration claim',async()=>{
+    const plain={...listing,name:'Real Tool',description:'General software. MCP support has not been established.'}
+    const review={...approved(),listing_sha256:catalogFingerprint(plain),mcp_confirmed:false}
+    await expect(assertCatalogReview(plain,{reviews:[review],fetcher,now})).resolves.toBeUndefined()
+  })
 })

@@ -15,6 +15,7 @@ tsconfig.tsbuildinfo
 .DS_Store
 .vercel
 supabase/.temp/
+/scripts/weekly/logs/
 
 # Reproducible local submission artifacts
 /dist/

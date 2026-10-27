@@ -4,13 +4,13 @@ vi.mock('next/cache', () => ({ revalidatePath: vi.fn() }))
 vi.mock('next/headers', () => ({ headers: vi.fn() }))
 vi.mock('@/lib/admin-auth', () => ({ isAdminAuthenticated: vi.fn() }))
 vi.mock('@/lib/supabase-admin', () => ({ getAdminClient: vi.fn() }))
-vi.mock('@/lib/catalog-review', () => ({ assertCatalogReview: vi.fn() }))
+vi.mock('@/lib/catalog-review', () => ({ assertCatalogReview: vi.fn(), storeCatalogReview: vi.fn() }))
 
 import { revalidatePath } from 'next/cache'
 import { headers } from 'next/headers'
 import { isAdminAuthenticated } from '@/lib/admin-auth'
 import { getAdminClient } from '@/lib/supabase-admin'
-import { assertCatalogReview } from '@/lib/catalog-review'
+import { assertCatalogReview, storeCatalogReview } from '@/lib/catalog-review'
 import { updateListingStatus, deleteListing, approveSubmission } from './actions'
 
 type AnyRecord = Record<string, unknown>
@@ -75,6 +75,7 @@ beforeEach(() => {
   mockHeaders(SAME_ORIGIN)
   vi.mocked(isAdminAuthenticated).mockResolvedValue(true)
   vi.mocked(assertCatalogReview).mockResolvedValue(undefined)
+  vi.mocked(storeCatalogReview).mockResolvedValue(undefined)
 })
 
 describe('requireAdmin (via exported actions)', () => {
@@ -119,6 +120,7 @@ describe('updateListingStatus', () => {
     const { updated } = makeDb({ listing })
     await updateListingStatus('id-1', 'published')
     expect(assertCatalogReview).toHaveBeenCalledWith(listing)
+    expect(storeCatalogReview).toHaveBeenCalledWith(expect.anything(), listing)
     expect(updated).toEqual([{ table: 'listings', payload: { status: 'published' } }])
   })
   it('updates with a valid status and revalidates', async () => {
@@ -148,6 +150,13 @@ describe('updateListingStatus', () => {
 })
 
 describe('approveSubmission', () => {
+  it('does not publish when the database approval cannot be staged', async () => {
+    const { inserted, updated } = makeDb({ submission: { id: 's1', listing_data: VALID_LISTING_DATA, submitter_name: 'Jane', status: 'pending' } })
+    vi.mocked(storeCatalogReview).mockRejectedValue(new Error('Could not stage approval'))
+    await expect(approveSubmission('s1')).rejects.toThrow('stage approval')
+    expect(inserted).toHaveLength(0)
+    expect(updated).toHaveLength(0)
+  })
   it('does not publish or mark a submission approved when its capability review fails', async () => {
     const { inserted, updated } = makeDb({ submission: { id: 's1', listing_data: VALID_LISTING_DATA, submitter_name: 'Jane', status: 'pending' } })
     vi.mocked(assertCatalogReview).mockRejectedValue(new Error('Publication blocked: primary-source review required'))
