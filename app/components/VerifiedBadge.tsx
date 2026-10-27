@@ -49,7 +49,7 @@ export function VerifiedBadge({
   if (Number.isNaN(date.getTime())) return null
 
   const label = date.toLocaleDateString('en-US', FORMAT)
-  const title = `Links last confirmed working on ${label}. Not an endorsement or a legal review.`
+  const title = `Links last confirmed working on ${label}. Product capabilities and MCP support are not established by this link check.`
 
   const pill = (
     <span
@@ -57,7 +57,7 @@ export function VerifiedBadge({
       title={title}
     >
       <ShieldCheck className="w-3 h-3" strokeWidth={2.5} aria-hidden="true" />
-      {showDate ? `Verified ${label}` : 'Verified'}
+      {showDate ? `Links checked ${label}` : 'Links checked'}
     </span>
   )
 

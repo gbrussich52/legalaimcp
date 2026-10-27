@@ -7,6 +7,8 @@ import { getAdminClient } from '@/lib/supabase-admin'
 import { isSameOriginRequest } from '@/lib/origin'
 import { CATEGORY_LABELS, PRICING_LABELS } from '@/lib/constants'
 import { z } from 'zod'
+import { assertCatalogReview } from '@/lib/catalog-review'
+import { LISTING_ADMIN_COLUMNS } from '@/lib/types'
 
 /**
  * Schema matching the shape of listing_data stored in the submissions table.
@@ -97,6 +99,11 @@ const VALID_LISTING_STATUSES = new Set(['published', 'pending_review', 'rejected
 export async function updateListingStatus(id: string, status: 'published' | 'pending_review' | 'rejected') {
   const db = await requireAdmin()
   if (!VALID_LISTING_STATUSES.has(status)) throw new Error('Invalid status')
+  if (status === 'published') {
+    const { data: listing, error } = await db.from('listings').select(LISTING_ADMIN_COLUMNS).eq('id', id).single()
+    if (error || !listing) throw new Error('Listing not found')
+    await assertCatalogReview(listing)
+  }
   const { error } = await db.from('listings').update({ status }).eq('id', id)
   if (error) throw new Error(`Failed to update status: ${error.message}`)
   revalidateAll()
@@ -221,7 +228,7 @@ export async function approveSubmission(submissionId: string) {
     }
   }
 
-  const { error: insertErr } = await db.from('listings').insert({
+  const candidate = {
     name: v?.name ?? data.name,
     slug,
     tagline: v?.tagline ?? data.tagline ?? '',
@@ -237,7 +244,9 @@ export async function approveSubmission(submissionId: string) {
     status: 'published' as const,
     creator_name: sub.submitter_name || null,
     creator_url: v ? v.creator_url || null : safeHttpUrl(data.creator_url),
-  })
+  }
+  await assertCatalogReview(candidate)
+  const { error: insertErr } = await db.from('listings').insert(candidate)
   if (insertErr) throw new Error(`Failed to create listing: ${insertErr.message}`)
 
   await db.from('submissions').update({ status: 'approved' }).eq('id', submissionId)

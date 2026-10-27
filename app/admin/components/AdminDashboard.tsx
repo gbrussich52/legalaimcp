@@ -56,9 +56,12 @@ export function AdminDashboard({
 
 function ListingsTable({ listings }: { listings: Listing[] }) {
   const [isPending, startTransition] = useTransition()
+  const [error, setError] = useState<string | null>(null)
 
   return (
     <div className="overflow-x-auto">
+      <p className="mb-3 text-sm text-charcoal/80">Publishing requires a dated primary-source review of the exact product claims. A working link does not establish capability or MCP support.</p>
+      {error && <p role="alert" className="mb-3 text-sm text-red-700">{error}</p>}
       <table className="w-full text-sm">
         <thead>
           <tr className="border-b border-slate-200">
@@ -91,9 +94,11 @@ function ListingsTable({ listings }: { listings: Listing[] }) {
                 <select
                   value={listing.status}
                   onChange={(e) =>
-                    startTransition(() =>
-                      updateListingStatus(listing.id, e.target.value as Listing['status'])
-                    )
+                    startTransition(async () => {
+                      setError(null)
+                      try { await updateListingStatus(listing.id, e.target.value as Listing['status']) }
+                      catch { setError('Status change failed. Publishing requires current primary-source evidence for the exact listing claims; see docs/catalog-review.md. Other status changes may need an operational retry.') }
+                    })
                   }
                   className="text-xs border border-slate-200 rounded px-2 py-1 bg-white"
                 >
@@ -158,6 +163,7 @@ function ListingsTable({ listings }: { listings: Listing[] }) {
 
 function SubmissionsTable({ submissions }: { submissions: Submission[] }) {
   const [isPending, startTransition] = useTransition()
+  const [error, setError] = useState<string | null>(null)
 
   if (submissions.length === 0) {
     return (
@@ -169,6 +175,7 @@ function SubmissionsTable({ submissions }: { submissions: Submission[] }) {
 
   return (
     <div className="space-y-4">
+      {error && <p role="alert" className="text-sm text-red-700">{error}</p>}
       {submissions.map((sub) => {
         const data = sub.listing_data as Record<string, string>
         return (
@@ -191,7 +198,11 @@ function SubmissionsTable({ submissions }: { submissions: Submission[] }) {
                 {sub.status === 'pending' ? (
                   <>
                     <button
-                      onClick={() => startTransition(() => approveSubmission(sub.id))}
+                      onClick={() => startTransition(async () => {
+                        setError(null)
+                        try { await approveSubmission(sub.id) }
+                        catch { setError('Approval blocked. Review the submission and primary-source evidence in docs/catalog-review.md. No capability approval can come from the submitted text alone.') }
+                      })}
                       className="text-xs bg-green-50 text-green-700 hover:bg-green-100 px-3 py-1.5 rounded font-sans font-medium transition-colors"
                     >
                       Approve

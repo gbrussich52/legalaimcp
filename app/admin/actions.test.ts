@@ -4,11 +4,13 @@ vi.mock('next/cache', () => ({ revalidatePath: vi.fn() }))
 vi.mock('next/headers', () => ({ headers: vi.fn() }))
 vi.mock('@/lib/admin-auth', () => ({ isAdminAuthenticated: vi.fn() }))
 vi.mock('@/lib/supabase-admin', () => ({ getAdminClient: vi.fn() }))
+vi.mock('@/lib/catalog-review', () => ({ assertCatalogReview: vi.fn() }))
 
 import { revalidatePath } from 'next/cache'
 import { headers } from 'next/headers'
 import { isAdminAuthenticated } from '@/lib/admin-auth'
 import { getAdminClient } from '@/lib/supabase-admin'
+import { assertCatalogReview } from '@/lib/catalog-review'
 import { updateListingStatus, deleteListing, approveSubmission } from './actions'
 
 type AnyRecord = Record<string, unknown>
@@ -29,7 +31,7 @@ const SAME_ORIGIN = {
  * Chainable fake of the supabase admin client covering the call shapes used
  * by app/admin/actions.ts. Captures insert/update payloads for assertions.
  */
-function makeDb(opts: { submission?: AnyRecord | null; slugTaken?: boolean; insertError?: { message: string } | null } = {}) {
+function makeDb(opts: { submission?: AnyRecord | null; listing?: AnyRecord; slugTaken?: boolean; insertError?: { message: string } | null } = {}) {
   const inserted: AnyRecord[] = []
   const updated: Array<{ table: string; payload: AnyRecord }> = []
 
@@ -40,7 +42,7 @@ function makeDb(opts: { submission?: AnyRecord | null; slugTaken?: boolean; inse
           single: async () =>
             table === 'submissions'
               ? { data: opts.submission ?? null, error: opts.submission ? null : { message: 'not found' } }
-              : { data: null, error: null },
+              : { data: opts.listing ?? null, error: null },
           maybeSingle: async () => ({ data: opts.slugTaken ? { slug: 'taken' } : null, error: null }),
         })),
       })),
@@ -72,6 +74,7 @@ beforeEach(() => {
   vi.clearAllMocks()
   mockHeaders(SAME_ORIGIN)
   vi.mocked(isAdminAuthenticated).mockResolvedValue(true)
+  vi.mocked(assertCatalogReview).mockResolvedValue(undefined)
 })
 
 describe('requireAdmin (via exported actions)', () => {
@@ -103,6 +106,21 @@ describe('requireAdmin (via exported actions)', () => {
 })
 
 describe('updateListingStatus', () => {
+  it('requires source evidence before republishing an existing listing', async () => {
+    const listing = { slug: 'deadlinewatch-mcp', name: 'DeadlineWatch MCP' }
+    const { updated } = makeDb({ listing })
+    const real = await vi.importActual<typeof import('@/lib/catalog-review')>('@/lib/catalog-review')
+    vi.mocked(assertCatalogReview).mockImplementation(candidate => real.assertCatalogReview(candidate))
+    await expect(updateListingStatus('id-1', 'published')).rejects.toThrow('misattribution')
+    expect(updated).toHaveLength(0)
+  })
+  it('runs the evidence gate on the fetched listing before allowing publication', async () => {
+    const listing = { slug: 'reviewed-tool', name: 'Reviewed Tool' }
+    const { updated } = makeDb({ listing })
+    await updateListingStatus('id-1', 'published')
+    expect(assertCatalogReview).toHaveBeenCalledWith(listing)
+    expect(updated).toEqual([{ table: 'listings', payload: { status: 'published' } }])
+  })
   it('updates with a valid status and revalidates', async () => {
     const { updated } = makeDb()
     await updateListingStatus('id-1', 'rejected')
@@ -130,6 +148,13 @@ describe('updateListingStatus', () => {
 })
 
 describe('approveSubmission', () => {
+  it('does not publish or mark a submission approved when its capability review fails', async () => {
+    const { inserted, updated } = makeDb({ submission: { id: 's1', listing_data: VALID_LISTING_DATA, submitter_name: 'Jane', status: 'pending' } })
+    vi.mocked(assertCatalogReview).mockRejectedValue(new Error('Publication blocked: primary-source review required'))
+    await expect(approveSubmission('s1')).rejects.toThrow('primary-source review')
+    expect(inserted).toHaveLength(0)
+    expect(updated).toHaveLength(0)
+  })
   it('throws when the submission does not exist', async () => {
     makeDb({ submission: null })
     await expect(approveSubmission('missing-id')).rejects.toThrow('Submission not found')
@@ -147,6 +172,7 @@ describe('approveSubmission', () => {
     await approveSubmission('s1')
 
     expect(inserted).toHaveLength(1)
+    expect(assertCatalogReview).toHaveBeenCalledWith(inserted[0])
     expect(inserted[0]).toMatchObject({
       name: 'Cool Legal Tool',
       slug: 'cool-legal-tool',

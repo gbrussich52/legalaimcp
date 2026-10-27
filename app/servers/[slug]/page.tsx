@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ExternalLink } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
+import { isCatalogQuarantined } from '@/lib/catalog-review'
 import { SoftwareAppJsonLd } from '../../components/JsonLd'
 import { ListingCard } from '../../components/ListingCard'
 import { VerifiedBadge } from '../../components/VerifiedBadge'
@@ -45,6 +46,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>
 }): Promise<Metadata> {
   const { slug } = await params
+  if (isCatalogQuarantined({ slug })) return { title: 'Tool Not Found' }
   if (!supabase) return { title: 'Tool Not Found' }
 
   // Q3: metadata only needs name/tagline/slug — skip the 2000-char description.
@@ -75,7 +77,7 @@ export async function generateStaticParams() {
     .from('listings')
     .select('slug')
     .eq('status', 'published')
-  return (data ?? []).map((l: { slug: string }) => ({ slug: l.slug }))
+  return (data ?? []).filter((l: { slug: string }) => !isCatalogQuarantined(l)).map((l: { slug: string }) => ({ slug: l.slug }))
 }
 
 export default async function ListingDetailPage({
@@ -84,6 +86,8 @@ export default async function ListingDetailPage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
+
+  if (isCatalogQuarantined({ slug })) notFound()
 
   if (!supabase) notFound()
 
