@@ -583,8 +583,8 @@
     {
       "slug": "firecrawl-gov-index",
       "decision": "approved",
-      "reviewed_at": "2026-10-27",
-      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "reviewed_at": "2026-10-28",
+      "reviewer": "Codex manual primary-source re-review on October 28, 2026",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": true,
@@ -592,11 +592,23 @@
         {
           "url": "https://www.firecrawl.dev/gov-index",
           "kind": "vendor",
-          "sha256": "459ff3f420c5b7fa2469d783ee389d4807a5c788fe3c55ed2a14d8fd733cdb8e",
+          "sha256": "236a03a78064dd702ef7c17eb17d39fd27dfb82c3f62283caf79f3f2ff77da14",
           "quote": "Call GET or POST /v2/search/gov, use firecrawl_gov_search in the Firecrawl MCP server"
+        },
+        {
+          "url": "https://docs.firecrawl.dev/features/gov.md",
+          "kind": "vendor",
+          "sha256": "483894479107dee1cbfe6bf8ff8a9c3dec39639e56119b035e22ffeee64f24c8",
+          "quote": "Government Index searches are free and use no credits, with or without zero data retention."
+        },
+        {
+          "url": "https://docs.firecrawl.dev/mcp-server.md",
+          "kind": "vendor",
+          "sha256": "99f90776691ddc998f1ce86779fa90e271d7b47840cf4646245fccfccf15913a",
+          "quote": "No account or key. Search, Scrape, and Parse within daily limits."
         }
       ],
-      "listing_sha256": "9500f333f1ee29de7efa5a4156e3ed10b2ba76ac3d56d9d64437e0842078eb5c",
+      "listing_sha256": "1e18d880c4fb6f91723772d8b303163cdd0da71208b19cebaefae40923c6e843",
       "claims": {
         "slug": "firecrawl-gov-index",
         "name": "Firecrawl Government & Legal Index",
@@ -607,7 +619,7 @@
         "mcp_repo_url": null,
         "mcp_install_command": null,
         "pricing_model": "free",
-        "pricing_details": "The vendor states index search uses no credits and the API works without a key to start. Connector setup requires a Firecrawl account; confirm current limits and other service charges.",
+        "pricing_details": "The vendor states index search uses no credits and the API works without a key to start. Its native Claude/ChatGPT connector setup describes a Firecrawl account; other MCP connection paths may differ. Confirm current limits and other service charges.",
         "tags": [
           "government-data",
           "statutes",
@@ -754,8 +766,8 @@
     {
       "slug": "harvey-ai",
       "decision": "approved",
-      "reviewed_at": "2026-10-27",
-      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "reviewed_at": "2026-10-28",
+      "reviewer": "Codex manual primary-source re-review on October 28, 2026",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": false,
@@ -763,7 +775,7 @@
         {
           "url": "https://www.harvey.ai/",
           "kind": "vendor",
-          "sha256": "cc66f33d15a8e350698bb3c46564689a49756ec666ec02760a643616e3082984",
+          "sha256": "798ef1ca8e2018adc50c1fbf519d92fc8012b752710c46879ac31eb8bf9baf4f",
           "quote": "Securely store, organize, and bulk-analyze legal documents."
         }
       ],
@@ -835,8 +847,8 @@
     {
       "slug": "imanage-work",
       "decision": "approved",
-      "reviewed_at": "2026-10-27",
-      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "reviewed_at": "2026-10-28",
+      "reviewer": "Codex manual primary-source re-review on October 28, 2026",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": true,
@@ -844,8 +856,8 @@
         {
           "url": "https://docs.imanage.com/ai/mcpserver-user-help/en-US/Adding_MCP_connectors_for_Claude.html",
           "kind": "vendor",
-          "sha256": "0363d4de47faebef719c3ffc66aed1835887e1d98eac0e60055c15e7fb75f6b8",
-          "quote": "Currently, only read permissions are available and selected by default."
+          "sha256": "8112f374ef574f257de3842531bb50e787c548e1f8e403d2b644d8bcce50c2ae",
+          "quote": "ensure that the iManage MCP Control Center Extension and iManage MCP Service applications are added in iManage Control Center."
         },
         {
           "url": "https://imanage.com/imanage-products/document-email-management/work/",
@@ -854,12 +866,12 @@
           "quote": "Yes, iManage includes the industry-leading email management solution"
         }
       ],
-      "listing_sha256": "181d8cfe81270c57829d9c95d547b77e14d5c149a57cb0ffb0f24c4db65d8894",
+      "listing_sha256": "edb6a28424039582e431f8a365ffe7508ba71539928a29edcd28185127efa547",
       "claims": {
         "slug": "imanage-work",
         "name": "iManage Work",
         "tagline": "Document and email management with vendor-documented AI-assistant connectors.",
-        "description": "iManage Work provides document and email management. Its vendor documents a Work connector in Claude and custom MCP connectors for search, Insight+ and Tracker. Setup requires an eligible account and may require administrator enablement. The vendor documents read permissions by default; available tools depend on administrator configuration. Connector URLs vary by environment and company subdomain. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "description": "iManage Work provides document and email management. Its vendor documents a Work connector in Claude and custom MCP connectors for search, Insight+ and Tracker. Setup requires an eligible account, the iManage MCP Control Center Extension and iManage MCP Service applications in iManage Control Center, and any required administrator enablement. The vendor documents read permissions by default; available tools depend on administrator configuration. Connector URLs vary by environment and company subdomain. Documentation reviewed on October 28, 2026; customer-account access and deployed operation have not been tested.",
         "category": "document_processing",
         "external_url": "https://docs.imanage.com/ai/mcpserver-user-help/en-US/Adding_MCP_connectors_for_Claude.html",
         "mcp_repo_url": null,
@@ -922,8 +934,8 @@
     {
       "slug": "ironclad",
       "decision": "approved",
-      "reviewed_at": "2026-10-27",
-      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "reviewed_at": "2026-10-28",
+      "reviewer": "Codex manual primary-source re-review on October 28, 2026",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": true,
@@ -931,7 +943,7 @@
         {
           "url": "https://ironcladapp.com/",
           "kind": "vendor",
-          "sha256": "0334547dd0ec1d924f62c56ecf54066214b74d00e1a19a90dbdefaeeee6d2de0",
+          "sha256": "82b7a5fdfbdc963f97f83d2d2d4b02a8ba49d49ed397c05163599044ec761231",
           "quote": "AI Contract Lifecycle Management"
         },
         {
@@ -1126,8 +1138,8 @@
     {
       "slug": "luminance",
       "decision": "approved",
-      "reviewed_at": "2026-10-27",
-      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "reviewed_at": "2026-10-28",
+      "reviewer": "Codex manual primary-source re-review on October 28, 2026",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": false,
@@ -1135,7 +1147,7 @@
         {
           "url": "https://www.luminance.com/",
           "kind": "vendor",
-          "sha256": "9b7de8e207c60fe5d5ebb015f551e521b769f520c3ff9ce4cf256f51676f8db4",
+          "sha256": "65698c7fc4b1f7e63720d41c6485faadc39c5f816674bac28788b8075ae9bd2c",
           "quote": "Bring precedent and playbooks into every negotiation."
         },
         {

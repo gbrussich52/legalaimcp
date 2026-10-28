@@ -4,7 +4,7 @@ import { createClient } from '@supabase/supabase-js'
 // (ref bzrdzchrdthyrhdsodla). Every client selects that schema here; queries stay unchanged.
 export const SUPABASE_SCHEMA = 'legalaimcp'
 // Bump on a reviewed bulk correction: ISR must not reuse the previous release's claims.
-export const CATALOG_CACHE_REVISION = '2026-10-27-source-audit'
+export const CATALOG_CACHE_REVISION = '2026-10-28-source-recheck'
 
 export function createSchemaClient(
   url: string,
