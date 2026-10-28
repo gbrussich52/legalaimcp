@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { ExternalLink } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 import { isCatalogQuarantined } from '@/lib/catalog-review'
+import { CatalogSources } from '../../components/CatalogSources'
 import { SoftwareAppJsonLd } from '../../components/JsonLd'
 import { ListingCard } from '../../components/ListingCard'
 import { VerifiedBadge } from '../../components/VerifiedBadge'
@@ -188,6 +189,7 @@ export default async function ListingDetailPage({
       </section>
 
       <SoftwareConnectionDetails slug={listing.slug} />
+      <CatalogSources listing={listing} />
 
       {/* Setup guide, when we have written one for this listing */}
       {SETUP_GUIDES[listing.slug] && (

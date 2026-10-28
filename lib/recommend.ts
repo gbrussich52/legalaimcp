@@ -81,7 +81,7 @@ export function pricingFitTiebreak(a: ScorableListing, b: ScorableListing): numb
  */
 export function pricingSupportNote(pricingModel: string): string | null {
   return pricingModel === 'paid' || pricingModel === 'contact'
-    ? 'Paid tier — often includes dedicated support that a free/freemium option may not.'
+    ? 'Confirm current commercial terms, support and access limits with the vendor.'
     : null
 }
 

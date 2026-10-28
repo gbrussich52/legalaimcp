@@ -398,7 +398,7 @@ const handler = createMcpHandler(
           : [
               `Top ${recommendations.length} legal AI tool(s) for a ${firm_size}-size ${
                 CATEGORY_LABELS[practice_area]?.toLowerCase() ?? practice_area
-              } practice. Ties are broken by lowest cost first:`,
+              } practice. Ties use the published pricing category; actual costs and firm-size suitability are not established:`,
               '',
               ...ranked.map((r) => {
                 const note = pricingSupportNote(r.listing.pricing_model)

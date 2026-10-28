@@ -1,11 +1,842 @@
 {
   "reviews": [
     {
+      "slug": "aws-document-loader-mcp",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/awslabs/mcp/main/src/document-loader-mcp-server/README.md",
+          "kind": "maintainer",
+          "sha256": "322a88c9a2676d6b46e079106c3bc787249b95fe99200d5122e01b1731514519",
+          "quote": "This MCP server provides tools to parse and extract content from various document formats"
+        }
+      ],
+      "listing_sha256": "df2bbdf4af9cb20f0a35291f7c9113d29ebbbc4bcd76672a7940babf9744e6de",
+      "claims": {
+        "slug": "aws-document-loader-mcp",
+        "name": "AWS Labs Document Loader MCP",
+        "tagline": "General-purpose document parsing for PDF, Word, Excel, PowerPoint and image files.",
+        "description": "AWS Labs maintains this general-purpose MCP server for extracting content from PDF, Word, Excel and PowerPoint files and loading images. It is a document-processing component, not a legal research or legal-analysis system. The maintainer documents Python and uv prerequisites; slide-image extraction also needs additional local dependencies. Documentation reviewed; installation and customer files were not tested.",
+        "category": "document_processing",
+        "external_url": "https://awslabs.github.io/mcp/servers/document-loader-mcp-server",
+        "mcp_repo_url": "https://github.com/awslabs/mcp/tree/main/src/document-loader-mcp-server",
+        "mcp_install_command": null,
+        "pricing_model": "free",
+        "pricing_details": "Open-source Apache-2.0 code. Local runtime, optional dependencies and any connected AI-provider usage may have separate costs.",
+        "tags": [
+          "document-processing",
+          "pdf",
+          "word",
+          "excel",
+          "powerpoint",
+          "general-purpose",
+          "mcp"
+        ],
+        "creator_name": "AWS Labs",
+        "creator_url": "https://github.com/awslabs",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "billing-ai-checkbox",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": false,
+      "sources": [
+        {
+          "url": "https://www.checkbox.ai/solutions/invoice-review",
+          "kind": "vendor",
+          "sha256": "27a86c8206bd51e4de6eff6ec0ac54e8100dfbf4eaa00766578f4fae39e11d16",
+          "quote": "Deterministic checks on math and format, then AI review of every line item against your guidelines."
+        }
+      ],
+      "listing_sha256": "1898d15df58ba5e80d37a76d238b9464eed6aacda3b17ade34559a895a5830b8",
+      "claims": {
+        "slug": "billing-ai-checkbox",
+        "name": "Checkbox First Pass Invoice Review",
+        "tagline": "Review invoice math, format and billing guidelines before your team approves payment.",
+        "description": "Checkbox First Pass reviews invoices before approval. The vendor describes deterministic math and formatting checks, AI review of line items against your guidelines, and a corrected invoice with a report. Setup is arranged with the Checkbox team. It is not an e-billing platform, and approval stays with your team. Documentation reviewed; no customer billing workflow was tested.",
+        "category": "billing_time",
+        "external_url": "https://www.checkbox.ai/solutions/invoice-review",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "contact",
+        "pricing_details": "Contact Checkbox about availability, setup and current pricing for invoice review.",
+        "tags": [
+          "invoice-review",
+          "billing-guidelines",
+          "human-approval"
+        ],
+        "creator_name": "Checkbox",
+        "creator_url": "https://www.checkbox.ai",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "canlii-legal-research",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/Vaquill-AI/canlii-mcp/main/README.md",
+          "kind": "maintainer",
+          "sha256": "74accdf5f38730e12637988a7469118d4ef19be2aa6a47143d70ca2ca5335101",
+          "quote": "Full document text is not available through the API."
+        }
+      ],
+      "listing_sha256": "130bf9038000421ff4e72c515a4924d6ab04cf138d012488b6d61002f2b33fc2",
+      "claims": {
+        "slug": "canlii-legal-research",
+        "name": "CanLII MCP (Vaquill community implementation)",
+        "tagline": "Community connector for Canadian case-law and legislation metadata through the CanLII API.",
+        "description": "Vaquill maintains a community MCP implementation for the CanLII API, forked from tomilashy/canlii-mcp. It exposes case and legislation metadata and citation relationships, not full document text or full-text legal research. The maintainer documents a hosted endpoint and self-hosting, and users need their own CanLII API key. This is a community implementation, not a CanLII-operated service. Documentation reviewed; API-key access and hosted operation were not tested.",
+        "category": "legal_research",
+        "external_url": "https://github.com/Vaquill-AI/canlii-mcp",
+        "mcp_repo_url": "https://github.com/Vaquill-AI/canlii-mcp",
+        "mcp_install_command": null,
+        "pricing_model": "free",
+        "pricing_details": "The repository lists an MIT license. A CanLII API key, API usage terms and any hosting costs are separate.",
+        "tags": [
+          "canadian-law",
+          "case-metadata",
+          "legislation-metadata",
+          "community",
+          "mcp"
+        ],
+        "creator_name": "Vaquill-AI",
+        "creator_url": "https://github.com/Vaquill-AI",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "cerebra-legal-server",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/yoda-digital/mcp-cerebra-legal-server/main/README.md",
+          "kind": "maintainer",
+          "sha256": "aeb44a92754178bfe602e8bfc636c615763e95442cd2634274357f8b8c96e35d",
+          "quote": "A structured legal reasoning tool that helps analyze complex legal issues with domain-specific guidance and templates."
+        }
+      ],
+      "listing_sha256": "a868a2e06205510f9390f4c8df213d0f91590ff2989abb16c16a731b5d5aebb9",
+      "claims": {
+        "slug": "cerebra-legal-server",
+        "name": "Cerebra Legal MCP Server",
+        "tagline": "Community MCP tools for structured legal reasoning, follow-up questions and formatted results.",
+        "description": "The yoda-digital repository documents three MCP tools for organizing structured legal reasoning, asking follow-up questions and presenting results. It provides legal-domain templates and citation formatting. These reasoning helpers are not an authoritative case-law database or a guarantee of correct legal conclusions. The maintainer documents building and running the server locally. Documentation reviewed; the runtime was not installed or tested.",
+        "category": "legal_research",
+        "external_url": "https://github.com/yoda-digital/mcp-cerebra-legal-server",
+        "mcp_repo_url": "https://github.com/yoda-digital/mcp-cerebra-legal-server",
+        "mcp_install_command": null,
+        "pricing_model": "free",
+        "pricing_details": "The maintainer README lists an MIT license. Runtime and any connected AI services are separate; no hosted subscription price was established.",
+        "tags": [
+          "structured-reasoning",
+          "legal-templates",
+          "community",
+          "mcp"
+        ],
+        "creator_name": "yoda-digital",
+        "creator_url": "https://github.com/yoda-digital",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "claude-legal",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": false,
+      "sources": [
+        {
+          "url": "https://claude.com/product/overview",
+          "kind": "vendor",
+          "sha256": "f8eef1da5fe135be70802060c7c9cdd56b19e84b4408168903606259d57edab0",
+          "quote": "Other common use cases include first drafts and editing"
+        },
+        {
+          "url": "https://claude.com/pricing",
+          "kind": "vendor",
+          "sha256": "74e2ba10c67c41a0b31fb7c8ea1076654fd0507f75af893b7f857169f0ae0934",
+          "quote": "Free for everyone"
+        }
+      ],
+      "listing_sha256": "b00e59f815303b97303b5f68f5e5a2e9efc3bc733370bd665d6618725909d12c",
+      "claims": {
+        "slug": "claude-legal",
+        "name": "Claude",
+        "tagline": "General-purpose AI assistant for drafting, document work and analysis.",
+        "description": "Claude is Anthropic's general-purpose AI assistant. The vendor describes first drafts and editing, creating briefs, and reading, creating or analyzing documents, spreadsheets and presentations. It can be used with connected tools when those services and account permissions are available. This is a general AI product; the listing does not certify legal accuracy or customer-data suitability. Documentation reviewed; no firm account or private documents were tested.",
+        "category": "general",
+        "external_url": "https://claude.com/product/overview",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "freemium",
+        "pricing_details": "Anthropic lists free and paid plans. Confirm current usage limits, included features, billing terms and API terms on its pricing page.",
+        "tags": [
+          "general-ai",
+          "drafting",
+          "document-work",
+          "analysis"
+        ],
+        "creator_name": "Anthropic",
+        "creator_url": "https://www.anthropic.com",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "clio",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": false,
+      "sources": [
+        {
+          "url": "https://docs.developers.clio.com/guides/clio-manage/",
+          "kind": "vendor",
+          "sha256": "1f8084845e005f7417432013aee52488a418a4d171c64d91912b24f3c1a31b46",
+          "quote": "A matter is the central organizing record for legal work in Clio Manage."
+        },
+        {
+          "url": "https://help.clio.com/api/v2/help_center/en-us/articles/29765932267675.json",
+          "kind": "vendor",
+          "sha256": "bc45e4bad6fbfcd082e521c6f1641b896571f7cb5e5e07d9dc50401558ad6a6d",
+          "quote": "Suggested time entries from unlogged communication, notes, or completed tasks."
+        }
+      ],
+      "listing_sha256": "8ae505ce43e6b76bed0f62d16a97429e502851807650fee0dcf8aaaeb3538e50",
+      "claims": {
+        "slug": "clio",
+        "name": "Clio Manage",
+        "tagline": "Legal matter management with vendor-documented AI recommendations for matter activity.",
+        "description": "Clio Manage organizes legal matters and their associated work. Clio's Manage AI documentation describes recommendations for client communications, bills and suggested time entries from unlogged activity. Its developer documentation describes matter-related records and cross-application workflows. Confirm which features, permissions and plan are available for your account. Documentation reviewed; no firm account connection or workflow was tested.",
+        "category": "case_management",
+        "external_url": "https://www.clio.com",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "contact",
+        "pricing_details": "Confirm current Clio plans, AI feature availability and pricing directly with Clio.",
+        "tags": [
+          "practice-management",
+          "matters",
+          "ai-recommendations",
+          "developer-api"
+        ],
+        "creator_name": "Clio",
+        "creator_url": "https://www.clio.com",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "clio-matter-manager",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/CHLEGAL/clio-mcp-server/main/README.md",
+          "kind": "maintainer",
+          "sha256": "8e0ebbb280398ec8fec2035200619f221e04d531c432391ff85088e1dd7d77a8",
+          "quote": "Lets Claude search matters, look up contacts, log time entries, create tasks, manage calendar entries, search documents, and check billing"
+        }
+      ],
+      "listing_sha256": "5afefd36977f941c37cf49fb2cb4d2a351f228299b4124cfa692db081ad88777",
+      "claims": {
+        "slug": "clio-matter-manager",
+        "name": "Clio MCP Server (CHLEGAL community)",
+        "tagline": "Community MCP access to Clio matters, contacts, time entries, tasks, calendar and billing.",
+        "description": "CHLEGAL publishes a community MCP server for working with Clio. Its README documents matter and contact searches, time entries, tasks, calendar entries, documents and billing tools. It requires a Clio account and configured developer-application access, and includes write actions. This is community software rather than an official Clio product. Documentation reviewed; permissions, runtime security and customer-account access were not independently tested.",
+        "category": "case_management",
+        "external_url": "https://github.com/CHLEGAL/clio-mcp-server",
+        "mcp_repo_url": "https://github.com/CHLEGAL/clio-mcp-server",
+        "mcp_install_command": null,
+        "pricing_model": "contact",
+        "pricing_details": "Public repository; confirm its license and support terms. Clio access and configured application credentials are required; confirm all service costs.",
+        "tags": [
+          "clio",
+          "community",
+          "practice-management",
+          "read-write",
+          "mcp"
+        ],
+        "creator_name": "CHLEGAL",
+        "creator_url": "https://github.com/CHLEGAL",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "cocounsel",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": false,
+      "sources": [
+        {
+          "url": "https://legal.thomsonreuters.com/en/products/cocounsel-legal",
+          "kind": "vendor",
+          "sha256": "7699205083c951df82b7a9b040f66b3ed5ccdecb3aeaf0bfa154241c01873c94",
+          "quote": "Integrate research, analysis, and drafting with professional-grade AI grounded in trusted Westlaw and Practical Law content."
+        }
+      ],
+      "listing_sha256": "8c8f726ac72b293d32799c39619129f57aefada7f8de189f8ac82fbbcc2e0121",
+      "claims": {
+        "slug": "cocounsel",
+        "name": "CoCounsel Legal",
+        "tagline": "Thomson Reuters legal AI for research, analysis and drafting.",
+        "description": "CoCounsel Legal is Thomson Reuters' commercial legal AI product for research, analysis and drafting. The vendor describes a workflow grounded in Westlaw and Practical Law content with linked citations that attorneys can inspect. Confirm licensed content, product availability and subscription requirements for your organization. Documentation reviewed; customer-account access and output accuracy were not independently tested.",
+        "category": "legal_research",
+        "external_url": "https://legal.thomsonreuters.com/en/products/cocounsel-legal",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "contact",
+        "pricing_details": "Contact Thomson Reuters for current CoCounsel Legal licensing, content coverage and pricing.",
+        "tags": [
+          "legal-research",
+          "analysis",
+          "drafting",
+          "citations"
+        ],
+        "creator_name": "Thomson Reuters",
+        "creator_url": "https://www.thomsonreuters.com",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "composio-legal-toolkit",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://docs.composio.dev/docs/single-toolkit-mcp.md",
+          "kind": "vendor",
+          "sha256": "70a3e01981caeb0fbeb4118b8c71b2c0824408be38fcc2226070bcb8e478082c",
+          "quote": "Users must authenticate with the toolkits configured in your MCP server first."
+        }
+      ],
+      "listing_sha256": "93c3c32d25bdd8833876aafa528829acd953f9c9a00f6f8b861ccc9aa8299df7",
+      "claims": {
+        "slug": "composio-legal-toolkit",
+        "name": "Composio MCP Integrations",
+        "tagline": "General-purpose authenticated tool integrations for AI assistants.",
+        "description": "Composio documents creating MCP server configurations for business-application toolkits and generating user-specific connection URLs. Users must authenticate with the configured services, and server configurations can limit allowed tools. This is general-purpose integration infrastructure, not a purpose-built legal toolkit or a guarantee that firm data stays within a particular boundary. Documentation reviewed; individual service connections and permissions were not tested.",
+        "category": "general",
+        "external_url": "https://docs.composio.dev/docs/single-toolkit-mcp",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "contact",
+        "pricing_details": "Confirm current Composio plans, usage limits and separate third-party service charges.",
+        "tags": [
+          "integrations",
+          "authentication",
+          "toolkits",
+          "general-purpose",
+          "mcp"
+        ],
+        "creator_name": "Composio",
+        "creator_url": "https://composio.dev",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "concord-contract-intelligence",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": false,
+      "sources": [
+        {
+          "url": "https://www.concord.app/",
+          "kind": "vendor",
+          "sha256": "4d84a739edddbfe5637fe101eeaa67f7b43547a2edc8349b7064e7a3a9990b56",
+          "quote": "AI understands your contracts, explains key risks and obligations, and suggests edits."
+        }
+      ],
+      "listing_sha256": "adcc29261586d138045d57e22bc42ee08752e90d7959504307c1abe45cf1cd45",
+      "claims": {
+        "slug": "concord-contract-intelligence",
+        "name": "Concord",
+        "tagline": "AI-assisted contract management, review and lifecycle workflows.",
+        "description": "Concord is a contract-management platform. Its product site describes AI-assisted contract review, explanations of risks and obligations, suggested edits, alerts, reporting, intake, collaboration and e-signature. Feature availability and connected services should be confirmed with Concord for your account. The cited article about AI connectivity does not establish a shipped connector. Documentation reviewed; no customer integration or contract output was tested.",
+        "category": "document_processing",
+        "external_url": "https://www.concord.app/",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "contact",
+        "pricing_details": "Contact Concord for current plans, feature availability and pricing.",
+        "tags": [
+          "contracts",
+          "ai-review",
+          "lifecycle-management",
+          "collaboration"
+        ],
+        "creator_name": "Concord",
+        "creator_url": "https://www.concord.app/",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "courtlistener-citations-checker",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/john-walkoe/courtlistener_citations_mcp/master/README.md",
+          "kind": "maintainer",
+          "sha256": "a52279115b05c3504ebbc6aec5d8905543a1d7c4c06030a0072334213a1289d1",
+          "quote": "does not verify that the citation supports the legal proposition for which it is cited."
+        }
+      ],
+      "listing_sha256": "1485283ac9a1b0c170e4c846bbbaa4d48ee95ab703741d0e51b40ea6c4312c2d",
+      "claims": {
+        "slug": "courtlistener-citations-checker",
+        "name": "CourtListener Citation Validation MCP (community)",
+        "tagline": "Check case citations against the CourtListener index with a community MCP server.",
+        "description": "john-walkoe maintains this community MCP server for extracting and checking case citations against CourtListener's API. A match establishes that a citation exists in that index, not that it supports a legal proposition. A missing match can reflect incomplete coverage rather than a fabricated case. The maintainer requires a CourtListener API token. Documentation reviewed; runtime, API access and citation results were not independently tested.",
+        "category": "legal_research",
+        "external_url": "https://github.com/john-walkoe/courtlistener_citations_mcp",
+        "mcp_repo_url": "https://github.com/john-walkoe/courtlistener_citations_mcp",
+        "mcp_install_command": null,
+        "pricing_model": "free",
+        "pricing_details": "MIT-licensed server code. CourtListener access terms, usage limits and hosting/runtime costs are separate.",
+        "tags": [
+          "citation-lookup",
+          "case-law",
+          "community",
+          "mcp"
+        ],
+        "creator_name": "john-walkoe",
+        "creator_url": "https://github.com/john-walkoe",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "courtlistener-mcp",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/freelawproject/courtlistener-api-client/main/MCP_README.md",
+          "kind": "maintainer",
+          "sha256": "ce8ed226f549546b22708eccd2e7422e11d00ec87c0afeac3ae53e74d6e0611c",
+          "quote": "Search U.S. case law, dockets, judges, and oral arguments; extract and verify legal citations; and manage alerts"
+        }
+      ],
+      "listing_sha256": "6558ecf9db1c09a83a4359ab215f39792603d8a9dd28516db52c55261c165512",
+      "claims": {
+        "slug": "courtlistener-mcp",
+        "name": "CourtListener MCP (Free Law Project)",
+        "tagline": "Official CourtListener access for case law, dockets, judges, citations and alerts.",
+        "description": "Free Law Project hosts the official CourtListener MCP server. Its documentation describes searching U.S. case law, dockets, judges and oral arguments, citation tools and alert management. Interactive clients use a CourtListener account with OAuth; the maintainer also documents API-token authentication for other clients. Some tools can change account state or request documents, so inspect permissions and possible charges. Documentation reviewed; an account connection was not tested.",
+        "category": "legal_research",
+        "external_url": "https://mcp.courtlistener.com/",
+        "mcp_repo_url": "https://github.com/freelawproject/courtlistener-api-client",
+        "mcp_install_command": null,
+        "pricing_model": "freemium",
+        "pricing_details": "The maintainer documents free individual accounts. Usage limits, memberships, document purchases and other charges depend on the service and account; confirm current terms.",
+        "tags": [
+          "case-law",
+          "dockets",
+          "citations",
+          "alerts",
+          "official",
+          "mcp"
+        ],
+        "creator_name": "Free Law Project",
+        "creator_url": "https://free.law",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "courtlistener-mcp-self-hosted",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/blakeox/courtlistener-mcp/main/README.md",
+          "kind": "maintainer",
+          "sha256": "0a665fba8a872b5dcc82d9ce95e79fd5f9cd059965e97ed5f47ac201af2a8ad0",
+          "quote": "It exposes legal research tools over MCP"
+        }
+      ],
+      "listing_sha256": "ac6a5451d890e2a4e35d3a1b1a70f4fe9b9e1df576d9fb95959e284169e60a76",
+      "claims": {
+        "slug": "courtlistener-mcp-self-hosted",
+        "name": "CourtListener MCP (blakeox community)",
+        "tagline": "Community CourtListener tools for local or self-hosted MCP deployments.",
+        "description": "blakeox maintains a community MCP implementation for CourtListener legal data, separate from Free Law Project's hosted service. The README documents local stdio and Cloudflare Worker HTTP deployments, with research tools for CourtListener data. It currently directs local users to build from a repository checkout rather than an available npm package. Review authentication, permissions and hosting requirements before deployment. Documentation reviewed; builds and account access were not tested.",
+        "category": "legal_research",
+        "external_url": "https://github.com/blakeox/courtlistener-mcp",
+        "mcp_repo_url": "https://github.com/blakeox/courtlistener-mcp",
+        "mcp_install_command": null,
+        "pricing_model": "free",
+        "pricing_details": "MIT-licensed source code. CourtListener service terms and hosting/runtime costs are separate.",
+        "tags": [
+          "case-law",
+          "self-hosted",
+          "community",
+          "mcp"
+        ],
+        "creator_name": "blakeox",
+        "creator_url": "https://github.com/blakeox",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "diligent-compliance",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": false,
+      "sources": [
+        {
+          "url": "https://www.diligent.com/",
+          "kind": "vendor",
+          "sha256": "3dfe03db418d633f2658c6bf7fcefe6eb9eb5f92b2235f9ef5c4b76a8fc5aaad",
+          "quote": "Centralize governance, risk and compliance in one AI platform."
+        }
+      ],
+      "listing_sha256": "17774e190198a1c6114423b50ad3d1f8b33c63c1889bfebfa9d07bfe28f935a2",
+      "claims": {
+        "slug": "diligent-compliance",
+        "name": "Diligent Governance, Risk and Compliance",
+        "tagline": "AI-assisted governance, risk, policy and third-party compliance products.",
+        "description": "Diligent provides governance, risk and compliance software. Its product site describes policy management, due diligence, third-party monitoring and AI-assisted risk triage across its product family. Select the specific module that fits your organization and confirm its coverage, configuration and permissions with the vendor. This listing does not claim automated jurisdiction-by-jurisdiction legal advice or regulatory impact analysis. Documentation reviewed; customer workflows were not tested.",
+        "category": "compliance",
+        "external_url": "https://www.diligent.com/",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "contact",
+        "pricing_details": "Contact Diligent for the relevant product, implementation requirements and current pricing.",
+        "tags": [
+          "governance",
+          "risk",
+          "compliance",
+          "policy-management",
+          "third-party-risk"
+        ],
+        "creator_name": "Diligent",
+        "creator_url": "https://www.diligent.com/",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "firecrawl-gov-index",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://www.firecrawl.dev/gov-index",
+          "kind": "vendor",
+          "sha256": "459ff3f420c5b7fa2469d783ee389d4807a5c788fe3c55ed2a14d8fd733cdb8e",
+          "quote": "Call GET or POST /v2/search/gov, use firecrawl_gov_search in the Firecrawl MCP server"
+        }
+      ],
+      "listing_sha256": "9500f333f1ee29de7efa5a4156e3ed10b2ba76ac3d56d9d64437e0842078eb5c",
+      "claims": {
+        "slug": "firecrawl-gov-index",
+        "name": "Firecrawl Government & Legal Index",
+        "tagline": "Search an index of U.S. government and legal sources for AI-assisted research.",
+        "description": "Firecrawl's Government & Legal Index searches government and legal sources including statutes, regulations and court opinions, with source links. The vendor documents public search API routes, the firecrawl_gov_search tool in its MCP server, CLI and SDK access, and AI-assistant connectors. Index search is described as credit-free; connector setup and usage limits have separate requirements. Verify the underlying issuer, jurisdiction, effective date and text before relying on a result. Documentation reviewed; this audit did not test account access or search completeness.",
+        "category": "legal_research",
+        "external_url": "https://www.firecrawl.dev/gov-index",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "free",
+        "pricing_details": "The vendor states index search uses no credits and the API works without a key to start. Connector setup requires a Firecrawl account; confirm current limits and other service charges.",
+        "tags": [
+          "government-data",
+          "statutes",
+          "regulations",
+          "case-law",
+          "index",
+          "mcp"
+        ],
+        "creator_name": "Firecrawl",
+        "creator_url": "https://www.firecrawl.dev",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "freshbooks-legal-billing",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/roboulos/freshbooks-mcp/main/README.md",
+          "kind": "maintainer",
+          "sha256": "b7fc58357bed85c8c2fc381b0e70bdf0788772375b5e8c92bca9ed5350b1f747",
+          "quote": "Automate your FreshBooks invoicing and time tracking through Claude."
+        }
+      ],
+      "listing_sha256": "d4c9bd4f1d2f2dcc206e8599144f6625b60d5a9745207867f8daaa12319d70c9",
+      "claims": {
+        "slug": "freshbooks-legal-billing",
+        "name": "FreshBooks MCP Server (roboulos community)",
+        "tagline": "Community MCP tools for FreshBooks invoices, time entries and revenue reports.",
+        "description": "roboulos publishes a community MCP server for FreshBooks invoicing and time tracking. The README documents listing invoices, sending draft invoices, logging time and generating revenue reports, using Xano and Snappy integration setup. It includes financial write actions. This is general billing software integration, not a legal trust-accounting product or an official FreshBooks connector. Documentation reviewed; financial accounts, authentication and live sending were not tested.",
+        "category": "billing_time",
+        "external_url": "https://github.com/roboulos/freshbooks-mcp",
+        "mcp_repo_url": "https://github.com/roboulos/freshbooks-mcp",
+        "mcp_install_command": null,
+        "pricing_model": "free",
+        "pricing_details": "The repository lists an MIT license. FreshBooks, required authentication services and hosting/runtime charges are separate; confirm current terms.",
+        "tags": [
+          "invoicing",
+          "time-tracking",
+          "freshbooks",
+          "community",
+          "read-write",
+          "mcp"
+        ],
+        "creator_name": "roboulos",
+        "creator_url": "https://github.com/roboulos",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "gavel",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": false,
+      "sources": [
+        {
+          "url": "https://www.gavel.io/",
+          "kind": "vendor",
+          "sha256": "5a474d8953e9661f1eca7a0d51b23e7616fc90c640691d740d2e40a6cedfcfa4",
+          "quote": "Automate your Word docs with custom rules"
+        },
+        {
+          "url": "https://www.gavel.io/pricing",
+          "kind": "vendor",
+          "sha256": "fc89b24331bc8fe7e2421ac6cbf2b39af0d7ef159ce99d33741f76a3a3e1c008",
+          "quote": "Start 7-day trial"
+        }
+      ],
+      "listing_sha256": "6759c40f238462ff809749e31753c02b6cf8aa00edb8047eac43798c85e0f934",
+      "claims": {
+        "slug": "gavel",
+        "name": "Gavel",
+        "tagline": "Legal document automation and a separate AI contract-review product.",
+        "description": "Gavel provides document automation using Word templates and PDF forms. Its product site also describes Gavel Exec, a separate AI contract-review product in Word for drafting, review and redlining. Confirm which product and plan covers your intended workflow. Documentation reviewed; no customer template, contract output or connected integration was tested.",
+        "category": "document_processing",
+        "external_url": "https://www.gavel.io/",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "paid",
+        "pricing_details": "Paid plans and trial offers are documented. Confirm the current product, billing term, usage limits and price on Gavel's pricing page.",
+        "tags": [
+          "document-automation",
+          "word",
+          "pdf-forms",
+          "contract-review"
+        ],
+        "creator_name": "Gavel",
+        "creator_url": "https://www.gavel.io/",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "german-law-mcp",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/Ansvar-Systems/German-law-mcp/main/README.md",
+          "kind": "maintainer",
+          "sha256": "3d13e312457e4898da91dd3ac1eda37a180aad32bbb4092326083710abf59307",
+          "quote": "The German law corpus is now served through the Ansvar Gateway."
+        }
+      ],
+      "listing_sha256": "09a1445c6854a94dc4ace7dce90c3da8975c2d80bb27a7c74173c660af18a9d0",
+      "claims": {
+        "slug": "german-law-mcp",
+        "name": "German Law MCP (Ansvar Systems)",
+        "tagline": "German legal-source access through the Ansvar MCP gateway or a self-hosted build.",
+        "description": "Ansvar Systems documents German legal-source access through its MCP gateway with OAuth and account tiers. The repository also contains self-hosting code and ingestion tooling; the pre-built corpus is not distributed as a public artifact, so self-hosting requires building the database and checking upstream licensing constraints. This listing does not certify legal accuracy, complete coverage or translation quality. Documentation reviewed; gateway authentication, corpus ingestion and query results were not tested.",
+        "category": "legal_research",
+        "external_url": "https://github.com/Ansvar-Systems/German-law-mcp",
+        "mcp_repo_url": "https://github.com/Ansvar-Systems/German-law-mcp",
+        "mcp_install_command": null,
+        "pricing_model": "freemium",
+        "pricing_details": "The maintainer describes free and paid gateway tiers. Self-hosting requires ingestion, resources and source-license review; confirm current quotas and terms.",
+        "tags": [
+          "german-law",
+          "statutes",
+          "gateway",
+          "self-hosted",
+          "mcp"
+        ],
+        "creator_name": "Ansvar Systems",
+        "creator_url": "https://ansvar.eu",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "harvey-ai",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": false,
+      "sources": [
+        {
+          "url": "https://www.harvey.ai/",
+          "kind": "vendor",
+          "sha256": "cc66f33d15a8e350698bb3c46564689a49756ec666ec02760a643616e3082984",
+          "quote": "Securely store, organize, and bulk-analyze legal documents."
+        }
+      ],
+      "listing_sha256": "1ca3d291f847ba66803615d3cc791e98be6aefe55ba268d266f72472d21100c5",
+      "claims": {
+        "slug": "harvey-ai",
+        "name": "Harvey",
+        "tagline": "Commercial legal AI for research, document analysis and legal workflows.",
+        "description": "Harvey is a commercial AI platform for legal and professional services. Its product site describes legal and regulatory research, Vault document analysis, contract intelligence and legal workflow agents. Availability depends on the product and account configuration; confirm licensed sources, access controls and intended workflows with Harvey. Documentation reviewed; customer-account access and output quality were not independently tested.",
+        "category": "legal_research",
+        "external_url": "https://www.harvey.ai/",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "contact",
+        "pricing_details": "Contact Harvey for current product access, licensed content, implementation requirements and pricing.",
+        "tags": [
+          "legal-ai",
+          "research",
+          "document-analysis",
+          "workflows"
+        ],
+        "creator_name": "Harvey",
+        "creator_url": "https://www.harvey.ai/",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "harvey-mcp",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://developers.harvey.ai/guides/harvey_mcp.md",
+          "kind": "vendor",
+          "sha256": "ddcad27e1d604a75063491c10ff5b7dd15d2f3b0e4b43817decb11d808ff58b6",
+          "quote": "Your client must support remote MCP servers over Streamable HTTP transport with OAuth authentication."
+        }
+      ],
+      "listing_sha256": "73e51dd1bad640f6e8537e5169a65fee28720ead003ee791de4baec44758f91e",
+      "claims": {
+        "slug": "harvey-mcp",
+        "name": "Harvey MCP (beta)",
+        "tagline": "Vendor-documented MCP tools for Harvey questions, Vault documents and enabled research sources.",
+        "description": "Harvey documents an MCP server for general questions, Vault document analysis, available projects and enabled research knowledge sources. It requires an eligible Harvey account, enabled feature access and a client supporting remote Streamable HTTP with OAuth. Tools and sources are limited by account permissions. Review the destination AI provider's data terms as well as Harvey's. Documentation reviewed; customer enrollment, authentication and tool calls were not tested.",
+        "category": "legal_research",
+        "external_url": "https://developers.harvey.ai/guides/harvey_mcp",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "contact",
+        "pricing_details": "Requires Harvey access and feature eligibility. Confirm current subscription and connector requirements with Harvey.",
+        "tags": [
+          "legal-ai",
+          "vault",
+          "research",
+          "official-connector",
+          "mcp"
+        ],
+        "creator_name": "Harvey",
+        "creator_url": "https://www.harvey.ai/",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
       "slug": "imanage-work",
       "decision": "approved",
       "reviewed_at": "2026-10-27",
-      "reviewer": "Codex — primary documentation review for catalog correction",
-      "listing_sha256": "d6cce281a04b971d4256301c3401dc4c0d035c19d43f388f4c75139de9ca112d",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": true,
@@ -22,13 +853,914 @@
           "sha256": "5f83d6b6e473cd2754550dcc4626058525da85dce5ad3516f7299bfd7019b4ed",
           "quote": "Yes, iManage includes the industry-leading email management solution"
         }
-      ]
+      ],
+      "listing_sha256": "181d8cfe81270c57829d9c95d547b77e14d5c149a57cb0ffb0f24c4db65d8894",
+      "claims": {
+        "slug": "imanage-work",
+        "name": "iManage Work",
+        "tagline": "Document and email management with vendor-documented AI-assistant connectors.",
+        "description": "iManage Work provides document and email management. Its vendor documents a Work connector in Claude and custom MCP connectors for search, Insight+ and Tracker. Setup requires an eligible account and may require administrator enablement. The vendor documents read permissions by default; available tools depend on administrator configuration. Connector URLs vary by environment and company subdomain. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "category": "document_processing",
+        "external_url": "https://docs.imanage.com/ai/mcpserver-user-help/en-US/Adding_MCP_connectors_for_Claude.html",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "contact",
+        "pricing_details": "Confirm current pricing, plan eligibility and limits with the vendor.",
+        "tags": [
+          "imanage",
+          "document-management",
+          "email-management",
+          "mcp",
+          "official-connector"
+        ],
+        "creator_name": "iManage",
+        "creator_url": "https://imanage.com",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "invoice-my-clients-mcp",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://www.invoicemyclients.com/features/mcp-server",
+          "kind": "vendor",
+          "sha256": "0cbe8d88d3b53aea37306a516a61039a01c7c9a34654f857b746c8a522386fae",
+          "quote": "Create draft invoices, add line items, and change tax, discounts, and shipping by asking your assistant in plain language."
+        }
+      ],
+      "listing_sha256": "6d5e61d84562cb310274e3df1f847ccc02580bc9a05e681a77680fcc3efb45c5",
+      "claims": {
+        "slug": "invoice-my-clients-mcp",
+        "name": "Invoice My Clients MCP",
+        "tagline": "Vendor-hosted MCP for draft invoices, billable time and client records.",
+        "description": "Invoice My Clients documents a hosted MCP connector for creating and editing draft invoices, logging billable hours, managing client records and checking balances. Sign-in is available across its plans, subject to each plan’s limits; API-key connections require Professional or above. Actions that contact clients require sending permission and explicit approval. This is a general billing product, not a purpose-built legal matter system. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "category": "billing_time",
+        "external_url": "https://www.invoicemyclients.com/features/mcp-server",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "freemium",
+        "pricing_details": "Vendor documents sign-in connections on every plan, including Free; plan limits apply. API-key connections require Professional or above. Confirm current plan prices.",
+        "tags": [
+          "invoicing",
+          "time-tracking",
+          "mcp",
+          "official-connector"
+        ],
+        "creator_name": "Invoice My Clients",
+        "creator_url": "https://www.invoicemyclients.com",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "ironclad",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://ironcladapp.com/",
+          "kind": "vendor",
+          "sha256": "0334547dd0ec1d924f62c56ecf54066214b74d00e1a19a90dbdefaeeee6d2de0",
+          "quote": "AI Contract Lifecycle Management"
+        },
+        {
+          "url": "https://support.ironcladapp.com/api/v2/help_center/en-us/articles/39887632957463.json",
+          "kind": "vendor",
+          "sha256": "318c99e7a7709486d0d673a8e2777269a716120daf36ea247d4b389c2f3e7c8b",
+          "quote": "It is read-only, supporting search only and never creating, editing, or deleting data."
+        }
+      ],
+      "listing_sha256": "06c9eab15ad3f01fdd0ca808e4060f19c90e77ebe3977f03d74688b353d651c4",
+      "claims": {
+        "slug": "ironclad",
+        "name": "Ironclad",
+        "tagline": "Contract lifecycle software with documented contract-search and obligation connectors.",
+        "description": "Ironclad provides AI-assisted contract lifecycle management. Its official MCP documentation describes permission-aware conversational contract search and obligation tools. Conversational search is read-only; creating and updating obligations requires the Obligations add-on. API/Search eligibility, granted session scopes, client support and the signed-in user’s permissions determine tool availability. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "category": "document_processing",
+        "external_url": "https://ironcladapp.com/",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "contact",
+        "pricing_details": "Confirm current pricing, plan eligibility and limits with the vendor.",
+        "tags": [
+          "contract-management",
+          "document-processing",
+          "mcp",
+          "official-connector"
+        ],
+        "creator_name": "Ironclad",
+        "creator_url": "https://ironcladapp.com/",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "kira-systems",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": false,
+      "sources": [
+        {
+          "url": "https://www.litera.com/capabilities/review",
+          "kind": "vendor",
+          "sha256": "3ccb4131e0ad27488d891c98bc771ea9fe6f98da1858fcb2f719a0b24feb45ce",
+          "quote": "Kira Purpose-built for high-volume, high-stakes review and due diligence."
+        }
+      ],
+      "listing_sha256": "364e4de40e246901ac23339c16517268d32c9b3e30309dc3b32362879024748d",
+      "claims": {
+        "slug": "kira-systems",
+        "name": "Kira by Litera",
+        "tagline": "AI-assisted contract review and extraction for due diligence.",
+        "description": "Kira is Litera’s contract-review and due-diligence product. Litera describes extracting contract provisions, reviewing findings against source documents, using pre-built or custom fields, and collaborating in review grids. Confirm product availability, commercial terms and the features included in your deployment with Litera. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "category": "document_processing",
+        "external_url": "https://www.litera.com/capabilities/review",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "contact",
+        "pricing_details": "Confirm current pricing, plan eligibility and limits with the vendor.",
+        "tags": [
+          "contract-review",
+          "due-diligence",
+          "clause-extraction"
+        ],
+        "creator_name": "Litera",
+        "creator_url": "https://www.litera.com",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "lawdroid",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": false,
+      "sources": [
+        {
+          "url": "https://lawdroid.com/builder/",
+          "kind": "vendor",
+          "sha256": "82b09bbe63ffa95bd9b95e438eb69b676141ce2c2f7ca8636974214cd1cb27fc",
+          "quote": "LawDroid empowers you to jump in and takeover automated conversations with human agent takeover."
+        }
+      ],
+      "listing_sha256": "662cf5360ad155400b7ff1e6afb3aa7014b96b5ca335b2c79f02a4c8479c9eee",
+      "claims": {
+        "slug": "lawdroid",
+        "name": "LawDroid Builder",
+        "tagline": "No-code AI workflows for intake conversations and document templates.",
+        "description": "LawDroid Builder is a no-code AI development platform for law firms. The vendor describes intake chatbots, natural-language answers, Word-based document templates and human takeover of automated conversations. The vendor page does not establish that any particular firm’s deployment meets confidentiality or professional obligations; those require the firm’s own configuration and review. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "category": "client_communication",
+        "external_url": "https://lawdroid.com/builder/",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "contact",
+        "pricing_details": "Confirm current pricing, plan eligibility and limits with the vendor.",
+        "tags": [
+          "intake",
+          "chatbots",
+          "document-automation",
+          "human-review"
+        ],
+        "creator_name": "LawDroid Ltd.",
+        "creator_url": "https://lawdroid.com",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "legal-mcp-agentic",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/agentic-ops/legal-mcp/HEAD/README.md",
+          "kind": "maintainer",
+          "sha256": "f6fefd0f2f48978af1617ed5264b3250d09cf8ee608a4c6e6dcf9a525a7c9162",
+          "quote": "Production mode is the default: bundled sample legal content is disabled, while real-document tools and optional opt-in live legal databases remain available."
+        }
+      ],
+      "listing_sha256": "673e50273e3c2f9f82162d5e4bfd0aa34a050326c68cbe20f40ee60c09e63764",
+      "claims": {
+        "slug": "legal-mcp-agentic",
+        "name": "Legal MCP by Agentic Ops",
+        "tagline": "Community MCP for structured legal-document and research workflows.",
+        "description": "The Agentic Ops repository documents a community MCP server for legal research, citation checks, clause comparison and guided drafting scaffolds. Its README distinguishes real-document workflows from opt-in bundled demo content; external CourtListener/RECAP and PACER integrations are optional. PACER, inference providers and other connected services can impose separate charges and data-handling terms. Outputs require qualified review. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "category": "case_management",
+        "external_url": "https://github.com/agentic-ops/legal-mcp",
+        "mcp_repo_url": "https://github.com/agentic-ops/legal-mcp",
+        "mcp_install_command": null,
+        "pricing_model": "free",
+        "pricing_details": "Repository is AGPL-3.0 licensed and documents free self-hosting; separate commercial licensing is offered. Hosting, inference and optional paid databases can cost extra.",
+        "tags": [
+          "legal-research",
+          "document-workflows",
+          "mcp",
+          "community-maintained"
+        ],
+        "creator_name": "Agentic Ops",
+        "creator_url": "https://github.com/agentic-ops",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "lex-machina",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": false,
+      "sources": [
+        {
+          "url": "https://www.lexisnexis.com/en-us/products/lex-machina.page",
+          "kind": "vendor",
+          "sha256": "f56a967fd7d4bdd79233d46c7898aefb80843bc40f85901024314ce00b40677f",
+          "quote": "Gain insights into the past behavior of parties, counsel, experts, judges, and courts to improve litigation and business outcomes."
+        }
+      ],
+      "listing_sha256": "fc77220a960242a2cd12e1e460e7e2cd4ca11171775a513f303ba956edc34b4f",
+      "claims": {
+        "slug": "lex-machina",
+        "name": "Lex Machina",
+        "tagline": "Litigation analytics for judges, parties, counsel and case outcomes.",
+        "description": "Lex Machina is a LexisNexis litigation-analytics product. The vendor describes AI-assisted attorney review that structures court information and supports analysis of judges, parties, counsel, case timing, resolutions and damages. Coverage differs by court and data set; confirm current coverage and subscription access for your research. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "category": "legal_research",
+        "external_url": "https://www.lexisnexis.com/en-us/products/lex-machina.page",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "contact",
+        "pricing_details": "Confirm current pricing, plan eligibility and limits with the vendor.",
+        "tags": [
+          "litigation-analytics",
+          "court-data",
+          "case-research"
+        ],
+        "creator_name": "LexisNexis",
+        "creator_url": "https://www.lexisnexis.com",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "luminance",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": false,
+      "sources": [
+        {
+          "url": "https://www.luminance.com/",
+          "kind": "vendor",
+          "sha256": "9b7de8e207c60fe5d5ebb015f551e521b769f520c3ff9ce4cf256f51676f8db4",
+          "quote": "Bring precedent and playbooks into every negotiation."
+        },
+        {
+          "url": "https://www.luminance.com/platform/technology",
+          "kind": "vendor",
+          "sha256": "9ff9ae861a7c117534627ea0df5bf100256d6ac7c2dfd3cda507bd851a1cc9bd",
+          "quote": "This foundation powers AI agents that orchestrate multi-step contract work at scale, automating repeatable tasks while maintaining control."
+        }
+      ],
+      "listing_sha256": "655ecfac68f79d901f07c6643132feddfd3d040ab7381ab07196dcce9ada16f8",
+      "claims": {
+        "slug": "luminance",
+        "name": "Luminance",
+        "tagline": "AI contract intelligence for review, negotiation and portfolio analysis.",
+        "description": "Luminance provides contract-intelligence software for legal and business teams. Its vendor describes tools for negotiation using playbooks and precedent, contract-portfolio questions, and connected contract workflows. Its technology documentation describes AI-based orchestration and source-grounded validation; that is a vendor product description, not a LegalAIMCP accuracy benchmark. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "category": "document_processing",
+        "external_url": "https://www.luminance.com/",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "contact",
+        "pricing_details": "Confirm current pricing, plan eligibility and limits with the vendor.",
+        "tags": [
+          "contract-review",
+          "negotiation",
+          "contract-intelligence"
+        ],
+        "creator_name": "Luminance",
+        "creator_url": "https://www.luminance.com/",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "nyclaw-custom-development",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": false,
+      "sources": [
+        {
+          "url": "https://nyclaw.io/law-firm-workflows",
+          "kind": "vendor",
+          "sha256": "5a32a65eda9883a77bf955b13a885076bebba05bc67d45f441af24b3e09fe331",
+          "quote": "One administrative workflow. Agreed scope and fee only after the free fit call."
+        }
+      ],
+      "listing_sha256": "e3f3f1b9f36b43a2800590ca2c2833d0219e86981f72835ae3db518061e2a6a1",
+      "claims": {
+        "slug": "nyclaw-custom-development",
+        "name": "NYClaw Workflow Blueprint",
+        "tagline": "Review one law-firm handoff and identify a practical next step.",
+        "description": "NYClaw offers a Workflow Blueprint assessment for a single administrative handoff, such as intake, document follow-up or invoice preparation. The published process maps inputs, ownership, exceptions and a configure/buy/build/manual recommendation using fictional acceptance examples. Scope and fee are agreed after a fit call. A review request is not a booking or paid-work agreement; legal and client decisions remain with the firm. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "category": "general",
+        "external_url": "https://nyclaw.io/law-firm-workflows",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "contact",
+        "pricing_details": "Confirm current pricing, plan eligibility and limits with the vendor.",
+        "tags": [
+          "workflow-assessment",
+          "intake",
+          "document-follow-up",
+          "human-review"
+        ],
+        "creator_name": "NYClaw",
+        "creator_url": "https://nyclaw.io",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "open-legal-compliance-mcp",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/TCoder920x/open-legal-compliance-mcp/HEAD/README.md",
+          "kind": "maintainer",
+          "sha256": "7fa4610188f548dd60937de9dc8807282487adec6f642a1ecdcb8099c319ff37",
+          "quote": "The server will not start without this key."
+        }
+      ],
+      "listing_sha256": "782f0f70b160642ad24a1b2e7404e9609d580118734c0dafc2580d11985f0639",
+      "claims": {
+        "slug": "open-legal-compliance-mcp",
+        "name": "Open Legal Compliance MCP",
+        "tagline": "Community MCP for searching public legal and regulatory sources.",
+        "description": "The TCoder920x repository documents searches across public legal and regulatory sources, including GovInfo, CourtListener, Congress.gov, the Federal Register and selected international sources. GovInfo credentials are required to start the server; other capabilities require their own optional keys or scraping access. This is a community research connector, not a determination that a client or activity complies with law. Verify retrieved material against its original source. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "category": "legal_research",
+        "external_url": "https://github.com/TCoder920x/open-legal-compliance-mcp",
+        "mcp_repo_url": "https://github.com/TCoder920x/open-legal-compliance-mcp",
+        "mcp_install_command": null,
+        "pricing_model": "free",
+        "pricing_details": "MIT-licensed server code; API registrations, hosting and connected-service terms or costs are separate. A GovInfo API key is required.",
+        "tags": [
+          "legal-research",
+          "government-data",
+          "mcp",
+          "community-maintained"
+        ],
+        "creator_name": "TCoder920x",
+        "creator_url": "https://github.com/TCoder920x",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "pageguard-privacy-compliance",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/pageguard/pageguard-mcp/HEAD/README.md",
+          "kind": "maintainer",
+          "sha256": "69f06753b0155c8659cf403e52853c1b478ec60157f08da7819238962da3ed4d",
+          "quote": "MCP (Model Context Protocol) server that exposes PageGuard privacy compliance scanning as tools for AI coding assistants."
+        }
+      ],
+      "listing_sha256": "ca90fb3a033fec5116e8156a5e0db37f0b60f98b0f84e9944258720a6b99da53",
+      "claims": {
+        "slug": "pageguard-privacy-compliance",
+        "name": "PageGuard MCP",
+        "tagline": "Developer privacy scans and draft documentation through MCP tools.",
+        "description": "PageGuard’s maintainer documents a general-purpose MCP server for local project scans, live URL scans and draft privacy-document generation. Local scans need no API key; URL scanning and document generation require a PageGuard API key. Local scanning inspects project files, including configuration and environment files, so review the permitted file scope before connecting. Findings and generated documents require human review and do not establish legal compliance. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "category": "compliance",
+        "external_url": "https://github.com/pageguard/pageguard-mcp",
+        "mcp_repo_url": "https://github.com/pageguard/pageguard-mcp",
+        "mcp_install_command": null,
+        "pricing_model": "freemium",
+        "pricing_details": "Maintainer documents free scanning and credit-priced document generation; URL scans and generation require an API key. Confirm current service terms and prices.",
+        "tags": [
+          "privacy-tools",
+          "developer-tools",
+          "mcp",
+          "human-review"
+        ],
+        "creator_name": "PageGuard",
+        "creator_url": "https://www.getpageguard.com/",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "paymo-time-tracker-mcp",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/feamster/paymo-mcp/HEAD/README.md",
+          "kind": "maintainer",
+          "sha256": "ed1285bf0127faf399394898d9cb72488ad87ceef894e268cde3b84c853df125",
+          "quote": "A Model Context Protocol (MCP) server for [Paymo](https://www.paymoapp.com/) time tracking and invoicing."
+        }
+      ],
+      "listing_sha256": "a4c331de4c45678b35003b6ec0605e286050984c46dc223240266c2af99cb43a",
+      "claims": {
+        "slug": "paymo-time-tracker-mcp",
+        "name": "Paymo MCP by feamster",
+        "tagline": "Community connector for Paymo time entries, projects and invoice timesheets.",
+        "description": "The feamster repository documents a community MCP server for Paymo time entries, projects, tasks, unbilled-time analysis and invoice timesheet exports. It also documents invoice creation and updates, which can change account data. The maintainer says invoice sending remains in the Paymo web interface. Setup requires a Paymo account with API access. This is a general billing connector, not a purpose-built legal matter system. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "category": "billing_time",
+        "external_url": "https://github.com/feamster/paymo-mcp",
+        "mcp_repo_url": "https://github.com/feamster/paymo-mcp",
+        "mcp_install_command": null,
+        "pricing_model": "free",
+        "pricing_details": "MIT-licensed server code. Requires a Paymo account with API access; Paymo pricing, hosting and connected-service costs are separate.",
+        "tags": [
+          "paymo",
+          "time-tracking",
+          "invoicing",
+          "mcp",
+          "community-maintained"
+        ],
+        "creator_name": "feamster",
+        "creator_url": "https://github.com/feamster",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "pdf-reader-mcp",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/SylphxAI/anymd/HEAD/README.md",
+          "kind": "maintainer",
+          "sha256": "40e70337814ddcad1121f8e390b90d1c74ada27a88e4651b2a483e2b67b6092a",
+          "quote": "Formerly **pdf-reader-mcp**."
+        }
+      ],
+      "listing_sha256": "2c0f40d69e79ec22d7c7f07fe86bad395c793a4ae063e2980948fac401c2054a",
+      "claims": {
+        "slug": "pdf-reader-mcp",
+        "name": "anymd (formerly PDF Reader MCP)",
+        "tagline": "General local MCP and command-line document-to-Markdown extraction.",
+        "description": "The Sylphx maintainer has renamed pdf-reader-mcp to anymd. The project documents a local MCP server and command-line tool for converting PDFs and other document formats into Markdown, with search and optional OCR capabilities. It is general document extraction software, not a legal-analysis or citation-verification system. Review local file access, optional model downloads and the current migration/setup instructions before use. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "category": "document_processing",
+        "external_url": "https://github.com/SylphxAI/anymd",
+        "mcp_repo_url": "https://github.com/SylphxAI/anymd",
+        "mcp_install_command": null,
+        "pricing_model": "free",
+        "pricing_details": "MIT-licensed local server/CLI. Maintainer also offers a separately hosted, metered parsing service; confirm any hosted or optional-model costs.",
+        "tags": [
+          "pdf",
+          "document-extraction",
+          "markdown",
+          "mcp",
+          "general-purpose"
+        ],
+        "creator_name": "Sylphx",
+        "creator_url": "https://sylphx.com",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "regulationsgov-mcp",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://1102tools.com/mcp/regulations-gov",
+          "kind": "vendor",
+          "sha256": "5c4f6c2d0129c2712aa25a12f891ca1c7cde943f65351b78b74dbe095b7cff32",
+          "quote": "Rulemaking dockets, documents, and public comments."
+        }
+      ],
+      "listing_sha256": "e19088da0de703248279e5b3c2b936425b5abca6fc439975250b30936eebc0b5",
+      "claims": {
+        "slug": "regulationsgov-mcp",
+        "name": "Regulations.gov MCP by 1102tools",
+        "tagline": "Independent connector for rulemaking dockets, documents and public comments.",
+        "description": "1102tools documents an independently developed MCP server for reading Regulations.gov rulemaking documents, dockets and public comments. Its hosted connector is offered without a user account or API key; local setup requires a Regulations.gov API key. It is not operated or endorsed by a federal agency. Check the original government record, current filters and returned comment-period dates before relying on a result. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "category": "legal_research",
+        "external_url": "https://1102tools.com/mcp/regulations-gov",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "free",
+        "pricing_details": "Vendor documents free MIT-licensed hosted and local options. Hosted access needs no user API key; local access requires a free Regulations.gov key.",
+        "tags": [
+          "regulations",
+          "rulemaking",
+          "government-data",
+          "mcp",
+          "independent-connector"
+        ],
+        "creator_name": "1102tools",
+        "creator_url": "https://1102tools.com",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "relativity",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": false,
+      "sources": [
+        {
+          "url": "https://www.relativity.com/",
+          "kind": "vendor",
+          "sha256": "107f82b753614156f5e166f0a9e96f485dc18129aa5af67892780ce2ba80cdae",
+          "quote": "e-Discovery Manage end-to-end litigation &ndash; collect, process, review, and produce in one place."
+        }
+      ],
+      "listing_sha256": "ad166c1707f843fcd033f3d5b45cd6419fcbaaff17547313dc33097826c5de2b",
+      "claims": {
+        "slug": "relativity",
+        "name": "Relativity",
+        "tagline": "AI-assisted legal-data review for discovery, investigations and contract work.",
+        "description": "Relativity describes an AI-assisted legal-data platform for discovery, investigations, contract review and related legal-data workflows. Its current site describes collecting, processing, reviewing and producing materials, together with tools for working through a case record. Confirm the deployment, supported data types, enabled features and commercial terms with Relativity. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "category": "compliance",
+        "external_url": "https://www.relativity.com/",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "contact",
+        "pricing_details": "Confirm current pricing, plan eligibility and limits with the vendor.",
+        "tags": [
+          "ediscovery",
+          "investigations",
+          "document-review",
+          "legal-data"
+        ],
+        "creator_name": "Relativity",
+        "creator_url": "https://www.relativity.com/",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "scoro-practice-analytics",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://www.scoro.com/mcp/",
+          "kind": "vendor",
+          "sha256": "5d50dcc338734478052bf95c7ffac0abe41051c55296340fe888a7ffa5168402",
+          "quote": "plus read access to financial documents like invoices, bills, expenses, and quotes."
+        }
+      ],
+      "listing_sha256": "4173379a0a7a1a3fa5487f46919023c613254977c2afe9585dbc5c0a52610c2f",
+      "claims": {
+        "slug": "scoro-practice-analytics",
+        "name": "Scoro MCP",
+        "tagline": "Vendor connector for Scoro workspace tasks, time entries and financial reads.",
+        "description": "Scoro documents an official MCP connector for its general professional-services work-management platform. Current documentation lists read/write actions for projects, tasks, calendar events, comments, time entries and contacts, plus read access to financial documents. Workspace and user connections are required; enabled tools and existing user permissions determine access. This is not a separate legal-practice analytics product, and not every Scoro module is available through the connector. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "category": "general",
+        "external_url": "https://www.scoro.com/mcp/",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "contact",
+        "pricing_details": "Confirm current pricing, plan eligibility and limits with the vendor.",
+        "tags": [
+          "professional-services",
+          "project-management",
+          "time-tracking",
+          "mcp",
+          "official-connector"
+        ],
+        "creator_name": "Scoro",
+        "creator_url": "https://www.scoro.com",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "smith-ai",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": false,
+      "sources": [
+        {
+          "url": "https://smith.ai/",
+          "kind": "vendor",
+          "sha256": "102a7fa75d75d7c03f14df443d19146ddaad6d39626684ed593bcae95bd0df30",
+          "quote": "Our unique hybrid solution gives you the best of both worlds."
+        }
+      ],
+      "listing_sha256": "1211120a74a3dbfcb0c1284004d242dceea0d02ee8d3b5a6610317d878b6cca1",
+      "claims": {
+        "slug": "smith-ai",
+        "name": "Smith.ai",
+        "tagline": "AI and human receptionist options for call handling and intake.",
+        "description": "Smith.ai offers AI and human receptionist options. Its law-firm material describes answering and qualifying calls, gathering intake information and booking appointments according to the firm’s instructions. Confirm which coverage, escalation paths, software integrations and plan limits apply to the service selected. This listing does not promise new-client conversion, savings or return on investment. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "category": "client_communication",
+        "external_url": "https://smith.ai/",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "contact",
+        "pricing_details": "Confirm current pricing, plan eligibility and limits with the vendor.",
+        "tags": [
+          "receptionist",
+          "intake",
+          "appointments",
+          "human-handoff"
+        ],
+        "creator_name": "Smith.ai",
+        "creator_url": "https://smith.ai/",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "smokeball",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": false,
+      "sources": [
+        {
+          "url": "https://www.smokeball.com/",
+          "kind": "vendor",
+          "sha256": "e0a1f85872baae9d97c0af6f6685b1b7dfe32c69b4da742868bd1b907aa39a3c",
+          "quote": "Archie works inside your matter to draft, review, and answer questions, so you deliver your best work, faster."
+        }
+      ],
+      "listing_sha256": "7e489d38165fac3931e98353ee7debbfc5ff13f2335659358f6f5fb1acbb53b0",
+      "claims": {
+        "slug": "smokeball",
+        "name": "Smokeball",
+        "tagline": "Legal practice management with automatic time tracking and Archie AI.",
+        "description": "Smokeball offers legal practice management with automatic time tracking, document automation, billing, trust accounting and reporting. The vendor describes Archie AI for drafting, document review and questions within matters. Features depend on the selected plan and deployment; confirm eligibility, supported integrations and the firm’s review controls with Smokeball. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "category": "case_management",
+        "external_url": "https://www.smokeball.com/",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "contact",
+        "pricing_details": "Confirm current pricing, plan eligibility and limits with the vendor.",
+        "tags": [
+          "practice-management",
+          "time-tracking",
+          "document-automation",
+          "archie-ai"
+        ],
+        "creator_name": "Smokeball",
+        "creator_url": "https://www.smokeball.com/",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "supabase-legal-mcp",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/supabase-community/supabase-mcp/HEAD/README.md",
+          "kind": "maintainer",
+          "sha256": "054ee5224ed78e8918ed73ac44f02bc10224b92cde881133d6e21429d8dceb17",
+          "quote": "It connects AI assistants directly with your Supabase project and allows them to perform tasks like managing tables, fetching config, and querying data."
+        },
+        {
+          "url": "https://supabase.com/docs/guides/ai-tools/mcp",
+          "kind": "vendor",
+          "sha256": "f3169305b3d44ee44fdd7c96cf0909351d7a3d99032edfbd5ebe13844c910c41",
+          "quote": "Scope the MCP server to a project. If no project is selected, all projects will be accessible."
+        }
+      ],
+      "listing_sha256": "fa58280ac951c6c23af61f591f24865e446dc128ad9dbcf240e5637da1226689",
+      "claims": {
+        "slug": "supabase-legal-mcp",
+        "name": "Supabase MCP Server",
+        "tagline": "General developer connector for managing and querying Supabase projects.",
+        "description": "Supabase’s official MCP server connects AI assistants to Supabase projects for database queries, schema/migration work and other enabled developer tools. It is general development tooling, not a legal database template or a client-permission-aware legal application. Project scoping, optional read-only mode and feature selection constrain access; write tools exist outside read-only configuration. Review Supabase’s security guidance before connecting company data. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "category": "general",
+        "external_url": "https://supabase.com/docs/guides/ai-tools/mcp",
+        "mcp_repo_url": "https://github.com/supabase-community/supabase-mcp",
+        "mcp_install_command": null,
+        "pricing_model": "contact",
+        "pricing_details": "Server code is open source; Supabase hosting/features, client subscriptions and operational costs are separate. Some tools create paid resources. Confirm current vendor plans.",
+        "tags": [
+          "supabase",
+          "database",
+          "developer-tools",
+          "mcp",
+          "general-purpose"
+        ],
+        "creator_name": "Supabase",
+        "creator_url": "https://supabase.com",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "timesolv",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": false,
+      "sources": [
+        {
+          "url": "https://www.timesolv.com/",
+          "kind": "vendor",
+          "sha256": "fa2f1ae1381f736e4c60e5d79533837b08efde7ffe2f1a331b27365c03309581",
+          "quote": "TimeSolv integrates with QuickBooks, Xero, NetDocuments, Dropbox and LawPay and AI time tracking tools like PointOne."
+        }
+      ],
+      "listing_sha256": "4907d06d09cdcbfe26b410d35222c3ca8c8ce265d0dad698de4ca1b9b74996d8",
+      "claims": {
+        "slug": "timesolv",
+        "name": "TimeSolv",
+        "tagline": "Legal time and billing software with documented third-party integrations.",
+        "description": "TimeSolv provides legal time tracking, invoicing, trust accounting and firm reporting. Its vendor lists integrations with billing, accounting and document services, including PointOne AI time-tracking tools. That integration does not establish native AI narrative suggestions, duplicate detection or billing-rate optimization in TimeSolv itself. Confirm the selected features and integration subscriptions with the vendor. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "category": "billing_time",
+        "external_url": "https://www.timesolv.com/",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "contact",
+        "pricing_details": "Confirm current pricing, plan eligibility and limits with the vendor.",
+        "tags": [
+          "legal-billing",
+          "time-tracking",
+          "invoicing",
+          "integrations"
+        ],
+        "creator_name": "TimeSolv",
+        "creator_url": "https://www.timesolv.com/",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "us-legal-mcp",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/JamesANZ/us-legal-mcp/HEAD/README.md",
+          "kind": "maintainer",
+          "sha256": "e135dd170e879464fbeb1cabda46b64b5c30df1e4e1f4d7729f586ab92d126d6",
+          "quote": "Search Congress bills, Federal Register documents, court opinions, and committees."
+        }
+      ],
+      "listing_sha256": "618432b45599eee665abf5a2ec1f5d2075ae9e92bad4a06b1765bc161d422fcd",
+      "claims": {
+        "slug": "us-legal-mcp",
+        "name": "US Legal MCP",
+        "tagline": "Community MCP research tools for US bills, regulations and court opinions.",
+        "description": "The JamesANZ repository documents a community MCP server for Congress bills and committees, Federal Register documents, CourtListener opinions and selected curated legislative references. The maintainer describes optional API keys and additional source/filtering features. Confirm current upstream access and coverage, and read original source material before using results in legal work; a connector is not a guarantee of complete or accurate research. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "category": "legal_research",
+        "external_url": "https://github.com/JamesANZ/us-legal-mcp",
+        "mcp_repo_url": "https://github.com/JamesANZ/us-legal-mcp",
+        "mcp_install_command": null,
+        "pricing_model": "free",
+        "pricing_details": "MIT-licensed server software. Hosting, optional filtering services and upstream API terms or limits are separate.",
+        "tags": [
+          "us-law",
+          "government-data",
+          "legal-research",
+          "mcp",
+          "community-maintained"
+        ],
+        "creator_name": "JamesANZ",
+        "creator_url": "https://github.com/JamesANZ",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "vlex-vincent",
+      "decision": "approved",
+      "reviewed_at": "2026-10-27",
+      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": false,
+      "sources": [
+        {
+          "url": "https://vlex.com/vincent-ai",
+          "kind": "vendor",
+          "sha256": "e8e0e71bfa8cbf2be87a5ee387190577e8bff8cb845520e289a5b33a6cb8c904",
+          "quote": "Vincent combines vLex&#039;s global legal database with cutting-edge AI to handle complex legal work."
+        }
+      ],
+      "listing_sha256": "8907dff8836d341a748ad9212c9148718ed126d97dd490c084618353266235ef",
+      "claims": {
+        "slug": "vlex-vincent",
+        "name": "Vincent by vLex",
+        "tagline": "AI-assisted legal research, analysis and configurable legal workflows.",
+        "description": "Vincent is vLex’s legal AI product, now presented by vLex as part of Clio. Its official page describes research questions, analysis and drafting workflows, along with Vincent Studio for configuring firm-specific processes. Jurisdictional content, workflow availability and subscription entitlements vary; confirm the sources and package needed for a particular matter. Outputs still require qualified review. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "category": "legal_research",
+        "external_url": "https://vlex.com/vincent-ai",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "contact",
+        "pricing_details": "Confirm current pricing, plan eligibility and limits with the vendor.",
+        "tags": [
+          "legal-research",
+          "drafting",
+          "legal-workflows",
+          "vincent"
+        ],
+        "creator_name": "vLex",
+        "creator_url": "https://vlex.com",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
     }
   ],
   "blocked_domains": [
     "deadlinewatch.com"
   ],
   "blocked_slugs": [
-    "deadlinewatch-mcp"
+    "billbot-legal",
+    "caselaw-search-mcp",
+    "clientintake-ai",
+    "clientportal-ai",
+    "complianceguard-mcp",
+    "conflictcheck-ai",
+    "courtlistener-research-mcp",
+    "deadlinewatch-mcp",
+    "docgen-legal",
+    "dockettrack-mcp",
+    "emaildrafter-legal",
+    "legalchat-receptionist",
+    "legalmind-contract-analyzer",
+    "lexisconnect-mcp",
+    "mattersync",
+    "nerq-ai-compliance",
+    "redlineai"
   ]
 }

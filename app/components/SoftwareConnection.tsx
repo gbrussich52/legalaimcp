@@ -34,7 +34,7 @@ export function SoftwareConnectionDetails({ slug }: { slug: string }) {
       </dl>
       <div className="border-t border-slate-200 bg-slate-50 p-6 font-body text-sm">
         <a href={connection.source} target="_blank" rel="noopener noreferrer" className="text-gold-text font-semibold underline">{connection.sourceLabel} ↗</a>
-        <p className="text-charcoal/75 mt-2">Documentation reviewed <time dateTime={connection.reviewed}>October 19, 2026</time>. Setup has not been tested against a customer account. Start with fictional data and check the vendor&apos;s current requirements.</p>
+        <p className="text-charcoal/75 mt-2">Documentation reviewed <time dateTime={connection.reviewed}>{connection.reviewed}</time>. Setup has not been tested against a customer account. Start with fictional data and check the vendor&apos;s current requirements.</p>
       </div>
     </section>
   )

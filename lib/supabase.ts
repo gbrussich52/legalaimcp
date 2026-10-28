@@ -3,6 +3,8 @@ import { createClient } from '@supabase/supabase-js'
 // 2026-09-11: LegalAIMCP lives in schema `legalaimcp` of the estate's one Supabase project
 // (ref bzrdzchrdthyrhdsodla). Every client selects that schema here; queries stay unchanged.
 export const SUPABASE_SCHEMA = 'legalaimcp'
+// Bump on a reviewed bulk correction: ISR must not reuse the previous release's claims.
+export const CATALOG_CACHE_REVISION = '2026-10-27-source-audit'
 
 export function createSchemaClient(
   url: string,
@@ -15,8 +17,10 @@ export function createSchemaClient(
 /** Bounded cache for public reads only; form writes must never be cached. */
 export const fetchPublicCatalog: typeof fetch = (input, init) => {
   const method = (init?.method ?? (input instanceof Request ? input.method : 'GET')).toUpperCase()
+  const headers = new Headers(init?.headers ?? (input instanceof Request ? input.headers : undefined))
+  if (method === 'GET' || method === 'HEAD') headers.set('x-client-info', `${headers.get('x-client-info') ?? 'LegalAIMCP'}; catalog/${CATALOG_CACHE_REVISION}`)
   return fetch(input, method === 'GET' || method === 'HEAD'
-    ? { ...init, cache: 'force-cache', next: { revalidate: 300 } }
+    ? { ...init, headers: Object.fromEntries(headers.entries()), cache: 'force-cache', next: { revalidate: 300 } }
     : { ...init, cache: 'no-store', next: { revalidate: 0 } })
 }
 
