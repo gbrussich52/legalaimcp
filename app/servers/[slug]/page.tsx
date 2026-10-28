@@ -182,6 +182,10 @@ export default async function ListingDetailPage({
       </div>
 
       {/* Description */}
+      {listing.pricing_details && <section className="mb-8 rounded-xl border border-slate-200 p-5" aria-labelledby="pricing-access-heading">
+        <h2 id="pricing-access-heading" className="font-sans font-semibold text-navy">Pricing and access</h2>
+        <p className="font-body text-sm text-charcoal/80 mt-2">{listing.pricing_details}</p>
+      </section>}
       <section className="mb-10 max-w-content">
         <p className="font-body text-charcoal/80 leading-relaxed whitespace-pre-line">
           {listing.description}
