@@ -6,8 +6,8 @@ const policy=JSON.parse(await readFile(path.join(root,'lib/catalog-reviews.json'
 if(!policy.reviews.length)throw Error('No reviewed catalog artifacts to verify')
 for(const review of policy.reviews){
  const file=path.join(root,'.next/server/app/servers',`${review.slug}.html`)
- const html=(await readFile(file,'utf8')).split('</main>')[0]
- for(const expected of [review.claims.name,'Primary sources reviewed',review.reviewed_at,...review.sources.map(s=>s.url)]){
+ const html=(await readFile(file,'utf8')).split('</main>')[0].replace(/&#x27;/g,"'").replace(/&quot;/g,'"').replace(/&amp;/g,'&')
+ for(const expected of [review.claims.name,'Primary sources reviewed',review.reviewed_at,review.claims.pricing_details,...review.sources.map(s=>s.url)]){
   if(!html.includes(expected))throw Error(`Source-reviewed page missing exact evidence: ${review.slug}`)
  }
 }
