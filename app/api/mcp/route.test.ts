@@ -31,4 +31,30 @@ describe('single-message MCP route boundary', () => {
     expect(await response.text()).toContain('legalaimcp')
     expect(from).not.toHaveBeenCalled()
   })
+  it('preserves real handler discovery, structured results and validation under the patched SDK peer', async () => {
+    const row = { slug: 'fixture-tool', name: 'Fictional fixture', category: 'legal_research', pricing_model: 'free', verified: false, verified_at: null, description: 'Synthetic public description', secret: 'never-expose-fixture-secret' }
+    const chain = { select: vi.fn(), eq: vi.fn(), maybeSingle: vi.fn().mockResolvedValue({ data: row, error: null }) }
+    chain.select.mockReturnValue(chain); chain.eq.mockReturnValue(chain); from.mockReturnValue(chain)
+    const rpc = async (method: string, params: Record<string, unknown> = {}) => {
+      const response = await POST(request({ jsonrpc: '2.0', id: 19, method, params }))
+      expect(response.status).toBe(200)
+      const body = await response.text()
+      const messages = body.trim().startsWith('{') ? [JSON.parse(body)] : body.split('\n').filter(line => line.startsWith('data: ')).map(line => JSON.parse(line.slice(6)))
+      const reply = messages.find(message => message.id === 19)
+      expect(reply).toBeDefined()
+      return reply
+    }
+    const listed = await rpc('tools/list')
+    expect(listed.result.tools.some((tool: {name:string}) => tool.name === 'get_legal_ai_tool')).toBe(true)
+    const result = await rpc('tools/call', { name: 'get_legal_ai_tool', arguments: { slug: row.slug } })
+    expect(result.result.isError).not.toBe(true)
+    expect(result.result.structuredContent.found).toBe(true)
+    expect(result.result.structuredContent.tool.name).toBe(row.name)
+    expect(JSON.stringify(result)).not.toContain(row.secret)
+    from.mockClear()
+    const invalid = await rpc('tools/call', { name: 'get_legal_ai_tool', arguments: { slug: 42 } })
+    expect(invalid.result?.isError || invalid.error).toBeTruthy()
+    expect(from).not.toHaveBeenCalled()
+  })
+
 })

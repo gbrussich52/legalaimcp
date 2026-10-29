@@ -583,8 +583,8 @@
     {
       "slug": "firecrawl-gov-index",
       "decision": "approved",
-      "reviewed_at": "2026-10-28",
-      "reviewer": "Codex manual primary-source re-review on October 28, 2026",
+      "reviewed_at": "2026-10-29",
+      "reviewer": "Codex manual primary-source claim review on October 29, 2026",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": true,
@@ -592,7 +592,7 @@
         {
           "url": "https://www.firecrawl.dev/gov-index",
           "kind": "vendor",
-          "sha256": "236a03a78064dd702ef7c17eb17d39fd27dfb82c3f62283caf79f3f2ff77da14",
+          "sha256": "b2dbf75363daf9341e94675870c75d4b60f6df497cdac1f109e564abc0e3065b",
           "quote": "Call GET or POST /v2/search/gov, use firecrawl_gov_search in the Firecrawl MCP server"
         },
         {
@@ -679,8 +679,8 @@
     {
       "slug": "gavel",
       "decision": "approved",
-      "reviewed_at": "2026-10-27",
-      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "reviewed_at": "2026-10-29",
+      "reviewer": "Codex manual primary-source claim review on October 29, 2026",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": false,
@@ -688,13 +688,13 @@
         {
           "url": "https://www.gavel.io/",
           "kind": "vendor",
-          "sha256": "5a474d8953e9661f1eca7a0d51b23e7616fc90c640691d740d2e40a6cedfcfa4",
+          "sha256": "ec3035aa29cf41ef2c1cda6b70025973a81b17b9b23209ddfe95a9df611b4185",
           "quote": "Automate your Word docs with custom rules"
         },
         {
           "url": "https://www.gavel.io/pricing",
           "kind": "vendor",
-          "sha256": "fc89b24331bc8fe7e2421ac6cbf2b39af0d7ef159ce99d33741f76a3a3e1c008",
+          "sha256": "1580b5214691690f251a57bee0a4cb12588306e2741b910e6f093016799144bf",
           "quote": "Start 7-day trial"
         }
       ],
@@ -894,8 +894,8 @@
     {
       "slug": "invoice-my-clients-mcp",
       "decision": "approved",
-      "reviewed_at": "2026-10-27",
-      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "reviewed_at": "2026-10-29",
+      "reviewer": "Codex manual primary-source claim review on October 29, 2026",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": true,
@@ -903,16 +903,16 @@
         {
           "url": "https://www.invoicemyclients.com/features/mcp-server",
           "kind": "vendor",
-          "sha256": "0cbe8d88d3b53aea37306a516a61039a01c7c9a34654f857b746c8a522386fae",
+          "sha256": "8930dd493df78f34d6d3935d1463f4386957b8f5114d05ec6f9d9d6f4476265c",
           "quote": "Create draft invoices, add line items, and change tax, discounts, and shipping by asking your assistant in plain language."
         }
       ],
-      "listing_sha256": "6d5e61d84562cb310274e3df1f847ccc02580bc9a05e681a77680fcc3efb45c5",
+      "listing_sha256": "608f540fb206c0a8215dca2cbd2849074c095e4862f031479024a724048c4865",
       "claims": {
         "slug": "invoice-my-clients-mcp",
         "name": "Invoice My Clients MCP",
         "tagline": "Vendor-hosted MCP for draft invoices, billable time and client records.",
-        "description": "Invoice My Clients documents a hosted MCP connector for creating and editing draft invoices, logging billable hours, managing client records and checking balances. Sign-in is available across its plans, subject to each plan’s limits; API-key connections require Professional or above. Actions that contact clients require sending permission and explicit approval. This is a general billing product, not a purpose-built legal matter system. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "description": "Invoice My Clients documents a hosted MCP connector for creating and editing draft invoices, logging billable hours, managing client records and checking balances. Sign-in is available across its plans, subject to each plan’s limits; API-key connections require Professional or above. Actions that contact clients require sending permission and explicit approval. This is a general invoicing and time-tracking product; the cited source does not describe legal matter management. Documentation reviewed on October 29, 2026; customer-account access and deployed operation have not been tested.",
         "category": "billing_time",
         "external_url": "https://www.invoicemyclients.com/features/mcp-server",
         "mcp_repo_url": null,
@@ -934,8 +934,8 @@
     {
       "slug": "ironclad",
       "decision": "approved",
-      "reviewed_at": "2026-10-28",
-      "reviewer": "Codex manual primary-source re-review on October 28, 2026",
+      "reviewed_at": "2026-10-29",
+      "reviewer": "Codex manual primary-source claim review on October 29, 2026",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": true,
@@ -943,7 +943,7 @@
         {
           "url": "https://ironcladapp.com/",
           "kind": "vendor",
-          "sha256": "82b7a5fdfbdc963f97f83d2d2d4b02a8ba49d49ed397c05163599044ec761231",
+          "sha256": "fc78170e87fcd5600bbb721606ff7a4776e8a1482168af7ce11f4c308523d373",
           "quote": "AI Contract Lifecycle Management"
         },
         {
@@ -953,12 +953,12 @@
           "quote": "It is read-only, supporting search only and never creating, editing, or deleting data."
         }
       ],
-      "listing_sha256": "06c9eab15ad3f01fdd0ca808e4060f19c90e77ebe3977f03d74688b353d651c4",
+      "listing_sha256": "f27bf6d58cb3ce48cc19c688908e454ee3c0ab52a4dcc831ed6b2deffcf7db38",
       "claims": {
         "slug": "ironclad",
         "name": "Ironclad",
         "tagline": "Contract lifecycle software with documented contract-search and obligation connectors.",
-        "description": "Ironclad provides AI-assisted contract lifecycle management. Its official MCP documentation describes permission-aware conversational contract search and obligation tools. Conversational search is read-only; creating and updating obligations requires the Obligations add-on. API/Search eligibility, granted session scopes, client support and the signed-in user’s permissions determine tool availability. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "description": "Ironclad provides AI-assisted contract lifecycle management. Its official MCP documentation describes permission-aware conversational contract search and obligation tools. Conversational search is read-only; creating and updating obligations requires the Obligations add-on. API/Search eligibility, granted session scopes, client support and the signed-in user’s permissions determine tool availability. Documentation reviewed on October 29, 2026; customer-account access and deployed operation have not been tested.",
         "category": "document_processing",
         "external_url": "https://ironcladapp.com/",
         "mcp_repo_url": null,
@@ -1138,8 +1138,8 @@
     {
       "slug": "luminance",
       "decision": "approved",
-      "reviewed_at": "2026-10-28",
-      "reviewer": "Codex manual primary-source re-review on October 28, 2026",
+      "reviewed_at": "2026-10-29",
+      "reviewer": "Codex manual primary-source claim review on October 29, 2026",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": false,
@@ -1147,22 +1147,22 @@
         {
           "url": "https://www.luminance.com/",
           "kind": "vendor",
-          "sha256": "65698c7fc4b1f7e63720d41c6485faadc39c5f816674bac28788b8075ae9bd2c",
+          "sha256": "4921c2c126f9bfe4d366162b7cdeaeef60815788de91f46982e943b767b41da5",
           "quote": "Bring precedent and playbooks into every negotiation."
         },
         {
           "url": "https://www.luminance.com/platform/technology",
           "kind": "vendor",
-          "sha256": "9ff9ae861a7c117534627ea0df5bf100256d6ac7c2dfd3cda507bd851a1cc9bd",
+          "sha256": "769c9b96e05e850d32adeff7f5532113753b0629f9b070accff7d78e2a8487f0",
           "quote": "This foundation powers AI agents that orchestrate multi-step contract work at scale, automating repeatable tasks while maintaining control."
         }
       ],
-      "listing_sha256": "655ecfac68f79d901f07c6643132feddfd3d040ab7381ab07196dcce9ada16f8",
+      "listing_sha256": "9e18d265273af05eb3c476ddee7069eb1a62a9113efc2752e17890dc0f3ad71e",
       "claims": {
         "slug": "luminance",
         "name": "Luminance",
         "tagline": "AI contract intelligence for review, negotiation and portfolio analysis.",
-        "description": "Luminance provides contract-intelligence software for legal and business teams. Its vendor describes tools for negotiation using playbooks and precedent, contract-portfolio questions, and connected contract workflows. Its technology documentation describes AI-based orchestration and source-grounded validation; that is a vendor product description, not a LegalAIMCP accuracy benchmark. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "description": "Luminance provides contract-intelligence software for legal and business teams. Its vendor describes tools for negotiation using playbooks and precedent, contract-portfolio questions, and connected contract workflows. Its technology documentation describes AI-based orchestration and source-grounded validation; that is a vendor product description, not a LegalAIMCP accuracy benchmark. Documentation reviewed on October 29, 2026; customer-account access and deployed operation have not been tested.",
         "category": "document_processing",
         "external_url": "https://www.luminance.com/",
         "mcp_repo_url": null,
@@ -1385,8 +1385,8 @@
     {
       "slug": "regulationsgov-mcp",
       "decision": "approved",
-      "reviewed_at": "2026-10-27",
-      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "reviewed_at": "2026-10-29",
+      "reviewer": "Codex manual primary-source claim review on October 29, 2026",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": true,
@@ -1394,16 +1394,16 @@
         {
           "url": "https://1102tools.com/mcp/regulations-gov",
           "kind": "vendor",
-          "sha256": "5c4f6c2d0129c2712aa25a12f891ca1c7cde943f65351b78b74dbe095b7cff32",
+          "sha256": "638c897476e3f2a2e7b19ee268894eb0fa7296266825544a2561f4193987e99d",
           "quote": "Rulemaking dockets, documents, and public comments."
         }
       ],
-      "listing_sha256": "e19088da0de703248279e5b3c2b936425b5abca6fc439975250b30936eebc0b5",
+      "listing_sha256": "2875d077d3decd0dbdcfd18f1622d16efbaac55309a2f606c470eb7a2b580376",
       "claims": {
         "slug": "regulationsgov-mcp",
         "name": "Regulations.gov MCP by 1102tools",
         "tagline": "Independent connector for rulemaking dockets, documents and public comments.",
-        "description": "1102tools documents an independently developed MCP server for reading Regulations.gov rulemaking documents, dockets and public comments. Its hosted connector is offered without a user account or API key; local setup requires a Regulations.gov API key. It is not operated or endorsed by a federal agency. Check the original government record, current filters and returned comment-period dates before relying on a result. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "description": "1102tools documents an independently developed MCP server for reading Regulations.gov rulemaking documents, dockets and public comments. Its hosted connector is offered without a user account or API key; local setup requires a Regulations.gov API key. It is not operated or endorsed by a federal agency. Check the original government record, current filters and returned comment-period dates before relying on a result. Documentation reviewed on October 29, 2026; customer-account access and deployed operation have not been tested.",
         "category": "legal_research",
         "external_url": "https://1102tools.com/mcp/regulations-gov",
         "mcp_repo_url": null,
@@ -1426,8 +1426,8 @@
     {
       "slug": "relativity",
       "decision": "approved",
-      "reviewed_at": "2026-10-27",
-      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "reviewed_at": "2026-10-29",
+      "reviewer": "Codex manual primary-source claim review on October 29, 2026",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": false,
@@ -1435,16 +1435,16 @@
         {
           "url": "https://www.relativity.com/",
           "kind": "vendor",
-          "sha256": "107f82b753614156f5e166f0a9e96f485dc18129aa5af67892780ce2ba80cdae",
+          "sha256": "3e6d34c3ae03c257a1f5a9ec167d04533ba39c1e78bf1c1851c583ea621c9130",
           "quote": "e-Discovery Manage end-to-end litigation &ndash; collect, process, review, and produce in one place."
         }
       ],
-      "listing_sha256": "ad166c1707f843fcd033f3d5b45cd6419fcbaaff17547313dc33097826c5de2b",
+      "listing_sha256": "0dde6e3d3ce6a7126a69028915acaebfbcc13c0fdf24be7c29b56ffec909fb74",
       "claims": {
         "slug": "relativity",
         "name": "Relativity",
         "tagline": "AI-assisted legal-data review for discovery, investigations and contract work.",
-        "description": "Relativity describes an AI-assisted legal-data platform for discovery, investigations, contract review and related legal-data workflows. Its current site describes collecting, processing, reviewing and producing materials, together with tools for working through a case record. Confirm the deployment, supported data types, enabled features and commercial terms with Relativity. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "description": "Relativity describes an AI-assisted legal-data platform for discovery, investigations, contract review and related legal-data workflows. Its current site describes collecting, processing, reviewing and producing materials, together with tools for working through a case record. Confirm the deployment, supported data types, enabled features and commercial terms with Relativity. Documentation reviewed on October 29, 2026; customer-account access and deployed operation have not been tested.",
         "category": "compliance",
         "external_url": "https://www.relativity.com/",
         "mcp_repo_url": null,
@@ -1547,8 +1547,8 @@
     {
       "slug": "smokeball",
       "decision": "approved",
-      "reviewed_at": "2026-10-27",
-      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "reviewed_at": "2026-10-29",
+      "reviewer": "Codex manual primary-source claim review on October 29, 2026",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": false,
@@ -1556,16 +1556,16 @@
         {
           "url": "https://www.smokeball.com/",
           "kind": "vendor",
-          "sha256": "e0a1f85872baae9d97c0af6f6685b1b7dfe32c69b4da742868bd1b907aa39a3c",
+          "sha256": "9c11a528fcec902a94e358df9cc31f9228d1124e37f76d4e9b305a457398d9ec",
           "quote": "Archie works inside your matter to draft, review, and answer questions, so you deliver your best work, faster."
         }
       ],
-      "listing_sha256": "7e489d38165fac3931e98353ee7debbfc5ff13f2335659358f6f5fb1acbb53b0",
+      "listing_sha256": "7539ffe7026d9b8a49371c0e2f63c3a109bd4336c1ab3ce3a64687f10cabd27f",
       "claims": {
         "slug": "smokeball",
         "name": "Smokeball",
         "tagline": "Legal practice management with automatic time tracking and Archie AI.",
-        "description": "Smokeball offers legal practice management with automatic time tracking, document automation, billing, trust accounting and reporting. The vendor describes Archie AI for drafting, document review and questions within matters. Features depend on the selected plan and deployment; confirm eligibility, supported integrations and the firm’s review controls with Smokeball. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "description": "Smokeball offers legal practice management with automatic time tracking, document automation, billing, trust accounting and reporting. The vendor describes Archie AI for drafting, document review and questions within matters. Features depend on the selected plan and deployment; confirm eligibility, supported integrations and the firm’s review controls with Smokeball. Documentation reviewed on October 29, 2026; customer-account access and deployed operation have not been tested.",
         "category": "case_management",
         "external_url": "https://www.smokeball.com/",
         "mcp_repo_url": null,
@@ -1715,8 +1715,8 @@
     {
       "slug": "vlex-vincent",
       "decision": "approved",
-      "reviewed_at": "2026-10-27",
-      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "reviewed_at": "2026-10-29",
+      "reviewer": "Codex manual primary-source claim review on October 29, 2026",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": false,
@@ -1724,29 +1724,40 @@
         {
           "url": "https://vlex.com/vincent-ai",
           "kind": "vendor",
-          "sha256": "e8e0e71bfa8cbf2be87a5ee387190577e8bff8cb845520e289a5b33a6cb8c904",
-          "quote": "Vincent combines vLex&#039;s global legal database with cutting-edge AI to handle complex legal work."
+          "sha256": "20dec35200974b3ce41a074a52148b8e23627247510578a95c689b5ac5dd9cd5",
+          "quote": "Vincent by Clio combines Clio’s global legal database with AI to handle complex legal work, adapting to your workflows."
+        },
+        {
+          "url": "https://vlex.com/free-trial",
+          "kind": "vendor",
+          "sha256": "41f58c325c89815c950deac614c35c15d07f93f07c81d4163b078097d376d058",
+          "quote": "Sign up to experience AI-powered legal technology from Clio."
+        },
+        {
+          "url": "https://vlex.com/book-a-demo",
+          "kind": "vendor",
+          "sha256": "0b629b1c67ec8ba1357107aaaf8629589ae7c35609c2f1c482e55781e5afa5d1",
+          "quote": "Suitable for individuals and teams, request an online demo to discover how Clio can support your firm."
         }
       ],
-      "listing_sha256": "8907dff8836d341a748ad9212c9148718ed126d97dd490c084618353266235ef",
+      "listing_sha256": "228ad053f90cd6009df88f1d4ecf885e01514791abfbd2cc0a50f316a7859345",
       "claims": {
         "slug": "vlex-vincent",
-        "name": "Vincent by vLex",
+        "name": "Vincent by Clio",
         "tagline": "AI-assisted legal research, analysis and configurable legal workflows.",
-        "description": "Vincent is vLex’s legal AI product, now presented by vLex as part of Clio. Its official page describes research questions, analysis and drafting workflows, along with Vincent Studio for configuring firm-specific processes. Jurisdictional content, workflow availability and subscription entitlements vary; confirm the sources and package needed for a particular matter. Outputs still require qualified review. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "description": "Vincent by Clio is the legal AI product presented on vLex's site. The vendor describes cited legal research, jurisdiction comparisons, complaint and contract analysis, and Vincent Studio for custom no-code workflows. Studio is described for large law firms and enterprise legal teams. Confirm jurisdictional coverage, workflow availability and subscription terms with Clio. Outputs require qualified review. Documentation reviewed on October 29, 2026; customer-account access and deployed operation have not been tested.",
         "category": "legal_research",
         "external_url": "https://vlex.com/vincent-ai",
         "mcp_repo_url": null,
         "mcp_install_command": null,
         "pricing_model": "contact",
-        "pricing_details": "Confirm current pricing, plan eligibility and limits with the vendor.",
+        "pricing_details": "Official pages offer a demo and free trial. No subscription price or trial duration is stated on the reviewed product, trial or demo pages; confirm current pricing, plan eligibility and trial conditions with Clio.",
         "tags": [
           "legal-research",
-          "drafting",
           "legal-workflows",
           "vincent"
         ],
-        "creator_name": "vLex",
+        "creator_name": "Clio",
         "creator_url": "https://vlex.com",
         "logo_url": null,
         "firm_size_fit": []
