@@ -5,7 +5,7 @@ import { ExternalLink } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 import { isCatalogQuarantined } from '@/lib/catalog-review'
 import { CatalogSources } from '../../components/CatalogSources'
-import { SoftwareAppJsonLd } from '../../components/JsonLd'
+import { SoftwareAppJsonLd, BreadcrumbJsonLd } from '../../components/JsonLd'
 import { ListingCard } from '../../components/ListingCard'
 import { VerifiedBadge } from '../../components/VerifiedBadge'
 import { LeadGenCTA } from '../../components/LeadGenCTA'
@@ -121,9 +121,21 @@ export default async function ListingDetailPage({
   return (
     <main className="max-w-content mx-auto px-4 py-12">
       <SoftwareAppJsonLd listing={listing} />
+      {/* Grok Bot (Crack Bot), 2026-11-09, why: BreadcrumbList for every tool page; mirrors the visible breadcrumb below. */}
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Home', path: '/' },
+          { name: 'Browse Tools', path: '/servers' },
+          { name: listing.name, path: `/servers/${listing.slug}` },
+        ]}
+      />
 
       {/* Breadcrumb */}
-      <nav className="text-sm font-body text-charcoal/80 mb-8">
+      <nav aria-label="Breadcrumb" className="text-sm font-body text-charcoal/80 mb-8">
+        <Link href="/" className="hover:text-gold-text transition-colors">
+          Home
+        </Link>
+        <span className="mx-2">/</span>
         <Link href="/servers" className="hover:text-gold-text transition-colors">
           Browse Tools
         </Link>
