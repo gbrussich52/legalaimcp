@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Terms of Use | LegalAIMCP',
+  // Claude Opus, 2026-11-12: the layout template already appends "| LegalAIMCP"; the old title printed the brand twice.
+  title: 'Terms of Use',
   description:
     'Terms governing use of the LegalAIMCP directory, workflow planner, and featured-listing purchases. Informational only, not legal advice.',
   alternates: { canonical: 'https://legalaimcp.com/terms' },

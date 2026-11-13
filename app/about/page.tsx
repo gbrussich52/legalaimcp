@@ -4,7 +4,8 @@ import { OrganizationJsonLd } from '../components/JsonLd'
 import { NYCLAW_URL, NYCLAW_CALENDLY } from '@/lib/constants'
 
 export const metadata: Metadata = {
-  title: 'About LegalAIMCP',
+  // Claude Opus, 2026-11-12: the layout template already appends "| LegalAIMCP"; the old title printed the brand twice.
+  title: 'About the Directory',
   description:
     'LegalAIMCP is the curated directory of AI-powered integrations for law firms. Built by NYClaw.io, the AI implementation agency serving Westchester County and NYC.',
   alternates: { canonical: 'https://legalaimcp.com/about' },

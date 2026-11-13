@@ -23,8 +23,11 @@ const TRUST_ITEMS = [
   },
   {
     icon: ShieldCheck,
-    label: 'Built by an AI agency',
-    detail: 'NYClaw.io ships these systems.',
+    // Claude Opus, 2026-11-12: "NYClaw.io ships these systems" read as if
+    // NYClaw built the listed tools (Harvey, Clio, CoCounsel). It did not.
+    // State only what is true: who runs the directory.
+    label: 'Operator named',
+    detail: 'Run by NYClaw.io, an AI agency.',
   },
   {
     icon: RefreshCw,

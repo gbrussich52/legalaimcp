@@ -1,16 +1,45 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { SITE_URL } from '@/lib/constants'
-import { FEATURED_PRICE_CENTS } from '@/lib/featured-pricing'
+import { FEATURED_PRICE_CENTS, FEATURED_DURATION_DAYS } from '@/lib/featured-pricing'
+import { FAQJsonLd } from '../components/JsonLd'
 
 export const metadata: Metadata = {
-  title: 'Featured Listing Pricing — LegalAIMCP',
+  // Claude Opus, 2026-11-12: the layout template already appends "| LegalAIMCP"; the old title printed the brand twice.
+  title: 'Featured Listing Pricing',
   description:
     'Boost a published listing with a 30-day Featured placement. Sort priority and a Featured badge — MCP search stays free.',
   alternates: { canonical: `${SITE_URL}/pricing` },
 }
 
 const PRICE_DISPLAY = `$${(FEATURED_PRICE_CENTS / 100).toFixed(0)}`
+
+// Claude Opus, 2026-11-12: FAQ for vendors deciding on a placement, rendered on
+// the page and as FAQPage JSON-LD (house SEO standard). Every answer restates
+// how the code works today: free review-gated listing, one Checkout payment,
+// a fixed run, the Sponsored label, and tie-only effect in MCP search.
+const PRICING_FAQS = [
+  {
+    q: 'Does it cost anything to be listed?',
+    a: 'No. Listing is free. Submit your tool and it goes live after review.',
+  },
+  {
+    q: 'What does a Featured placement cost?',
+    a: `${PRICE_DISPLAY} for ${FEATURED_DURATION_DAYS} days, paid once through Stripe Checkout. It does not renew on its own.`,
+  },
+  {
+    q: 'How is a paid placement labeled?',
+    a: 'Paid placements show a Sponsored badge and have an end date. Editorial picks show Featured. Neither label is an endorsement.',
+  },
+  {
+    q: 'Does Featured change MCP search results?',
+    a: 'Only for ties. Search ranks by how well a tool matches the question first. Featured moves a tool up only among equally good matches.',
+  },
+  {
+    q: 'Does Featured guarantee traffic or leads?',
+    a: 'No. It changes sort order and adds a badge. It does not guarantee impressions, clicks, leads or sales.',
+  },
+] as const
 
 export default function PricingPage() {
   return (
@@ -45,7 +74,8 @@ export default function PricingPage() {
         <ul className="space-y-2 font-body text-charcoal/80 mb-8">
           <li>✓ Sort boost on /servers, category pages, and homepage Featured grid</li>
           <li>✓ Featured badge on the listing (labeled as sponsored)</li>
-          <li>✓ Featured sort priority also applies to MCP directory search</li>
+          {/* Claude Opus, 2026-11-12: MCP search now ranks by relevance first; Featured only breaks ties. */}
+          <li>✓ In MCP directory search, Featured breaks ties between equal matches</li>
           <li>✓ No affiliate links required; one Checkout payment</li>
         </ul>
         <Link href="/servers" className="btn-primary inline-flex">
@@ -76,6 +106,21 @@ export default function PricingPage() {
           </Link>{' '}
           if you are not listed yet.
         </p>
+      </section>
+
+      <section className="mt-12" aria-labelledby="pricing-faq">
+        <h2 id="pricing-faq" className="font-display text-xl font-bold text-navy mb-4">
+          Questions vendors ask
+        </h2>
+        <dl className="space-y-5 font-body text-sm text-charcoal/80 leading-relaxed">
+          {PRICING_FAQS.map(({ q, a }) => (
+            <div key={q}>
+              <dt className="font-sans font-semibold text-navy">{q}</dt>
+              <dd className="mt-1">{a}</dd>
+            </div>
+          ))}
+        </dl>
+        <FAQJsonLd faqs={PRICING_FAQS} />
       </section>
     </main>
   )
