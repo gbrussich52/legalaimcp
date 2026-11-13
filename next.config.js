@@ -2,6 +2,15 @@
 const nextConfig = {
   reactStrictMode: true,
 
+  // Claude Sonnet 5.5, 2026-11-13: /servers/clientintake-ai returned 404 but gets impressions for "ai client intake for lawyers".
+  // The listing was withheld on purpose in the 2026-10-27 catalog audit (#19: domain parking, product identity not established),
+  // so it is not a bug and the page stays gone. A 308 sends the query to the live category that lists intake tools.
+  async redirects() {
+    return [
+      { source: '/servers/clientintake-ai', destination: '/categories/client-communication', permanent: true },
+    ]
+  },
+
   /**
    * Security headers applied to all routes.
    * CSP below deliberately has no script-src/connect-src so it cannot break

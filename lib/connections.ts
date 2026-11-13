@@ -139,17 +139,21 @@ export const SOFTWARE_CONNECTIONS: readonly SoftwareConnection[] = [
     // help center (updated 2026-10-29) documents an official "Clio for Claude" connector on its Clio Work product:
     // https://help.clio.com/hc/en-us/articles/57881711703451-Use-Clio-Work-in-Claude-and-Codex
     // That is newer than this listing's 2026-10-27 review, which found no official connector. The page now shows both,
-    // each labeled. The listing's catalog review (mcp_confirmed false) is untouched; refresh it in the catalog flow.
-    // Clio's help center returned no article for "Aila" on 2026-11-12, so no claim is made about that name.
+    // each labeled. Clio's help center returned no article for "Aila" on 2026-11-12, so no claim is made about that name.
+    // Claude Sonnet 5.5, 2026-11-13: replaced the old "refresh it in the catalog flow" note. The catalog entry for slug `clio`
+    // (Clio Manage) keeps mcp_confirmed false on purpose: the Claude connector belongs to Clio Work, a different product and
+    // license tier, and that listing makes no MCP claim. A new source record also needs a sha256 of the fetched page, and
+    // help.clio.com returns 403 to scripted fetches, so none was invented. The connector is recorded here with its source and
+    // review date (2026-11-13). Clio documents no install URL or public server address on that page, so none is listed.
     lead: 'Clio documents an official Claude connector, Clio for Claude, for its Clio Work product. Community-built MCP servers for Clio Manage data also exist. This page covers both, each with its source and what it can do.',
     vendorConnector: {
       name: 'Clio for Claude (Clio Work)',
-      summary: 'Clio documents a separate Claude connector that runs on Clio Work, not on Clio Manage alone. Claude can ask Clio Work to research a question, review documents or draft, using the matter context and legal sources in your Clio account. Clio says firm records stay in Clio and Claude receives only what Clio Work returns.',
+      summary: 'Clio documents a separate Claude connector that runs on Clio Work, not on Clio Manage alone. Claude can ask Clio Work to research a question, review documents or draft, using the matter context and legal sources in your Clio account. Clio says firm records stay in Clio and Claude receives only what Clio Work returns. Clio documents adding it from the Claude desktop app (Customize, then Connectors) and lists no public server address.',
       requirements: 'A Clio Identity login linked to a Clio Work user account, a Clio Work license assigned by your firm’s Clio administrator, and the Claude desktop app. Clio Grow records also need Clio Grow connected to Clio Manage.',
       permissions: 'Clio shows a Read and Write access request when you connect. Each Clio Work tool starts at Needs approval in Claude. Review the request before you authorize it.',
       source: 'https://help.clio.com/hc/en-us/articles/57881711703451-Use-Clio-Work-in-Claude-and-Codex',
       sourceLabel: 'Clio help center: Use Clio Work in Claude and Codex',
-      reviewed: '2026-11-12',
+      reviewed: '2026-11-13',
     },
     faqs: [
       {
@@ -173,7 +177,7 @@ export const SOFTWARE_CONNECTIONS: readonly SoftwareConnection[] = [
       { label: 'Clio help center: Use Clio Work in Claude and Codex', url: 'https://help.clio.com/hc/en-us/articles/57881711703451-Use-Clio-Work-in-Claude-and-Codex' },
       { label: 'CHLEGAL community repository', url: 'https://github.com/CHLEGAL/clio-mcp-server' },
     ],
-    faqsChecked: '2026-11-12',
+    faqsChecked: '2026-11-13',
   },
 ]
 

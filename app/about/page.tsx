@@ -6,8 +6,9 @@ import { NYCLAW_URL, NYCLAW_CALENDLY } from '@/lib/constants'
 export const metadata: Metadata = {
   // Claude Opus, 2026-11-12: the layout template already appends "| LegalAIMCP"; the old title printed the brand twice.
   title: 'About the Directory',
+  // Claude Sonnet 5.5, 2026-11-13: description was 162 characters, over the 160 limit. Dropped "-powered" ("AI integrations" is the page's own wording) to get 154.
   description:
-    'LegalAIMCP is the curated directory of AI-powered integrations for law firms. Built by NYClaw.io, the AI implementation agency serving Westchester County and NYC.',
+    'LegalAIMCP is the curated directory of AI integrations for law firms. Built by NYClaw.io, the AI implementation agency serving Westchester County and NYC.',
   alternates: { canonical: 'https://legalaimcp.com/about' },
 }
 

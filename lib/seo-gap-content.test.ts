@@ -82,8 +82,21 @@ describe('connection page copy', () => {
     const clio = SOFTWARE_CONNECTIONS.find(c => c.name === 'Clio')
     expect(clio?.kind).toBe('community') // the listing's own review is unchanged
     expect(clio?.vendorConnector?.source).toMatch(/^https:\/\/help\.clio\.com\//)
-    expect(clio?.vendorConnector?.reviewed).toBe('2026-11-12')
+    // Claude Sonnet 5.5, 2026-11-13: connector re-read against Clio's help page on this date.
+    expect(clio?.vendorConnector?.reviewed).toBe('2026-11-13')
+    expect(clio?.faqsChecked).toBe('2026-11-13')
     clean(clio!.vendorConnector!.summary)
+    // Clio documents no public server address, so none may appear in the connector copy.
+    expect(JSON.stringify(clio?.vendorConnector)).not.toMatch(/https?:\/\/(?!help\.clio\.com\/)/)
+  })
+  it('keeps the Clio Manage catalog review at mcp_confirmed false, since the connector belongs to Clio Work', () => {
+    // Claude Sonnet 5.5, 2026-11-13: the review for slug `clio` is for Clio Manage and makes no MCP claim; the Clio Work
+    // connector is shown from lib/connections.ts with its own source. Do not flip this without a new hashed source record.
+    const registry = JSON.parse(readFileSync(new URL('./catalog-reviews.json', import.meta.url), 'utf8'))
+    const review = registry.reviews.find((r: { slug: string }) => r.slug === 'clio')
+    expect(review.mcp_confirmed).toBe(false)
+    expect(review.claims.mcp_repo_url).toBeNull()
+    expect(review.claims.tags).not.toContain('mcp')
   })
   it('states what the CourtListener tools can change, so the page does not imply read-only', () => {
     const cl = SOFTWARE_CONNECTIONS.find(c => c.name === 'CourtListener')
@@ -105,6 +118,14 @@ describe('blog and servers page copy', () => {
   it('no post pairs FAQ text with a different schema source', () => {
     for (const p of getAllPosts()) for (const f of p.faqs ?? []) expect(f.a.length).toBeGreaterThan(20)
   })
+  it('/about metadata description fits the 110 to 160 character rule', () => {
+    // Claude Sonnet 5.5, 2026-11-13: /about was 162 characters.
+    const src = readFileSync(new URL('../app/about/page.tsx', import.meta.url), 'utf8')
+    const desc = /description:\s*'([^']+)'/.exec(src)?.[1] ?? ''
+    expect(desc.length).toBeGreaterThanOrEqual(DESC_MIN)
+    expect(desc.length).toBeLessThanOrEqual(DESC_MAX)
+    clean(desc)
+  })
   it('/servers metadata fits the title and description rules', () => {
     // The page is TSX, which vitest here cannot import, so read the literals from the source.
     const src = readFileSync(new URL('../app/servers/page.tsx', import.meta.url), 'utf8')
@@ -114,5 +135,17 @@ describe('blog and servers page copy', () => {
     expect(desc.length).toBeGreaterThanOrEqual(DESC_MIN)
     expect(desc.length).toBeLessThanOrEqual(DESC_MAX)
     clean(title); clean(desc)
+  })
+})
+
+describe('withheld listing redirect', () => {
+  // Claude Sonnet 5.5, 2026-11-13: /servers/clientintake-ai is withheld on purpose (blocked_slugs) and 404s; the query still gets impressions.
+  it('sends the withheld clientintake-ai URL to the client-communication category with a permanent redirect', async () => {
+    const config = (await import('../next.config.js')).default as { redirects: () => Promise<Array<{ source: string; destination: string; permanent: boolean }>> }
+    const rule = (await config.redirects()).find(r => r.source === '/servers/clientintake-ai')
+    expect(rule).toEqual({ source: '/servers/clientintake-ai', destination: '/categories/client-communication', permanent: true })
+    expect(CATEGORY_CONTENT['client-communication']).toBeDefined()
+    const registry = JSON.parse(readFileSync(new URL('./catalog-reviews.json', import.meta.url), 'utf8'))
+    expect(registry.blocked_slugs).toContain('clientintake-ai')
   })
 })
