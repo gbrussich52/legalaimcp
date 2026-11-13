@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { serverPageTitle } from '@/lib/server-title'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ExternalLink } from 'lucide-react'
@@ -61,7 +62,7 @@ export async function generateMetadata({
   if (!listing) return { title: 'Tool Not Found' }
 
   return {
-    title: `${listing.name} — AI Tool for Law Firms`,
+    title: serverPageTitle(listing.name),
     description: listing.tagline,
     alternates: { canonical: `${SITE_URL}/servers/${listing.slug}` },
     openGraph: {

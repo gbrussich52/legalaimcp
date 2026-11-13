@@ -3,7 +3,8 @@ import Link from 'next/link'
 import { SITE_URL } from '@/lib/constants'
 
 export const metadata: Metadata = {
-  title: 'Featured checkout canceled — LegalAIMCP',
+  // Claude Opus, 2026-11-12: the layout template already appends "| LegalAIMCP"; the old title printed the brand twice.
+  title: 'Featured Checkout Canceled',
   robots: { index: false, follow: false },
   alternates: { canonical: `${SITE_URL}/featured/cancel` },
 }

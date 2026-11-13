@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | LegalAIMCP',
+  // Claude Opus, 2026-11-12: the layout template already appends "| LegalAIMCP"; the old title printed the brand twice.
+  title: 'Privacy Policy',
   description:
     'How LegalAIMCP collects and uses information from directory forms, Stripe payments, and cookieless analytics. No accounts, no client data.',
   alternates: { canonical: 'https://legalaimcp.com/privacy' },
