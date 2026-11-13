@@ -1,3 +1,4 @@
+import { fitTitle, fitDescription, FILLER } from '@/lib/seo-meta'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
@@ -52,8 +53,9 @@ export async function generateMetadata({
     // The editorial headline carries search intent better than the bare
     // category name ("AI Document & Contract Tools for Law Firms" vs
     // "Document Processing").
-    title: content ? content.headline : `${category.name} — AI Tools for Law Firms`,
-    description: category.description,
+    // Claude Sonnet 5.5, 2026-11-12: fit title <= 60 and description >= 110 chars (Ahrefs 11/12)
+    title: fitTitle(content ? content.headline : `${category.name} — AI Tools for Law Firms`),
+    description: fitDescription(category.description ?? '', FILLER.category),
     alternates: { canonical: `${SITE_URL}/categories/${slug}` },
   }
 }

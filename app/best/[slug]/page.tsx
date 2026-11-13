@@ -1,3 +1,4 @@
+import { fitTitle, fitDescription, FILLER } from '@/lib/seo-meta'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
@@ -44,11 +45,12 @@ export async function generateMetadata({
   if (!categorySlug) return { title: 'Not Found' }
 
   const content = CATEGORY_CONTENT[categorySlug]
-  const title = `Best ${content.headline} — Ranked`
-  const description = `The top-ranked ${content.headline.toLowerCase()} in our directory, with pricing and MCP install details for each.`
+  // Claude Sonnet 5.5, 2026-11-12: title without the "Ranked" tail is 57-60 chars; the old one ran 68-79 (Ahrefs 11/12)
+  const title = `Best ${content.headline}`
+  const description = fitDescription(`The top-ranked ${content.headline.toLowerCase()} in our directory, with pricing and MCP install details for each.`, FILLER.best)
 
   return {
-    title,
+    title: fitTitle(title),
     description,
     alternates: { canonical: `${SITE_URL}/best/${slug}` },
     openGraph: { title, description, type: 'article' },

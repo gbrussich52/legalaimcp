@@ -5,6 +5,7 @@ import { RoundupItem } from '../../components/RoundupItem'
 import { LeadGenCTA } from '../../components/LeadGenCTA'
 import { ItemListJsonLd, BreadcrumbJsonLd } from '../../components/JsonLd'
 import { LISTING_CARD_COLUMNS, type ListingCardData } from '@/lib/types'
+import { fitTitle } from '@/lib/seo-meta'
 import { SITE_URL } from '@/lib/constants'
 import { CATEGORY_CONTENT } from '@/lib/category-content'
 
@@ -13,7 +14,8 @@ const PAGE_DESCRIPTION =
   'Compare legal MCP servers and AI tools by workflow, pricing, and connection requirements. Understand listing order and link checks before choosing.'
 
 export const metadata: Metadata = {
-  title: PAGE_TITLE,
+  // Claude Sonnet 5.5, 2026-11-12: fit title <= 60 (was 63 with brand)
+  title: fitTitle(PAGE_TITLE),
   description: PAGE_DESCRIPTION,
   alternates: { canonical: `${SITE_URL}/best/legal-mcp-servers` },
   openGraph: {

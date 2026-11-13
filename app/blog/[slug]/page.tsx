@@ -1,3 +1,4 @@
+import { fitTitle, fitDescription, FILLER } from '@/lib/seo-meta'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
@@ -15,8 +16,9 @@ export async function generateMetadata({
   if (!post) return { title: 'Post Not Found' }
 
   return {
-    title: post.title,
-    description: post.description,
+    // Claude Sonnet 5.5, 2026-11-12: fit title <= 60 and description >= 110 chars (Ahrefs 11/12)
+    title: fitTitle(post.title),
+    description: fitDescription(post.description, FILLER.post),
     alternates: { canonical: `${SITE_URL}/blog/${post.slug}` },
     openGraph: {
       title: post.title,

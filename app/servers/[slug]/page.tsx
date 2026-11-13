@@ -1,3 +1,4 @@
+import { fitTitle, fitDescription, FILLER } from '@/lib/seo-meta'
 import type { Metadata } from 'next'
 import { serverPageTitle } from '@/lib/server-title'
 import { notFound } from 'next/navigation'
@@ -62,8 +63,9 @@ export async function generateMetadata({
   if (!listing) return { title: 'Tool Not Found' }
 
   return {
-    title: serverPageTitle(listing.name),
-    description: listing.tagline,
+    // Claude Sonnet 5.5, 2026-11-12: fit title <= 60 and description >= 110 chars (Ahrefs 11/12)
+    title: fitTitle(serverPageTitle(listing.name)),
+    description: fitDescription(listing.tagline, FILLER.listing),
     alternates: { canonical: `${SITE_URL}/servers/${listing.slug}` },
     openGraph: {
       title: listing.name,
