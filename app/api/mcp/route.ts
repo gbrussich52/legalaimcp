@@ -5,6 +5,7 @@ import { z } from 'zod'
 import { ToolItem, toStructured, formatTool, type ToolRow } from '@/lib/mcp-results'
 import { supabase } from '@/lib/supabase'
 import { CATEGORY_LABELS, PRICING_LABELS, SITE_URL } from '@/lib/constants'
+import { rankSearchResults, searchTerms } from '@/lib/search'
 import { rankListings, pricingSupportNote, FIRM_SIZES, type ScorableListing } from '@/lib/recommend'
 
 /**
@@ -128,67 +129,51 @@ const handler = createMcpHandler(
       async ({ query, category, pricing, limit }) => {
         if (!supabase) return unavailable()
 
+        // Claude Opus, 2026-11-12: with a query, fetch every match (the
+        // catalog is about 50 rows; capped at 200) and rank by relevance in
+        // lib/search.ts. The old DB-side .limit() ordered only by verified,
+        // then featured, so "contract review" returned case-law and
+        // receptionist tools ahead of the contract tools. Without a query the
+        // old verified-then-featured browse order stays.
+        const terms = query ? searchTerms(query) : []
         let q = supabase
           .from('listings')
-          .select(SUMMARY_COLUMNS)
+          .select(terms.length ? `${SUMMARY_COLUMNS}, description, featured` : SUMMARY_COLUMNS)
           .eq('status', 'published')
-          // Verified first, then featured: surface what we can actually stand
-          // behind ahead of what we merely chose to highlight.
           .order('verified', { ascending: false })
           .order('featured', { ascending: false })
-          .limit(limit)
+          .limit(terms.length ? 200 : limit)
 
         if (category) q = q.eq('category', category)
         if (pricing) q = q.eq('pricing_model', pricing)
-        if (query) {
-          // Tokenise, then match ANY token across name/tagline/description.
-          //
-          // Two failures this fixes, both discovered by calling the deployed
-          // endpoint rather than by reading the code:
-          //
-          // 1. Phrase-matching a natural-language query. `ilike '%contract
-          //    review%'` demands that exact adjacent phrase, but assistants
-          //    send prose, not keywords. "contract review" matched 2 of 45
-          //    listings; "contract" alone matches far more.
-          // 2. Searching name/tagline only. The website has a human scanning
-          //    a results page as a safety net; an assistant takes the first
-          //    response as the answer and moves on. Recall matters more than
-          //    precision when the consumer cannot scroll.
-          //
-          // Stopwords are dropped because a token like "for" or "tool" would
-          // otherwise ilike-match nearly every description and flatten the
-          // ranking into noise. Capped at 4 tokens to bound the URL length
-          // PostgREST has to parse. Metacharacters are stripped first — an
-          // MCP tool argument is attacker-controlled the same way a query
-          // param is.
-          const STOPWORDS = new Set([
-            'the', 'a', 'an', 'for', 'and', 'or', 'of', 'to', 'in', 'on',
-            'with', 'my', 'me', 'i', 'ai', 'tool', 'tools', 'legal', 'law',
-            'best', 'good', 'need', 'want', 'that', 'this', 'is', 'are',
-          ])
-          const tokens = query
-            .replace(/[,()*\\%]/g, ' ')
-            .toLowerCase()
-            .split(/\s+/)
-            .filter((t) => t.length > 2 && !STOPWORDS.has(t))
-            .slice(0, 4)
-
-          // If the query was entirely stopwords, fall back to the raw string
-          // rather than silently dropping the filter and returning everything
-          // as though it all matched.
-          const terms = tokens.length ? tokens : [query.replace(/[,()*\\%]/g, ' ').trim()]
-          const clauses = terms
-            .filter(Boolean)
-            .flatMap((t) => [
-              `name.ilike.%${t}%`,
-              `tagline.ilike.%${t}%`,
-              `description.ilike.%${t}%`,
-            ])
-          if (clauses.length) q = q.or(clauses.join(','))
+        if (terms.length) {
+          // Match ANY token across name/tagline/description (recall first:
+          // assistants send prose, not keywords), then rank below. Tokens are
+          // stripped of PostgREST metacharacters in searchTerms, because an
+          // MCP tool argument is attacker-controlled like a query param.
+          q = q.or(
+            terms
+              .flatMap((t) => [`name.ilike.%${t}%`, `tagline.ilike.%${t}%`, `description.ilike.%${t}%`])
+              .join(',')
+          )
         }
 
-        const { data, error } = await q
+        const { data: matched, error } = await q
         if (error) return unavailable()
+        const data = terms.length
+          ? rankSearchResults(
+              ((matched ?? []) as unknown as ToolRow[]).map((t) => ({
+                ...t,
+                category_label: CATEGORY_LABELS[t.category as string],
+              })),
+              terms,
+              limit
+            ).map((t) => {
+              // Keep the response narrow: description and featured were read for ranking only.
+              const { description: _d, featured: _f, category_label: _c, ...rest } = t as ToolRow
+              return rest as ToolRow
+            })
+          : ((matched ?? []) as unknown as ToolRow[])
 
         const structuredContent = {
           count: data?.length ?? 0,
@@ -430,6 +415,12 @@ const handler = createMcpHandler(
     maxDuration: 30,
   }
 )
+
+// Claude Opus, 2026-11-12: Vercel reads maxDuration from the route module, not
+// from the mcp-handler options above. Without this export the function ran to
+// the platform default; runtime errors show 16 "Task timed out after 300
+// seconds" on /api/mcp (last 2026-11-12), each billed as a 5-minute call.
+export const maxDuration = 30
 
 async function guardedHandler(request: Request) {
   const bounded = await boundedMcpRequest(request)
