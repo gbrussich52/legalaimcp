@@ -157,13 +157,26 @@ export async function collect({ connections, previous = { sources: {}, candidate
   return result
 }
 
+// Claude Opus, 2026-11-12: the old check demanded exactly 4 tools. Production
+// has served 5 since build_legal_ai_shortlist shipped (PR #15), so every weekly
+// run failed TOOL_CONTRACT and the loop validator went red on a healthy server.
+// Check the contract by name instead: the known read-only tools must exist and
+// every tool served, known or new, must stay read-only and non-destructive.
+export const REQUIRED_TOOLS = ['search_legal_ai_tools', 'get_legal_ai_tool', 'list_legal_ai_categories', 'recommend_legal_ai_tools']
+export function checkToolContract(tools) {
+  const names = new Set((tools ?? []).map(t => t?.name))
+  const readOnly = (tools ?? []).every(t => t?.annotations?.readOnlyHint === true && t?.annotations?.destructiveHint === false)
+  if (!readOnly || !REQUIRED_TOOLS.every(n => names.has(n)) || names.size !== (tools ?? []).length) throw new Error('TOOL_CONTRACT')
+  return true
+}
+
 export async function checkProtocol() {
   const client = new Client({ name: 'legalaimcp-weekly-sense', version: '1.0.0' })
   const timeout = setTimeout(() => { void client.close() }, 35000)
   try {
     await client.connect(new StreamableHTTPClientTransport(new URL('https://legalaimcp.com/api/mcp')), { timeout: 12000 })
     const { tools } = await client.listTools({}, { timeout: 10000 })
-    if (tools.length !== 4 || !tools.every(t => t.annotations?.readOnlyHint === true && t.annotations?.destructiveHint === false)) throw new Error('TOOL_CONTRACT')
+    checkToolContract(tools)
     const categories = await client.callTool({ name: 'list_legal_ai_categories', arguments: {} }, undefined, { timeout: 10000 })
     if (categories.isError || !(categories.structuredContent?.total > 0)) throw new Error('EMPTY_CATALOG')
     const search = await client.callTool({ name: 'search_legal_ai_tools', arguments: { query: 'iManage', limit: 5 } }, undefined, { timeout: 10000 })

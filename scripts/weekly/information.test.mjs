@@ -1,7 +1,7 @@
 // classification: PUBLIC
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { collect, curlFetch, sourceObservation, normalizeSource, publicURL, fetchText, registryCandidates, validate, report } from './information.mjs'
+import { collect, curlFetch, sourceObservation, normalizeSource, publicURL, fetchText, registryCandidates, validate, report, checkToolContract, REQUIRED_TOOLS } from './information.mjs'
 const now = '2026-10-20T01:00:00.000Z'
 const connection = { name: 'Test', slugs: ['test'], source: 'https://developers.harvey.ai/guides/harvey_mcp', reviewed: '2026-10-19' }
 const prose = '<nav>changing navigation</nav><main>MCP connector setup. '+ 'Read the administrator permission documentation. '.repeat(10)+'</main>'
@@ -94,4 +94,17 @@ test('real curl adapter disables user config before all options and never follow
   return {stdout:'public body\nLEGAL_HTTP:200:'}
  }})
  assert.equal(await response.text(),'public body')
+})
+
+// Claude Opus, 2026-11-12: guard the name-based tool contract. Production
+// serves 5 read-only tools; the old exact-count check failed every week.
+test('tool contract accepts added read-only tools and rejects missing or writable ones', () => {
+ const ro={readOnlyHint:true,destructiveHint:false}
+ const base=REQUIRED_TOOLS.map(name=>({name,annotations:ro}))
+ assert.equal(checkToolContract(base),true)
+ assert.equal(checkToolContract([...base,{name:'build_legal_ai_shortlist',annotations:ro}]),true)
+ assert.throws(()=>checkToolContract(base.slice(1)),/TOOL_CONTRACT/)
+ assert.throws(()=>checkToolContract([...base,{name:'write_listing',annotations:{readOnlyHint:false,destructiveHint:true}}]),/TOOL_CONTRACT/)
+ assert.throws(()=>checkToolContract([...base,{name:'search_legal_ai_tools',annotations:ro}]),/TOOL_CONTRACT/)
+ assert.throws(()=>checkToolContract(undefined),/TOOL_CONTRACT/)
 })
