@@ -14,14 +14,20 @@ export function createSchemaClient(
   return createClient(url, key, { ...options, db: { schema: SUPABASE_SCHEMA } })
 }
 
+export const CATALOG_FETCH_TIMEOUT_MS = 10_000
+
 /** Bounded cache for public reads only; form writes must never be cached. */
 export const fetchPublicCatalog: typeof fetch = (input, init) => {
   const method = (init?.method ?? (input instanceof Request ? input.method : 'GET')).toUpperCase()
   const headers = new Headers(init?.headers ?? (input instanceof Request ? input.headers : undefined))
   if (method === 'GET' || method === 'HEAD') headers.set('x-client-info', `${headers.get('x-client-info') ?? 'LegalAIMCP'}; catalog/${CATALOG_CACHE_REVISION}`)
+  // Claude Opus, 2026-11-12: bound every catalog request. Runtime errors show
+  // Supabase sockets closing with no reply ("other side closed") on /api/mcp;
+  // a stalled read held the function open until the platform timeout.
+  const signal = init?.signal ?? AbortSignal.timeout(CATALOG_FETCH_TIMEOUT_MS)
   return fetch(input, method === 'GET' || method === 'HEAD'
-    ? { ...init, headers: Object.fromEntries(headers.entries()), cache: 'force-cache', next: { revalidate: 300 } }
-    : { ...init, cache: 'no-store', next: { revalidate: 0 } })
+    ? { ...init, signal, headers: Object.fromEntries(headers.entries()), cache: 'force-cache', next: { revalidate: 300 } }
+    : { ...init, signal, cache: 'no-store', next: { revalidate: 0 } })
 }
 
 export type SchemaClient = ReturnType<typeof createSchemaClient>
