@@ -24,6 +24,7 @@ describe('published claim evidence',()=>{
  it('corrects every supporting article with a revision date and primary-source references',()=>{
   const posts=getAllPosts();expect(posts).toHaveLength(6)
   for(const post of posts){expect(post.updatedDate).toBe('2026-10-27');expect(post.content).toContain('https://');expect(post.content).not.toMatch(/data doesn.t leave your infrastructure|paralegal that never makes typos|\$50,000|\$5,000/)}
-  expect(posts.find(p=>p.slug==='ai-contract-review-tools-compared')?.title).toMatch(/^Three /)
+  // Claude Sonnet 5.5, 2026-11-12: title now names the three vendors the post compares (gap query "compare ai contract review tools"); the guard still pins the three-vendor scope.
+  expect(posts.find(p=>p.slug==='ai-contract-review-tools-compared')?.title).toMatch(/Luminance, Ironclad, Kira$/)
  })
 })

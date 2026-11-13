@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { getPostBySlug, getAllSlugs } from '@/lib/blog'
 import { SITE_URL } from '@/lib/constants'
 import { LeadGenCTA } from '../../components/LeadGenCTA'
+import { FAQJsonLd } from '../../components/JsonLd'
 
 export async function generateMetadata({
   params,
@@ -87,6 +88,27 @@ export default async function BlogPostPage({
           className="prose prose-slate prose-headings:font-display prose-headings:text-navy prose-a:text-gold-text prose-a:no-underline hover:prose-a:underline prose-strong:text-navy max-w-none font-body"
           dangerouslySetInnerHTML={articleHtml}
         />
+
+        {/* Claude Sonnet 5.5, 2026-11-12: optional FAQ; the same strings feed the visible text and the FAQPage schema. */}
+        {post.faqs && post.faqs.length > 0 && (
+          <section className="mt-12">
+            <FAQJsonLd faqs={post.faqs} />
+            <h2 className="font-display text-2xl font-bold text-navy mb-5">Common questions</h2>
+            <ul className="space-y-3">
+              {post.faqs.map(({ q, a }) => (
+                <li key={q}>
+                  <details className="group rounded-xl border border-slate-200 bg-white open:bg-warm-white open:border-navy/20 transition-colors">
+                    <summary className="cursor-pointer list-none px-5 py-4 font-display text-lg font-semibold text-navy flex items-center justify-between gap-4">
+                      <span>{q}</span>
+                      <span aria-hidden="true" className="text-2xl text-gold-text group-open:rotate-45 transition-transform leading-none">+</span>
+                    </summary>
+                    <div className="px-5 pb-5 font-body text-charcoal/80 leading-relaxed">{a}</div>
+                  </details>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         {/* CTA */}
         <div className="mt-16">

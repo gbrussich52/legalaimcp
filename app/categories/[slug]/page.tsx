@@ -54,8 +54,9 @@ export async function generateMetadata({
     // category name ("AI Document & Contract Tools for Law Firms" vs
     // "Document Processing").
     // Claude Sonnet 5.5, 2026-11-12: fit title <= 60 and description >= 110 chars (Ahrefs 11/12)
-    title: fitTitle(content ? content.headline : `${category.name} — AI Tools for Law Firms`),
-    description: fitDescription(category.description ?? '', FILLER.category),
+    // Claude Sonnet 5.5, 2026-11-12: use the query-shaped H1/meta text when the category has one (Search Console gap queries).
+    title: fitTitle(content ? (content.searchHeadline ?? content.headline) : `${category.name} — AI Tools for Law Firms`),
+    description: fitDescription(content?.metaDescription ?? category.description ?? '', FILLER.category),
     alternates: { canonical: `${SITE_URL}/categories/${slug}` },
   }
 }
@@ -93,6 +94,21 @@ export default async function CategoryPage({
       .order('name', { ascending: true }),
     supabase.from('categories').select('slug, name').neq('slug', slug).order('name'),
   ])
+
+  // Claude Sonnet 5.5, 2026-11-12: listings named by the editorial "focus" sections. Names and
+  // taglines come from these rows, so the page never describes a tool the directory does not
+  // publish. One extra query, only for categories that define a focus section.
+  const focusSlugs = [...new Set((CATEGORY_CONTENT[slug]?.focus ?? []).flatMap((f) => f.slugs))]
+  const focusRes = focusSlugs.length
+    ? await supabase
+        .from('listings')
+        .select('slug, name, tagline')
+        .eq('status', 'published')
+        .in('slug', focusSlugs)
+    : { data: [] as { slug: string; name: string; tagline: string }[] }
+  const focusRows = new Map(
+    (focusRes.data ?? []).map((r: { slug: string; name: string; tagline: string }) => [r.slug, r]),
+  )
 
   const category = categoryRes.data
   if (!category) notFound()
@@ -133,11 +149,14 @@ export default async function CategoryPage({
         {/* Header */}
         <div className="mb-10">
           <h1 className="font-display text-4xl font-bold text-navy mb-3">
-            {content ? content.headline : category.name}
+            {content ? (content.searchHeadline ?? content.headline) : category.name}
           </h1>
-          {category.description && (
+          {/* Claude Sonnet 5.5, 2026-11-12: answer-first lead replaces the bare database sentence
+              for categories that have one. The database sentence still feeds the meta description
+              when no metaDescription is set. */}
+          {(content?.answer ?? category.description) && (
             <p className="font-body text-lg text-charcoal/75 max-w-content">
-              {category.description}
+              {content?.answer ?? category.description}
             </p>
           )}
           {/* Live counts only — both derived from the rows below, so this
@@ -182,6 +201,43 @@ export default async function CategoryPage({
           </p>
         )}
 
+        {/* Claude Sonnet 5.5, 2026-11-12: listing-backed sections for gap queries. A section shows only
+            the listings that are published right now. */}
+        {content?.focus?.map((f) => {
+          const rows = f.slugs.map((s) => focusRows.get(s)).filter(Boolean) as { slug: string; name: string; tagline: string }[]
+          if (rows.length === 0) return null
+          return (
+            <section key={f.heading} className="mt-16 max-w-3xl">
+              <h2 className="font-display text-2xl font-bold text-navy mb-3">{f.heading}</h2>
+              <p className="font-body text-charcoal/80 leading-relaxed mb-4">{f.lead}</p>
+              <ul className="space-y-3">
+                {rows.map((r) => (
+                  <li key={r.slug} className="font-body text-charcoal/80 leading-relaxed">
+                    <Link href={`/servers/${r.slug}`} className="text-gold-text font-semibold hover:underline">
+                      {r.name}
+                    </Link>
+                    {': '}
+                    {r.tagline}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )
+        })}
+
+        {/* Claude Sonnet 5.5, 2026-11-12: numbered workflow for "how do I set this up" queries. */}
+        {content?.steps && (
+          <section className="mt-16 max-w-3xl">
+            <h2 className="font-display text-2xl font-bold text-navy mb-3">{content.steps.heading}</h2>
+            <p className="font-body text-charcoal/80 leading-relaxed mb-4">{content.steps.intro}</p>
+            <ol className="list-decimal pl-6 space-y-2 font-body text-charcoal/80 leading-relaxed">
+              {content.steps.items.map((item) => (
+                <li key={item.slice(0, 30)}>{item}</li>
+              ))}
+            </ol>
+          </section>
+        )}
+
         {/* What to look for */}
         {content && (
           <section className="mt-16 max-w-3xl">
@@ -220,6 +276,29 @@ export default async function CategoryPage({
                     </summary>
                     <div className="px-5 pb-5 font-body text-charcoal/80 leading-relaxed">{a}</div>
                   </details>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {/* Claude Sonnet 5.5, 2026-11-12: the ordered list for this category plus related guides.
+            Before this, category pages linked to no /best page, so the two never passed each
+            other relevance. Every href below is a route in this repo. */}
+        {content && (
+          <section className="mt-16 max-w-3xl">
+            <h2 className="font-display text-2xl font-bold text-navy mb-4">Related guides and lists</h2>
+            <ul className="space-y-2 font-body text-charcoal/80">
+              <li>
+                <Link href={`/best/${slug}-mcp-servers`} className="text-gold-text font-semibold hover:underline">
+                  See these tools in directory order: {content.headline}
+                </Link>
+              </li>
+              {content.links?.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="text-gold-text font-semibold hover:underline">
+                    {l.label}
+                  </Link>
                 </li>
               ))}
             </ul>

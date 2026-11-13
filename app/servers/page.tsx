@@ -14,9 +14,11 @@ import { SoftwareConnectionShortlist } from '../components/SoftwareConnection'
 const PAGE_SIZE = 12
 
 export const metadata: Metadata = {
-  title: 'Browse AI Tools for Law Firms',
+  // Claude Sonnet 5.5, 2026-11-12: "legal mcp server" lands here at pos 9.2 (31 impressions, 0 clicks), but title and H1 did not
+  // say "legal MCP". Title with the brand is 50 chars.
+  title: 'Browse Legal MCP Servers and AI Tools',
   description:
-    'Search and filter AI-powered integrations for law firms. Find MCP servers for document processing, case management, legal research, and more.',
+    'Search and filter legal MCP servers and AI tools for law firms. Find tools for document processing, case management, legal research and more.',
   alternates: { canonical: 'https://legalaimcp.com/servers' },
 }
 
@@ -91,13 +93,18 @@ export default async function BrowsePage({
       <ItemListJsonLd listings={listings} name="AI Tools for Law Firms" />
 
       <h1 className="font-display text-4xl font-bold text-navy mb-2">
-        Browse AI Tools for Law Firms
+        Browse Legal MCP Servers and AI Tools
       </h1>
       {totalCount > 0 && (
         <p className="text-sm text-charcoal/80 font-body mb-2">
           {totalCount} tool{totalCount !== 1 ? 's' : ''} available
         </p>
       )}
+      {/* Claude Sonnet 5.5, 2026-11-12: plain definition for "legal mcp server" and "lawtech mcp" queries. */}
+      <p className="text-sm text-charcoal/80 font-body mb-2 max-w-3xl">
+        A legal MCP server connects an AI assistant such as Claude to a legal tool or data source.
+        This directory lists these servers along with other lawtech (legal technology) products that use AI.
+      </p>
       <p className="text-sm text-charcoal/80 font-body mb-8">
         Not sure where to start?{' '}
         <Link href="/best/legal-mcp-servers" className="text-gold-text font-semibold hover:underline">

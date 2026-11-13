@@ -17,21 +17,23 @@ import { CATEGORY_CONTENT } from '@/lib/category-content'
  *
  * Bump a date when that page's content meaningfully changes.
  */
+// Claude Sonnet 5.5, 2026-11-12: dates below bumped to 2026-11-12 for pages whose visible copy changed in the
+// gap-query pass (home FAQ, /servers, flagship roundup, /best template, category template, Clio guide).
 const MODIFIED = {
-  home: '2026-10-17',
+  home: '2026-11-12',
   privacy: '2026-09-19',
   terms: '2026-09-19',
-  servers: '2026-10-19',
+  servers: '2026-11-12',
   mcp: '2026-10-19',
   submit: '2026-06-10',
   about: '2026-07-28',
   blogIndex: '2026-04-13',
-  bestLegal: '2026-10-17',
+  bestLegal: '2026-11-12',
   courtlistenerGuide: '2026-08-07',
   harveyGuide: '2026-10-19',
-  clioGuide: '2026-09-24',
-  bestCategoryTemplate: '2026-08-07',
-  categoryIndex: '2026-07-28',
+  clioGuide: '2026-11-12',
+  bestCategoryTemplate: '2026-11-12',
+  categoryIndex: '2026-11-12',
 } as const
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -114,9 +116,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     {
-      // Kill-test guide, 2026-09-24: Clio has no official MCP server (confirmed
+      // Kill-test guide, 2026-09-24: Clio had no official MCP server (confirmed
       // via clio.com + the live listing row), so this covers the two real
       // open-source community servers instead of an enrollment flow.
+      // Claude Sonnet 5.5, 2026-11-12: Clio's help center now documents an official
+      // Clio for Claude connector on Clio Work (updated 2026-10-29); the guide panel shows it.
       url: `${SITE_URL}/guides/connect-claude-to-clio`,
       lastModified: MODIFIED.clioGuide,
       changeFrequency: 'monthly',

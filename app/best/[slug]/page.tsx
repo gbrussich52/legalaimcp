@@ -47,7 +47,10 @@ export async function generateMetadata({
   const content = CATEGORY_CONTENT[categorySlug]
   // Claude Sonnet 5.5, 2026-11-12: title without the "Ranked" tail is 57-60 chars; the old one ran 68-79 (Ahrefs 11/12)
   const title = `Best ${content.headline}`
-  const description = fitDescription(`The top-ranked ${content.headline.toLowerCase()} in our directory, with pricing and MCP install details for each.`, FILLER.best)
+  // Claude Sonnet 5.5, 2026-11-12: "top-ranked" claimed a performance ranking this page does not make. The order is
+  // link-check status, then Featured, then name (see the query below), so the text now says so. Headline stays
+  // in its original case; lower-casing it turned "AI" into "ai".
+  const description = fitDescription(`${content.headline} in directory order, with pricing and MCP install details for each tool.`, FILLER.best)
 
   return {
     title: fitTitle(title),
@@ -121,14 +124,29 @@ export default async function BestCategoryPage({
         {/* Header */}
         <div className="mb-10 max-w-3xl">
           <p className="font-sans text-xs font-bold uppercase tracking-widest text-gold-text mb-3">
-            Ranked
+            {/* Claude Sonnet 5.5, 2026-11-12: was "Ranked"; the order is not a performance ranking. */}
+            Directory order
           </p>
           <h1 className="font-display text-4xl font-bold text-navy leading-tight">{pageTitle}</h1>
+          {/* Claude Sonnet 5.5, 2026-11-12: answer-first lead per category, then the ordering rule.
+              Ordering matches the query below: listings whose links passed an automated check,
+              then Featured, then name. It is not a performance ranking. */}
+          {content.bestLead && (
+            <p className="font-body text-lg text-charcoal/75 mt-4 leading-relaxed">{content.bestLead}</p>
+          )}
+          {content.bestAlso && (
+            <p className="font-body text-charcoal/75 mt-3">
+              <Link href={content.bestAlso.href} className="text-gold-text font-semibold hover:underline">
+                {content.bestAlso.label}
+              </Link>
+            </p>
+          )}
           <p className="font-body text-lg text-charcoal/75 mt-4 leading-relaxed">
-            The top-ranked tools in this category from our directory, ordered
-            by verification status and featured placement. For the full
-            buyer&apos;s guide — what this category covers, what to check
-            before you buy, and answers to common questions — see the{' '}
+            Order: listings whose links passed an automated check come first,
+            then Featured listings (paid placements can affect position), then
+            name. This is not a performance ranking. For the full
+            buyer&apos;s guide, including what this category covers, what to
+            check before you buy and answers to common questions, see the{' '}
             <Link
               href={`/categories/${categorySlug}`}
               className="text-gold-text font-semibold hover:underline"

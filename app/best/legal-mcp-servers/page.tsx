@@ -106,6 +106,9 @@ export default async function BestLegalMcpServersPage() {
 
         <section className="mb-10 max-w-3xl font-body text-charcoal/80 space-y-3">
           <h2 className="font-display text-2xl font-bold text-navy">How to choose a legal MCP server</h2>
+          {/* Claude Sonnet 5.5, 2026-11-12: definition paragraph for "legal mcp server" and "lawtech mcp" queries. */}
+          <p>A legal MCP server connects an AI assistant to a lawtech product or a legal data source.
+            Some connect to research databases, some to practice management, and some to document systems.</p>
           <p>Start with one workflow: <Link href="/categories/legal-research" className="text-gold-text underline">legal research</Link>,{' '}
             <Link href="/categories/document-processing" className="text-gold-text underline">document processing</Link>, or{' '}
             <Link href="/categories/case-management" className="text-gold-text underline">case management</Link>.
