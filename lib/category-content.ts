@@ -24,9 +24,55 @@ export interface CategoryFaq {
   a: string
 }
 
+export interface CategoryLink {
+  href: string
+  label: string
+}
+
+/**
+ * A short section on a category page that points at listings by slug. Names and taglines come
+ * from the database row at render time, so the page can never describe a tool the directory
+ * does not currently publish (a slug that is not published is skipped, and an empty section is
+ * not shown). `lead` must stay true of the topic in general, never of one tool's features.
+ */
+export interface CategoryFocus {
+  heading: string
+  lead: string
+  slugs: string[]
+}
+
+export interface CategorySteps {
+  heading: string
+  intro: string
+  items: string[]
+}
+
 export interface CategoryContent {
   /** Search-intent headline, used as the page h1 in place of the bare name. */
   headline: string
+  /**
+   * Claude Sonnet 5.5, 2026-11-12: optional H1 and <title> for the category page only. `headline`
+   * still names the matching /best page and the "more rankings" pills, so a query-shaped
+   * category headline does not rename the roundup. Keep it <= 47 chars so the brand fits.
+   */
+  searchHeadline?: string
+  /** Claude Sonnet 5.5, 2026-11-12: 110-160 char meta description for the category page. */
+  metaDescription?: string
+  /**
+   * Claude Sonnet 5.5, 2026-11-12: answer-first lead shown under the H1 in place of the bare
+   * database sentence. Plain claims about the category only; no tool-specific facts.
+   */
+  answer?: string
+  /** Claude Sonnet 5.5, 2026-11-12: listing-backed sections (see CategoryFocus). */
+  focus?: CategoryFocus[]
+  /** Claude Sonnet 5.5, 2026-11-12: numbered how-to-set-it-up section. */
+  steps?: CategorySteps
+  /** Claude Sonnet 5.5, 2026-11-12: internal links to guides and posts that exist in this repo. */
+  links?: CategoryLink[]
+  /** Claude Sonnet 5.5, 2026-11-12: answer-first lead for the /best roundup of this category. */
+  bestLead?: string
+  /** Claude Sonnet 5.5, 2026-11-12: one extra link shown under the /best lead. */
+  bestAlso?: CategoryLink
   /** 2–3 paragraph buyer's-guide intro. Plain strings, rendered as <p>s. */
   intro: string[]
   /** "What to look for" bullets — software-evaluation criteria only. */
@@ -37,6 +83,10 @@ export interface CategoryContent {
 export const CATEGORY_CONTENT: Record<string, CategoryContent> = {
   'document-processing': {
     headline: 'AI Document & Contract Tools for Law Firms',
+    // Claude Sonnet 5.5, 2026-11-12: search-gap fields for this category (Search Console 2026-10-16 to 2026-11-13).
+    links: [
+      { href: '/blog/ai-contract-review-tools-compared', label: 'Compare Luminance, Ironclad and Kira for AI contract review' },
+    ],
     intro: [
       'Document work is where legal AI is most mature and most crowded: contract review, clause extraction, redlining, due-diligence sweeps, and document generation all have credible tools behind them. It is also the category where the difference between products is least visible from a marketing page — nearly everything claims to "review contracts with AI."',
       'The practical differences are narrower and more checkable: which document types the tool was actually built for, whether it works inside the software you already draft in, and what happens to a document after you upload it. Tools with an MCP integration add a further option — connecting document analysis directly to an AI assistant like Claude or ChatGPT, so review happens in conversation rather than in another portal.',
@@ -65,6 +115,15 @@ export const CATEGORY_CONTENT: Record<string, CategoryContent> = {
 
   'case-management': {
     headline: 'AI Case & Matter Management Tools for Law Firms',
+    // Claude Sonnet 5.5, 2026-11-12: search-gap fields for this category (Search Console 2026-10-16 to 2026-11-13).
+    searchHeadline: 'AI Case & Matter Management for Lawyers',
+    metaDescription: 'AI case and matter management tools for lawyers. Compare practice-management software with AI features and see which listings document an assistant connector.',
+    answer: 'AI case management tools help a law firm track matters, deadlines and documents, with AI features such as summaries, drafting and suggested time entries. Start from your sharpest pain point, and check that a tool connects to the practice-management system you already use.',
+    bestLead: 'Legal practice management software tracks matters, contacts, deadlines, time and billing. This list shows tools in that group in directory order. Some listings document a connector for an AI assistant, and each listing says what is documented and links the source. Clio documents a Claude connector for its separate Clio Work product; see the Clio listing.',
+    links: [
+      { href: '/servers/clio', label: 'Clio: AI features and connector options' },
+      { href: '/guides/connect-claude-to-clio', label: 'Clio MCP: community setup reference' },
+    ],
     intro: [
       'Case management AI splits into two different products that get marketed with the same words: practice-management platforms adding AI features (intake summaries, document drafting inside the matter), and standalone tools that watch dockets, track deadlines, and automate workflow steps. Which one you need depends on whether your problem is "our system is dumb" or "we have no system."',
       'This category rewards integration above all else. A brilliant docket tracker that doesn’t talk to your practice-management system just creates a second place to check. The MCP angle matters here for the same reason — a case-management tool exposed over MCP lets an AI assistant query matter status, deadlines, and documents without anyone logging into anything.',
@@ -93,6 +152,27 @@ export const CATEGORY_CONTENT: Record<string, CategoryContent> = {
 
   'client-communication': {
     headline: 'AI Client Intake & Communication Tools for Law Firms',
+    // Claude Sonnet 5.5, 2026-11-12: search-gap fields for this category (Search Console 2026-10-16 to 2026-11-13).
+    searchHeadline: 'AI Client Intake & Communication for Lawyers',
+    metaDescription: 'AI client intake and communication tools for lawyers, with a step-by-step workflow for intake, follow-up and handoff to a person. Compare listings.',
+    answer: 'AI client intake tools collect a new client’s details, answer routine questions and pass the matter to your team. The tools below cover intake conversations, document templates and call handling. A lawyer should stay in charge of every answer a client sees.',
+    bestLead: 'These are the client intake and communication tools in our directory, in directory order. Check each listing for how it hands off to a person and where intake data goes.',
+    steps: {
+      heading: 'A practical AI client communication workflow',
+      intro: 'Set it up in this order. Each step names who decides, so the AI never works alone.',
+      items: [
+        'Capture. A form, chat or call collects the client’s name, contact details and type of matter.',
+        'Screen. Apply your own conflict and fit rules. The AI can flag a case. A person decides.',
+        'Route. Send the intake into your case-management or CRM system so nobody retypes it.',
+        'Follow up. Send reminders and status updates from templates your firm approved.',
+        'Hand off. Define the moments when the AI stops and a lawyer takes over, such as any question about the merits of a case.',
+        'Review. Read transcripts on a set schedule and fix what went wrong.',
+      ],
+    },
+    links: [
+      { href: '/workflow-plan', label: 'Plan one workflow before you buy' },
+      { href: '/checklist', label: 'Free checklist: questions to ask before you adopt an AI tool' },
+    ],
     intro: [
       'Client-communication AI covers the front door of a practice: intake forms that actually get completed, chat that answers after-hours questions, follow-up sequences that don’t depend on someone remembering, and drafting help for routine client email. For consumer-facing practices, this is often the highest-ROI category in the directory — unanswered intake is revenue walking away.',
       'It’s also the category with the most direct client contact, which raises the bar on tone and accuracy. A hallucinated answer in an internal research memo gets caught by a lawyer; a hallucinated answer in a client-facing chat is a problem the moment it’s sent. Look hard at what each tool lets you constrain.',
@@ -116,11 +196,42 @@ export const CATEGORY_CONTENT: Record<string, CategoryContent> = {
         q: 'What’s the difference between these tools and a general chatbot like ChatGPT?',
         a: 'Purpose-built legal intake tools ship the guardrails, intake flows, and practice-management integrations that a general assistant lacks out of the box. A general assistant connected over MCP to your systems can close some of that gap — several tools in this category exist precisely to be that bridge.',
       },
+      // Claude Sonnet 5.5, 2026-11-12: extra answers for question-shaped gap queries.
+      {
+        q: 'How does AI client intake work for a law firm?',
+        a: 'A chat, form or call handler asks a new client set questions, records the answers and sends them to your team or your case-management system. Good setups limit what the AI may say and hand off to a person at defined points. Test with made-up inquiries before real clients use it.',
+      },
+      {
+        q: 'Which AI tools handle client intake for lawyers?',
+        a: 'Compare the listings on this page. Each one shows what it covers, its pricing and any MCP server or reviewed connector details. Check the intake-to-system flow first, so intake data lands in the software you already use.',
+      },
     ],
   },
 
   'legal-research': {
     headline: 'AI Legal Research Tools & Case Law Search',
+    // Claude Sonnet 5.5, 2026-11-12: search-gap fields for this category (Search Console 2026-10-16 to 2026-11-13).
+    searchHeadline: 'AI Case Law Research & Legal Citation Tools',
+    metaDescription: 'Compare AI case law research and legal citation tools, from free CourtListener access to commercial platforms, and see which ones connect to your AI assistant.',
+    answer: 'AI case law research tools search court opinions for you. The better ones link each answer to its source, so you can read the opinion before you cite it. The tools below run from free CourtListener access to commercial legal AI, and each listing shows its MCP details where the directory has them.',
+    bestLead: 'These are the AI legal research tools in our directory, from free CourtListener access to commercial platforms. A listing with an MCP server or a documented connector can work with your AI assistant, and each listing says what is documented.',
+    focus: [
+      {
+        heading: 'AI legal citation research',
+        lead: 'Citation research checks that a case exists and says what your draft says it does. These listings work with citations. A citation check is a database lookup, not legal advice, so read the opinion before you file.',
+        slugs: ['courtlistener-citations-checker', 'courtlistener-mcp'],
+      },
+      {
+        heading: 'Free case law search with MCP',
+        lead: 'CourtListener is run by the nonprofit Free Law Project, and its accounts are free for individuals. These listings connect an AI assistant to case law and other U.S. legal sources.',
+        slugs: ['courtlistener-mcp', 'us-legal-mcp'],
+      },
+    ],
+    links: [
+      { href: '/guides/connect-claude-to-courtlistener', label: 'Connect Claude to CourtListener (setup guide)' },
+      { href: '/blog/courtlistener-mcp-inside-claude', label: 'CourtListener in Claude: sources, access and research limits' },
+      { href: '/guides/connect-claude-to-harvey', label: 'Connect Claude to Harvey AI (setup guide)' },
+    ],
     intro: [
       'Legal research is the category where AI’s failure mode is most famous — invented citations have made national news more than once — and also where the mature tools have moved furthest to fix it. The current generation retrieves real sources first and drafts from them, rather than generating from memory, and the difference between tools is largely the quality of that retrieval layer.',
       'Coverage is the other quiet differentiator. Federal case law is broadly available; state coverage, agency materials, secondary sources, and how current the database is vary widely between products — and between price tiers of the same product. A tool is only as good as the corpus behind it.',
@@ -143,6 +254,15 @@ export const CATEGORY_CONTENT: Record<string, CategoryContent> = {
       {
         q: 'What does an MCP server change about legal research?',
         a: 'It lets an AI assistant run searches against a real case-law database mid-conversation — so instead of "find me cases about X" producing text from the model’s memory, it produces results retrieved from an actual corpus, with links. That grounding is exactly the fix for the fake-citation problem, applied at the tool layer.',
+      },
+      // Claude Sonnet 5.5, 2026-11-12: extra answers for question-shaped gap queries.
+      {
+        q: 'How do I check AI legal citations?',
+        a: 'Look up each case in a primary source, such as the court’s own site or a case-law database, and read the passage you rely on. Some MCP tools can run that lookup from your AI assistant. The CourtListener MCP server documents a citation tool that checks each case citation against the CourtListener database. Treat the result as a lookup, not a legal opinion.',
+      },
+      {
+        q: 'Which AI tools search case law?',
+        a: 'The tools listed on this page. They differ in coverage, price and MCP support. This directory lists links that passed an automated check first, then Featured listings, then names. That is not a performance ranking, so test two or three tools on questions where you already know the answer.',
       },
     ],
   },
@@ -177,6 +297,21 @@ export const CATEGORY_CONTENT: Record<string, CategoryContent> = {
 
   compliance: {
     headline: 'AI Compliance & Regulatory Monitoring Tools',
+    // Claude Sonnet 5.5, 2026-11-12: search-gap fields for this category (Search Console 2026-10-16 to 2026-11-13).
+    metaDescription: 'AI compliance and regulatory monitoring tools for legal teams. See what each tool covers, from governance and policy to privacy scans, and whether it has MCP.',
+    answer: 'These AI tools support compliance work in legal settings. They do different jobs, from governance, risk and policy programs to privacy scans and legal-data review, and not every tool here monitors regulations. Read each description before you buy, and ask for the list of sources a tool watches.',
+    bestLead: 'These are the compliance tools in our directory, in directory order. Only a listing that shows an MCP repository or install details has a documented MCP server, so open each one to check what it covers.',
+    focus: [
+      {
+        heading: 'Follow rulemaking and public comments',
+        lead: 'If you need to follow rulemaking dockets rather than run a compliance program, start with this connector from the legal research category.',
+        slugs: ['regulationsgov-mcp'],
+      },
+    ],
+    links: [
+      { href: '/blog/compliance-considerations-ai-law-firms', label: 'AI software due diligence for law firms: questions to resolve' },
+      { href: '/checklist', label: 'Free checklist: questions to ask before you adopt an AI tool' },
+    ],
     intro: [
       'Compliance AI does surveillance at a scale humans can’t: watching regulatory feeds across jurisdictions, mapping changes to the obligations a client actually has, and drafting the assessment work that follows. The category serves two distinct buyers — law firms advising clients on compliance, and in-house/ops teams running their own programs — and most tools lean clearly toward one or the other.',
       'The evaluation question that matters most here is the false-negative rate you can’t see: a monitoring tool earns its keep on the change it catches that you’d have missed, and quietly fails on the one it misses that you’d assumed was covered. Scope clarity — exactly which sources, jurisdictions, and topics are monitored — is worth more than any AI feature.',
@@ -200,11 +335,23 @@ export const CATEGORY_CONTENT: Record<string, CategoryContent> = {
         q: 'Where does MCP fit in compliance work?',
         a: 'A compliance platform exposed over MCP lets an AI assistant answer "what changed in our space this quarter" or "which obligations does this new rule touch" from live monitored data, in conversation. Listings note which tools ship MCP servers.',
       },
+      // Claude Sonnet 5.5, 2026-11-12: extra answers for question-shaped gap queries.
+      {
+        q: 'What should I ask before I buy AI compliance monitoring software?',
+        a: 'Ask for the exact list of sources and jurisdictions the tool watches and how fast changes appear. Ask how it decides which changes apply to you, what record it keeps for audits, and where a person reviews its output.',
+      },
+      {
+        q: 'Which compliance tools here support MCP?',
+        a: 'Open each listing. A tool with an MCP server shows its repository or install details, and the connection panel says when MCP setup documentation has been reviewed. A tool without those has no confirmed MCP connection in this directory, though one may exist.',
+      },
     ],
   },
 
   general: {
     headline: 'General-Purpose AI Tools for Legal Practice',
+    // Claude Sonnet 5.5, 2026-11-12: search-gap fields for this category (Search Console 2026-10-16 to 2026-11-13).
+    bestLead: 'These are the general-purpose AI tools in our directory, in directory order. If you are looking for legal practice management tools to use with Claude, see the case and matter management list.',
+    bestAlso: { href: '/best/case-management-mcp-servers', label: 'Legal practice management tools with MCP' },
     intro: [
       'This category holds the tools that don’t fit one practice function because they span several: AI platforms with legal modes, assistants built to work across research, drafting, and analysis, and the infrastructure pieces — including MCP servers — that connect general AI assistants to legal-specific data and software.',
       'General tools trade depth for reach. A dedicated contract-review product will usually beat a general assistant at contract review; the general assistant wins on everything that happens between the specialized tools — and, connected over MCP to the right sources, it can borrow their depth on demand. For many small firms, one well-connected general assistant is the realistic starting point.',

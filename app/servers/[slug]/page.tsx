@@ -14,7 +14,7 @@ import { LeadGenCTA } from '../../components/LeadGenCTA'
 import { FeatureListingCTA } from '../../components/FeatureListingCTA'
 import { CATEGORY_LABELS, PRICING_LABELS, SITE_URL } from '@/lib/constants'
 import { sanitizeLogoUrl } from '@/lib/logo-url'
-import { SoftwareConnectionDetails } from '../../components/SoftwareConnection'
+import { SoftwareConnectionDetails, ConnectionLead, ConnectionFaqs } from '../../components/SoftwareConnection'
 import {
   LISTING_CARD_COLUMNS,
   LISTING_DETAIL_COLUMNS,
@@ -174,9 +174,14 @@ export default async function ListingDetailPage({
 
         {/* Badges */}
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="text-xs bg-slate-100 text-charcoal rounded-full px-2.5 py-1">
+          {/* Claude Sonnet 5.5, 2026-11-12: the category label now links to its hub page. Listing pages
+              linked to no category page before, so the hubs got no relevance from the pages that rank. */}
+          <Link
+            href={`/categories/${listing.category.replace(/_/g, '-')}`}
+            className="text-xs bg-slate-100 text-charcoal rounded-full px-2.5 py-1 hover:text-gold-text transition-colors"
+          >
             {categoryLabel}
-          </span>
+          </Link>
           <span className="text-xs bg-amber-50 text-gold-text rounded-full px-2.5 py-1">
             {pricingLabel}
           </span>
@@ -196,6 +201,10 @@ export default async function ListingDetailPage({
         </div>
       </div>
 
+      {/* Claude Sonnet 5.5, 2026-11-12: answer-first paragraph (about 50 words) for listings with reviewed
+          connection data; sourced in lib/connections.ts. Renders nothing for other listings. */}
+      <ConnectionLead slug={listing.slug} />
+
       {/* Description */}
       {listing.pricing_details && <section className="mb-8 rounded-xl border border-slate-200 p-5" aria-labelledby="pricing-access-heading">
         <h2 id="pricing-access-heading" className="font-sans font-semibold text-navy">Pricing and access</h2>
@@ -209,6 +218,8 @@ export default async function ListingDetailPage({
 
       <SoftwareConnectionDetails slug={listing.slug} />
       <CatalogSources listing={listing} />
+      {/* Claude Sonnet 5.5, 2026-11-12: FAQ with matching FAQPage schema for question-shaped queries. */}
+      <ConnectionFaqs slug={listing.slug} />
 
       {/* Setup guide, when we have written one for this listing */}
       {SETUP_GUIDES[listing.slug] && (

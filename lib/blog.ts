@@ -13,6 +13,8 @@ export interface BlogPost {
   category: string
   readingTime: string
   content: string // HTML content
+  /** Claude Sonnet 5.5, 2026-11-12: optional FAQ shown under the article, with matching FAQPage schema. */
+  faqs?: { q: string; a: string }[]
 }
 
 const posts: BlogPost[] = [
@@ -62,14 +64,37 @@ const posts: BlogPost[] = [
   },
   {
     "slug": "ai-contract-review-tools-compared",
-    "title": "Three Contract-Review Platforms: Compare the Workflow",
-    "description": "Compare documented Luminance, Ironclad and Kira workflows using the same permitted sample and current vendor terms.",
+    // Claude Sonnet 5.5, 2026-11-12: title, description, feature table and FAQ rewritten for the gap queries "compare
+    // different ai contract reader platforms based on features" (pos 5.7), "what contract review tools do corporate
+    // legal departments prefer?" (6.8) and "who are the top providers of contract review automation used by law
+    // firms?" (9.8). Every feature in the table is the wording already in this post's October 27 bullets, with
+    // the same vendor links. The page makes no preference, usage or ranking claim, and says so in a heading.
+    "title": "Compare AI Contract Review Tools: Luminance, Ironclad, Kira",
+    "description": "Compare how Luminance, Ironclad and Kira describe their AI contract review features, and how to test all three on the same sample.",
     "date": "2026-04-08",
     "category": "Comparison",
-    "content": "<p>Luminance, Ironclad and Kira describe overlapping contract workflows. We reviewed their public documentation; we have not run a comparative customer-account benchmark. There is no source-backed price comparison in this article. Obtain current quotes and confirm the features and deployment included.</p><h2>What the vendors describe</h2><ul><li><a href=\"https://www.luminance.com/\">Luminance</a>: negotiation using playbooks and precedent, portfolio questions and connected contract workflows.</li><li><a href=\"https://ironcladapp.com/\">Ironclad</a>: contract lifecycle management and connected workflows. Its documented MCP search and obligation tools have distinct access requirements.</li><li><a href=\"https://www.litera.com/capabilities/review\">Kira by Litera</a>: extracting contract provisions, pre-built or custom fields and collaborative review.</li></ul><h2>Run a fair evaluation</h2><p>Use the same permitted sample documents and check extraction accuracy, traceability to source text, review controls, collaboration, integrations and exports. Record missing information and corrections, not only successful demonstrations. Confirm account permissions, data handling and commercial terms before choosing. A vendor description does not establish how a product performs on your documents.</p><p><a href=\"/categories/document-processing\">See the directory’s document-processing tools and source references</a>.</p>",
+    "content": "<p>Luminance, Ironclad and Kira describe overlapping AI contract review features: negotiation, lifecycle management and provision extraction. We reviewed their public documentation; we have not run a comparative customer-account benchmark. There is no source-backed price comparison in this article. Obtain current quotes and confirm the features and deployment included.</p><h2>AI contract review features each vendor describes</h2><table><thead><tr><th>Platform</th><th>What the vendor describes</th></tr></thead><tbody><tr><td><a href=\"https://www.luminance.com/\">Luminance</a></td><td>Negotiation using playbooks and precedent, portfolio questions and connected contract workflows.</td></tr><tr><td><a href=\"https://ironcladapp.com/\">Ironclad</a></td><td>Contract lifecycle management and connected workflows. Its documented MCP search and obligation tools have distinct access requirements.</td></tr><tr><td><a href=\"https://www.litera.com/capabilities/review\">Kira by Litera</a></td><td>Extracting contract provisions, pre-built or custom fields and collaborative review.</td></tr></tbody></table><h2>Which contract review tools do firms and legal departments prefer?</h2><p>We have no usage, market-share or preference data, so this article does not rank these platforms or say which ones firms choose. The table shows what each vendor says it does. Choose by testing.</p><h2>Run a fair evaluation</h2><p>Use the same permitted sample documents and check extraction accuracy, traceability to source text, review controls, collaboration, integrations and exports. Record missing information and corrections, not only successful demonstrations. Confirm account permissions, data handling and commercial terms before choosing. A vendor description does not establish how a product performs on your documents.</p><p>Directory profiles: <a href=\"/servers/luminance\">Luminance</a>, <a href=\"/servers/ironclad\">Ironclad</a> and <a href=\"/servers/kira-systems\">Kira</a>. <a href=\"/categories/document-processing\">See the directory’s document-processing tools and source references</a>, or the <a href=\"/best/document-processing-mcp-servers\">document-processing list in directory order</a>.</p>",
     "updatedDate": "2026-10-27",
     "author": "LegalAIMCP Team",
-    "readingTime": "2 min read"
+    "readingTime": "2 min read",
+    "faqs": [
+      {
+        "q": "How do I compare AI contract review tools?",
+        "a": "Use the same permitted sample documents with each tool. Check extraction accuracy, traceability to source text, review controls, collaboration, integrations and exports. Record missing information and corrections, not only successful demonstrations."
+      },
+      {
+        "q": "Which AI contract review tool is best?",
+        "a": "This article does not pick one. We reviewed public vendor documentation and have not run a comparative customer-account benchmark, so we cannot say which performs best on your documents. Test each tool on your own permitted sample and confirm commercial terms."
+      },
+      {
+        "q": "Is there a price comparison?",
+        "a": "No. There is no source-backed price comparison in this article. Ask each vendor for a current quote and confirm which features and deployment it includes."
+      },
+      {
+        "q": "Does Ironclad work with AI assistants over MCP?",
+        "a": "Ironclad documents an MCP server for contract search and, with the required add-on, obligation management. Search is read-only, and obligation tools can create and update records. Check the requirements on the Ironclad listing before you connect."
+      }
+    ]
   },
   {
     "slug": "compliance-considerations-ai-law-firms",

@@ -73,6 +73,39 @@ const FAQ_ITEMS = [
       </>
     ),
   },
+  // Claude Sonnet 5.5, 2026-11-12: two answers for homepage gap queries "mcp for lawyers" (pos 17.1), "mcp for legal"
+  // (11.6) and "which legal intake platforms support mcp integrations?" (4.9). The MCP definition is the one already
+  // used in the general category FAQ (lib/category-content.ts). No tool is named, so nothing here can go stale.
+  {
+    q: 'What is an MCP server for lawyers?',
+    text: 'An MCP server lets an AI assistant such as Claude use a legal tool or data source directly, for example to search case law or read matter data. This directory lists legal MCP servers and AI tools, shows what each one documents, and runs its own read-only MCP server for finding tools. MCP alone does not keep client data private.',
+    a: (
+      <>
+        An MCP server lets an AI assistant such as Claude use a legal tool or data source
+        directly, for example to search case law or read matter data. This directory lists{' '}
+        <Link href="/best/legal-mcp-servers" className="text-gold-text font-semibold hover:underline">
+          legal MCP servers and AI tools
+        </Link>
+        , shows what each one documents, and runs its own read-only MCP server for finding tools.
+        MCP alone does not keep client data private.
+      </>
+    ),
+  },
+  {
+    q: 'Which legal intake platforms support MCP?',
+    text: 'Open the client intake and communication category. Each listing shows its MCP server or reviewed connector details where the directory has them. A listing with no MCP details has no confirmed MCP connection in this directory, so confirm with the vendor before you plan around one.',
+    a: (
+      <>
+        Open the{' '}
+        <Link href="/categories/client-communication" className="text-gold-text font-semibold hover:underline">
+          client intake and communication category
+        </Link>
+        . Each listing shows its MCP server or reviewed connector details where the directory has
+        them. A listing with no MCP details has no confirmed MCP connection in this directory, so
+        confirm with the vendor before you plan around one.
+      </>
+    ),
+  },
   {
     q: 'What if I need something custom, not off-the-shelf?',
     text: "Talk to NYClaw.io. That's the AI agency that builds and funds this directory — they build private AI integrations for firms whose workflow doesn't match any off-the-shelf tool. (Disclosure: NYClaw funds this site.)",
