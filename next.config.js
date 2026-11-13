@@ -11,6 +11,21 @@ const nextConfig = {
   async headers() {
     return [
       {
+        // Claude Sonnet 5.5, 2026-11-12: the /chatgpt routes are hand-built HTML with no <link rel=canonical>; Search Console
+        // listed them under "Duplicate without user-selected canonical". An HTTP Link header is
+        // honored by Google and leaves the CSP-hashed HTML untouched.
+        source: '/chatgpt',
+        headers: [{ key: 'Link', value: '<https://legalaimcp.com/chatgpt>; rel="canonical"' }],
+      },
+      {
+        source: '/chatgpt/privacy',
+        headers: [{ key: 'Link', value: '<https://legalaimcp.com/chatgpt/privacy>; rel="canonical"' }],
+      },
+      {
+        source: '/chatgpt/support',
+        headers: [{ key: 'Link', value: '<https://legalaimcp.com/chatgpt/support>; rel="canonical"' }],
+      },
+      {
         source: '/(.*)',
         headers: [
           {

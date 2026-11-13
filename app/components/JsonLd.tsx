@@ -1,6 +1,7 @@
 import { SITE_NAME, SITE_URL, NYCLAW_URL, SITE_LAST_MODIFIED } from '@/lib/constants'
 import type { Listing } from '@/lib/types'
 import { toJsonLd } from '@/lib/json-ld'
+import { softwareAppSchema } from '@/lib/software-schema'
 
 export function WebSiteJsonLd() {
   const schema = {
@@ -105,23 +106,8 @@ export function SoftwareAppJsonLd({
 }: {
   listing: Pick<Listing, 'pricing_model' | 'pricing_details' | 'name' | 'tagline' | 'slug'>
 }) {
-  const offers =
-    listing.pricing_model === 'free'
-      ? { '@type': 'Offer', price: '0', priceCurrency: 'USD' }
-      : {
-          '@type': 'Offer',
-          description: listing.pricing_details ?? listing.pricing_model,
-        }
-
-  const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    name: listing.name,
-    description: listing.tagline,
-    applicationCategory: 'Legal',
-    url: `${SITE_URL}/servers/${listing.slug}`,
-    offers,
-  }
+  // Claude Sonnet 5.5, 2026-11-12: schema now built in lib/software-schema.ts (no price-less Offer)
+  const schema = softwareAppSchema(listing)
 
   return (
     <script

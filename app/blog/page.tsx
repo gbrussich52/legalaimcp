@@ -5,7 +5,8 @@ import { getAllPosts } from '@/lib/blog'
 export const metadata: Metadata = {
   title: 'Legal AI Blog',
   description:
-    'Articles about AI for law firms — tool reviews, implementation guides, and industry insights from LegalAIMCP.',
+    // Claude Sonnet 5.5, 2026-11-12: was 109 chars, one short of the 110 minimum (Ahrefs 11/12)
+    'Articles about AI for law firms: tool reviews, implementation guides, and industry insights from the LegalAIMCP directory.',
   alternates: { canonical: 'https://legalaimcp.com/blog' },
 }
 
