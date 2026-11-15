@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { FEATURED_PRICE_CENTS } from '@/lib/featured-pricing'
+import { FEATURED_ROLES, ROLE_LABELS, type FeaturedRole } from '@/lib/featured-intent'
 
 const PRICE_LABEL = `$${(FEATURED_PRICE_CENTS / 100).toFixed(0)}`
 
@@ -23,20 +24,41 @@ export function FeatureListingCTA({
 }) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  // Claude Fable 5.2 (executor), 2026-11-15: short form before Stripe (prior code redirected on click with no contact captured).
+  const [formOpen, setFormOpen] = useState(false)
+  const [email, setEmail] = useState('')
+  const [role, setRole] = useState<FeaturedRole | ''>('')
+  const [website, setWebsite] = useState('') // honeypot, hidden from people
 
   const paidActive =
     alreadyFeatured &&
     featuredUntil != null &&
     new Date(featuredUntil).getTime() > Date.now()
 
-  async function startCheckout() {
+  function openForm() {
+    setFormOpen(true)
+    // Claude Fable 5.2 (executor), 2026-11-15: featured_click is the one client-originated funnel step; slug only, failures ignored.
+    fetch('/api/featured/click', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ slug }),
+      keepalive: true,
+    }).catch(() => {})
+  }
+
+  async function startCheckout(e: React.FormEvent) {
+    e.preventDefault()
+    if (!role) {
+      setError('Choose the option that describes you.')
+      return
+    }
     setLoading(true)
     setError(null)
     try {
       const res = await fetch('/api/stripe/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ listing_id: listingId, slug }),
+        body: JSON.stringify({ listing_id: listingId, slug, email, role, website }),
       })
       const data = (await res.json().catch(() => ({}))) as {
         url?: string
@@ -44,7 +66,8 @@ export function FeatureListingCTA({
       }
       if (!res.ok || !data.url) {
         setError(
-          data.error ||
+          (res.status === 400 ? 'Enter a valid work email and choose a role.' : '') ||
+            data.error ||
             (res.status === 503
               ? 'Featured checkout is not configured yet.'
               : 'Could not start checkout.'),
@@ -86,15 +109,55 @@ export function FeatureListingCTA({
             </Link>
           </p>
         </div>
-        <button
-          type="button"
-          onClick={startCheckout}
-          disabled={loading}
-          className="btn-primary whitespace-nowrap disabled:opacity-60"
-        >
-          {loading ? 'Starting checkout…' : 'Feature this listing'}
-        </button>
+        {!formOpen && (
+          <button
+            type="button"
+            onClick={openForm}
+            className="btn-primary whitespace-nowrap"
+          >
+            Feature this listing
+          </button>
+        )}
       </div>
+      {formOpen && (
+        <form onSubmit={startCheckout} className="mt-4 space-y-3" noValidate>
+          <label className="block">
+            <span className="font-sans text-sm font-semibold text-navy">Work email</span>
+            <input
+              type="email"
+              required
+              autoComplete="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="mt-1 block w-full rounded-lg border border-slate-300 px-3 py-2 font-body text-sm"
+            />
+          </label>
+          <fieldset>
+            <legend className="font-sans text-sm font-semibold text-navy">Your role</legend>
+            <div className="mt-1 space-y-1">
+              {FEATURED_ROLES.map((r) => (
+                <label key={r} className="flex items-center gap-2 font-body text-sm text-charcoal/80">
+                  <input type="radio" name="role" value={r} checked={role === r} onChange={() => setRole(r)} />
+                  {ROLE_LABELS[r]}
+                </label>
+              ))}
+            </div>
+          </fieldset>
+          {/* Honeypot: off-screen, not focusable; bots fill it, people never see it. */}
+          <div aria-hidden="true" style={{ position: 'absolute', left: '-10000px' }}>
+            <label>
+              Website
+              <input type="text" tabIndex={-1} autoComplete="off" value={website} onChange={(e) => setWebsite(e.target.value)} />
+            </label>
+          </div>
+          <p className="font-body text-xs text-charcoal/75">
+            We use your email only to send the receipt and to follow up on this purchase.
+          </p>
+          <button type="submit" disabled={loading} className="btn-primary whitespace-nowrap disabled:opacity-60">
+            {loading ? 'Starting checkout…' : `Continue to payment — ${PRICE_LABEL}`}
+          </button>
+        </form>
+      )}
       {error && (
         <p className="mt-3 text-sm text-red-600 font-body" role="alert">
           {error}
