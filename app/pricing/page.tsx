@@ -88,8 +88,9 @@ export default function PricingPage() {
         <ol className="list-decimal list-inside space-y-2">
           <li>Publish a listing (free submit + admin review).</li>
           <li>
-            On the listing page, click <strong>Feature this listing</strong> to
-            open Stripe Checkout.
+            {/* Claude Fable 5.2, 2026-11-15: the click now asks for a work email and role before Stripe; the old line said it opened Stripe Checkout directly. */}
+            On the listing page, click <strong>Feature this listing</strong>, enter
+            your work email and role, then pay in Stripe Checkout.
           </li>
           <li>
             After payment is confirmed, the placement runs for 30 days.

@@ -3,6 +3,7 @@ import type Stripe from 'stripe'
 import { getAdminClient } from '@/lib/supabase-admin'
 import { FEATURED_PRICE_CENTS, getStripe, isStripeConfigured } from '@/lib/stripe'
 import { FEATURED_DURATION_DAYS } from '@/lib/featured-pricing'
+import { recordFunnelEvent } from '@/lib/funnel'
 
 export const runtime = 'nodejs'
 
@@ -51,6 +52,13 @@ export async function POST(req: Request) {
       console.error('[stripe/webhook] applyFeaturedPurchase failed', err)
       return NextResponse.json({ error: 'Handler failed' }, { status: 500 })
     }
+    // Claude Fable 5.2 (executor), 2026-11-15: bookkeeping only, after fulfillment; errors are logged inside and never change the response.
+    await markIntentPaid(session)
+  }
+
+  // Claude Fable 5.2 (executor), 2026-11-15: an expired session is a recoverable lead; store Stripe's recovery link on the intent. No listing change.
+  if (event.type === 'checkout.session.expired') {
+    await markIntentExpired(event.data.object as Stripe.Checkout.Session)
   }
 
   return NextResponse.json({ received: true })
@@ -138,4 +146,44 @@ async function applyFeaturedPurchase(session: Stripe.Checkout.Session) {
   console.info(
     `[stripe/webhook] Featured applied listing=${listingId} slug=${slug ?? '?'} until=${featuredUntil.toISOString()}`,
   )
+}
+
+// Claude Fable 5.2 (executor), 2026-11-15: the intent id rides on client_reference_id (and metadata as a fallback).
+function intentIdOf(session: Stripe.Checkout.Session): string | null {
+  return session.client_reference_id || session.metadata?.intent_id || null
+}
+
+async function markIntentPaid(session: Stripe.Checkout.Session) {
+  const id = intentIdOf(session)
+  if (!id || session.payment_status !== 'paid') return
+  try {
+    // neq('paid') makes a replay a no-op, so featured_paid is logged once.
+    const { data, error } = await getAdminClient().from('featured_intents')
+      .update({ status: 'paid', stripe_session_id: session.id }).eq('id', id).neq('status', 'paid').select('id')
+    if (error) { console.error('[stripe/webhook] intent paid update failed', error.message); return }
+    if (Array.isArray(data) && data.length > 0) await recordFunnelEvent('featured_paid', session.metadata?.slug)
+  } catch (err) {
+    console.error('[stripe/webhook] intent paid update threw', err instanceof Error ? err.message : 'unknown')
+  }
+}
+
+async function markIntentExpired(session: Stripe.Checkout.Session) {
+  const id = intentIdOf(session)
+  if (!id) return
+  const recoveryUrl = session.after_expiration?.recovery?.url ?? null
+  try {
+    const db = getAdminClient()
+    // Only a still-started intent flips to expired; canceled keeps its reason, paid is never touched.
+    const { data, error } = await db.from('featured_intents')
+      .update({ status: 'expired', ...(recoveryUrl ? { recovery_url: recoveryUrl } : {}) })
+      .eq('id', id).eq('status', 'started').select('id')
+    if (error) { console.error('[stripe/webhook] intent expired update failed', error.message); return }
+    if (Array.isArray(data) && data.length > 0) await recordFunnelEvent('featured_expired', session.metadata?.slug)
+    else if (recoveryUrl) {
+      const { error: e2 } = await db.from('featured_intents').update({ recovery_url: recoveryUrl }).eq('id', id).neq('status', 'paid')
+      if (e2) console.error('[stripe/webhook] intent recovery url update failed', e2.message)
+    }
+  } catch (err) {
+    console.error('[stripe/webhook] intent expired update threw', err instanceof Error ? err.message : 'unknown')
+  }
 }
