@@ -1,4 +1,4 @@
-// Claude Fable 5.2 (executor), 2026-11-15: first-party funnel log (Vercel Hobby drops custom Analytics events). Stores enums and a slug only; never email, name, IP, user agent or free text.
+// Claude Fable 5.2 (executor), 2026-11-15: first-party funnel log (our own table keeps the buyer funnel out of third-party trackers and in one place we can query). Stores enums and a slug only; never email, name, IP, user agent or free text.
 import { getAdminClient } from '@/lib/supabase-admin'
 import { CANCEL_REASONS, FEATURED_ROLES, SLUG_RE, type FunnelStep } from '@/lib/featured-intent'
 

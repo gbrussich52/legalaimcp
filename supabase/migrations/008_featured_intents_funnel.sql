@@ -48,4 +48,4 @@ REVOKE ALL ON legalaimcp.funnel_events FROM anon, authenticated;
 GRANT ALL ON legalaimcp.funnel_events TO service_role;
 
 COMMENT ON TABLE legalaimcp.funnel_events IS
-  'First-party funnel steps (Vercel Hobby drops custom Analytics events). Slug and enum props only; no PII.';
+  'First-party funnel steps, kept out of third-party trackers. Slug and enum props only; no PII.';

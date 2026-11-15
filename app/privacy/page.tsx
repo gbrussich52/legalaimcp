@@ -54,9 +54,16 @@ export default function PrivacyPage() {
                 contact email, and &mdash; if you provide one &mdash; the integration endpoint you
                 want reviewed.
               </li>
+              {/* Claude Fable 5.2, 2026-11-15: the Featured form now collects a work email and role before Stripe; the policy must say so. */}
+              <li>
+                <span className="text-navy font-medium">Feature a listing</span>: your work email
+                and your role (you work at the company, you are its agency or consultant, or you are
+                just looking). We use the email to send the receipt and to follow up on that purchase,
+                including once if you leave before paying.
+              </li>
             </ul>
             <p className="text-base text-charcoal/75 leading-relaxed mt-4">
-              Both forms ask you to keep examples fictional and free of real client or case data; we
+              The submit and pilot forms ask you to keep examples fictional and free of real client or case data; we
               don&apos;t want it and don&apos;t need it to review a submission or scope a pilot.
             </p>
           </div>
