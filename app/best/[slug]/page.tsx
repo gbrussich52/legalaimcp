@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 import { RoundupItem } from '../../components/RoundupItem'
 import { LeadGenCTA } from '../../components/LeadGenCTA'
+import { CategoryFocusSections } from '../../components/CategoryFocusSections'
 import { ItemListJsonLd, BreadcrumbJsonLd } from '../../components/JsonLd'
 import { LISTING_CARD_COLUMNS, type ListingCardData } from '@/lib/types'
 import { SITE_URL } from '@/lib/constants'
@@ -172,6 +173,10 @@ export default async function BestCategoryPage({
             </Link>
           </p>
         )}
+
+        {/* Claude Fable 5.2, 2026-11-15: related listings from other categories, same sections as the
+            category guide. They sit below the roundup and outside its ItemList on purpose. */}
+        <CategoryFocusSections categorySlug={categorySlug} className="mt-14 max-w-3xl" />
 
         {/* Cross-link back to the flagship roundup and every other category */}
         <section className="mt-14 border-t border-slate-200 pt-10">

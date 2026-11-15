@@ -583,8 +583,8 @@
     {
       "slug": "firecrawl-gov-index",
       "decision": "approved",
-      "reviewed_at": "2026-10-29",
-      "reviewer": "Codex manual primary-source claim review on October 29, 2026",
+      "reviewed_at": "2026-11-15",
+      "reviewer": "Claude Fable 5.2 manual primary-source claim review on November 15, 2026",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": true,
@@ -592,30 +592,30 @@
         {
           "url": "https://www.firecrawl.dev/gov-index",
           "kind": "vendor",
-          "sha256": "b2dbf75363daf9341e94675870c75d4b60f6df497cdac1f109e564abc0e3065b",
+          "sha256": "9aad0957aa705291dffae6bd93c80ecfafe751eeb823c7c6c316a195ec8be5dd",
           "quote": "Call GET or POST /v2/search/gov, use firecrawl_gov_search in the Firecrawl MCP server"
         },
         {
           "url": "https://docs.firecrawl.dev/features/gov.md",
           "kind": "vendor",
-          "sha256": "483894479107dee1cbfe6bf8ff8a9c3dec39639e56119b035e22ffeee64f24c8",
+          "sha256": "6be035fef3141dfeeb2cdcf2cae3179508ea8e71ecad5195727f2a8bb259c056",
           "quote": "Government Index searches are free and use no credits, with or without zero data retention."
         },
         {
           "url": "https://docs.firecrawl.dev/mcp-server.md",
           "kind": "vendor",
-          "sha256": "99f90776691ddc998f1ce86779fa90e271d7b47840cf4646245fccfccf15913a",
+          "sha256": "27528145864b91b4efa34d76af8ef280e9034964f4a19190d84852bef882761d",
           "quote": "No account or key. Search, Scrape, and Parse within daily limits."
         }
       ],
-      "listing_sha256": "1e18d880c4fb6f91723772d8b303163cdd0da71208b19cebaefae40923c6e843",
+      "listing_sha256": "072dce311fad1850d6827b1c2867d0f64b44853a91fc517a6a413e498200185e",
       "claims": {
         "slug": "firecrawl-gov-index",
         "name": "Firecrawl Government & Legal Index",
         "tagline": "Search an index of U.S. government and legal sources for AI-assisted research.",
         "description": "Firecrawl's Government & Legal Index searches government and legal sources including statutes, regulations and court opinions, with source links. The vendor documents public search API routes, the firecrawl_gov_search tool in its MCP server, CLI and SDK access, and AI-assistant connectors. Index search is described as credit-free; connector setup and usage limits have separate requirements. Verify the underlying issuer, jurisdiction, effective date and text before relying on a result. Documentation reviewed; this audit did not test account access or search completeness.",
         "category": "legal_research",
-        "external_url": "https://www.firecrawl.dev/gov-index",
+        "external_url": "https://alexandria.firecrawl.dev/firecrawl-gov-index",
         "mcp_repo_url": null,
         "mcp_install_command": null,
         "pricing_model": "free",

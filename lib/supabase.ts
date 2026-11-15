@@ -4,7 +4,8 @@ import { createClient } from '@supabase/supabase-js'
 // (ref bzrdzchrdthyrhdsodla). Every client selects that schema here; queries stay unchanged.
 export const SUPABASE_SCHEMA = 'legalaimcp'
 // Bump on a reviewed bulk correction: ISR must not reuse the previous release's claims.
-export const CATALOG_CACHE_REVISION = '2026-10-29-source-and-sdk-recheck'
+// Claude Fable 5.2, 2026-11-15: new namespace so production reads the re-reviewed Firecrawl listing URL.
+export const CATALOG_CACHE_REVISION = '2026-11-15-firecrawl-alexandria-url'
 
 export function createSchemaClient(
   url: string,

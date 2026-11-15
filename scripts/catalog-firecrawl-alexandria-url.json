@@ -1,0 +1,55 @@
+[
+  {
+    "id": "d51149a3-5914-428c-8409-813fe0e7023d",
+    "expected_status": "published",
+    "expected_claims": {
+      "slug": "firecrawl-gov-index",
+      "name": "Firecrawl Government & Legal Index",
+      "tagline": "Search an index of U.S. government and legal sources for AI-assisted research.",
+      "description": "Firecrawl's Government & Legal Index searches government and legal sources including statutes, regulations and court opinions, with source links. The vendor documents public search API routes, the firecrawl_gov_search tool in its MCP server, CLI and SDK access, and AI-assistant connectors. Index search is described as credit-free; connector setup and usage limits have separate requirements. Verify the underlying issuer, jurisdiction, effective date and text before relying on a result. Documentation reviewed; this audit did not test account access or search completeness.",
+      "category": "legal_research",
+      "external_url": "https://www.firecrawl.dev/gov-index",
+      "mcp_repo_url": null,
+      "mcp_install_command": null,
+      "pricing_model": "free",
+      "pricing_details": "The vendor states index search uses no credits and the API works without a key to start. Its native Claude/ChatGPT connector setup describes a Firecrawl account; other MCP connection paths may differ. Confirm current limits and other service charges.",
+      "tags": [
+        "government-data",
+        "statutes",
+        "regulations",
+        "case-law",
+        "index",
+        "mcp"
+      ],
+      "creator_name": "Firecrawl",
+      "creator_url": "https://www.firecrawl.dev",
+      "logo_url": null,
+      "firm_size_fit": []
+    },
+    "listing": {
+      "slug": "firecrawl-gov-index",
+      "name": "Firecrawl Government & Legal Index",
+      "tagline": "Search an index of U.S. government and legal sources for AI-assisted research.",
+      "description": "Firecrawl's Government & Legal Index searches government and legal sources including statutes, regulations and court opinions, with source links. The vendor documents public search API routes, the firecrawl_gov_search tool in its MCP server, CLI and SDK access, and AI-assistant connectors. Index search is described as credit-free; connector setup and usage limits have separate requirements. Verify the underlying issuer, jurisdiction, effective date and text before relying on a result. Documentation reviewed; this audit did not test account access or search completeness.",
+      "category": "legal_research",
+      "external_url": "https://alexandria.firecrawl.dev/firecrawl-gov-index",
+      "mcp_repo_url": null,
+      "mcp_install_command": null,
+      "pricing_model": "free",
+      "pricing_details": "The vendor states index search uses no credits and the API works without a key to start. Its native Claude/ChatGPT connector setup describes a Firecrawl account; other MCP connection paths may differ. Confirm current limits and other service charges.",
+      "tags": [
+        "government-data",
+        "statutes",
+        "regulations",
+        "case-law",
+        "index",
+        "mcp"
+      ],
+      "creator_name": "Firecrawl",
+      "creator_url": "https://www.firecrawl.dev",
+      "logo_url": null,
+      "firm_size_fit": [],
+      "status": "published"
+    }
+  }
+]
