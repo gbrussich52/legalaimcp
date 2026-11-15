@@ -307,6 +307,13 @@ export const CATEGORY_CONTENT: Record<string, CategoryContent> = {
         lead: 'If you need to follow rulemaking dockets rather than run a compliance program, start with this connector from the legal research category.',
         slugs: ['regulationsgov-mcp'],
       },
+      // Claude Fable 5.2, 2026-11-15: Firecrawl asked to be on the compliance list. Its index is a legal
+      // research listing, so it gets a pointer here, not a compliance-category row.
+      {
+        heading: 'Find the statute or regulation behind a rule',
+        lead: 'If you need to read the statute, regulation or code section behind a compliance question, start with this search index from the legal research category.',
+        slugs: ['firecrawl-gov-index'],
+      },
     ],
     links: [
       { href: '/blog/compliance-considerations-ai-law-firms', label: 'AI software due diligence for law firms: questions to resolve' },

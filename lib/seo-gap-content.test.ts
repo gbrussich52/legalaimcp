@@ -148,4 +148,14 @@ describe('withheld listing redirect', () => {
     const registry = JSON.parse(readFileSync(new URL('./catalog-reviews.json', import.meta.url), 'utf8'))
     expect(registry.blocked_slugs).toContain('clientintake-ai')
   })
+
+  // Claude Fable 5.2, 2026-11-15: Firecrawl asked for the Alexandria URL and a place on the compliance
+  // list. Guard both: the approved destination, and the cross-category pointer that both pages render.
+  it('points the Firecrawl index at Alexandria and names it on the compliance pages', () => {
+    const registry = JSON.parse(readFileSync(new URL('./catalog-reviews.json', import.meta.url), 'utf8'))
+    const review = registry.reviews.find((r: { slug: string }) => r.slug === 'firecrawl-gov-index') as { claims: { external_url: string; category: string } }
+    expect(review.claims.external_url).toBe('https://alexandria.firecrawl.dev/firecrawl-gov-index')
+    expect(review.claims.category).toBe('legal_research')
+    expect((CATEGORY_CONTENT.compliance.focus ?? []).flatMap((f) => f.slugs)).toContain('firecrawl-gov-index')
+  })
 })
