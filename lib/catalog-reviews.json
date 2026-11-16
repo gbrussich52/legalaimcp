@@ -212,7 +212,7 @@
     {
       "slug": "clio",
       "decision": "approved",
-      "reviewed_at": "2026-10-27",
+      "reviewed_at": "2026-11-16",
       "reviewer": "Codex primary-source catalog audit, independently integrated",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
@@ -221,14 +221,26 @@
         {
           "url": "https://docs.developers.clio.com/guides/clio-manage/",
           "kind": "vendor",
-          "sha256": "1f8084845e005f7417432013aee52488a418a4d171c64d91912b24f3c1a31b46",
+          "sha256": "03a5d0bcaa15832c48b9e96338fead37c6dea7cec535d6b371eee4211f202d41",
           "quote": "A matter is the central organizing record for legal work in Clio Manage."
         },
         {
-          "url": "https://help.clio.com/api/v2/help_center/en-us/articles/29765932267675.json",
+          "url": "https://help.clio.com/api/v2/help_center/en-us/articles/9289741706779.json",
           "kind": "vendor",
-          "sha256": "bc45e4bad6fbfcd082e521c6f1641b896571f7cb5e5e07d9dc50401558ad6a6d",
-          "quote": "Suggested time entries from unlogged communication, notes, or completed tasks."
+          "sha256": "4a2b32187b573653808dfa36ee9dbde87d962d7ac0c325f9a4b4ae4f5a377022",
+          "quote": "help you proactively identify matter activity and suggest unlogged time entries"
+        },
+        {
+          "url": "https://help.clio.com/api/v2/help_center/en-us/articles/29658448391067.json",
+          "kind": "vendor",
+          "sha256": "dd6a7d95d05bc091240571b5dd09da3211691b446a941fd743482e42cad4c675",
+          "quote": "recognizes when a client update is warranted"
+        },
+        {
+          "url": "https://help.clio.com/api/v2/help_center/en-us/articles/29764998990491.json",
+          "kind": "vendor",
+          "sha256": "4908e2f492c175f43742aa4850a2b940bb634958622c3e3b10c3cdd69666756c",
+          "quote": "Clio's AI converts recorded entries into invoices"
         }
       ],
       "listing_sha256": "8ae505ce43e6b76bed0f62d16a97429e502851807650fee0dcf8aaaeb3538e50",
@@ -467,9 +479,9 @@
       "mcp_confirmed": true,
       "sources": [
         {
-          "url": "https://raw.githubusercontent.com/freelawproject/courtlistener-api-client/main/MCP_README.md",
+          "url": "https://raw.githubusercontent.com/freelawproject/courtlistener-mcp/main/MCP_README.md",
           "kind": "maintainer",
-          "sha256": "ce8ed226f549546b22708eccd2e7422e11d00ec87c0afeac3ae53e74d6e0611c",
+          "sha256": "0de287dc5353983c8288668d6ebc6154ad2714175945e9f4e3ca25d3d4bee146",
           "quote": "Search U.S. case law, dockets, judges, and oral arguments; extract and verify legal citations; and manage alerts"
         }
       ],
