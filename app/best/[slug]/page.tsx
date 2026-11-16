@@ -1,4 +1,4 @@
-import { fitTitle, fitDescription, FILLER } from '@/lib/seo-meta'
+import { fitTitle, fitDescription, FILLER, withSocial } from '@/lib/seo-meta'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
@@ -36,7 +36,7 @@ function categorySlugFromParam(param: string): string | null {
   return CATEGORY_CONTENT[categorySlug] ? categorySlug : null
 }
 
-export async function generateMetadata({
+async function buildMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>
@@ -211,4 +211,9 @@ export default async function BestCategoryPage({
       </main>
     </>
   )
+}
+
+// Claude Sonnet 5.5, 2026-11-16: og:url and og:image follow this page's own canonical (see withSocial).
+export async function generateMetadata(...args: Parameters<typeof buildMetadata>): Promise<Metadata> {
+  return withSocial(await buildMetadata(...args))
 }

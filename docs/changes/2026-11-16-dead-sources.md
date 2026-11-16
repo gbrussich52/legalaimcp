@@ -45,3 +45,52 @@ Review date for `clio` moved to 2026-11-16 after each description claim was trac
 - `clio` `creator_url` https://www.clio.com returns 403: bot blocking, not dead.
 
 Source hashes on many other entries have drifted because live pages change. Those are the weekly sensor's job and were not touched.
+
+## 3. Canonical on /pilot, and Open Graph that follows the canonical
+
+Claude Sonnet 5.5, 2026-11-16, at the director's request.
+
+Search Console: "Duplicate without user-selected canonical" for `/pilot` and `/pilot?source=mcp` (first seen 2026-11-09).
+
+Live check today: `https://legalaimcp.com/pilot?source=mcp` already serves `<link rel="canonical" href="https://legalaimcp.com/pilot"/>`, a fixed string that does not change with the query. `app/pilot/page.tsx` has had it since the page was added, and `/pilot` is in `app/sitemap.ts` (kept). So the Search Console row is stale or lagging; the page needs no canonical change. Ask Search Console to validate the fix after merge.
+
+What the live page did get wrong: `og:url` was `https://legalaimcp.com` (the home page) on `/pilot`, because a page that sets no `openGraph` inherits the layout's block, and a page that sets its own loses the layout's `og:url` and `og:image`. Scan of the 80 built indexable pages before the fix: 74 had `og:url` different from the canonical (null or home), 55 had no `og:image`, 2 had no `og:type`.
+
+Fix: `withSocial()` in `lib/seo-meta.ts` sets `og:url` to the page's own canonical and adds the shared card image (`/opengraph-image`, 1200 by 630) and `og:type`/site name when missing. Every static page and the four `generateMetadata` templates (`/best/[slug]`, `/blog/[slug]`, `/categories/[slug]`, `/servers/[slug]`) now pass through it. Pages without a canonical (the not-found fallbacks) are untouched.
+
+Route scan for "reachable with query params and no fixed canonical": every page under `app/` sets a fixed canonical string except `/admin/login`, which is a client component with no metadata and was indexable. It now has a `layout.tsx` with `noindex`. Pages that read `searchParams` (`/pilot`, `/servers`, `/featured/success`, `/featured/cancel`, `/admin/pilots`) all have fixed canonicals or `noindex`.
+
+## 4. Titles and descriptions (Ahrefs 2026-11-12)
+
+The 15 long titles were already fixed on main by #27 (`fitTitle`, 2026-11-12, after that crawl), and the `/about` description by #29. Checked live today and in the local build. Rendered title lengths, before (Ahrefs) and after (built page, suffix included):
+
+| URL | Before | After | Rendered title |
+| --- | --- | --- | --- |
+| /servers/courtlistener-citations-checker | 86 | 49 | CourtListener Citation Validation MCP (community) |
+| /servers/courtlistener-mcp | 73 | 49 | CourtListener MCP (Free Law Project) \| LegalAIMCP |
+| /servers/courtlistener-mcp-self-hosted | 74 | 50 | CourtListener MCP (blakeox community) \| LegalAIMCP |
+| /best/billing-time-mcp-servers | 73 | 51 | Best AI Time Tracking & Billing Tools for Law Firms |
+| /servers/clio-matter-manager | 72 | 48 | Clio MCP Server (CHLEGAL community) \| LegalAIMCP |
+| /best/case-management-mcp-servers | 74 | 52 | Best AI Case & Matter Management Tools for Law Firms |
+| /servers/freshbooks-legal-billing | 79 | 55 | FreshBooks MCP Server (roboulos community) \| LegalAIMCP |
+| /best/client-communication-mcp-servers | 79 | 57 | Best AI Client Intake & Communication Tools for Law Firms |
+| /servers/diligent-compliance | 77 | 53 | Diligent Governance, Risk and Compliance \| LegalAIMCP |
+| /servers/firecrawl-gov-index | 71 | 47 | Firecrawl Government & Legal Index \| LegalAIMCP |
+| /servers/canlii-legal-research | 82 | 58 | CanLII MCP (Vaquill community implementation) \| LegalAIMCP |
+| /servers/billing-ai-checkbox | 71 | 47 | Checkbox First Pass Invoice Review \| LegalAIMCP |
+| /blog/courtlistener-mcp-inside-claude | 73 | 60 | CourtListener in Claude: Sources, Access and Research Limits |
+| /blog/compliance-considerations-ai-law-firms | 74 | 54 | AI Software Due Diligence for Law Firms: Questions to… |
+| /blog/general-legal-mcp-server-first-law-firm | 75 | 54 | General Legal’s MCP Service: Check the Engagement and… |
+
+The title template is unchanged; `fitTitle` drops the suffix when it would pass 60 and cuts at a word boundary only if the title alone is too long.
+
+Changed in this PR:
+- `/about` description 155 to 146 characters (dropped "curated"; no new words). Limit moved to 150 for that page.
+- `/pilot` description 166 to 150 (dropped "before sending a request").
+- Three category descriptions (case-management, legal-research, compliance) were 158 to 159; cut a few words each, now 147 to 153.
+- `DESC_MAX` is 155 (was 160).
+- New test `lib/seo-sitemap-meta.test.ts` renders title and description for every static sitemap route and the `/best`, `/blog` templates, plus the title and tagline builders for every reviewed listing. It fails over 60 title characters, over 155 or under 110 description characters, a canonical other than the page's own, or an `og:url` that is not that canonical. `vitest.config.ts` gets a JSX setting so the test can import page modules.
+
+Scan of all 80 indexable built pages after the changes (title, description 110 to 155, canonical, og:url equal to canonical, og:title, og:description, og:image, og:type): zero issues.
+
+Ahrefs counts-only rows not fixed here, because their URLs were not listed and the local scan shows no matching page: "Meta description tag missing" 3 (likely non-indexable pages), "Page has links to redirect" 3, "Product page missing Product schema" 22, "Article page missing Article schema" 17, "Structured data validation error" 43. These need the Ahrefs URL lists.

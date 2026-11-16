@@ -2,8 +2,9 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { NYCLAW_CONTACT } from '@/lib/constants'
 import { PrintButton } from '../components/PrintButton'
+import { withSocial } from '@/lib/seo-meta'
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: 'AI Tool Selection Checklist — 10 questions for law firms',
   description:
     'A free 10-question checklist attorneys use to vet AI tools for bar compliance, client data privacy, and actual ROI before buying.',
@@ -132,3 +133,6 @@ export default function ChecklistPage() {
     </main>
   )
 }
+
+// Claude Sonnet 5.5, 2026-11-16: og:url and og:image follow this page's own canonical (see withSocial).
+export const metadata: Metadata = withSocial(baseMetadata)

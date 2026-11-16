@@ -2,13 +2,15 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { OrganizationJsonLd } from '../components/JsonLd'
 import { NYCLAW_URL, NYCLAW_CALENDLY } from '@/lib/constants'
+import { withSocial } from '@/lib/seo-meta'
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   // Claude Opus, 2026-11-12: the layout template already appends "| LegalAIMCP"; the old title printed the brand twice.
   title: 'About the Directory',
   // Claude Sonnet 5.5, 2026-11-13: description was 162 characters, over the 160 limit. Dropped "-powered" ("AI integrations" is the page's own wording) to get 154.
+  // Claude Sonnet 5.5, 2026-11-16: Ahrefs wants 150 or fewer; dropped "curated" (155 to 146).
   description:
-    'LegalAIMCP is the curated directory of AI integrations for law firms. Built by NYClaw.io, the AI implementation agency serving Westchester County and NYC.',
+    'LegalAIMCP is the directory of AI integrations for law firms. Built by NYClaw.io, the AI implementation agency serving Westchester County and NYC.',
   alternates: { canonical: 'https://legalaimcp.com/about' },
 }
 
@@ -118,3 +120,6 @@ export default function AboutPage() {
     </main>
   )
 }
+
+// Claude Sonnet 5.5, 2026-11-16: og:url and og:image follow this page's own canonical (see withSocial).
+export const metadata: Metadata = withSocial(baseMetadata)

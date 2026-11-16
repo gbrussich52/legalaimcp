@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getAllPosts } from '@/lib/blog'
+import { withSocial } from '@/lib/seo-meta'
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: 'Legal AI Blog',
   description:
     // Claude Sonnet 5.5, 2026-11-12: was 109 chars, one short of the 110 minimum (Ahrefs 11/12)
@@ -56,3 +57,6 @@ export default function BlogPage() {
     </main>
   )
 }
+
+// Claude Sonnet 5.5, 2026-11-16: og:url and og:image follow this page's own canonical (see withSocial).
+export const metadata: Metadata = withSocial(baseMetadata)

@@ -5,7 +5,7 @@ import { RoundupItem } from '../../components/RoundupItem'
 import { LeadGenCTA } from '../../components/LeadGenCTA'
 import { ItemListJsonLd, BreadcrumbJsonLd } from '../../components/JsonLd'
 import { LISTING_CARD_COLUMNS, type ListingCardData } from '@/lib/types'
-import { fitTitle } from '@/lib/seo-meta'
+import { fitTitle, withSocial } from '@/lib/seo-meta'
 import { SITE_URL } from '@/lib/constants'
 import { CATEGORY_CONTENT } from '@/lib/category-content'
 
@@ -13,7 +13,7 @@ const PAGE_TITLE = 'Legal MCP Servers & AI Tools: Compare Before Setup'
 const PAGE_DESCRIPTION =
   'Compare legal MCP servers and AI tools by workflow, pricing, and connection requirements. Understand listing order and link checks before choosing.'
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   // Claude Sonnet 5.5, 2026-11-12: fit title <= 60 (was 63 with brand)
   title: fitTitle(PAGE_TITLE),
   description: PAGE_DESCRIPTION,
@@ -192,3 +192,6 @@ export default async function BestLegalMcpServersPage() {
     </>
   )
 }
+
+// Claude Sonnet 5.5, 2026-11-16: og:url and og:image follow this page's own canonical (see withSocial).
+export const metadata: Metadata = withSocial(baseMetadata)

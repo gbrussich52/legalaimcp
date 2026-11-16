@@ -10,10 +10,11 @@ import { LISTING_CARD_COLUMNS, type ListingCardData } from '@/lib/types'
 import { CATEGORY_LABELS, PRICING_LABELS } from '@/lib/constants'
 import { sanitizeSearchQuery } from '@/lib/search'
 import { SoftwareConnectionShortlist } from '../components/SoftwareConnection'
+import { withSocial } from '@/lib/seo-meta'
 
 const PAGE_SIZE = 12
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   // Claude Sonnet 5.5, 2026-11-12: "legal mcp server" lands here at pos 9.2 (31 impressions, 0 clicks), but title and H1 did not
   // say "legal MCP". Title with the brand is 50 chars.
   title: 'Browse Legal MCP Servers and AI Tools',
@@ -178,3 +179,6 @@ export default async function BrowsePage({
     </main>
   )
 }
+
+// Claude Sonnet 5.5, 2026-11-16: og:url and og:image follow this page's own canonical (see withSocial).
+export const metadata: Metadata = withSocial(baseMetadata)
