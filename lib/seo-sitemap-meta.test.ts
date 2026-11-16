@@ -3,13 +3,13 @@
 // /best, /blog and /servers templates) and fails when a rendered title passes 60 characters, a description passes
 // 155, or og:url is not the page's own canonical. /categories/[slug] and the per-listing taglines come from the database,
 // so they are covered by the fitTitle / fitDescription tests in seo-meta.test.ts rather than here.
-import { readFileSync } from 'node:fs'
+import { readdirSync, readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import type { Metadata } from 'next'
 import { CATEGORY_CONTENT } from './category-content'
 import { getAllPosts } from './blog'
 import { serverPageTitle } from './server-title'
-import { fitDescription, fitTitle, FILLER, withSocial } from './seo-meta'
+import { fitDescription, fitTitle, FILLER } from './seo-meta'
 
 const SUFFIX = ' | LegalAIMCP' // root layout title template
 const rendered = (t: Metadata['title']) => (typeof t === 'string' ? `${t}${SUFFIX}` : (t as { absolute: string }).absolute)
@@ -21,10 +21,11 @@ async function check(name: string, meta: Metadata, path: string) {
   expect(title.length, `${name} title (${title.length}): ${title}`).toBeLessThanOrEqual(60)
   expect((meta.description as string).length, `${name} description`).toBeLessThanOrEqual(155)
   expect((meta.description as string).length, `${name} description`).toBeGreaterThanOrEqual(110)
-  const social = withSocial(meta)
-  expect(social.openGraph?.url, name).toBe(`https://legalaimcp.com${path}`)
+  // Claude Sonnet 5.5, 2026-11-16: reads the metadata exactly as the page exports it. It no longer calls withSocial
+  // itself, so a page that forgot the wrapper, or set a wrong og:url, fails here.
   expect(meta.alternates?.canonical, name).toBe(`https://legalaimcp.com${path}`)
-  expect(social.openGraph?.images, name).toBeTruthy()
+  expect(meta.openGraph?.url, `${name} og:url`).toBe(`https://legalaimcp.com${path}`)
+  expect(meta.openGraph?.images, `${name} og:image`).toBeTruthy()
 }
 
 describe('sitemap routes: rendered title, description, canonical and og:url', () => {
@@ -43,6 +44,7 @@ describe('sitemap routes: rendered title, description, canonical and og:url', ()
     expect(rendered(metadata.title).length).toBeLessThanOrEqual(60)
     expect((metadata.description as string).length).toBeLessThanOrEqual(155)
     expect(metadata.openGraph?.url).toBe('https://legalaimcp.com')
+    expect(metadata.openGraph?.images).toBeTruthy()
   })
   it('/best/{category}-mcp-servers', async () => {
     const { generateMetadata } = await import('../app/best/[slug]/page')
@@ -65,6 +67,18 @@ describe('sitemap routes: rendered title, description, canonical and og:url', ()
       expect(title.length, `${r.slug}: ${title}`).toBeLessThanOrEqual(60)
       const d = fitDescription(r.claims.tagline, FILLER.listing)
       expect(d.length, r.slug).toBeLessThanOrEqual(155)
+    }
+  })
+  // The /servers/[slug] and /categories/[slug] templates read the database, so they cannot run here. Assert in source
+  // that every indexable page file exports its metadata through withSocial.
+  it('every page that sets a canonical exports metadata through withSocial', () => {
+    const walk = (dir: URL): string[] => readdirSync(dir, { withFileTypes: true }).flatMap(e => e.isDirectory() ? walk(new URL(`${e.name}/`, dir)) : e.name === 'page.tsx' ? [new URL(e.name, dir).pathname] : [])
+    const pages = walk(new URL('../app/', import.meta.url))
+    expect(pages.length).toBeGreaterThan(20)
+    for (const f of pages) {
+      const src = readFileSync(f, 'utf8')
+      if (!/canonical/.test(src) || !/export (const metadata|async function generateMetadata)/.test(src)) continue
+      expect(src, `${f} exports metadata without withSocial`).toMatch(/withSocial\((baseMetadata|await buildMetadata)/)
     }
   })
 })

@@ -36,7 +36,7 @@ After: three live Clio help articles, fetched as help center API JSON like the o
 
 The other recorded source, `docs.developers.clio.com/guides/clio-manage/`, had a stale hash. The page still has its quote ("A matter is the central organizing record for legal work in Clio Manage.") and the Custom Actions text for "cross-application workflows". Hash updated to `03a5d0bc...`.
 
-Review date for `clio` moved to 2026-11-16 after each description claim was traced to these four sources. Wording to watch: the description says "recommendations for ... bills". The sources say the AI generates draft invoices for approval, which is close but not the same word. Left unchanged because changing it needs a database import.
+The `clio` review date stays 2026-10-27. The description still says "recommendations for ... bills", which is not the vendor's wording ("draft invoices"), so not every printed claim was re-read and holds. The new wording and the date move together in the prepared import, `docs/changes/2026-11-16-catalog-import-prep.md`. Nothing in the repo ties `reviewed_at` to the source hashes; it is only the 90 day age check and a string the build prints on each page.
 
 ## Other dead links in the catalog
 

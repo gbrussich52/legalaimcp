@@ -1,0 +1,153 @@
+[
+  {
+    "id": "a11b2cf2-d182-4abb-8821-8b0c09745479",
+    "expected_status": "published",
+    "expected_claims": {
+      "slug": "clio",
+      "name": "Clio Manage",
+      "tagline": "Legal matter management with vendor-documented AI recommendations for matter activity.",
+      "description": "Clio Manage organizes legal matters and their associated work. Clio's Manage AI documentation describes recommendations for client communications, bills and suggested time entries from unlogged activity. Its developer documentation describes matter-related records and cross-application workflows. Confirm which features, permissions and plan are available for your account. Documentation reviewed; no firm account connection or workflow was tested.",
+      "category": "case_management",
+      "external_url": "https://www.clio.com",
+      "mcp_repo_url": null,
+      "mcp_install_command": null,
+      "pricing_model": "contact",
+      "pricing_details": "Confirm current Clio plans, AI feature availability and pricing directly with Clio.",
+      "tags": [
+        "practice-management",
+        "matters",
+        "ai-recommendations",
+        "developer-api"
+      ],
+      "creator_name": "Clio",
+      "creator_url": "https://www.clio.com",
+      "logo_url": null,
+      "firm_size_fit": []
+    },
+    "listing": {
+      "slug": "clio",
+      "name": "Clio Manage",
+      "tagline": "Legal matter management with vendor-documented AI recommendations for matter activity.",
+      "description": "Clio Manage organizes legal matters and their associated work. Clio's AI documentation describes drafted client communications, draft invoices and suggested time entries from unlogged activity. Its developer documentation describes matter-related records and cross-application workflows. Confirm which features, permissions and plan are available for your account. Documentation reviewed; no firm account connection or workflow was tested.",
+      "category": "case_management",
+      "external_url": "https://www.clio.com",
+      "mcp_repo_url": null,
+      "mcp_install_command": null,
+      "pricing_model": "contact",
+      "pricing_details": "Confirm current Clio plans, AI feature availability and pricing directly with Clio.",
+      "tags": [
+        "practice-management",
+        "matters",
+        "ai-recommendations",
+        "developer-api"
+      ],
+      "creator_name": "Clio",
+      "creator_url": "https://www.clio.com",
+      "logo_url": null,
+      "firm_size_fit": [],
+      "status": "published"
+    }
+  },
+  {
+    "id": "e0a9ddad-3420-476d-a3cd-60da14c30ea6",
+    "expected_status": "published",
+    "expected_claims": {
+      "slug": "open-legal-compliance-mcp",
+      "name": "Open Legal Compliance MCP",
+      "tagline": "Community MCP for searching public legal and regulatory sources.",
+      "description": "The TCoder920x repository documents searches across public legal and regulatory sources, including GovInfo, CourtListener, Congress.gov, the Federal Register and selected international sources. GovInfo credentials are required to start the server; other capabilities require their own optional keys or scraping access. This is a community research connector, not a determination that a client or activity complies with law. Verify retrieved material against its original source. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+      "category": "legal_research",
+      "external_url": "https://github.com/TCoder920x/open-legal-compliance-mcp",
+      "mcp_repo_url": "https://github.com/TCoder920x/open-legal-compliance-mcp",
+      "mcp_install_command": null,
+      "pricing_model": "free",
+      "pricing_details": "MIT-licensed server code; API registrations, hosting and connected-service terms or costs are separate. A GovInfo API key is required.",
+      "tags": [
+        "legal-research",
+        "government-data",
+        "mcp",
+        "community-maintained"
+      ],
+      "creator_name": "TCoder920x",
+      "creator_url": "https://github.com/TCoder920x",
+      "logo_url": null,
+      "firm_size_fit": []
+    },
+    "listing": {
+      "slug": "open-legal-compliance-mcp",
+      "name": "Open Legal Compliance MCP",
+      "tagline": "Community MCP for searching public legal and regulatory sources.",
+      "description": "The TCoder920 repository documents searches across public legal and regulatory sources, including GovInfo, CourtListener, Congress.gov, the Federal Register and selected international sources. GovInfo credentials are required to start the server; other capabilities require their own optional keys or scraping access. This is a community research connector, not a determination that a client or activity complies with law. Verify retrieved material against its original source. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+      "category": "legal_research",
+      "external_url": "https://github.com/TCoder920/open-legal-compliance-mcp",
+      "mcp_repo_url": "https://github.com/TCoder920/open-legal-compliance-mcp",
+      "mcp_install_command": null,
+      "pricing_model": "free",
+      "pricing_details": "MIT-licensed server code; API registrations, hosting and connected-service terms or costs are separate. A GovInfo API key is required.",
+      "tags": [
+        "legal-research",
+        "government-data",
+        "mcp",
+        "community-maintained"
+      ],
+      "creator_name": "TCoder920",
+      "creator_url": "https://github.com/TCoder920",
+      "logo_url": null,
+      "firm_size_fit": [],
+      "status": "published"
+    }
+  },
+  {
+    "id": "249eb1f1-0f31-48b5-9acc-24a41c28fb61",
+    "expected_status": "published",
+    "expected_claims": {
+      "slug": "courtlistener-mcp",
+      "name": "CourtListener MCP (Free Law Project)",
+      "tagline": "Official CourtListener access for case law, dockets, judges, citations and alerts.",
+      "description": "Free Law Project hosts the official CourtListener MCP server. Its documentation describes searching U.S. case law, dockets, judges and oral arguments, citation tools and alert management. Interactive clients use a CourtListener account with OAuth; the maintainer also documents API-token authentication for other clients. Some tools can change account state or request documents, so inspect permissions and possible charges. Documentation reviewed; an account connection was not tested.",
+      "category": "legal_research",
+      "external_url": "https://mcp.courtlistener.com/",
+      "mcp_repo_url": "https://github.com/freelawproject/courtlistener-api-client",
+      "mcp_install_command": null,
+      "pricing_model": "freemium",
+      "pricing_details": "The maintainer documents free individual accounts. Usage limits, memberships, document purchases and other charges depend on the service and account; confirm current terms.",
+      "tags": [
+        "case-law",
+        "dockets",
+        "citations",
+        "alerts",
+        "official",
+        "mcp"
+      ],
+      "creator_name": "Free Law Project",
+      "creator_url": "https://free.law",
+      "logo_url": null,
+      "firm_size_fit": []
+    },
+    "listing": {
+      "slug": "courtlistener-mcp",
+      "name": "CourtListener MCP (Free Law Project)",
+      "tagline": "Official CourtListener access for case law, dockets, judges, citations and alerts.",
+      "description": "Free Law Project hosts the official CourtListener MCP server. Its documentation describes searching U.S. case law, dockets, judges and oral arguments, citation tools and alert management. Interactive clients use a CourtListener account with OAuth; the maintainer also documents API-token authentication for other clients. Some tools can change account state or request documents, so inspect permissions before you approve. Documentation reviewed; an account connection was not tested.",
+      "category": "legal_research",
+      "external_url": "https://mcp.courtlistener.com/",
+      "mcp_repo_url": "https://github.com/freelawproject/courtlistener-mcp",
+      "mcp_install_command": null,
+      "pricing_model": "freemium",
+      "pricing_details": "The maintainer documents free individual accounts. Usage is bounded by CourtListener's API rate limits; confirm current terms.",
+      "tags": [
+        "case-law",
+        "dockets",
+        "citations",
+        "alerts",
+        "official",
+        "mcp"
+      ],
+      "creator_name": "Free Law Project",
+      "creator_url": "https://free.law",
+      "logo_url": null,
+      "firm_size_fit": [],
+      "status": "published"
+    }
+  }
+]

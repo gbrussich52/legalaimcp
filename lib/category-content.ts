@@ -118,8 +118,9 @@ export const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     // Claude Sonnet 5.5, 2026-11-12: search-gap fields for this category (Search Console 2026-10-16 to 2026-11-13).
     searchHeadline: 'AI Case & Matter Management for Lawyers',
     // Claude Sonnet 5.5, 2026-11-16: three descriptions (case-management, legal-research, compliance) were 158-159 characters;
-    // cut a few words each so all sit at 155 or fewer (Ahrefs / director limit).
-    metaDescription: 'AI case and matter management tools for lawyers. Compare practice-management software with AI features and see which document an assistant connector.',
+    // cut a few words each so all sit at 155 or fewer (Ahrefs / director limit). Case management keeps "which listings document"
+    // and instead uses "&" and the plural "assistant connectors" (154).
+    metaDescription: 'AI case & matter management tools for lawyers. Compare practice-management software with AI features and see which listings document assistant connectors.',
     answer: 'AI case management tools help a law firm track matters, deadlines and documents, with AI features such as summaries, drafting and suggested time entries. Start from your sharpest pain point, and check that a tool connects to the practice-management system you already use.',
     bestLead: 'Legal practice management software tracks matters, contacts, deadlines, time and billing. This list shows tools in that group in directory order. Some listings document a connector for an AI assistant, and each listing says what is documented and links the source. Clio documents a Claude connector for its separate Clio Work product; see the Clio listing.',
     links: [
