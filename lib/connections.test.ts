@@ -36,4 +36,19 @@ describe('reviewed software connection evidence', () => {
     expect(getSoftwareConnection('ironclad')?.permissions).toContain('create and update')
     expect(getSoftwareConnection('courtlistener-mcp')?.permissions).toContain('do not assume every tool is read-only')
   })
+  // Claude Sonnet 5.5, 2026-11-16: the old CourtListener source (courtlistener-api-client MCP_README.md) went 404
+  // after Free Law Project moved the MCP server. Keep the dead URL out and keep the source on an FLP-run host.
+  it('keeps the CourtListener source off the dead 404 URL and on a Free Law Project page', () => {
+    const connection = getSoftwareConnection('courtlistener-mcp')
+    const urls = [connection?.source, ...(connection?.faqSources ?? []).map(item => item.url)]
+    for (const url of urls) {
+      expect(url).toBeDefined()
+      expect(url).not.toContain('MCP_README.md')
+      const parsed = new URL(url as string)
+      expect(parsed.protocol).toBe('https:')
+      expect(['wiki.free.law', 'free.law', 'www.courtlistener.com', 'github.com']).toContain(parsed.hostname)
+    }
+    expect(connection?.source).toBe('https://wiki.free.law/c/courtlistener/help/api/mcp/using-the-courtlistener-mcp-in-claude-chatgpt-and-other-ai-assistants')
+    expect(connection?.reviewed).toBe('2026-11-16')
+  })
 })
