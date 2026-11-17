@@ -21,3 +21,14 @@ Also changed: `reviewed` 2026-10-27 to 2026-11-16, `sourceLabel`, `faqSources`, 
 Not tested: the connector itself, sign-in, or `mcp.courtlistener.com` beyond one plain GET.
 
 Seen, not touched: `lib/catalog-reviews.json` lines about 470 and 484 still cite the dead README; `lib/category-content.ts` line 226 and `lib/blog.ts` line 27 repeat "free for individuals".
+
+## Second pass (same day): the dead URL elsewhere
+Claude Sonnet 5.5, 2026-11-16.
+- `lib/blog.ts`: source link repointed to the wiki page. The sentence "other clients may use documented API-token authentication" is replaced by the wiki's own wording: "All CourtListener users are granted API access, automatically. Elevated access is available through a Free Law Project membership or commercial agreement."
+- `lib/category-content.ts` (line 226): "its accounts are free for individuals" replaced by the same access wording.
+- `lib/catalog-reviews.json` (`courtlistener-mcp` source): url, sha256 and quote swapped. Old quote: "Search U.S. case law, dockets, judges, and oral arguments; extract and verify legal citations; and manage alerts". New quote, present on the wiki page: "direct access to case law, PACER data, judge information, and more". New sha256 `22521cbd...dca9df8` is the repo's normalized fingerprint of the page, equal on two fetches. The page prints a view count, so the weekly source check may flag drift; re-fingerprint then.
+- Not changed, needs a gated database apply because `listing_sha256` binds them: the registry `claims` still say "maintainer also documents API-token authentication", "free individual accounts", and `mcp_repo_url` points to the Python client repo.
+- Test added: the dead URL appears nowhere in `lib/` or `app/` outside comments.
+
+## Rebase note (2026-11-17)
+Claude Sonnet 5.5, 2026-11-17. Main's PR #32 (3cdbab8) fixed the same dead URL first, pointing at the `courtlistener-mcp` repo README, and re-read every claim against it. In the rebase I kept main's `lib/connections.ts`, `lib/blog.ts`, `lib/catalog-reviews.json` and `lib/category-content.ts` as they are (they hold claims main verified: "free for individuals", token wording). The wiki wording above is no longer applied. What this branch still adds: the two regression tests (source host and no `courtlistener-api-client` URL on the entry; dead README URL absent from `lib/` and `app/` code and data), pinned to main's new source.
