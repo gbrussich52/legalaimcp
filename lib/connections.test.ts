@@ -1,4 +1,5 @@
-import { readFileSync } from 'node:fs'
+import { readFileSync, readdirSync, statSync } from 'node:fs'
+import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { getSoftwareConnection, SOFTWARE_CONNECTIONS } from './connections'
 
@@ -35,5 +36,41 @@ describe('reviewed software connection evidence', () => {
     }
     expect(getSoftwareConnection('ironclad')?.permissions).toContain('create and update')
     expect(getSoftwareConnection('courtlistener-mcp')?.permissions).toContain('do not assume every tool is read-only')
+  })
+  // Claude Sonnet 5.5, 2026-11-16: the old CourtListener source (courtlistener-api-client MCP_README.md) went 404
+  // after Free Law Project moved the MCP server. Keep the dead URL out and keep the source on an FLP-run host.
+  // Claude Sonnet 5.5, 2026-11-17: rebased on main, which (PR #32) moved the source to the courtlistener-mcp README; the pin follows main.
+  it('keeps the CourtListener source off the dead 404 URL and on a Free Law Project page', () => {
+    const connection = getSoftwareConnection('courtlistener-mcp')
+    const urls = [connection?.source, ...(connection?.faqSources ?? []).map(item => item.url)]
+    for (const url of urls) {
+      expect(url).toBeDefined()
+      expect(url).not.toContain('courtlistener-api-client')
+      const parsed = new URL(url as string)
+      expect(parsed.protocol).toBe('https:')
+      expect(['wiki.free.law', 'free.law', 'www.courtlistener.com', 'github.com']).toContain(parsed.hostname)
+    }
+    expect(connection?.source).toBe('https://github.com/freelawproject/courtlistener-mcp/blob/main/MCP_README.md')
+    expect(connection?.reviewed).toBe('2026-11-16')
+  })
+  // Claude Sonnet 5.5, 2026-11-16: the dead README URL also sat in lib/blog.ts and lib/catalog-reviews.json. Scan
+  // lib/ and app/ (not comments, not this file) so it cannot come back. Reads files only; no network.
+  it('keeps the dead CourtListener README URL out of lib and app code and data', () => {
+    const root = new URL('..', import.meta.url).pathname
+    const hits: string[] = []
+    const walk = (dir: string) => {
+      for (const name of readdirSync(dir)) {
+        const path = join(dir, name)
+        if (statSync(path).isDirectory()) { walk(path); continue }
+        if (!/\.(ts|tsx|json)$/.test(name) || path.endsWith('lib/connections.test.ts')) continue
+        for (const line of readFileSync(path, 'utf8').split('\n')) {
+          if (/^\s*(\/\/|\*|\/\*)/.test(line)) continue
+          if (line.includes('courtlistener-api-client/blob/main/MCP_README.md') || line.includes('courtlistener-api-client/main/MCP_README.md')) hits.push(path)
+        }
+      }
+    }
+    walk(join(root, 'lib'))
+    walk(join(root, 'app'))
+    expect(hits).toEqual([])
   })
 })
