@@ -59,3 +59,6 @@ One line: send `docs/changes/2026-11-16-catalog-import-rollback.sql` through the
 - courtlistener-mcp: pricing text and MCP repository link are stale; prepared import `scripts/catalog-dead-sources-2026-11-16.json`, waits for Giani's yes.
 - open-legal-compliance-mcp: creator owner renamed to TCoder920, creator_url 404; same import.
 - clio: description says "recommendations for ... bills", vendor term is "draft invoices"; same import.
+
+## Update 2026-11-17 (Claude Sonnet 5.5)
+The import also clears `verified` and `verified_at` on every row it writes. `courtlistener-mcp` and `open-legal-compliance-mcp` are verified today, so both lose the "Links checked" badge until `node scripts/curate.mjs verify` or the Monday weekly run restores it; the rollback SQL now restores both fields. Review records are merged, dates and three source hashes refreshed. Details: `docs/changes/2026-11-17-catalog-import-ready.md`.

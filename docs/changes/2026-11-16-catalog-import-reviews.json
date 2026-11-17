@@ -2,22 +2,22 @@
   {
     "slug": "clio",
     "decision": "approved",
-    "reviewed_at": "2026-11-16",
+    "reviewed_at": "2026-11-17",
     "reviewer": "Claude Sonnet 5.5 re-review of changed claims against re-read primary sources",
     "identity_confirmed": true,
     "capabilities_confirmed": true,
-    "mcp_confirmed": true,
+    "mcp_confirmed": false,
     "sources": [
       {
         "url": "https://docs.developers.clio.com/guides/clio-manage/",
         "kind": "vendor",
-        "sha256": "03a5d0bcaa15832c48b9e96338fead37c6dea7cec535d6b371eee4211f202d41",
+        "sha256": "1afd5fc454491f911f0fa7ac86a1c94a9c13ee53e943c7b3b1f632536530c68c",
         "quote": "A matter is the central organizing record for legal work in Clio Manage."
       },
       {
         "url": "https://help.clio.com/api/v2/help_center/en-us/articles/9289741706779.json",
         "kind": "vendor",
-        "sha256": "4a2b32187b573653808dfa36ee9dbde87d962d7ac0c325f9a4b4ae4f5a377022",
+        "sha256": "9d7157422e65874c3a628a74c5b63823a0a740ef33e55b1a3b94a2a21593ed25",
         "quote": "help you proactively identify matter activity and suggest unlogged time entries"
       },
       {
@@ -60,7 +60,7 @@
   {
     "slug": "open-legal-compliance-mcp",
     "decision": "approved",
-    "reviewed_at": "2026-11-16",
+    "reviewed_at": "2026-11-17",
     "reviewer": "Claude Sonnet 5.5 re-review of changed claims against re-read primary sources",
     "identity_confirmed": true,
     "capabilities_confirmed": true,
@@ -100,7 +100,7 @@
   {
     "slug": "courtlistener-mcp",
     "decision": "approved",
-    "reviewed_at": "2026-11-16",
+    "reviewed_at": "2026-11-17",
     "reviewer": "Claude Sonnet 5.5 re-review of changed claims against re-read primary sources",
     "identity_confirmed": true,
     "capabilities_confirmed": true,
@@ -109,25 +109,25 @@
       {
         "url": "https://raw.githubusercontent.com/freelawproject/courtlistener-mcp/main/MCP_README.md",
         "kind": "maintainer",
-        "sha256": "0de287dc5353983c8288668d6ebc6154ad2714175945e9f4e3ca25d3d4bee146",
+        "sha256": "a27c920519c25c1cfe4ec3be7b143dbecc4175eed562c109761db68a11edd442",
         "quote": "Search U.S. case law, dockets, judges, and oral arguments; extract and verify legal citations; and manage alerts"
       },
       {
         "url": "https://raw.githubusercontent.com/freelawproject/courtlistener-mcp/main/MCP_README.md",
         "kind": "maintainer",
-        "sha256": "0de287dc5353983c8288668d6ebc6154ad2714175945e9f4e3ca25d3d4bee146",
+        "sha256": "a27c920519c25c1cfe4ec3be7b143dbecc4175eed562c109761db68a11edd442",
         "quote": "Accounts are free for individuals"
       },
       {
         "url": "https://raw.githubusercontent.com/freelawproject/courtlistener-mcp/main/MCP_README.md",
         "kind": "maintainer",
-        "sha256": "0de287dc5353983c8288668d6ebc6154ad2714175945e9f4e3ca25d3d4bee146",
+        "sha256": "a27c920519c25c1cfe4ec3be7b143dbecc4175eed562c109761db68a11edd442",
         "quote": "Usage is bounded by CourtListener's API rate limits"
       },
       {
         "url": "https://raw.githubusercontent.com/freelawproject/courtlistener-mcp/main/MCP_README.md",
         "kind": "maintainer",
-        "sha256": "0de287dc5353983c8288668d6ebc6154ad2714175945e9f4e3ca25d3d4bee146",
+        "sha256": "a27c920519c25c1cfe4ec3be7b143dbecc4175eed562c109761db68a11edd442",
         "quote": "Nothing is charged to you, but fulfillment isn't immediate or guaranteed."
       }
     ],
