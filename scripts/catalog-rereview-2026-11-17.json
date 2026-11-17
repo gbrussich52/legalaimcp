@@ -1,0 +1,104 @@
+[
+  {
+    "id": "53e6ee3b-2d91-411b-934e-5265a2d68274",
+    "expected_status": "published",
+    "expected_claims": {
+      "slug": "harvey-mcp",
+      "name": "Harvey MCP (beta)",
+      "tagline": "Vendor-documented MCP tools for Harvey questions, Vault documents and enabled research sources.",
+      "description": "Harvey documents an MCP server for general questions, Vault document analysis, available projects and enabled research knowledge sources. It requires an eligible Harvey account, enabled feature access and a client supporting remote Streamable HTTP with OAuth. Tools and sources are limited by account permissions. Review the destination AI provider's data terms as well as Harvey's. Documentation reviewed; customer enrollment, authentication and tool calls were not tested.",
+      "category": "legal_research",
+      "external_url": "https://developers.harvey.ai/guides/harvey_mcp",
+      "mcp_repo_url": null,
+      "mcp_install_command": null,
+      "pricing_model": "contact",
+      "pricing_details": "Requires Harvey access and feature eligibility. Confirm current subscription and connector requirements with Harvey.",
+      "tags": [
+        "legal-ai",
+        "vault",
+        "research",
+        "official-connector",
+        "mcp"
+      ],
+      "creator_name": "Harvey",
+      "creator_url": "https://www.harvey.ai/",
+      "logo_url": null,
+      "firm_size_fit": []
+    },
+    "listing": {
+      "slug": "harvey-mcp",
+      "name": "Harvey MCP",
+      "tagline": "Vendor-documented MCP tools for Harvey questions, Vault documents and enabled research sources.",
+      "description": "Harvey documents an MCP server for general questions, Vault document analysis, available projects and enabled research knowledge sources. It requires an eligible Harvey account, enabled feature access and a client supporting remote Streamable HTTP with OAuth. Tools and sources are limited by account permissions. Review the destination AI provider's data terms as well as Harvey's. Documentation reviewed; customer enrollment, authentication and tool calls were not tested.",
+      "category": "legal_research",
+      "external_url": "https://developers.harvey.ai/guides/harvey_mcp",
+      "mcp_repo_url": null,
+      "mcp_install_command": null,
+      "pricing_model": "contact",
+      "pricing_details": "Requires Harvey access and feature eligibility. Confirm current subscription and connector requirements with Harvey.",
+      "tags": [
+        "legal-ai",
+        "vault",
+        "research",
+        "official-connector",
+        "mcp"
+      ],
+      "creator_name": "Harvey",
+      "creator_url": "https://www.harvey.ai/",
+      "logo_url": null,
+      "firm_size_fit": [],
+      "status": "published"
+    }
+  },
+  {
+    "id": "5920675f-fd68-4375-90da-639eb5b01cf0",
+    "expected_status": "published",
+    "expected_claims": {
+      "slug": "scoro-practice-analytics",
+      "name": "Scoro MCP",
+      "tagline": "Vendor connector for Scoro workspace tasks, time entries and financial reads.",
+      "description": "Scoro documents an official MCP connector for its general professional-services work-management platform. Current documentation lists read/write actions for projects, tasks, calendar events, comments, time entries and contacts, plus read access to financial documents. Workspace and user connections are required; enabled tools and existing user permissions determine access. This is not a separate legal-practice analytics product, and not every Scoro module is available through the connector. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+      "category": "general",
+      "external_url": "https://www.scoro.com/mcp/",
+      "mcp_repo_url": null,
+      "mcp_install_command": null,
+      "pricing_model": "contact",
+      "pricing_details": "Confirm current pricing, plan eligibility and limits with the vendor.",
+      "tags": [
+        "professional-services",
+        "project-management",
+        "time-tracking",
+        "mcp",
+        "official-connector"
+      ],
+      "creator_name": "Scoro",
+      "creator_url": "https://www.scoro.com",
+      "logo_url": null,
+      "firm_size_fit": []
+    },
+    "listing": {
+      "slug": "scoro-practice-analytics",
+      "name": "Scoro MCP",
+      "tagline": "Vendor connector for Scoro workspace tasks, time entries and financial records.",
+      "description": "Scoro documents an official MCP connector for its general professional-services work-management platform. Current documentation lists tools to search, create and update projects, tasks, calendar events, comments, time entries and contacts, and to manage financial records such as quotes, invoices and bills. Workspace and user connections are required; enabled tools and existing user permissions determine access. This is not a separate legal-practice analytics product, and not every Scoro module is available through the connector. Documentation reviewed on November 17, 2026; customer-account access and deployed operation have not been tested.",
+      "category": "general",
+      "external_url": "https://www.scoro.com/mcp/",
+      "mcp_repo_url": null,
+      "mcp_install_command": null,
+      "pricing_model": "contact",
+      "pricing_details": "Confirm current pricing, plan eligibility and limits with the vendor.",
+      "tags": [
+        "professional-services",
+        "project-management",
+        "time-tracking",
+        "mcp",
+        "official-connector"
+      ],
+      "creator_name": "Scoro",
+      "creator_url": "https://www.scoro.com",
+      "logo_url": null,
+      "firm_size_fit": [],
+      "status": "published"
+    }
+  }
+]

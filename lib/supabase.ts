@@ -7,7 +7,9 @@ export const SUPABASE_SCHEMA = 'legalaimcp'
 // Claude Fable 5.2, 2026-11-15: new namespace so production reads the re-reviewed Firecrawl listing URL.
 // Claude Sonnet 5.5, 2026-11-17: new namespace for the clio, open-legal-compliance-mcp and courtlistener-mcp
 // corrections (docs/changes/2026-11-17-catalog-import-ready.md), so ISR does not reuse the old claims after the import.
-export const CATALOG_CACHE_REVISION = '2026-11-17-catalog-import'
+// Claude Sonnet 5.5, 2026-11-17: new namespace for the harvey-mcp and scoro-practice-analytics claim corrections
+// (docs/changes/2026-11-17-catalog-rereview.md), so ISR does not reuse the old claims after that import.
+export const CATALOG_CACHE_REVISION = '2026-11-17-catalog-rereview'
 
 export function createSchemaClient(
   url: string,
