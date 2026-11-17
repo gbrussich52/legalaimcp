@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { PilotForm } from './form'
+import { withSocial } from '@/lib/seo-meta'
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: 'AI Workflow Reliability Pilot',
-  description: 'Scope a four-week pilot to check one legal AI integration, catch empty or stale results, and produce evidence your team can review before sending a request.',
+  // Claude Sonnet 5.5, 2026-11-16: was 166 characters; cut the closing "before sending a request" to get under 155.
+  description: 'Scope a four-week pilot to check one legal AI integration, catch empty or stale results, and produce evidence your team can review.',
   alternates: { canonical: 'https://legalaimcp.com/pilot' },
 }
 
@@ -80,3 +82,6 @@ export default async function PilotPage({ searchParams }: { searchParams: Promis
     </main>
   )
 }
+
+// Claude Sonnet 5.5, 2026-11-16: og:url and og:image follow this page's own canonical (see withSocial).
+export const metadata: Metadata = withSocial(baseMetadata)

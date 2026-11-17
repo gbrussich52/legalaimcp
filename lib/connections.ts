@@ -62,12 +62,17 @@ export const SOFTWARE_CONNECTIONS: readonly SoftwareConnection[] = [
     requirements: 'A CourtListener account and an MCP client that supports Streamable HTTP and OAuth.',
     permissions: 'The server also exposes alert management and broader API access. Review requested scopes; do not assume every tool is read-only.',
     setup: 'Add https://mcp.courtlistener.com/ as a remote connector, then sign in through CourtListener. The hosted OAuth setup does not need a separate API token; the maintainer also documents token-based clients.',
-    source: 'https://github.com/freelawproject/courtlistener-api-client/blob/main/MCP_README.md',
+    // Claude Sonnet 5.5, 2026-11-16: the MCP server and its MCP_README.md moved from courtlistener-api-client (removed
+    // 2026-11-13, commit 810b81a) to courtlistener-mcp, so the old link 404ed. Every field below was re-read against
+    // the new README today, which is why `reviewed` moves.
+    source: 'https://github.com/freelawproject/courtlistener-mcp/blob/main/MCP_README.md',
     sourceLabel: 'Free Law Project setup documentation',
-    reviewed: '2026-10-27',
+    reviewed: '2026-11-16',
     // Claude Sonnet 5.5, 2026-11-12: "courtlistener mcp" / "court listener mcp" / "courtlistener mcp server" sit at
     // positions 7.6 to 8.8 with 0 clicks. Source for the lead and FAQs below: the maintainer README, fetched
     // 2026-11-12, https://raw.githubusercontent.com/freelawproject/courtlistener-api-client/main/MCP_README.md
+    // (that URL is dead; Claude Sonnet 5.5, 2026-11-16: every quoted line was found again, word for word, in
+    // https://raw.githubusercontent.com/freelawproject/courtlistener-mcp/main/MCP_README.md)
     // ("hosted by Free Law Project, the nonprofit behind CourtListener"; "Accounts are free for individuals";
     // "You do not need a separate API token to use the hosted server"; the Claude.ai / Claude Desktop connector
     // steps; `claude mcp add --transport http courtlistener https://mcp.courtlistener.com/`; the analyze_citations
@@ -94,11 +99,12 @@ export const SOFTWARE_CONNECTIONS: readonly SoftwareConnection[] = [
       },
       {
         q: 'Can the CourtListener MCP server change my account?',
-        a: 'Some tools can. The documentation lists tools that create and delete search alerts and subscribe to or unsubscribe from docket alerts. Your client should ask you to confirm them. Review the permissions on the authorization screen before you approve.',
+        a: 'Some tools can. The documentation lists tools that create and delete search alerts and subscribe to or unsubscribe from docket alerts. The Pray and Pay tools, which ask CourtListener to add a PACER filing it does not have yet, also change your account state. Your client should ask you to confirm them. Review the permissions on the authorization screen before you approve.',
       },
     ],
-    faqSources: [{ label: 'Free Law Project MCP README', url: 'https://github.com/freelawproject/courtlistener-api-client/blob/main/MCP_README.md' }],
-    faqsChecked: '2026-11-12',
+    faqSources: [{ label: 'Free Law Project MCP README', url: 'https://github.com/freelawproject/courtlistener-mcp/blob/main/MCP_README.md' }],
+    // Claude Sonnet 5.5, 2026-11-16: new URL, and every FAQ answer re-read against it today.
+    faqsChecked: '2026-11-16',
   },
   {
     slugs: ['harvey-mcp', 'harvey-ai'],

@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { WorkflowPlanner } from './planner'
+import { withSocial } from '@/lib/seo-meta'
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: 'Free Law Firm AI Workflow Planner',
   description: 'Plan one intake, document collection, or billing workflow. Get a printable pilot brief with review steps and a time-savings estimate. No signup.',
   alternates: { canonical: 'https://legalaimcp.com/workflow-plan' },
@@ -25,3 +26,6 @@ export default function WorkflowPlanPage() {
     </main>
   )
 }
+
+// Claude Sonnet 5.5, 2026-11-16: og:url and og:image follow this page's own canonical (see withSocial).
+export const metadata: Metadata = withSocial(baseMetadata)

@@ -117,7 +117,10 @@ export const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     headline: 'AI Case & Matter Management Tools for Law Firms',
     // Claude Sonnet 5.5, 2026-11-12: search-gap fields for this category (Search Console 2026-10-16 to 2026-11-13).
     searchHeadline: 'AI Case & Matter Management for Lawyers',
-    metaDescription: 'AI case and matter management tools for lawyers. Compare practice-management software with AI features and see which listings document an assistant connector.',
+    // Claude Sonnet 5.5, 2026-11-16: three descriptions (case-management, legal-research, compliance) were 158-159 characters;
+    // cut a few words each so all sit at 155 or fewer (Ahrefs / director limit). Case management keeps "which listings document"
+    // and instead uses "&" and the plural "assistant connectors" (154).
+    metaDescription: 'AI case & matter management tools for lawyers. Compare practice-management software with AI features and see which listings document assistant connectors.',
     answer: 'AI case management tools help a law firm track matters, deadlines and documents, with AI features such as summaries, drafting and suggested time entries. Start from your sharpest pain point, and check that a tool connects to the practice-management system you already use.',
     bestLead: 'Legal practice management software tracks matters, contacts, deadlines, time and billing. This list shows tools in that group in directory order. Some listings document a connector for an AI assistant, and each listing says what is documented and links the source. Clio documents a Claude connector for its separate Clio Work product; see the Clio listing.',
     links: [
@@ -212,7 +215,7 @@ export const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     headline: 'AI Legal Research Tools & Case Law Search',
     // Claude Sonnet 5.5, 2026-11-12: search-gap fields for this category (Search Console 2026-10-16 to 2026-11-13).
     searchHeadline: 'AI Case Law Research & Legal Citation Tools',
-    metaDescription: 'Compare AI case law research and legal citation tools, from free CourtListener access to commercial platforms, and see which ones connect to your AI assistant.',
+    metaDescription: 'Compare AI case law research and citation tools, from free CourtListener access to commercial platforms, and see which connect to your AI assistant.',
     answer: 'AI case law research tools search court opinions for you. The better ones link each answer to its source, so you can read the opinion before you cite it. The tools below run from free CourtListener access to commercial legal AI, and each listing shows its MCP details where the directory has them.',
     bestLead: 'These are the AI legal research tools in our directory, from free CourtListener access to commercial platforms. A listing with an MCP server or a documented connector can work with your AI assistant, and each listing says what is documented.',
     focus: [
@@ -298,7 +301,7 @@ export const CATEGORY_CONTENT: Record<string, CategoryContent> = {
   compliance: {
     headline: 'AI Compliance & Regulatory Monitoring Tools',
     // Claude Sonnet 5.5, 2026-11-12: search-gap fields for this category (Search Console 2026-10-16 to 2026-11-13).
-    metaDescription: 'AI compliance and regulatory monitoring tools for legal teams. See what each tool covers, from governance and policy to privacy scans, and whether it has MCP.',
+    metaDescription: 'AI compliance and regulatory monitoring tools for legal teams. See what each tool covers, from governance and policy to privacy scans, and if it has MCP.',
     answer: 'These AI tools support compliance work in legal settings. They do different jobs, from governance, risk and policy programs to privacy scans and legal-data review, and not every tool here monitors regulations. Read each description before you buy, and ask for the list of sources a tool watches.',
     bestLead: 'These are the compliance tools in our directory, in directory order. Only a listing that shows an MCP repository or install details has a documented MCP server, so open each one to check what it covers.',
     focus: [

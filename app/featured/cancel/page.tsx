@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { SITE_URL } from '@/lib/constants'
+import { withSocial } from '@/lib/seo-meta'
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   // Claude Opus, 2026-11-12: the layout template already appends "| LegalAIMCP"; the old title printed the brand twice.
   title: 'Featured Checkout Canceled',
   robots: { index: false, follow: false },
@@ -48,3 +49,6 @@ export default async function FeaturedCancelPage({
     </main>
   )
 }
+
+// Claude Sonnet 5.5, 2026-11-16: og:url and og:image follow this page's own canonical (see withSocial).
+export const metadata: Metadata = withSocial(baseMetadata)

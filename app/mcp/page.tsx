@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { SITE_URL, SITE_NAME } from '@/lib/constants'
 import { McpServerJsonLd } from '../components/JsonLd'
+import { withSocial } from '@/lib/seo-meta'
 
 /**
  * The install page for our own MCP server.
@@ -15,7 +16,7 @@ import { McpServerJsonLd } from '../components/JsonLd'
 
 const ENDPOINT = `${SITE_URL}/api/mcp`
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: `Legal AI Directory MCP Server: Claude Setup`,
   description: `Connect Claude, ChatGPT, or any MCP client to the ${SITE_NAME} directory of legal AI tools. Free, read-only, no API key. Find tools for law firms.`,
   alternates: { canonical: `${SITE_URL}/mcp` },
@@ -196,3 +197,6 @@ export default function McpPage() {
     </main>
   )
 }
+
+// Claude Sonnet 5.5, 2026-11-16: og:url and og:image follow this page's own canonical (see withSocial).
+export const metadata: Metadata = withSocial(baseMetadata)

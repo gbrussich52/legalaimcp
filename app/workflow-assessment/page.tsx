@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { AssessmentBooking } from '../components/AssessmentBooking'
+import { withSocial } from '@/lib/seo-meta'
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   title: 'Law Firm AI Workflow Assessment',
   description: 'Scope one intake, document collection, or billing workflow with NYClaw. Get a software review, pilot plan, and written implementation scope.',
   alternates: { canonical: 'https://legalaimcp.com/workflow-assessment' },
@@ -43,3 +44,6 @@ export default function AssessmentPage() {
     </section>
   </main>
 }
+
+// Claude Sonnet 5.5, 2026-11-16: og:url and og:image follow this page's own canonical (see withSocial).
+export const metadata: Metadata = withSocial(baseMetadata)

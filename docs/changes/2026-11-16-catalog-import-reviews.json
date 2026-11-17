@@ -1,0 +1,160 @@
+[
+  {
+    "slug": "clio",
+    "decision": "approved",
+    "reviewed_at": "2026-11-16",
+    "reviewer": "Claude Sonnet 5.5 re-review of changed claims against re-read primary sources",
+    "identity_confirmed": true,
+    "capabilities_confirmed": true,
+    "mcp_confirmed": true,
+    "sources": [
+      {
+        "url": "https://docs.developers.clio.com/guides/clio-manage/",
+        "kind": "vendor",
+        "sha256": "03a5d0bcaa15832c48b9e96338fead37c6dea7cec535d6b371eee4211f202d41",
+        "quote": "A matter is the central organizing record for legal work in Clio Manage."
+      },
+      {
+        "url": "https://help.clio.com/api/v2/help_center/en-us/articles/9289741706779.json",
+        "kind": "vendor",
+        "sha256": "4a2b32187b573653808dfa36ee9dbde87d962d7ac0c325f9a4b4ae4f5a377022",
+        "quote": "help you proactively identify matter activity and suggest unlogged time entries"
+      },
+      {
+        "url": "https://help.clio.com/api/v2/help_center/en-us/articles/29658448391067.json",
+        "kind": "vendor",
+        "sha256": "dd6a7d95d05bc091240571b5dd09da3211691b446a941fd743482e42cad4c675",
+        "quote": "recognizes when a client update is warranted"
+      },
+      {
+        "url": "https://help.clio.com/api/v2/help_center/en-us/articles/29764998990491.json",
+        "kind": "vendor",
+        "sha256": "4908e2f492c175f43742aa4850a2b940bb634958622c3e3b10c3cdd69666756c",
+        "quote": "The generated draft invoice is automatically routed to the specified approvers for review and final approval"
+      }
+    ],
+    "listing_sha256": "8ec0cbce2b488ddbdfa64bcc052cc970db1fe79686b869a1603265c6829f0f9a",
+    "claims": {
+      "slug": "clio",
+      "name": "Clio Manage",
+      "tagline": "Legal matter management with vendor-documented AI recommendations for matter activity.",
+      "description": "Clio Manage organizes legal matters and their associated work. Clio's AI documentation describes drafted client communications, draft invoices and suggested time entries from unlogged activity. Its developer documentation describes matter-related records and cross-application workflows. Confirm which features, permissions and plan are available for your account. Documentation reviewed; no firm account connection or workflow was tested.",
+      "category": "case_management",
+      "external_url": "https://www.clio.com",
+      "mcp_repo_url": null,
+      "mcp_install_command": null,
+      "pricing_model": "contact",
+      "pricing_details": "Confirm current Clio plans, AI feature availability and pricing directly with Clio.",
+      "tags": [
+        "practice-management",
+        "matters",
+        "ai-recommendations",
+        "developer-api"
+      ],
+      "creator_name": "Clio",
+      "creator_url": "https://www.clio.com",
+      "logo_url": null,
+      "firm_size_fit": []
+    }
+  },
+  {
+    "slug": "open-legal-compliance-mcp",
+    "decision": "approved",
+    "reviewed_at": "2026-11-16",
+    "reviewer": "Claude Sonnet 5.5 re-review of changed claims against re-read primary sources",
+    "identity_confirmed": true,
+    "capabilities_confirmed": true,
+    "mcp_confirmed": true,
+    "sources": [
+      {
+        "url": "https://raw.githubusercontent.com/TCoder920/open-legal-compliance-mcp/HEAD/README.md",
+        "kind": "maintainer",
+        "sha256": "7fa4610188f548dd60937de9dc8807282487adec6f642a1ecdcb8099c319ff37",
+        "quote": "The server will not start without this key."
+      }
+    ],
+    "listing_sha256": "ae9a3915aea89234a4d0c2ddc43dd437e336cd16ffe462d8aa348a232364825a",
+    "claims": {
+      "slug": "open-legal-compliance-mcp",
+      "name": "Open Legal Compliance MCP",
+      "tagline": "Community MCP for searching public legal and regulatory sources.",
+      "description": "The TCoder920 repository documents searches across public legal and regulatory sources, including GovInfo, CourtListener, Congress.gov, the Federal Register and selected international sources. GovInfo credentials are required to start the server; other capabilities require their own optional keys or scraping access. This is a community research connector, not a determination that a client or activity complies with law. Verify retrieved material against its original source. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+      "category": "legal_research",
+      "external_url": "https://github.com/TCoder920/open-legal-compliance-mcp",
+      "mcp_repo_url": "https://github.com/TCoder920/open-legal-compliance-mcp",
+      "mcp_install_command": null,
+      "pricing_model": "free",
+      "pricing_details": "MIT-licensed server code; API registrations, hosting and connected-service terms or costs are separate. A GovInfo API key is required.",
+      "tags": [
+        "legal-research",
+        "government-data",
+        "mcp",
+        "community-maintained"
+      ],
+      "creator_name": "TCoder920",
+      "creator_url": "https://github.com/TCoder920",
+      "logo_url": null,
+      "firm_size_fit": []
+    }
+  },
+  {
+    "slug": "courtlistener-mcp",
+    "decision": "approved",
+    "reviewed_at": "2026-11-16",
+    "reviewer": "Claude Sonnet 5.5 re-review of changed claims against re-read primary sources",
+    "identity_confirmed": true,
+    "capabilities_confirmed": true,
+    "mcp_confirmed": true,
+    "sources": [
+      {
+        "url": "https://raw.githubusercontent.com/freelawproject/courtlistener-mcp/main/MCP_README.md",
+        "kind": "maintainer",
+        "sha256": "0de287dc5353983c8288668d6ebc6154ad2714175945e9f4e3ca25d3d4bee146",
+        "quote": "Search U.S. case law, dockets, judges, and oral arguments; extract and verify legal citations; and manage alerts"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/freelawproject/courtlistener-mcp/main/MCP_README.md",
+        "kind": "maintainer",
+        "sha256": "0de287dc5353983c8288668d6ebc6154ad2714175945e9f4e3ca25d3d4bee146",
+        "quote": "Accounts are free for individuals"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/freelawproject/courtlistener-mcp/main/MCP_README.md",
+        "kind": "maintainer",
+        "sha256": "0de287dc5353983c8288668d6ebc6154ad2714175945e9f4e3ca25d3d4bee146",
+        "quote": "Usage is bounded by CourtListener's API rate limits"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/freelawproject/courtlistener-mcp/main/MCP_README.md",
+        "kind": "maintainer",
+        "sha256": "0de287dc5353983c8288668d6ebc6154ad2714175945e9f4e3ca25d3d4bee146",
+        "quote": "Nothing is charged to you, but fulfillment isn't immediate or guaranteed."
+      }
+    ],
+    "listing_sha256": "e1fde5ccf06145742df0d45ef8c2ea685554852f4c301be6d942a87d73021ff7",
+    "claims": {
+      "slug": "courtlistener-mcp",
+      "name": "CourtListener MCP (Free Law Project)",
+      "tagline": "Official CourtListener access for case law, dockets, judges, citations and alerts.",
+      "description": "Free Law Project hosts the official CourtListener MCP server. Its documentation describes searching U.S. case law, dockets, judges and oral arguments, citation tools and alert management. Interactive clients use a CourtListener account with OAuth; the maintainer also documents API-token authentication for other clients. Some tools can change account state or request documents, so inspect permissions before you approve. Documentation reviewed; an account connection was not tested.",
+      "category": "legal_research",
+      "external_url": "https://mcp.courtlistener.com/",
+      "mcp_repo_url": "https://github.com/freelawproject/courtlistener-mcp",
+      "mcp_install_command": null,
+      "pricing_model": "freemium",
+      "pricing_details": "The maintainer documents free individual accounts. Usage is bounded by CourtListener's API rate limits; confirm current terms.",
+      "tags": [
+        "case-law",
+        "dockets",
+        "citations",
+        "alerts",
+        "official",
+        "mcp"
+      ],
+      "creator_name": "Free Law Project",
+      "creator_url": "https://free.law",
+      "logo_url": null,
+      "firm_size_fit": []
+    }
+  }
+]
