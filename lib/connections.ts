@@ -64,7 +64,7 @@ export const SOFTWARE_CONNECTIONS: readonly SoftwareConnection[] = [
     // sections) and Tools_available_for_each_MCP_connector.html ("1 million character limit for each document or
     // email"; "A maximum/total of 500 results are returned, with 100 results displayed per page by default").
     serverName: 'the iManage MCP server',
-    lead: 'iManage documents its own MCP connectors for iManage Work. They let an AI assistant such as Claude search and work with documents, emails, workspaces and folders in iManage Work. Your firm\'s iManage administrator has to add the MCP applications first, and the Claude connector starts with read permissions only.',
+    lead: 'iManage documents its own MCP connectors for iManage Work. They let an AI assistant such as Claude search and work with documents, emails, workspaces and folders in iManage Work. The MCP applications must first be added in iManage Control Center, and the Claude connector starts with read permissions only.',
     faqs: [
       {
         q: 'Does iManage have an MCP server?',
@@ -75,7 +75,7 @@ export const SOFTWARE_CONNECTIONS: readonly SoftwareConnection[] = [
         a: 'In Claude, open the connector directory, search for iManage Work, choose Connect and sign in with your iManage Work account, then select Authorize. On Claude Team and Enterprise plans an administrator must enable the connector first. Adding an iManage connector by URL as a custom connector needs a paid Claude plan.',
       },
       {
-        q: 'What does my iManage administrator need to set up first?',
+        q: 'What needs to be set up in iManage first?',
         a: 'The iManage MCP Control Center Extension and the iManage MCP Service applications must be added in iManage Control Center. iManage says the connector cannot connect without them. The administrator also decides which tools each MCP client may use.',
       },
       {
@@ -88,7 +88,7 @@ export const SOFTWARE_CONNECTIONS: readonly SoftwareConnection[] = [
       },
       {
         q: 'Are there limits on what the AI can read?',
-        a: 'Yes. iManage MCP Server reads up to 1 million characters of each document or email, the same limit iManage Work uses for indexing. For an email, the limit covers the email and its attachments together. List and search tools return up to 500 results, 100 per page by default.',
+        a: 'Yes. iManage MCP Server reads up to 1 million characters of each document or email, the same limit iManage Work uses for indexing. For an email, the limit covers the email and its attachments together. Some iManage Work search and list tools return up to 500 results, 100 per page by default.',
       },
     ],
     faqSources: [

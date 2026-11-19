@@ -6,13 +6,20 @@ import { describe, expect, it } from 'vitest'
 import { ConnectionFaqs, ConnectionLead } from '../app/components/SoftwareConnection'
 import { getSoftwareConnection } from './connections'
 
+// Each iManage page the FAQ answers rely on must stay cited.
+const IMANAGE = [
+  'https://docs.imanage.com/ai/mcpserver-user-help/en-US/Adding_MCP_connectors_for_Claude.html',
+  'https://docs.imanage.com/ai/mcpserver-user-help/en-US/Adding_iManage_connectors_for_MCP-enabled_clients.html',
+  'https://docs.imanage.com/ai/mcpserver-user-help/en-US/Tools_available_for_each_MCP_connector.html',
+]
+
 const cases = [
-  { slug: 'imanage-work', host: 'docs.imanage.com', query: /imanage/i },
-  { slug: 'ironclad', host: 'support.ironcladapp.com', query: /ironclad/i },
+  { slug: 'imanage-work', host: 'docs.imanage.com', query: /imanage/i, sources: IMANAGE },
+  { slug: 'ironclad', host: 'support.ironcladapp.com', query: /ironclad/i, sources: ['https://support.ironcladapp.com/hc/en-us/articles/39887632957463-Connect-an-MCP-Client-to-Ironclad-MCP-Server'] },
 ]
 
 describe('iManage Work and Ironclad connection FAQs', () => {
-  for (const { slug, host, query } of cases) {
+  for (const { slug, host, query, sources } of cases) {
     const c = getSoftwareConnection(slug)!
     it(`${slug}: FAQ markup equals the visible FAQ, and every source is the vendor's own page`, () => {
       const html = renderToStaticMarkup(createElement(ConnectionFaqs, { slug }))
@@ -25,6 +32,7 @@ describe('iManage Work and Ironclad connection FAQs', () => {
       expect(c.faqs!.length).toBeGreaterThanOrEqual(4)
       expect(c.faqsChecked).toBe('2026-11-19')
       for (const s of c.faqSources!) expect(new URL(s.url).host).toBe(host)
+      expect(c.faqSources!.map(s => s.url)).toEqual(expect.arrayContaining(sources))
       expect(new URL(c.source).host).toBe(host)
     })
     it(`${slug}: lead answers the query first and stays near 50 words`, () => {
