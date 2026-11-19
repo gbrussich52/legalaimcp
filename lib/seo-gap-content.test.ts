@@ -69,7 +69,8 @@ describe('category gap copy', () => {
 describe('connection page copy', () => {
   it('gives every FAQ a source and a check date, and keeps wording plain', () => {
     const withFaqs = SOFTWARE_CONNECTIONS.filter(c => c.faqs?.length)
-    expect(withFaqs.map(c => c.name).sort()).toEqual(['Clio', 'CourtListener'])
+    // Grok Bot (Crack Bot), 2026-11-19: iManage Work and Ironclad FAQs added (sourced to vendor help pages read that day).
+    expect(withFaqs.map(c => c.name).sort()).toEqual(['Clio', 'CourtListener', 'Ironclad', 'iManage Work'])
     for (const c of withFaqs) {
       expect(c.faqsChecked).toMatch(/^\d{4}-\d{2}-\d{2}$/)
       expect(c.faqSources?.length).toBeGreaterThan(0)
