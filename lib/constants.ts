@@ -25,3 +25,8 @@ export const PRICING_LABELS: Record<string, string> = {
   paid: 'Paid',
   contact: 'Contact',
 }
+
+// Claude Sonnet 5.5, 2026-11-19: dates for the /best roundup Article JSON-LD. Published = the commit that added the roundup pages
+// (724595e, 2026-08-07, also the audit date named in app/sitemap.ts). Modified = the sitemap date for those pages; bump both together.
+export const BEST_ROUNDUP_PUBLISHED = '2026-08-07'
+export const BEST_ROUNDUP_MODIFIED = '2026-11-12'

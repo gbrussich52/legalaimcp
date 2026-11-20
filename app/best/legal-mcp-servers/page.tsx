@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 import { RoundupItem } from '../../components/RoundupItem'
 import { LeadGenCTA } from '../../components/LeadGenCTA'
-import { ItemListJsonLd, BreadcrumbJsonLd } from '../../components/JsonLd'
+import { ItemListJsonLd, BreadcrumbJsonLd, RoundupArticleJsonLd } from '../../components/JsonLd'
 import { LISTING_CARD_COLUMNS, type ListingCardData } from '@/lib/types'
 import { fitTitle, withSocial } from '@/lib/seo-meta'
 import { SITE_URL } from '@/lib/constants'
@@ -49,6 +49,8 @@ export default async function BestLegalMcpServersPage() {
 
   return (
     <>
+      {/* Claude Sonnet 5.5, 2026-11-19: Article schema next to the existing ItemList (Ahrefs: Article schema missing) */}
+      <RoundupArticleJsonLd headline={PAGE_TITLE} description={PAGE_DESCRIPTION} path="/best/legal-mcp-servers" />
       <ItemListJsonLd listings={listings} name="Legal MCP Servers and AI Tools" />
       <BreadcrumbJsonLd
         items={[

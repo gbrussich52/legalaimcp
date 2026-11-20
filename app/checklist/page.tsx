@@ -11,7 +11,8 @@ const baseMetadata: Metadata = {
   // No-index: this is the lead-magnet payload page. We want it accessible to
   // subscribers (so it can be bookmarked) but not competing with our SEO
   // landing pages for organic traffic.
-  robots: { index: false, follow: false },
+  // Claude Sonnet 5.5, 2026-11-19: follow stays on so the page's own links count; Ahrefs flagged nofollow (noindex kept)
+  robots: { index: false, follow: true },
   alternates: { canonical: 'https://legalaimcp.com/checklist' },
 }
 

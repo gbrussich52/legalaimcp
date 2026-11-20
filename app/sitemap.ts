@@ -1,7 +1,8 @@
 import type { MetadataRoute } from 'next'
 import { supabase } from '@/lib/supabase'
 import { getAllPosts } from '@/lib/blog'
-import { SITE_URL } from '@/lib/constants'
+import { SITE_URL, BEST_ROUNDUP_MODIFIED } from '@/lib/constants'
+import { CHATGPT_PAGES } from '@/lib/chatgpt-information'
 import { CATEGORY_CONTENT } from '@/lib/category-content'
 
 /**
@@ -28,11 +29,11 @@ const MODIFIED = {
   submit: '2026-06-10',
   about: '2026-07-28',
   blogIndex: '2026-04-13',
-  bestLegal: '2026-11-12',
+  bestLegal: BEST_ROUNDUP_MODIFIED,
   courtlistenerGuide: '2026-08-07',
   harveyGuide: '2026-10-19',
   clioGuide: '2026-11-12',
-  bestCategoryTemplate: '2026-11-12',
+  bestCategoryTemplate: BEST_ROUNDUP_MODIFIED,
   categoryIndex: '2026-11-12',
 } as const
 
@@ -128,6 +129,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ]
 
+  // Claude Sonnet 5.5, 2026-11-19: the three ChatGPT app pages are indexable but were not listed (Ahrefs 11/19); dates are their last git change.
+  const chatgptPages: MetadataRoute.Sitemap = Object.entries(CHATGPT_PAGES).map(([path, page]) => ({
+    url: `${SITE_URL}${path}`,
+    lastModified: page.modified,
+    changeFrequency: 'yearly' as const,
+    priority: 0.3,
+  }))
+
   const bestCategoryPages: MetadataRoute.Sitemap = Object.keys(CATEGORY_CONTENT).map((slug) => ({
     url: `${SITE_URL}/best/${slug}-mcp-servers`,
     lastModified: MODIFIED.bestCategoryTemplate,
@@ -160,5 +169,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }))
 
-  return [...staticPages, ...bestCategoryPages, ...categoryPages, ...listingPages, ...blogPages]
+  return [...staticPages, ...chatgptPages, ...bestCategoryPages, ...categoryPages, ...listingPages, ...blogPages]
 }

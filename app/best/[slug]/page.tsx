@@ -6,7 +6,7 @@ import { supabase } from '@/lib/supabase'
 import { RoundupItem } from '../../components/RoundupItem'
 import { LeadGenCTA } from '../../components/LeadGenCTA'
 import { CategoryFocusSections } from '../../components/CategoryFocusSections'
-import { ItemListJsonLd, BreadcrumbJsonLd } from '../../components/JsonLd'
+import { ItemListJsonLd, BreadcrumbJsonLd, RoundupArticleJsonLd } from '../../components/JsonLd'
 import { LISTING_CARD_COLUMNS, type ListingCardData } from '@/lib/types'
 import { SITE_URL } from '@/lib/constants'
 import { CATEGORY_CONTENT } from '@/lib/category-content'
@@ -97,6 +97,12 @@ export default async function BestCategoryPage({
 
   return (
     <>
+      {/* Claude Sonnet 5.5, 2026-11-19: Article schema next to the existing ItemList (Ahrefs: Article schema missing) */}
+      <RoundupArticleJsonLd
+        headline={pageTitle}
+        description={`${content.headline} in directory order, with pricing and MCP install details for each tool.`}
+        path={`/best/${slug}`}
+      />
       <ItemListJsonLd listings={listings} name={pageTitle} />
       <BreadcrumbJsonLd
         items={[
