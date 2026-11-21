@@ -170,7 +170,8 @@ export const SOFTWARE_CONNECTIONS: readonly SoftwareConnection[] = [
     requirements: 'An Ironclad account with the API and Search features and an OAuth-capable HTTP MCP client.',
     permissions: 'Conversational search is read-only. Obligation tools can create and update records and require the Obligations add-on; approve only the scopes you need.',
     setup: 'Choose the server for your environment: https://mcp.na1.ironcladapp.com/mcp (NA1) or https://mcp.eu1.ironcladapp.com/mcp (EU1). Add it to your client and authenticate with Ironclad.',
-    source: 'https://support.ironcladapp.com/hc/en-us/articles/39887632957463-Connect-an-MCP-Client-to-Ironclad-MCP-Server',
+    // Claude Fable 5.2, 2026-11-21: Ironclad moved this help article; the old /hc/ address answers 301, which a crawler reports as a redirecting link. Points at the final address, the same one the review record cites.
+    source: 'https://support.ironcladapp.com/en-us/articles/18170697-connect-an-mcp-client-to-ironclad-mcp-server',
     sourceLabel: 'Ironclad connection instructions',
     reviewed: '2026-10-27',
     // Grok Bot (Crack Bot), 2026-11-19, why: "ironclad mcp" style queries land on a listing page with no answer-first
@@ -204,7 +205,8 @@ export const SOFTWARE_CONNECTIONS: readonly SoftwareConnection[] = [
         a: 'No. Ironclad says the MCP server follows the user and group permissions on your Ironclad account, and search returns only results you are allowed to access.',
       },
     ],
-    faqSources: [{ label: 'Ironclad: Connect an MCP Client to Ironclad MCP Server', url: 'https://support.ironcladapp.com/hc/en-us/articles/39887632957463-Connect-an-MCP-Client-to-Ironclad-MCP-Server' }],
+    // Claude Fable 5.2, 2026-11-21: same move as the source above; final address, no redirect.
+    faqSources: [{ label: 'Ironclad: Connect an MCP Client to Ironclad MCP Server', url: 'https://support.ironcladapp.com/en-us/articles/18170697-connect-an-mcp-client-to-ironclad-mcp-server' }],
     faqsChecked: '2026-11-19',
   },
   {

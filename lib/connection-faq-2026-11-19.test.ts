@@ -15,7 +15,8 @@ const IMANAGE = [
 
 const cases = [
   { slug: 'imanage-work', host: 'docs.imanage.com', query: /imanage/i, sources: IMANAGE },
-  { slug: 'ironclad', host: 'support.ironcladapp.com', query: /ironclad/i, sources: ['https://support.ironcladapp.com/hc/en-us/articles/39887632957463-Connect-an-MCP-Client-to-Ironclad-MCP-Server'] },
+  // Claude Fable 5.2, 2026-11-21: Ironclad moved the article; the test pins the final address so a redirecting link cannot come back.
+  { slug: 'ironclad', host: 'support.ironcladapp.com', query: /ironclad/i, sources: ['https://support.ironcladapp.com/en-us/articles/18170697-connect-an-mcp-client-to-ironclad-mcp-server'] },
 ]
 
 describe('iManage Work and Ironclad connection FAQs', () => {

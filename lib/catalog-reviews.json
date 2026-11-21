@@ -166,8 +166,8 @@
     {
       "slug": "claude-legal",
       "decision": "approved",
-      "reviewed_at": "2026-10-27",
-      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "reviewed_at": "2026-11-17",
+      "reviewer": "Claude Sonnet 5.5 re-review of changed sources against re-read primary sources",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": false,
@@ -175,13 +175,13 @@
         {
           "url": "https://claude.com/product/overview",
           "kind": "vendor",
-          "sha256": "f8eef1da5fe135be70802060c7c9cdd56b19e84b4408168903606259d57edab0",
+          "sha256": "ba3826726795632a4f3fbab6821d70f74c65f554dbe510ad7d4b313cf6732045",
           "quote": "Other common use cases include first drafts and editing"
         },
         {
           "url": "https://claude.com/pricing",
           "kind": "vendor",
-          "sha256": "74e2ba10c67c41a0b31fb7c8ea1076654fd0507f75af893b7f857169f0ae0934",
+          "sha256": "5531767ab63ac8b8fab1ec7ac4c398d3472e845aa7b1a9744460053ef0e82739",
           "quote": "Free for everyone"
         }
       ],
@@ -212,8 +212,8 @@
     {
       "slug": "clio",
       "decision": "approved",
-      "reviewed_at": "2026-10-27",
-      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "reviewed_at": "2026-11-17",
+      "reviewer": "Claude Sonnet 5.5 re-review of changed claims against re-read primary sources",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": false,
@@ -221,13 +221,13 @@
         {
           "url": "https://docs.developers.clio.com/guides/clio-manage/",
           "kind": "vendor",
-          "sha256": "03a5d0bcaa15832c48b9e96338fead37c6dea7cec535d6b371eee4211f202d41",
+          "sha256": "1afd5fc454491f911f0fa7ac86a1c94a9c13ee53e943c7b3b1f632536530c68c",
           "quote": "A matter is the central organizing record for legal work in Clio Manage."
         },
         {
           "url": "https://help.clio.com/api/v2/help_center/en-us/articles/9289741706779.json",
           "kind": "vendor",
-          "sha256": "4a2b32187b573653808dfa36ee9dbde87d962d7ac0c325f9a4b4ae4f5a377022",
+          "sha256": "9d7157422e65874c3a628a74c5b63823a0a740ef33e55b1a3b94a2a21593ed25",
           "quote": "help you proactively identify matter activity and suggest unlogged time entries"
         },
         {
@@ -240,15 +240,15 @@
           "url": "https://help.clio.com/api/v2/help_center/en-us/articles/29764998990491.json",
           "kind": "vendor",
           "sha256": "4908e2f492c175f43742aa4850a2b940bb634958622c3e3b10c3cdd69666756c",
-          "quote": "Clio's AI converts recorded entries into invoices"
+          "quote": "The generated draft invoice is automatically routed to the specified approvers for review and final approval"
         }
       ],
-      "listing_sha256": "8ae505ce43e6b76bed0f62d16a97429e502851807650fee0dcf8aaaeb3538e50",
+      "listing_sha256": "8ec0cbce2b488ddbdfa64bcc052cc970db1fe79686b869a1603265c6829f0f9a",
       "claims": {
         "slug": "clio",
         "name": "Clio Manage",
         "tagline": "Legal matter management with vendor-documented AI recommendations for matter activity.",
-        "description": "Clio Manage organizes legal matters and their associated work. Clio's Manage AI documentation describes recommendations for client communications, bills and suggested time entries from unlogged activity. Its developer documentation describes matter-related records and cross-application workflows. Confirm which features, permissions and plan are available for your account. Documentation reviewed; no firm account connection or workflow was tested.",
+        "description": "Clio Manage organizes legal matters and their associated work. Clio's AI documentation describes drafted client communications, draft invoices and suggested time entries from unlogged activity. Its developer documentation describes matter-related records and cross-application workflows. Confirm which features, permissions and plan are available for your account. Documentation reviewed; no firm account connection or workflow was tested.",
         "category": "case_management",
         "external_url": "https://www.clio.com",
         "mcp_repo_url": null,
@@ -311,8 +311,8 @@
     {
       "slug": "cocounsel",
       "decision": "approved",
-      "reviewed_at": "2026-10-27",
-      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "reviewed_at": "2026-11-17",
+      "reviewer": "Claude Sonnet 5.5 re-review of changed sources against re-read primary sources",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": false,
@@ -320,7 +320,7 @@
         {
           "url": "https://legal.thomsonreuters.com/en/products/cocounsel-legal",
           "kind": "vendor",
-          "sha256": "7699205083c951df82b7a9b040f66b3ed5ccdecb3aeaf0bfa154241c01873c94",
+          "sha256": "f8782d119433ddd7d345914ac3d7b6c0c27b3388e0fbfb09cf0d7747c4b29b30",
           "quote": "Integrate research, analysis, and drafting with professional-grade AI grounded in trusted Westlaw and Practical Law content."
         }
       ],
@@ -351,8 +351,8 @@
     {
       "slug": "composio-legal-toolkit",
       "decision": "approved",
-      "reviewed_at": "2026-10-27",
-      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "reviewed_at": "2026-11-17",
+      "reviewer": "Claude Sonnet 5.5 re-review of changed sources against re-read primary sources",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": true,
@@ -360,7 +360,7 @@
         {
           "url": "https://docs.composio.dev/docs/single-toolkit-mcp.md",
           "kind": "vendor",
-          "sha256": "70a3e01981caeb0fbeb4118b8c71b2c0824408be38fcc2226070bcb8e478082c",
+          "sha256": "3f838026b59a90a1d877311f25e3945d0c0006db964697bb73e998d5198628de",
           "quote": "Users must authenticate with the toolkits configured in your MCP server first."
         }
       ],
@@ -392,8 +392,8 @@
     {
       "slug": "concord-contract-intelligence",
       "decision": "approved",
-      "reviewed_at": "2026-10-27",
-      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "reviewed_at": "2026-11-17",
+      "reviewer": "Claude Sonnet 5.5 re-review of changed sources against re-read primary sources",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": false,
@@ -401,7 +401,7 @@
         {
           "url": "https://www.concord.app/",
           "kind": "vendor",
-          "sha256": "4d84a739edddbfe5637fe101eeaa67f7b43547a2edc8349b7064e7a3a9990b56",
+          "sha256": "222c7245738cbebf0133583f48697b64b5d05503c53417a2b76cf0d07134b1f8",
           "quote": "AI understands your contracts, explains key risks and obligations, and suggests edits."
         }
       ],
@@ -472,8 +472,8 @@
     {
       "slug": "courtlistener-mcp",
       "decision": "approved",
-      "reviewed_at": "2026-10-27",
-      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "reviewed_at": "2026-11-17",
+      "reviewer": "Claude Sonnet 5.5 re-review of changed claims against re-read primary sources",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": true,
@@ -481,22 +481,40 @@
         {
           "url": "https://raw.githubusercontent.com/freelawproject/courtlistener-mcp/main/MCP_README.md",
           "kind": "maintainer",
-          "sha256": "0de287dc5353983c8288668d6ebc6154ad2714175945e9f4e3ca25d3d4bee146",
+          "sha256": "acf4f6da3671e775948f637c7b200a138ffcace9dc9e922bd7fdd278ff5355cd",
           "quote": "Search U.S. case law, dockets, judges, and oral arguments; extract and verify legal citations; and manage alerts"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/freelawproject/courtlistener-mcp/main/MCP_README.md",
+          "kind": "maintainer",
+          "sha256": "acf4f6da3671e775948f637c7b200a138ffcace9dc9e922bd7fdd278ff5355cd",
+          "quote": "Accounts are free for individuals"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/freelawproject/courtlistener-mcp/main/MCP_README.md",
+          "kind": "maintainer",
+          "sha256": "acf4f6da3671e775948f637c7b200a138ffcace9dc9e922bd7fdd278ff5355cd",
+          "quote": "Usage is bounded by CourtListener's API rate limits"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/freelawproject/courtlistener-mcp/main/MCP_README.md",
+          "kind": "maintainer",
+          "sha256": "acf4f6da3671e775948f637c7b200a138ffcace9dc9e922bd7fdd278ff5355cd",
+          "quote": "Nothing is charged to you, but fulfillment isn't immediate or guaranteed."
         }
       ],
-      "listing_sha256": "6558ecf9db1c09a83a4359ab215f39792603d8a9dd28516db52c55261c165512",
+      "listing_sha256": "e1fde5ccf06145742df0d45ef8c2ea685554852f4c301be6d942a87d73021ff7",
       "claims": {
         "slug": "courtlistener-mcp",
         "name": "CourtListener MCP (Free Law Project)",
         "tagline": "Official CourtListener access for case law, dockets, judges, citations and alerts.",
-        "description": "Free Law Project hosts the official CourtListener MCP server. Its documentation describes searching U.S. case law, dockets, judges and oral arguments, citation tools and alert management. Interactive clients use a CourtListener account with OAuth; the maintainer also documents API-token authentication for other clients. Some tools can change account state or request documents, so inspect permissions and possible charges. Documentation reviewed; an account connection was not tested.",
+        "description": "Free Law Project hosts the official CourtListener MCP server. Its documentation describes searching U.S. case law, dockets, judges and oral arguments, citation tools and alert management. Interactive clients use a CourtListener account with OAuth; the maintainer also documents API-token authentication for other clients. Some tools can change account state or request documents, so inspect permissions before you approve. Documentation reviewed; an account connection was not tested.",
         "category": "legal_research",
         "external_url": "https://mcp.courtlistener.com/",
-        "mcp_repo_url": "https://github.com/freelawproject/courtlistener-api-client",
+        "mcp_repo_url": "https://github.com/freelawproject/courtlistener-mcp",
         "mcp_install_command": null,
         "pricing_model": "freemium",
-        "pricing_details": "The maintainer documents free individual accounts. Usage limits, memberships, document purchases and other charges depend on the service and account; confirm current terms.",
+        "pricing_details": "The maintainer documents free individual accounts. Usage is bounded by CourtListener's API rate limits; confirm current terms.",
         "tags": [
           "case-law",
           "dockets",
@@ -563,8 +581,8 @@
         {
           "url": "https://www.diligent.com/",
           "kind": "vendor",
-          "sha256": "3dfe03db418d633f2658c6bf7fcefe6eb9eb5f92b2235f9ef5c4b76a8fc5aaad",
-          "quote": "Centralize governance, risk and compliance in one AI platform."
+          "sha256": "e3832557cb349d6824f1747e7ddf5f86aaeebaaf1d2ab3eb2f0cfd37d033eebf",
+          "quote": "Agents work across governance, risk and compliance."
         }
       ],
       "listing_sha256": "17774e190198a1c6114423b50ad3d1f8b33c63c1889bfebfa9d07bfe28f935a2",
@@ -595,8 +613,8 @@
     {
       "slug": "firecrawl-gov-index",
       "decision": "approved",
-      "reviewed_at": "2026-11-15",
-      "reviewer": "Claude Fable 5.2 manual primary-source claim review on November 15, 2026",
+      "reviewed_at": "2026-11-21",
+      "reviewer": "Claude Sonnet 5.5 primary-source re-read on November 21, 2026, checked by Claude Fable 5.2",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": true,
@@ -604,7 +622,7 @@
         {
           "url": "https://www.firecrawl.dev/gov-index",
           "kind": "vendor",
-          "sha256": "9aad0957aa705291dffae6bd93c80ecfafe751eeb823c7c6c316a195ec8be5dd",
+          "sha256": "5efbf21be2afc5c6fbde2a1809b42443fa475fdfc8754da3fccc9ff099569ce8",
           "quote": "Call GET or POST /v2/search/gov, use firecrawl_gov_search in the Firecrawl MCP server"
         },
         {
@@ -616,18 +634,18 @@
         {
           "url": "https://docs.firecrawl.dev/mcp-server.md",
           "kind": "vendor",
-          "sha256": "27528145864b91b4efa34d76af8ef280e9034964f4a19190d84852bef882761d",
+          "sha256": "f0d13ae93d386c8c7e18ae79fd6a005c3c418de21dcbc6badbfa7b758ab9a260",
           "quote": "No account or key. Search, Scrape, and Parse within daily limits."
         }
       ],
-      "listing_sha256": "072dce311fad1850d6827b1c2867d0f64b44853a91fc517a6a413e498200185e",
+      "listing_sha256": "a4648469762b0cc0df4ef3a4a848c5b4c9592d367e98b4664d3e016cf0300293",
       "claims": {
         "slug": "firecrawl-gov-index",
         "name": "Firecrawl Government & Legal Index",
         "tagline": "Search an index of U.S. government and legal sources for AI-assisted research.",
         "description": "Firecrawl's Government & Legal Index searches government and legal sources including statutes, regulations and court opinions, with source links. The vendor documents public search API routes, the firecrawl_gov_search tool in its MCP server, CLI and SDK access, and AI-assistant connectors. Index search is described as credit-free; connector setup and usage limits have separate requirements. Verify the underlying issuer, jurisdiction, effective date and text before relying on a result. Documentation reviewed; this audit did not test account access or search completeness.",
         "category": "legal_research",
-        "external_url": "https://alexandria.firecrawl.dev/firecrawl-gov-index",
+        "external_url": "https://alexandria.firecrawl.dev/providers/firecrawl-gov-index",
         "mcp_repo_url": null,
         "mcp_install_command": null,
         "pricing_model": "free",
@@ -691,8 +709,8 @@
     {
       "slug": "gavel",
       "decision": "approved",
-      "reviewed_at": "2026-10-29",
-      "reviewer": "Codex manual primary-source claim review on October 29, 2026",
+      "reviewed_at": "2026-11-17",
+      "reviewer": "Claude Sonnet 5.5 re-review of changed sources against re-read primary sources",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": false,
@@ -700,13 +718,13 @@
         {
           "url": "https://www.gavel.io/",
           "kind": "vendor",
-          "sha256": "ec3035aa29cf41ef2c1cda6b70025973a81b17b9b23209ddfe95a9df611b4185",
+          "sha256": "688eecee9bd313b7b4bee658179a76a68b9231b70353e123fead3de4ce4c6323",
           "quote": "Automate your Word docs with custom rules"
         },
         {
           "url": "https://www.gavel.io/pricing",
           "kind": "vendor",
-          "sha256": "1580b5214691690f251a57bee0a4cb12588306e2741b910e6f093016799144bf",
+          "sha256": "b4753782a292e76511f2d582d5985f240e33ef9a837724c0bec8aa6ff5ca4899",
           "quote": "Start 7-day trial"
         }
       ],
@@ -778,8 +796,8 @@
     {
       "slug": "harvey-ai",
       "decision": "approved",
-      "reviewed_at": "2026-10-28",
-      "reviewer": "Codex manual primary-source re-review on October 28, 2026",
+      "reviewed_at": "2026-11-17",
+      "reviewer": "Claude Sonnet 5.5 re-review of changed sources against re-read primary sources",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": false,
@@ -787,8 +805,8 @@
         {
           "url": "https://www.harvey.ai/",
           "kind": "vendor",
-          "sha256": "798ef1ca8e2018adc50c1fbf519d92fc8012b752710c46879ac31eb8bf9baf4f",
-          "quote": "Securely store, organize, and bulk-analyze legal documents."
+          "sha256": "cfb66194a32eba3d3c213751aed9e100484614ca920e6c124dc5c61243a6faae",
+          "quote": "Organize thousands of documents in one secure place, then extract the insights that matter with a single query."
         }
       ],
       "listing_sha256": "1ca3d291f847ba66803615d3cc791e98be6aefe55ba268d266f72472d21100c5",
@@ -818,8 +836,8 @@
     {
       "slug": "harvey-mcp",
       "decision": "approved",
-      "reviewed_at": "2026-10-27",
-      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "reviewed_at": "2026-11-17",
+      "reviewer": "Claude Sonnet 5.5 re-review of changed claims against re-read primary sources",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": true,
@@ -827,14 +845,14 @@
         {
           "url": "https://developers.harvey.ai/guides/harvey_mcp.md",
           "kind": "vendor",
-          "sha256": "ddcad27e1d604a75063491c10ff5b7dd15d2f3b0e4b43817decb11d808ff58b6",
+          "sha256": "3cbe33b44c2cc9fd9a7bfd0706e0b5d1391eaedf79fc979aef83ded04642567e",
           "quote": "Your client must support remote MCP servers over Streamable HTTP transport with OAuth authentication."
         }
       ],
-      "listing_sha256": "73e51dd1bad640f6e8537e5169a65fee28720ead003ee791de4baec44758f91e",
+      "listing_sha256": "9c62149a3ea6e66173a3ba2e21679baa66dd3cf5053dbeb5e7b7a8d9ce62ad79",
       "claims": {
         "slug": "harvey-mcp",
-        "name": "Harvey MCP (beta)",
+        "name": "Harvey MCP",
         "tagline": "Vendor-documented MCP tools for Harvey questions, Vault documents and enabled research sources.",
         "description": "Harvey documents an MCP server for general questions, Vault document analysis, available projects and enabled research knowledge sources. It requires an eligible Harvey account, enabled feature access and a client supporting remote Streamable HTTP with OAuth. Tools and sources are limited by account permissions. Review the destination AI provider's data terms as well as Harvey's. Documentation reviewed; customer enrollment, authentication and tool calls were not tested.",
         "category": "legal_research",
@@ -874,7 +892,7 @@
         {
           "url": "https://imanage.com/imanage-products/document-email-management/work/",
           "kind": "vendor",
-          "sha256": "5f83d6b6e473cd2754550dcc4626058525da85dce5ad3516f7299bfd7019b4ed",
+          "sha256": "4d346fa8e82f7bca58c5447f9c37044005a7f91edc70d18445cb31b7287dcf97",
           "quote": "Yes, iManage includes the industry-leading email management solution"
         }
       ],
@@ -906,8 +924,8 @@
     {
       "slug": "invoice-my-clients-mcp",
       "decision": "approved",
-      "reviewed_at": "2026-10-29",
-      "reviewer": "Codex manual primary-source claim review on October 29, 2026",
+      "reviewed_at": "2026-11-17",
+      "reviewer": "Claude Sonnet 5.5 re-review of changed sources against re-read primary sources",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": true,
@@ -915,7 +933,7 @@
         {
           "url": "https://www.invoicemyclients.com/features/mcp-server",
           "kind": "vendor",
-          "sha256": "8930dd493df78f34d6d3935d1463f4386957b8f5114d05ec6f9d9d6f4476265c",
+          "sha256": "ce1257299ab2800370050c9999c9a0a927a219dc4b79c33a5d1443e45538c39e",
           "quote": "Create draft invoices, add line items, and change tax, discounts, and shipping by asking your assistant in plain language."
         }
       ],
@@ -946,8 +964,8 @@
     {
       "slug": "ironclad",
       "decision": "approved",
-      "reviewed_at": "2026-10-29",
-      "reviewer": "Codex manual primary-source claim review on October 29, 2026",
+      "reviewed_at": "2026-11-17",
+      "reviewer": "Claude Sonnet 5.5 re-review of changed sources against re-read primary sources",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": true,
@@ -955,13 +973,13 @@
         {
           "url": "https://ironcladapp.com/",
           "kind": "vendor",
-          "sha256": "fc78170e87fcd5600bbb721606ff7a4776e8a1482168af7ce11f4c308523d373",
+          "sha256": "32daa50a7556b209d2150c1733cab0818d878824473602e3d0edee086f921e60",
           "quote": "AI Contract Lifecycle Management"
         },
         {
-          "url": "https://support.ironcladapp.com/api/v2/help_center/en-us/articles/39887632957463.json",
+          "url": "https://support.ironcladapp.com/en-us/articles/18170697-connect-an-mcp-client-to-ironclad-mcp-server",
           "kind": "vendor",
-          "sha256": "318c99e7a7709486d0d673a8e2777269a716120daf36ea247d4b389c2f3e7c8b",
+          "sha256": "fcbd5d69b4264ec2281aeb172c26cdb812def725d4c471d2f9dfed2e54908576",
           "quote": "It is read-only, supporting search only and never creating, editing, or deleting data."
         }
       ],
@@ -992,8 +1010,8 @@
     {
       "slug": "kira-systems",
       "decision": "approved",
-      "reviewed_at": "2026-10-27",
-      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "reviewed_at": "2026-11-17",
+      "reviewer": "Claude Sonnet 5.5 re-review of changed sources against re-read primary sources",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": false,
@@ -1001,7 +1019,7 @@
         {
           "url": "https://www.litera.com/capabilities/review",
           "kind": "vendor",
-          "sha256": "3ccb4131e0ad27488d891c98bc771ea9fe6f98da1858fcb2f719a0b24feb45ce",
+          "sha256": "fe9cc3689c348d764c2017e0804a2843a64adfc151fb42fbbcec26905641c336",
           "quote": "Kira Purpose-built for high-volume, high-stakes review and due diligence."
         }
       ],
@@ -1111,8 +1129,8 @@
     {
       "slug": "lex-machina",
       "decision": "approved",
-      "reviewed_at": "2026-10-27",
-      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "reviewed_at": "2026-11-17",
+      "reviewer": "Claude Sonnet 5.5 re-review of changed sources against re-read primary sources",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": false,
@@ -1120,7 +1138,7 @@
         {
           "url": "https://www.lexisnexis.com/en-us/products/lex-machina.page",
           "kind": "vendor",
-          "sha256": "f56a967fd7d4bdd79233d46c7898aefb80843bc40f85901024314ce00b40677f",
+          "sha256": "ced5f0e4c810124acacb72cbef71afa13f264a659794ed48404fa1410f144e1f",
           "quote": "Gain insights into the past behavior of parties, counsel, experts, judges, and courts to improve litigation and business outcomes."
         }
       ],
@@ -1150,8 +1168,8 @@
     {
       "slug": "luminance",
       "decision": "approved",
-      "reviewed_at": "2026-10-29",
-      "reviewer": "Codex manual primary-source claim review on October 29, 2026",
+      "reviewed_at": "2026-11-17",
+      "reviewer": "Claude Sonnet 5.5 re-review of changed sources against re-read primary sources",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": false,
@@ -1159,13 +1177,13 @@
         {
           "url": "https://www.luminance.com/",
           "kind": "vendor",
-          "sha256": "4921c2c126f9bfe4d366162b7cdeaeef60815788de91f46982e943b767b41da5",
+          "sha256": "3249a9666bb041a334285ee177924df4f899ae4b0b718287f11eba655afdcdb0",
           "quote": "Bring precedent and playbooks into every negotiation."
         },
         {
           "url": "https://www.luminance.com/platform/technology",
           "kind": "vendor",
-          "sha256": "769c9b96e05e850d32adeff7f5532113753b0629f9b070accff7d78e2a8487f0",
+          "sha256": "e39d4f09897b499726922976f33da527244f9762451ed8027c0aa1f0b2baec46",
           "quote": "This foundation powers AI agents that orchestrate multi-step contract work at scale, automating repeatable tasks while maintaining control."
         }
       ],
@@ -1235,28 +1253,28 @@
     {
       "slug": "open-legal-compliance-mcp",
       "decision": "approved",
-      "reviewed_at": "2026-10-27",
-      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "reviewed_at": "2026-11-17",
+      "reviewer": "Claude Sonnet 5.5 re-review of changed claims against re-read primary sources",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": true,
       "sources": [
         {
-          "url": "https://raw.githubusercontent.com/TCoder920x/open-legal-compliance-mcp/HEAD/README.md",
+          "url": "https://raw.githubusercontent.com/TCoder920/open-legal-compliance-mcp/HEAD/README.md",
           "kind": "maintainer",
           "sha256": "7fa4610188f548dd60937de9dc8807282487adec6f642a1ecdcb8099c319ff37",
           "quote": "The server will not start without this key."
         }
       ],
-      "listing_sha256": "782f0f70b160642ad24a1b2e7404e9609d580118734c0dafc2580d11985f0639",
+      "listing_sha256": "ae9a3915aea89234a4d0c2ddc43dd437e336cd16ffe462d8aa348a232364825a",
       "claims": {
         "slug": "open-legal-compliance-mcp",
         "name": "Open Legal Compliance MCP",
         "tagline": "Community MCP for searching public legal and regulatory sources.",
-        "description": "The TCoder920x repository documents searches across public legal and regulatory sources, including GovInfo, CourtListener, Congress.gov, the Federal Register and selected international sources. GovInfo credentials are required to start the server; other capabilities require their own optional keys or scraping access. This is a community research connector, not a determination that a client or activity complies with law. Verify retrieved material against its original source. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "description": "The TCoder920 repository documents searches across public legal and regulatory sources, including GovInfo, CourtListener, Congress.gov, the Federal Register and selected international sources. GovInfo credentials are required to start the server; other capabilities require their own optional keys or scraping access. This is a community research connector, not a determination that a client or activity complies with law. Verify retrieved material against its original source. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
         "category": "legal_research",
-        "external_url": "https://github.com/TCoder920x/open-legal-compliance-mcp",
-        "mcp_repo_url": "https://github.com/TCoder920x/open-legal-compliance-mcp",
+        "external_url": "https://github.com/TCoder920/open-legal-compliance-mcp",
+        "mcp_repo_url": "https://github.com/TCoder920/open-legal-compliance-mcp",
         "mcp_install_command": null,
         "pricing_model": "free",
         "pricing_details": "MIT-licensed server code; API registrations, hosting and connected-service terms or costs are separate. A GovInfo API key is required.",
@@ -1266,8 +1284,8 @@
           "mcp",
           "community-maintained"
         ],
-        "creator_name": "TCoder920x",
-        "creator_url": "https://github.com/TCoder920x",
+        "creator_name": "TCoder920",
+        "creator_url": "https://github.com/TCoder920",
         "logo_url": null,
         "firm_size_fit": []
       }
@@ -1315,8 +1333,8 @@
     {
       "slug": "paymo-time-tracker-mcp",
       "decision": "approved",
-      "reviewed_at": "2026-10-27",
-      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "reviewed_at": "2026-11-17",
+      "reviewer": "Claude Sonnet 5.5 re-review of changed sources against re-read primary sources",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": true,
@@ -1324,7 +1342,7 @@
         {
           "url": "https://raw.githubusercontent.com/feamster/paymo-mcp/HEAD/README.md",
           "kind": "maintainer",
-          "sha256": "ed1285bf0127faf399394898d9cb72488ad87ceef894e268cde3b84c853df125",
+          "sha256": "676e67225bf0d8fb472cfe7b427e1566bce5073084c89bb3b759c76efaa84d71",
           "quote": "A Model Context Protocol (MCP) server for [Paymo](https://www.paymoapp.com/) time tracking and invoicing."
         }
       ],
@@ -1356,8 +1374,8 @@
     {
       "slug": "pdf-reader-mcp",
       "decision": "approved",
-      "reviewed_at": "2026-10-27",
-      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "reviewed_at": "2026-11-21",
+      "reviewer": "Claude Sonnet 5.5 primary-source re-read on November 21, 2026, checked by Claude Fable 5.2",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": true,
@@ -1365,22 +1383,34 @@
         {
           "url": "https://raw.githubusercontent.com/SylphxAI/anymd/HEAD/README.md",
           "kind": "maintainer",
-          "sha256": "40e70337814ddcad1121f8e390b90d1c74ada27a88e4651b2a483e2b67b6092a",
+          "sha256": "12c33ac9805ecda1bad74a5265f2d600152620cca8f70df5bc9b9f70b23a3c10",
           "quote": "Formerly **pdf-reader-mcp**."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/SylphxAI/anymd/HEAD/README.md",
+          "kind": "maintainer",
+          "sha256": "12c33ac9805ecda1bad74a5265f2d600152620cca8f70df5bc9b9f70b23a3c10",
+          "quote": "The core stays free and MIT licensed, and nothing that was free has moved to Pro."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/SylphxAI/anymd/HEAD/README.md",
+          "kind": "maintainer",
+          "sha256": "12c33ac9805ecda1bad74a5265f2d600152620cca8f70df5bc9b9f70b23a3c10",
+          "quote": "US$29, one payment. No subscription, no account."
         }
       ],
-      "listing_sha256": "2c0f40d69e79ec22d7c7f07fe86bad395c793a4ae063e2980948fac401c2054a",
+      "listing_sha256": "08d6bea6e1517f67cc7e3953188be89f333a3c2cb2f282db3b50a973fc9c239c",
       "claims": {
         "slug": "pdf-reader-mcp",
         "name": "anymd (formerly PDF Reader MCP)",
         "tagline": "General local MCP and command-line document-to-Markdown extraction.",
-        "description": "The Sylphx maintainer has renamed pdf-reader-mcp to anymd. The project documents a local MCP server and command-line tool for converting PDFs and other document formats into Markdown, with search and optional OCR capabilities. It is general document extraction software, not a legal-analysis or citation-verification system. Review local file access, optional model downloads and the current migration/setup instructions before use. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "description": "The Sylphx maintainer has renamed pdf-reader-mcp to anymd. The project documents a local MCP server and command-line tool for converting PDFs and other document formats into Markdown, with search and optional OCR capabilities. It is general document extraction software, not a legal-analysis or citation-verification system. Review local file access, optional model downloads and the current migration/setup instructions before use. Documentation reviewed on November 21, 2026; customer-account access and deployed operation have not been tested.",
         "category": "document_processing",
         "external_url": "https://github.com/SylphxAI/anymd",
         "mcp_repo_url": "https://github.com/SylphxAI/anymd",
         "mcp_install_command": null,
-        "pricing_model": "free",
-        "pricing_details": "MIT-licensed local server/CLI. Maintainer also offers a separately hosted, metered parsing service; confirm any hosted or optional-model costs.",
+        "pricing_model": "freemium",
+        "pricing_details": "MIT-licensed local server and CLI, free to use with no API key. The maintainer's README also describes an optional anymd Pro license for US$29, one payment, which adds PDF cite_check and video timelines. Confirm current price and terms with the maintainer.",
         "tags": [
           "pdf",
           "document-extraction",
@@ -1397,8 +1427,8 @@
     {
       "slug": "regulationsgov-mcp",
       "decision": "approved",
-      "reviewed_at": "2026-10-29",
-      "reviewer": "Codex manual primary-source claim review on October 29, 2026",
+      "reviewed_at": "2026-11-17",
+      "reviewer": "Claude Sonnet 5.5 re-review of changed sources against re-read primary sources",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": true,
@@ -1406,7 +1436,7 @@
         {
           "url": "https://1102tools.com/mcp/regulations-gov",
           "kind": "vendor",
-          "sha256": "638c897476e3f2a2e7b19ee268894eb0fa7296266825544a2561f4193987e99d",
+          "sha256": "bf9b7532ef3d067d89757cbfa212610ced5dd798c82f0c565c1a5ff864ce1a87",
           "quote": "Rulemaking dockets, documents, and public comments."
         }
       ],
@@ -1438,8 +1468,8 @@
     {
       "slug": "relativity",
       "decision": "approved",
-      "reviewed_at": "2026-10-29",
-      "reviewer": "Codex manual primary-source claim review on October 29, 2026",
+      "reviewed_at": "2026-11-17",
+      "reviewer": "Claude Sonnet 5.5 re-review of changed sources against re-read primary sources",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": false,
@@ -1447,7 +1477,7 @@
         {
           "url": "https://www.relativity.com/",
           "kind": "vendor",
-          "sha256": "3e6d34c3ae03c257a1f5a9ec167d04533ba39c1e78bf1c1851c583ea621c9130",
+          "sha256": "5da63456d79bebd273fcdff15f7fcffdeff965d483c14204b590c1607622c6f0",
           "quote": "e-Discovery Manage end-to-end litigation &ndash; collect, process, review, and produce in one place."
         }
       ],
@@ -1478,8 +1508,8 @@
     {
       "slug": "scoro-practice-analytics",
       "decision": "approved",
-      "reviewed_at": "2026-10-27",
-      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "reviewed_at": "2026-11-17",
+      "reviewer": "Claude Sonnet 5.5 re-review of changed claims against re-read primary sources",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": true,
@@ -1487,16 +1517,40 @@
         {
           "url": "https://www.scoro.com/mcp/",
           "kind": "vendor",
-          "sha256": "5d50dcc338734478052bf95c7ffac0abe41051c55296340fe888a7ffa5168402",
-          "quote": "plus read access to financial documents like invoices, bills, expenses, and quotes."
+          "sha256": "a32a667d00f5de78cbe8f38aa0081ba65ab7092dfb693b3c0afc0100eead26e0",
+          "quote": "use natural language to pull information from Scoro, create projects, schedule meetings, log time, and more without switching apps"
+        },
+        {
+          "url": "https://support.scoro.com/api/v2/help_center/en-us/articles/39712766664589.json",
+          "kind": "vendor",
+          "sha256": "c35ddc0b5e3c129a6e1a8b73c46da26eb1d262e0398a92564dd321916e98c867",
+          "quote": "create or modify projects, tasks, contacts, comments"
+        },
+        {
+          "url": "https://support.scoro.com/api/v2/help_center/en-us/articles/47563484102413.json",
+          "kind": "vendor",
+          "sha256": "1186416e61da82660675cc124921a38431ad6ce4a8d42ed5f00086a1212f9aa7",
+          "quote": "get_invoices , get_invoice_lines , create_invoice , update_invoice"
+        },
+        {
+          "url": "https://support.scoro.com/api/v2/help_center/en-us/articles/47563484102413.json",
+          "kind": "vendor",
+          "sha256": "1186416e61da82660675cc124921a38431ad6ce4a8d42ed5f00086a1212f9aa7",
+          "quote": "get_bills , get_bill_lines , create_bill , update_bill"
+        },
+        {
+          "url": "https://support.scoro.com/api/v2/help_center/en-us/articles/47563484102413.json",
+          "kind": "vendor",
+          "sha256": "1186416e61da82660675cc124921a38431ad6ce4a8d42ed5f00086a1212f9aa7",
+          "quote": "get_quotes , get_quote_lines , create_quote , update_quote"
         }
       ],
-      "listing_sha256": "4173379a0a7a1a3fa5487f46919023c613254977c2afe9585dbc5c0a52610c2f",
+      "listing_sha256": "fd74f2581a7fbfd62bf30c3e9d4c54e2c23fe902635b83fd56e31a2ca40f3c1b",
       "claims": {
         "slug": "scoro-practice-analytics",
         "name": "Scoro MCP",
-        "tagline": "Vendor connector for Scoro workspace tasks, time entries and financial reads.",
-        "description": "Scoro documents an official MCP connector for its general professional-services work-management platform. Current documentation lists read/write actions for projects, tasks, calendar events, comments, time entries and contacts, plus read access to financial documents. Workspace and user connections are required; enabled tools and existing user permissions determine access. This is not a separate legal-practice analytics product, and not every Scoro module is available through the connector. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "tagline": "Vendor connector for Scoro workspace tasks, time entries and financial records.",
+        "description": "Scoro documents an official MCP connector for its general professional-services work-management platform. Current documentation lists tools to search, create and update projects, tasks, calendar events, comments, time entries and contacts, and to manage financial records such as quotes, invoices and bills. Workspace and user connections are required; enabled tools and existing user permissions determine access. This is not a separate legal-practice analytics product, and not every Scoro module is available through the connector. Documentation reviewed on November 17, 2026; customer-account access and deployed operation have not been tested.",
         "category": "general",
         "external_url": "https://www.scoro.com/mcp/",
         "mcp_repo_url": null,
@@ -1519,8 +1573,8 @@
     {
       "slug": "smith-ai",
       "decision": "approved",
-      "reviewed_at": "2026-10-27",
-      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "reviewed_at": "2026-11-17",
+      "reviewer": "Claude Sonnet 5.5 re-review of changed sources against re-read primary sources",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": false,
@@ -1528,7 +1582,7 @@
         {
           "url": "https://smith.ai/",
           "kind": "vendor",
-          "sha256": "102a7fa75d75d7c03f14df443d19146ddaad6d39626684ed593bcae95bd0df30",
+          "sha256": "1e972e43dd958c93991b79acfc0411b9e7d7b977060aedfb2f80480211217682",
           "quote": "Our unique hybrid solution gives you the best of both worlds."
         }
       ],
@@ -1559,8 +1613,8 @@
     {
       "slug": "smokeball",
       "decision": "approved",
-      "reviewed_at": "2026-10-29",
-      "reviewer": "Codex manual primary-source claim review on October 29, 2026",
+      "reviewed_at": "2026-11-17",
+      "reviewer": "Claude Sonnet 5.5 re-review of changed sources against re-read primary sources",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": false,
@@ -1568,7 +1622,7 @@
         {
           "url": "https://www.smokeball.com/",
           "kind": "vendor",
-          "sha256": "9c11a528fcec902a94e358df9cc31f9228d1124e37f76d4e9b305a457398d9ec",
+          "sha256": "009adf34e41ac5c275dcf42359741fe066fd7b2a5b1e44dc47ba81dfabbf92d7",
           "quote": "Archie works inside your matter to draft, review, and answer questions, so you deliver your best work, faster."
         }
       ],
@@ -1599,26 +1653,26 @@
     {
       "slug": "supabase-legal-mcp",
       "decision": "approved",
-      "reviewed_at": "2026-10-27",
-      "reviewer": "Codex primary-source catalog audit, independently integrated",
+      "reviewed_at": "2026-11-21",
+      "reviewer": "Claude Sonnet 5.5 primary-source re-read on November 21, 2026, checked by Claude Fable 5.2",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": true,
       "sources": [
         {
-          "url": "https://raw.githubusercontent.com/supabase-community/supabase-mcp/HEAD/README.md",
+          "url": "https://raw.githubusercontent.com/supabase/mcp/HEAD/README.md",
           "kind": "maintainer",
-          "sha256": "054ee5224ed78e8918ed73ac44f02bc10224b92cde881133d6e21429d8dceb17",
+          "sha256": "18bdbb7df4c790d28e4a53ca16a71e6e07a97f13e29caf64277c89ec890b495e",
           "quote": "It connects AI assistants directly with your Supabase project and allows them to perform tasks like managing tables, fetching config, and querying data."
         },
         {
           "url": "https://supabase.com/docs/guides/ai-tools/mcp",
           "kind": "vendor",
-          "sha256": "f3169305b3d44ee44fdd7c96cf0909351d7a3d99032edfbd5ebe13844c910c41",
+          "sha256": "ad1728633606f81786a4fb755bd025dd08f7af571544da5e75814d675628a15d",
           "quote": "Scope the MCP server to a project. If no project is selected, all projects will be accessible."
         }
       ],
-      "listing_sha256": "fa58280ac951c6c23af61f591f24865e446dc128ad9dbcf240e5637da1226689",
+      "listing_sha256": "f747843929091fd72e2865322564ca8102d0c2dfd9a9f4ef8121e2f1053ee2aa",
       "claims": {
         "slug": "supabase-legal-mcp",
         "name": "Supabase MCP Server",
@@ -1626,7 +1680,7 @@
         "description": "Supabase’s official MCP server connects AI assistants to Supabase projects for database queries, schema/migration work and other enabled developer tools. It is general development tooling, not a legal database template or a client-permission-aware legal application. Project scoping, optional read-only mode and feature selection constrain access; write tools exist outside read-only configuration. Review Supabase’s security guidance before connecting company data. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
         "category": "general",
         "external_url": "https://supabase.com/docs/guides/ai-tools/mcp",
-        "mcp_repo_url": "https://github.com/supabase-community/supabase-mcp",
+        "mcp_repo_url": "https://github.com/supabase/mcp",
         "mcp_install_command": null,
         "pricing_model": "contact",
         "pricing_details": "Server code is open source; Supabase hosting/features, client subscriptions and operational costs are separate. Some tools create paid resources. Confirm current vendor plans.",
@@ -1727,8 +1781,8 @@
     {
       "slug": "vlex-vincent",
       "decision": "approved",
-      "reviewed_at": "2026-10-29",
-      "reviewer": "Codex manual primary-source claim review on October 29, 2026",
+      "reviewed_at": "2026-11-17",
+      "reviewer": "Claude Sonnet 5.5 re-review of changed sources against re-read primary sources",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": false,
@@ -1736,20 +1790,20 @@
         {
           "url": "https://vlex.com/vincent-ai",
           "kind": "vendor",
-          "sha256": "20dec35200974b3ce41a074a52148b8e23627247510578a95c689b5ac5dd9cd5",
+          "sha256": "bf1ac082bacb930f1eb56cd0d80f2f6da4a542301ef2feebcb920b988f6edb8d",
           "quote": "Vincent by Clio combines Clio’s global legal database with AI to handle complex legal work, adapting to your workflows."
         },
         {
           "url": "https://vlex.com/free-trial",
           "kind": "vendor",
-          "sha256": "41f58c325c89815c950deac614c35c15d07f93f07c81d4163b078097d376d058",
+          "sha256": "0831b3216548390fe7baa362dd6af6816bd65ff2a2fe09885d0ebd2d5635047d",
           "quote": "Sign up to experience AI-powered legal technology from Clio."
         },
         {
           "url": "https://vlex.com/book-a-demo",
           "kind": "vendor",
-          "sha256": "0b629b1c67ec8ba1357107aaaf8629589ae7c35609c2f1c482e55781e5afa5d1",
-          "quote": "Suitable for individuals and teams, request an online demo to discover how Clio can support your firm."
+          "sha256": "4672035c9d87ed5dbbb17a180f6032a944b4603b9e57ca858c3841e1227d6376",
+          "quote": "See Clio’s legal AI in action, for individuals and teams."
         }
       ],
       "listing_sha256": "228ad053f90cd6009df88f1d4ecf885e01514791abfbd2cc0a50f316a7859345",
