@@ -1,0 +1,53 @@
+[
+  {
+    "id": "907e62dd-c353-4929-9f6e-442849dae249",
+    "expected_status": "published",
+    "expected_claims": {
+      "slug": "pdf-reader-mcp",
+      "name": "anymd (formerly PDF Reader MCP)",
+      "tagline": "General local MCP and command-line document-to-Markdown extraction.",
+      "description": "The Sylphx maintainer has renamed pdf-reader-mcp to anymd. The project documents a local MCP server and command-line tool for converting PDFs and other document formats into Markdown, with search and optional OCR capabilities. It is general document extraction software, not a legal-analysis or citation-verification system. Review local file access, optional model downloads and the current migration/setup instructions before use. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+      "category": "document_processing",
+      "external_url": "https://github.com/SylphxAI/anymd",
+      "mcp_repo_url": "https://github.com/SylphxAI/anymd",
+      "mcp_install_command": null,
+      "pricing_model": "free",
+      "pricing_details": "MIT-licensed local server/CLI. Maintainer also offers a separately hosted, metered parsing service; confirm any hosted or optional-model costs.",
+      "tags": [
+        "pdf",
+        "document-extraction",
+        "markdown",
+        "mcp",
+        "general-purpose"
+      ],
+      "creator_name": "Sylphx",
+      "creator_url": "https://sylphx.com",
+      "logo_url": null,
+      "firm_size_fit": []
+    },
+    "listing": {
+      "slug": "pdf-reader-mcp",
+      "name": "anymd (formerly PDF Reader MCP)",
+      "tagline": "General local MCP and command-line document-to-Markdown extraction.",
+      "description": "The Sylphx maintainer has renamed pdf-reader-mcp to anymd. The project documents a local MCP server and command-line tool for converting PDFs and other document formats into Markdown, with search and optional OCR capabilities. It is general document extraction software, not a legal-analysis or citation-verification system. Review local file access, optional model downloads and the current migration/setup instructions before use. Documentation reviewed on November 21, 2026; customer-account access and deployed operation have not been tested.",
+      "category": "document_processing",
+      "external_url": "https://github.com/SylphxAI/anymd",
+      "mcp_repo_url": "https://github.com/SylphxAI/anymd",
+      "mcp_install_command": null,
+      "pricing_model": "freemium",
+      "pricing_details": "MIT-licensed local server and CLI, free to use with no API key. The maintainer also sells an optional anymd Pro licence for US$29, one payment, which adds PDF cite_check and video timelines. Confirm current price and terms on the maintainer's pricing page.",
+      "tags": [
+        "pdf",
+        "document-extraction",
+        "markdown",
+        "mcp",
+        "general-purpose"
+      ],
+      "creator_name": "Sylphx",
+      "creator_url": "https://sylphx.com",
+      "logo_url": null,
+      "firm_size_fit": [],
+      "status": "published"
+    }
+  }
+]

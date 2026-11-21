@@ -581,8 +581,8 @@
         {
           "url": "https://www.diligent.com/",
           "kind": "vendor",
-          "sha256": "3dfe03db418d633f2658c6bf7fcefe6eb9eb5f92b2235f9ef5c4b76a8fc5aaad",
-          "quote": "Centralize governance, risk and compliance in one AI platform."
+          "sha256": "e3832557cb349d6824f1747e7ddf5f86aaeebaaf1d2ab3eb2f0cfd37d033eebf",
+          "quote": "Agents work across governance, risk and compliance."
         }
       ],
       "listing_sha256": "17774e190198a1c6114423b50ad3d1f8b33c63c1889bfebfa9d07bfe28f935a2",
@@ -973,13 +973,13 @@
         {
           "url": "https://ironcladapp.com/",
           "kind": "vendor",
-          "sha256": "f45a8bc3192c594ba26e2a29b3d167776012420df88231cd6c483d8e4c217562",
+          "sha256": "32daa50a7556b209d2150c1733cab0818d878824473602e3d0edee086f921e60",
           "quote": "AI Contract Lifecycle Management"
         },
         {
-          "url": "https://support.ironcladapp.com/api/v2/help_center/en-us/articles/39887632957463.json",
+          "url": "https://support.ironcladapp.com/en-us/articles/18170697-connect-an-mcp-client-to-ironclad-mcp-server",
           "kind": "vendor",
-          "sha256": "318c99e7a7709486d0d673a8e2777269a716120daf36ea247d4b389c2f3e7c8b",
+          "sha256": "fcbd5d69b4264ec2281aeb172c26cdb812def725d4c471d2f9dfed2e54908576",
           "quote": "It is read-only, supporting search only and never creating, editing, or deleting data."
         }
       ],
@@ -1374,8 +1374,8 @@
     {
       "slug": "pdf-reader-mcp",
       "decision": "approved",
-      "reviewed_at": "2026-11-17",
-      "reviewer": "Claude Sonnet 5.5 re-review of changed sources against re-read primary sources",
+      "reviewed_at": "2026-11-21",
+      "reviewer": "Claude Sonnet 5.5 primary-source re-read on November 21, 2026, checked by Claude Fable 5.2",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": true,
@@ -1383,22 +1383,34 @@
         {
           "url": "https://raw.githubusercontent.com/SylphxAI/anymd/HEAD/README.md",
           "kind": "maintainer",
-          "sha256": "0cfe5298e10f6d813a1bbb900164dafa05f099a70266cf8db0a8bc97c856ae93",
+          "sha256": "12c33ac9805ecda1bad74a5265f2d600152620cca8f70df5bc9b9f70b23a3c10",
           "quote": "Formerly **pdf-reader-mcp**."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/SylphxAI/anymd/HEAD/README.md",
+          "kind": "maintainer",
+          "sha256": "12c33ac9805ecda1bad74a5265f2d600152620cca8f70df5bc9b9f70b23a3c10",
+          "quote": "The core stays free and MIT licensed, and nothing that was free has moved to Pro."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/SylphxAI/anymd/HEAD/README.md",
+          "kind": "maintainer",
+          "sha256": "12c33ac9805ecda1bad74a5265f2d600152620cca8f70df5bc9b9f70b23a3c10",
+          "quote": "US$29, one payment. No subscription, no account."
         }
       ],
-      "listing_sha256": "2c0f40d69e79ec22d7c7f07fe86bad395c793a4ae063e2980948fac401c2054a",
+      "listing_sha256": "69e6c8b19968805179c479a261533dff8503c91f8a3f7d4312ad75abcd8c75b9",
       "claims": {
         "slug": "pdf-reader-mcp",
         "name": "anymd (formerly PDF Reader MCP)",
         "tagline": "General local MCP and command-line document-to-Markdown extraction.",
-        "description": "The Sylphx maintainer has renamed pdf-reader-mcp to anymd. The project documents a local MCP server and command-line tool for converting PDFs and other document formats into Markdown, with search and optional OCR capabilities. It is general document extraction software, not a legal-analysis or citation-verification system. Review local file access, optional model downloads and the current migration/setup instructions before use. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+        "description": "The Sylphx maintainer has renamed pdf-reader-mcp to anymd. The project documents a local MCP server and command-line tool for converting PDFs and other document formats into Markdown, with search and optional OCR capabilities. It is general document extraction software, not a legal-analysis or citation-verification system. Review local file access, optional model downloads and the current migration/setup instructions before use. Documentation reviewed on November 21, 2026; customer-account access and deployed operation have not been tested.",
         "category": "document_processing",
         "external_url": "https://github.com/SylphxAI/anymd",
         "mcp_repo_url": "https://github.com/SylphxAI/anymd",
         "mcp_install_command": null,
-        "pricing_model": "free",
-        "pricing_details": "MIT-licensed local server/CLI. Maintainer also offers a separately hosted, metered parsing service; confirm any hosted or optional-model costs.",
+        "pricing_model": "freemium",
+        "pricing_details": "MIT-licensed local server and CLI, free to use with no API key. The maintainer also sells an optional anymd Pro licence for US$29, one payment, which adds PDF cite_check and video timelines. Confirm current price and terms on the maintainer's pricing page.",
         "tags": [
           "pdf",
           "document-extraction",
