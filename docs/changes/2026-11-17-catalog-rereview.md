@@ -1,6 +1,6 @@
 # Catalog re-review of 22 source findings (2026-11-17)
 
-Claude Sonnet 5.5, 2026-11-17. PREPARED, NOT RUN. No database write, no push. Applying the two corrections still needs Giani's yes.
+Claude Sonnet 5.5, 2026-11-17. APPLIED 2026-11-21 14:09 UTC as import 2 (harvey-mcp, scoro-practice-analytics). Claude Fable 5.2 ran the guarded SQL through the database confirm prompt with Giani's yes and read the rows back: each listing matches its review record. The rest of this note is the plan as written before the run.
 
 Why: the weekly link check (`scripts/weekly/run.sh`, step `curate.mjs verify`) stopped with exit 2. Its primary-source audit (`auditPublishedCatalog`, result of 2026-11-16 in `scripts/weekly/logs/catalog-health.json`) listed 24 findings. `clio` and `courtlistener-mcp` are handled on `strict/catalog-import-2026-11-17` (`open-legal-compliance-mcp` was not among the 24). This change covers the other 22 findings. The task brief said 21; the log lists 22 besides those two.
 

@@ -1,6 +1,6 @@
 # Prepared catalog import: three live listing faults (2026-11-16)
 
-Claude Sonnet 5.5, 2026-11-16. PREPARED, NOT RUN. Applying it writes to the production database, so it needs Giani's yes. Nothing in `lib/catalog-reviews.json` changed for these three claims, and no review date moved for them. Until the import runs, the live rows, `lib/catalog-reviews.json` and the build all agree with each other, and the build's catalog artifact check keeps passing.
+Claude Sonnet 5.5, 2026-11-16. APPLIED 2026-11-21 14:08 UTC as import 1 (clio, courtlistener-mcp, open-legal-compliance-mcp). Claude Fable 5.2 ran the guarded SQL through the database confirm prompt with Giani's yes and read the rows back: each listing matches its review record. The rest of this note is the plan as written before the run. Nothing in `lib/catalog-reviews.json` changed for these three claims, and no review date moved for them. Until the import runs, the live rows, `lib/catalog-reviews.json` and the build all agree with each other, and the build's catalog artifact check keeps passing.
 
 ## Files
 - `scripts/catalog-dead-sources-2026-11-16.json`: the import plan. Same format as `scripts/catalog-firecrawl-alexandria-url.json`. Each item binds the row `id`, `expected_status`, `expected_claims` (the live row, read 2026-11-16 with the public anon key, identical to the approved review) and the new `listing`.
@@ -56,7 +56,7 @@ Backing (Clio help center articles, fetched as `/api/v2/help_center/en-us/articl
 One line: send `docs/changes/2026-11-16-catalog-import-rollback.sql` through the same Management API call the importer uses (it is the importer's own SQL, one transaction, and refuses to run unless the three rows still hold the new claims), then `git revert` the commit that applied the review records. Rolling back through the importer itself is not possible: the old Clio and CourtListener review records cite sources that now return 404, so the gate would refuse them. The SQL path writes the old review evidence back into the ledger without re-fetching.
 
 ## Improve queue lines (also in `scripts/weekly/logs/improve-queue.md`, which is git-ignored)
-- courtlistener-mcp: pricing text and MCP repository link are stale; prepared import `scripts/catalog-dead-sources-2026-11-16.json`, waits for Giani's yes.
+- courtlistener-mcp: pricing text and MCP repository link are stale; prepared import `scripts/catalog-dead-sources-2026-11-16.json`, applied 2026-11-21 in import 1.
 - open-legal-compliance-mcp: creator owner renamed to TCoder920, creator_url 404; same import.
 - clio: description says "recommendations for ... bills", vendor term is "draft invoices"; same import.
 

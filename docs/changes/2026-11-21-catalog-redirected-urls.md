@@ -1,6 +1,6 @@
 # Two listings: redirected link targets (import 3, 2026-11-21)
 
-Claude Sonnet 5.5, 2026-11-21, checked by Claude Fable 5.2. The owner approved these changes. PREPARED, NOT APPLIED. The SQL writes to the production database, so a person with credentials runs it.
+Claude Sonnet 5.5, 2026-11-21, checked by Claude Fable 5.2. The owner approved these changes. APPLIED 2026-11-21 14:15 UTC as import 3 (firecrawl-gov-index, supabase-legal-mcp). Claude Fable 5.2 ran the guarded SQL through the database confirm prompt with Giani's yes and read the rows back: each listing matches its review record.
 
 Two published listings link to addresses that now redirect. Each change was checked against the live redirect today. No other word of either listing changes.
 

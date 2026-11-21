@@ -1,6 +1,6 @@
 # Catalog import made ready to run (2026-11-17)
 
-Claude Sonnet 5.5, 2026-11-17. PREPARED, NOT RUN. Nothing was written to the production database, and the importer was not run with `--apply`. Applying it still needs Giani's yes.
+Claude Sonnet 5.5, 2026-11-17. APPLIED 2026-11-21 14:08 UTC as import 1 (clio, courtlistener-mcp, open-legal-compliance-mcp). Claude Fable 5.2 ran the guarded SQL through the database confirm prompt with Giani's yes and read the rows back: each listing matches its review record. The importer script was not used. The rest of this note is the plan as written before the run.
 
 Why: a read-only pre-check of the 2026-11-16 import (`docs/changes/2026-11-16-catalog-import-prep.md`) found three gaps. This change closes them.
 
@@ -30,4 +30,4 @@ Merged (above). `validateImport(plan, gate, {checkSources: true})` from the impo
 The merged CourtListener work (PR #32) points the source at the `courtlistener-mcp` repo README, and the 11-16 change note records an earlier wiki-page pass whose "stale" verdict was reversed at rebase. Read today: the README says "Accounts are free for individuals", documents an API-token credential for clients that cannot run OAuth, and says "Usage is bounded by CourtListener's API rate limits". The wiki page is silent on free accounts and tokens and does not contradict them. So both phrases ("free individual accounts", API-token authentication) are supported by the README and stay.
 
 ## SQL
-Forward and rollback SQL, matched to these records, are in the scratchpad (`legalaimcp-catalog-forward.sql`, `legalaimcp-catalog-rollback.sql`). Not run.
+Forward and rollback SQL, matched to these records, were in the scratchpad (`legalaimcp-catalog-forward.sql`, `legalaimcp-catalog-rollback.sql`). The copy that ran on 2026-11-21, with its rollback, is kept in the owner's ops repo under `docs/ops/legalaimcp-import-2026-11-17/`.
