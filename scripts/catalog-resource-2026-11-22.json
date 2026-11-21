@@ -35,7 +35,7 @@
       "mcp_repo_url": "https://github.com/SylphxAI/anymd",
       "mcp_install_command": null,
       "pricing_model": "freemium",
-      "pricing_details": "MIT-licensed local server and CLI, free to use with no API key. The maintainer also sells an optional anymd Pro licence for US$29, one payment, which adds PDF cite_check and video timelines. Confirm current price and terms on the maintainer's pricing page.",
+      "pricing_details": "MIT-licensed local server and CLI, free to use with no API key. The maintainer also sells an optional anymd Pro license for US$29, one payment, which adds PDF cite_check and video timelines. Confirm current price and terms on the maintainer's pricing page.",
       "tags": [
         "pdf",
         "document-extraction",

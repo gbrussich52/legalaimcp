@@ -1399,7 +1399,7 @@
           "quote": "US$29, one payment. No subscription, no account."
         }
       ],
-      "listing_sha256": "69e6c8b19968805179c479a261533dff8503c91f8a3f7d4312ad75abcd8c75b9",
+      "listing_sha256": "6290949a508c4b02afb803851b322de21d23ca7785c9121588cf48de77266d18",
       "claims": {
         "slug": "pdf-reader-mcp",
         "name": "anymd (formerly PDF Reader MCP)",
@@ -1410,7 +1410,7 @@
         "mcp_repo_url": "https://github.com/SylphxAI/anymd",
         "mcp_install_command": null,
         "pricing_model": "freemium",
-        "pricing_details": "MIT-licensed local server and CLI, free to use with no API key. The maintainer also sells an optional anymd Pro licence for US$29, one payment, which adds PDF cite_check and video timelines. Confirm current price and terms on the maintainer's pricing page.",
+        "pricing_details": "MIT-licensed local server and CLI, free to use with no API key. The maintainer also sells an optional anymd Pro license for US$29, one payment, which adds PDF cite_check and video timelines. Confirm current price and terms on the maintainer's pricing page.",
         "tags": [
           "pdf",
           "document-extraction",
