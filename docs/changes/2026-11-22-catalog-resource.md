@@ -35,12 +35,14 @@ Source: https://raw.githubusercontent.com/SylphxAI/anymd/HEAD/README.md (hash `1
 | Field | Before | After | Supporting line |
 | --- | --- | --- | --- |
 | pricing_model | free | freemium | "The core stays free and MIT licensed, and nothing that was free has moved to Pro." and "US$29, one payment. No subscription, no account." |
-| pricing_details | MIT-licensed local server/CLI. Maintainer also offers a separately hosted, metered parsing service; confirm any hosted or optional-model costs. | MIT-licensed local server and CLI, free to use with no API key. The maintainer also sells an optional anymd Pro license for US$29, one payment, which adds PDF cite_check and video timelines. Confirm current price and terms on the maintainer's pricing page. | README: "A fast Rust MCP server and CLI that runs on your machine. No API key."; "Pro adds two tools ... PDF `cite_check`" and video timelines |
+| pricing_details | MIT-licensed local server/CLI. Maintainer also offers a separately hosted, metered parsing service; confirm any hosted or optional-model costs. | MIT-licensed local server and CLI, free to use with no API key. The maintainer's README also describes an optional anymd Pro license for US$29, one payment, which adds PDF cite_check and video timelines. Confirm current price and terms with the maintainer. | README: "A fast Rust MCP server and CLI that runs on your machine. No API key."; "Pro adds two tools ... PDF `cite_check`" and video timelines |
 | description | ... Documentation reviewed on October 27, 2026; ... | ... Documentation reviewed on November 21, 2026; ... | Date of this re-read. No other word changes. |
+
+The pricing page the README links (anymd.sylphx.com/pricing) answered 404 on 2026-11-21 in curl and in Chrome, so the listing cites the README and sends readers to the maintainer, not to that page.
 
 Why: the README no longer mentions a hosted or metered service. `freemium` is a value the database enum already allows (`free`, `freemium`, `paid`, `contact`) and the catalog uses it for a free core plus a paid option (for example german-law-mcp).
 
-Review record: `listing_sha256` is now `6290949a508c4b02afb803851b322de21d23ca7785c9121588cf48de77266d18` (computed with `catalogFingerprint`), reviewer "Claude Sonnet 5.5 primary-source re-read on November 21, 2026, checked by Claude Fable 5.2", reviewed_at 2026-11-21. Three sources on the same README: the rename line, the free MIT core line, the US$29 line.
+Review record: `listing_sha256` is now `08d6bea6e1517f67cc7e3953188be89f333a3c2cb2f282db3b50a973fc9c239c` (computed with `catalogFingerprint`), reviewer "Claude Sonnet 5.5 primary-source re-read on November 21, 2026, checked by Claude Fable 5.2", reviewed_at 2026-11-21. Three sources on the same README: the rename line, the free MIT core line, the US$29 line.
 
 Open point for the director: the description says the project is "not a legal-analysis or citation-verification system". Pro adds `cite_check`, which checks that a quote appears on a cited PDF page. That is quote location, not legal citation checking, so the sentence was left alone.
 
