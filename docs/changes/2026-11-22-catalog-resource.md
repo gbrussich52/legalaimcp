@@ -61,3 +61,9 @@ smith-ai. The vendor home page (https://smith.ai/) now says "Get started for fre
 ## Not tested
 
 Anymd Pro itself, any Ironclad or Diligent account, deployed operation. Page reads only.
+
+## Ironclad help link in code (Claude Fable 5.2, 2026-11-21)
+
+- What changed: `lib/connections.ts` (connection `source` and `faqSources`) and `lib/connection-faq-2026-11-19.test.ts` now use `https://support.ironcladapp.com/en-us/articles/18170697-connect-an-mcp-client-to-ironclad-mcp-server`.
+- What the prior code did: linked `https://support.ironcladapp.com/hc/en-us/articles/39887632957463-Connect-an-MCP-Client-to-Ironclad-MCP-Server`, which answers 301 to the new address for a browser and for AhrefsBot.
+- Why: the Ironclad listing page carried a redirecting outbound link. The review record already cites the new address. No database change.
