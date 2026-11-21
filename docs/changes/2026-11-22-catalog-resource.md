@@ -1,6 +1,6 @@
 # Three audit findings: diligent-compliance, ironclad, pdf-reader-mcp (import 4, 2026-11-21)
 
-Claude Sonnet 5.5, 2026-11-21, checked by Claude Fable 5.2. PREPARED, NOT APPLIED. No database was touched. The SQL below has not been parsed by a database.
+Claude Sonnet 5.5, 2026-11-21, checked by Claude Fable 5.2. APPLIED to production 2026-11-21 16:10:06 UTC (import 4, Giani's database confirm). Read back the same minute: published, pricing `freemium`, the new text, three sources, row matches its review record. diligent-compliance and ironclad needed no database change.
 
 Stacked on `strict/catalog-import-2026-11-21` (`69b67c2`). Goal: the Monday 2026-11-23 audit finds 0 problems in 42 listings.
 
@@ -12,7 +12,7 @@ Every vendor page was read again on 2026-11-21 with the repo's own `sourceFinger
 | --- | --- | --- |
 | diligent-compliance | Source only. Every claim still holds. | None |
 | ironclad | Source only. Every claim still holds. | None |
-| pdf-reader-mcp | Claim change (pricing). | forward-4.sql, PREPARED, NOT APPLIED |
+| pdf-reader-mcp | Claim change (pricing). | forward-4.sql, APPLIED 2026-11-21 16:10:06 UTC |
 
 ## diligent-compliance (source only)
 
@@ -52,7 +52,7 @@ smith-ai. The vendor home page (https://smith.ai/) now says "Get started for fre
 
 ## How it is applied
 
-1. SQL: `forward-4.sql` (rollback `rollback-4.sql`, read-only pre-check `guard-4.sql`) in `docs/ops/legalaimcp-import-2026-11-17/`. PREPARED, NOT APPLIED. Importer equivalent: `node --env-file=.env.local scripts/import-reviewed-catalog.mjs scripts/catalog-resource-2026-11-22.json` from this branch. Plan file: `scripts/catalog-resource-2026-11-22.json`.
+1. SQL: `forward-4.sql` (rollback `rollback-4.sql`, read-only pre-check `guard-4.sql`) in `docs/ops/legalaimcp-import-2026-11-17/`. APPLIED 2026-11-21 16:10:06 UTC through the Supabase connector; do not run it again (its guards would refuse). Importer equivalent: `node --env-file=.env.local scripts/import-reviewed-catalog.mjs scripts/catalog-resource-2026-11-22.json` from this branch. Plan file: `scripts/catalog-resource-2026-11-22.json`.
 2. diligent-compliance and ironclad need no database write. Their ledger rows keep the older evidence, as the 12 source-only records of import 3 did.
 3. Read the target back, then run `npm run build` and `npm run catalog:verify`. Build waits on the SQL because its post-build check reads live rows.
 
