@@ -1,4 +1,4 @@
-import { SITE_NAME, SITE_URL, NYCLAW_URL, SITE_LAST_MODIFIED } from '@/lib/constants'
+import { SITE_NAME, SITE_URL, NYCLAW_URL, SITE_LAST_MODIFIED, BEST_ROUNDUP_PUBLISHED, BEST_ROUNDUP_MODIFIED } from '@/lib/constants'
 import type { Listing } from '@/lib/types'
 import { toJsonLd } from '@/lib/json-ld'
 import { softwareAppSchema } from '@/lib/software-schema'
@@ -187,6 +187,32 @@ export function BreadcrumbJsonLd({
       name: item.name,
       item: `${SITE_URL}${item.path}`,
     })),
+  }
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: toJsonLd(schema) }}
+    />
+  )
+}
+
+/**
+ * Article schema for the dated /best roundups.
+ * Claude Sonnet 5.5, 2026-11-19: Ahrefs flagged these pages as articles without Article schema. Dates come from
+ * lib/constants.ts (real git and sitemap dates). The site publishes them, so the publisher is the site's own Organization
+ * (same @id as OrganizationJsonLd). No author is named because the repo records none; no rating or review is added.
+ */
+export function RoundupArticleJsonLd({ headline, description, path }: { headline: string; description: string; path: string }) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline,
+    description,
+    mainEntityOfPage: `${SITE_URL}${path}`,
+    datePublished: BEST_ROUNDUP_PUBLISHED,
+    dateModified: BEST_ROUNDUP_MODIFIED,
+    publisher: { '@type': 'Organization', '@id': `${SITE_URL}/#organization`, name: SITE_NAME, url: SITE_URL },
   }
 
   return (

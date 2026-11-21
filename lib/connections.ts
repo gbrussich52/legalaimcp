@@ -53,6 +53,50 @@ export const SOFTWARE_CONNECTIONS: readonly SoftwareConnection[] = [
     source: 'https://docs.imanage.com/ai/mcpserver-user-help/en-US/Adding_MCP_connectors_for_Claude.html',
     sourceLabel: 'iManage connector documentation',
     reviewed: '2026-10-28',
+    // Grok Bot (Crack Bot), 2026-11-19, why: "imanage mcp" style queries land on a listing page with no answer-first
+    // copy or FAQ markup. Every line below was read today (2026-11-19) in iManage's MCP Server user help:
+    // Adding_MCP_connectors_for_Claude.html ("ensure that the iManage MCP Control Center Extension and iManage MCP
+    // Service applications are added in iManage Control Center"; "For Team and Enterprise plans, your administrator
+    // needs to enable the connector"; "Currently, only read permissions are available and selected by default";
+    // "To add custom MCP connectors, you need a paid subscription to Claude"; "the available tools depend on what your
+    // administrator has configured"), Adding_iManage_connectors_for_MCP-enabled_clients.html (iManage Work, Tracker,
+    // MCP Search and Insight+; "can be used with any MCP-enabled client"; Claude, ChatGPT and Microsoft Copilot Studio
+    // sections) and Tools_available_for_each_MCP_connector.html ("1 million character limit for each document or
+    // email"; "A maximum/total of 500 results are returned, with 100 results displayed per page by default").
+    serverName: 'the iManage MCP server',
+    lead: 'iManage documents its own MCP connectors for iManage Work. They let an AI assistant such as Claude search and work with documents, emails, workspaces and folders in iManage Work. The MCP applications must first be added in iManage Control Center, and the Claude connector starts with read permissions only.',
+    faqs: [
+      {
+        q: 'Does iManage have an MCP server?',
+        a: 'Yes. iManage documents four MCP connectors: iManage Work for documents, workspaces and folders; iManage Tracker for tasks and checklists; iManage MCP Search for plain-language search; and iManage Insight+ for knowledge management and expert discovery. iManage says they work with any MCP-enabled client.',
+      },
+      {
+        q: 'How do I connect iManage Work to Claude?',
+        a: 'In Claude, open the connector directory, search for iManage Work, choose Connect and sign in with your iManage Work account, then select Authorize. On Claude Team and Enterprise plans an administrator must enable the connector first. Adding an iManage connector by URL as a custom connector needs a paid Claude plan.',
+      },
+      {
+        q: 'What needs to be set up in iManage first?',
+        a: 'The iManage MCP Control Center Extension and the iManage MCP Service applications must be added in iManage Control Center. iManage says the connector cannot connect without them. The administrator also decides which tools each MCP client may use.',
+      },
+      {
+        q: 'Can Claude change or delete documents in iManage?',
+        a: 'iManage says only read permissions are available and selected by default when you authorize the Claude connector. The tools you get still depend on what your administrator has configured, so read the authorization screen before you approve.',
+      },
+      {
+        q: 'Can I use the iManage connectors with ChatGPT or Microsoft Copilot?',
+        a: 'iManage publishes setup steps for Claude, ChatGPT and Microsoft Copilot Studio, and says the connectors work with any MCP-enabled client. Check your firm\'s AI policy and the provider agreement before you connect client files.',
+      },
+      {
+        q: 'Are there limits on what the AI can read?',
+        a: 'Yes. iManage MCP Server reads up to 1 million characters of each document or email, the same limit iManage Work uses for indexing. For an email, the limit covers the email and its attachments together. Some iManage Work search and list tools return up to 500 results, 100 per page by default.',
+      },
+    ],
+    faqSources: [
+      { label: 'iManage: Adding MCP connectors for Claude', url: 'https://docs.imanage.com/ai/mcpserver-user-help/en-US/Adding_MCP_connectors_for_Claude.html' },
+      { label: 'iManage: connectors for MCP-enabled clients', url: 'https://docs.imanage.com/ai/mcpserver-user-help/en-US/Adding_iManage_connectors_for_MCP-enabled_clients.html' },
+      { label: 'iManage: tools for each MCP connector', url: 'https://docs.imanage.com/ai/mcpserver-user-help/en-US/Tools_available_for_each_MCP_connector.html' },
+    ],
+    faqsChecked: '2026-11-19',
   },
   {
     slugs: ['courtlistener-mcp'],
@@ -129,6 +173,39 @@ export const SOFTWARE_CONNECTIONS: readonly SoftwareConnection[] = [
     source: 'https://support.ironcladapp.com/hc/en-us/articles/39887632957463-Connect-an-MCP-Client-to-Ironclad-MCP-Server',
     sourceLabel: 'Ironclad connection instructions',
     reviewed: '2026-10-27',
+    // Grok Bot (Crack Bot), 2026-11-19, why: "ironclad mcp" style queries land on a listing page with no answer-first
+    // copy or FAQ markup. Every line below was read today (2026-11-19) in Ironclad's help article "Connect an MCP Client
+    // to Ironclad MCP Server" (updated 2026-09-30): Features "API, Search"; "complies with whatever user and group
+    // permissions are associated with your Ironclad user account"; server URLs for NA1, EU1 and Demo / sandbox;
+    // conversational_search "is read-only, supporting search only and never creating, editing, or deleting data";
+    // create_obligation ... update_obligation "requires the Obligations add-on"; "A tool is usable only if both are
+    // true"; "You must reconnect to the MCP server before using any new tool"; Claude.ai and Claude Code steps.
+    serverName: 'the Ironclad MCP server',
+    lead: 'The Ironclad MCP server is Ironclad\'s own Model Context Protocol server. It lets an AI assistant such as Claude search your Ironclad contracts in plain language and, with the Obligations add-on, create, read and update contract obligations. It only returns records your Ironclad user account is allowed to see.',
+    faqs: [
+      {
+        q: 'What can the Ironclad MCP server do?',
+        a: 'Ironclad documents two groups of tools. Conversational search runs plain-language contract searches, such as NDAs governed by California law that expire in the next 12 months. Obligation tools create, read, list and update contractual obligations tied to Ironclad records.',
+      },
+      {
+        q: 'How do I connect Claude to Ironclad?',
+        a: 'Add an HTTP MCP connector in Claude and paste the server URL for your Ironclad environment: https://mcp.na1.ironcladapp.com/mcp for NA1 or https://mcp.eu1.ironcladapp.com/mcp for EU1. Choose Connect, log in to Ironclad and approve the requested scopes. In Claude Code, add it with claude mcp add --transport http and finish the sign-in in your browser.',
+      },
+      {
+        q: 'Is the Ironclad MCP server read-only?',
+        a: 'Not all of it. Ironclad says conversational search is read-only and never creates, edits or deletes data. The obligation tools can create and update obligations and need the Obligations add-on. Approve only the scopes you need.',
+      },
+      {
+        q: 'Why does a tool show up but not work?',
+        a: 'Ironclad says a tool works only when your current session granted the scopes it needs and your MCP client supports it. A tool can be enabled for your company and still fail. Reconnect to the server before you use a tool for the first time.',
+      },
+      {
+        q: 'Can it see contracts I cannot open in Ironclad?',
+        a: 'No. Ironclad says the MCP server follows the user and group permissions on your Ironclad account, and search returns only results you are allowed to access.',
+      },
+    ],
+    faqSources: [{ label: 'Ironclad: Connect an MCP Client to Ironclad MCP Server', url: 'https://support.ironcladapp.com/hc/en-us/articles/39887632957463-Connect-an-MCP-Client-to-Ironclad-MCP-Server' }],
+    faqsChecked: '2026-11-19',
   },
   {
     slugs: ['clio', 'clio-matter-manager'],
