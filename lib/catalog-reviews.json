@@ -181,7 +181,7 @@
         {
           "url": "https://claude.com/pricing",
           "kind": "vendor",
-          "sha256": "43504f904fc82fc7bab225a13d06edc77c1fc5ed0ec98e12d8e80325081ea6cb",
+          "sha256": "5531767ab63ac8b8fab1ec7ac4c398d3472e845aa7b1a9744460053ef0e82739",
           "quote": "Free for everyone"
         }
       ],
@@ -320,7 +320,7 @@
         {
           "url": "https://legal.thomsonreuters.com/en/products/cocounsel-legal",
           "kind": "vendor",
-          "sha256": "0bf114ec910377dc2009927cec8a269462dbbb42f59bcfd45e3b898db3a8c5aa",
+          "sha256": "f8782d119433ddd7d345914ac3d7b6c0c27b3388e0fbfb09cf0d7747c4b29b30",
           "quote": "Integrate research, analysis, and drafting with professional-grade AI grounded in trusted Westlaw and Practical Law content."
         }
       ],
@@ -360,7 +360,7 @@
         {
           "url": "https://docs.composio.dev/docs/single-toolkit-mcp.md",
           "kind": "vendor",
-          "sha256": "70cd69661380c35d1aca28b9d43accdbe0bb70f421d09ec628114d4b37f04b37",
+          "sha256": "3f838026b59a90a1d877311f25e3945d0c0006db964697bb73e998d5198628de",
           "quote": "Users must authenticate with the toolkits configured in your MCP server first."
         }
       ],
@@ -481,25 +481,25 @@
         {
           "url": "https://raw.githubusercontent.com/freelawproject/courtlistener-mcp/main/MCP_README.md",
           "kind": "maintainer",
-          "sha256": "a27c920519c25c1cfe4ec3be7b143dbecc4175eed562c109761db68a11edd442",
+          "sha256": "acf4f6da3671e775948f637c7b200a138ffcace9dc9e922bd7fdd278ff5355cd",
           "quote": "Search U.S. case law, dockets, judges, and oral arguments; extract and verify legal citations; and manage alerts"
         },
         {
           "url": "https://raw.githubusercontent.com/freelawproject/courtlistener-mcp/main/MCP_README.md",
           "kind": "maintainer",
-          "sha256": "a27c920519c25c1cfe4ec3be7b143dbecc4175eed562c109761db68a11edd442",
+          "sha256": "acf4f6da3671e775948f637c7b200a138ffcace9dc9e922bd7fdd278ff5355cd",
           "quote": "Accounts are free for individuals"
         },
         {
           "url": "https://raw.githubusercontent.com/freelawproject/courtlistener-mcp/main/MCP_README.md",
           "kind": "maintainer",
-          "sha256": "a27c920519c25c1cfe4ec3be7b143dbecc4175eed562c109761db68a11edd442",
+          "sha256": "acf4f6da3671e775948f637c7b200a138ffcace9dc9e922bd7fdd278ff5355cd",
           "quote": "Usage is bounded by CourtListener's API rate limits"
         },
         {
           "url": "https://raw.githubusercontent.com/freelawproject/courtlistener-mcp/main/MCP_README.md",
           "kind": "maintainer",
-          "sha256": "a27c920519c25c1cfe4ec3be7b143dbecc4175eed562c109761db68a11edd442",
+          "sha256": "acf4f6da3671e775948f637c7b200a138ffcace9dc9e922bd7fdd278ff5355cd",
           "quote": "Nothing is charged to you, but fulfillment isn't immediate or guaranteed."
         }
       ],
@@ -613,8 +613,8 @@
     {
       "slug": "firecrawl-gov-index",
       "decision": "approved",
-      "reviewed_at": "2026-11-17",
-      "reviewer": "Claude Sonnet 5.5 re-review of changed sources against re-read primary sources",
+      "reviewed_at": "2026-11-21",
+      "reviewer": "Claude Sonnet 5.5 primary-source re-read on November 21, 2026, checked by Claude Fable 5.2",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": true,
@@ -622,7 +622,7 @@
         {
           "url": "https://www.firecrawl.dev/gov-index",
           "kind": "vendor",
-          "sha256": "2f2d55d0d0c86a866d5d7e0f1a48e4e6d134b6bc1542abdb9c5ed1b8706703c1",
+          "sha256": "5efbf21be2afc5c6fbde2a1809b42443fa475fdfc8754da3fccc9ff099569ce8",
           "quote": "Call GET or POST /v2/search/gov, use firecrawl_gov_search in the Firecrawl MCP server"
         },
         {
@@ -638,14 +638,14 @@
           "quote": "No account or key. Search, Scrape, and Parse within daily limits."
         }
       ],
-      "listing_sha256": "072dce311fad1850d6827b1c2867d0f64b44853a91fc517a6a413e498200185e",
+      "listing_sha256": "a4648469762b0cc0df4ef3a4a848c5b4c9592d367e98b4664d3e016cf0300293",
       "claims": {
         "slug": "firecrawl-gov-index",
         "name": "Firecrawl Government & Legal Index",
         "tagline": "Search an index of U.S. government and legal sources for AI-assisted research.",
         "description": "Firecrawl's Government & Legal Index searches government and legal sources including statutes, regulations and court opinions, with source links. The vendor documents public search API routes, the firecrawl_gov_search tool in its MCP server, CLI and SDK access, and AI-assistant connectors. Index search is described as credit-free; connector setup and usage limits have separate requirements. Verify the underlying issuer, jurisdiction, effective date and text before relying on a result. Documentation reviewed; this audit did not test account access or search completeness.",
         "category": "legal_research",
-        "external_url": "https://alexandria.firecrawl.dev/firecrawl-gov-index",
+        "external_url": "https://alexandria.firecrawl.dev/providers/firecrawl-gov-index",
         "mcp_repo_url": null,
         "mcp_install_command": null,
         "pricing_model": "free",
@@ -805,7 +805,7 @@
         {
           "url": "https://www.harvey.ai/",
           "kind": "vendor",
-          "sha256": "992b959a5884b72766f05be8a8a6986065c43383b34b026772bc8a531e37be6f",
+          "sha256": "cfb66194a32eba3d3c213751aed9e100484614ca920e6c124dc5c61243a6faae",
           "quote": "Organize thousands of documents in one secure place, then extract the insights that matter with a single query."
         }
       ],
@@ -892,7 +892,7 @@
         {
           "url": "https://imanage.com/imanage-products/document-email-management/work/",
           "kind": "vendor",
-          "sha256": "5f83d6b6e473cd2754550dcc4626058525da85dce5ad3516f7299bfd7019b4ed",
+          "sha256": "4d346fa8e82f7bca58c5447f9c37044005a7f91edc70d18445cb31b7287dcf97",
           "quote": "Yes, iManage includes the industry-leading email management solution"
         }
       ],
@@ -933,7 +933,7 @@
         {
           "url": "https://www.invoicemyclients.com/features/mcp-server",
           "kind": "vendor",
-          "sha256": "9957209b9a6d36cf9f3641a7bcf27cbecb35cfa8fb8a3a396f27767c8eda3084",
+          "sha256": "ce1257299ab2800370050c9999c9a0a927a219dc4b79c33a5d1443e45538c39e",
           "quote": "Create draft invoices, add line items, and change tax, discounts, and shipping by asking your assistant in plain language."
         }
       ],
@@ -1019,7 +1019,7 @@
         {
           "url": "https://www.litera.com/capabilities/review",
           "kind": "vendor",
-          "sha256": "af8e8c66f8803fa9f7ecf975dd44a35682d2eaf4e960251d996c816b88df690d",
+          "sha256": "fe9cc3689c348d764c2017e0804a2843a64adfc151fb42fbbcec26905641c336",
           "quote": "Kira Purpose-built for high-volume, high-stakes review and due diligence."
         }
       ],
@@ -1177,13 +1177,13 @@
         {
           "url": "https://www.luminance.com/",
           "kind": "vendor",
-          "sha256": "a7e040f0173d4ecf157573908e5066e5b58873fbc5536858e8630c6fb42a4649",
+          "sha256": "3249a9666bb041a334285ee177924df4f899ae4b0b718287f11eba655afdcdb0",
           "quote": "Bring precedent and playbooks into every negotiation."
         },
         {
           "url": "https://www.luminance.com/platform/technology",
           "kind": "vendor",
-          "sha256": "5b6e4534019f7da6c06eb4e751d0915826b29f151525b1d354eb6addde6f0243",
+          "sha256": "e39d4f09897b499726922976f33da527244f9762451ed8027c0aa1f0b2baec46",
           "quote": "This foundation powers AI agents that orchestrate multi-step contract work at scale, automating repeatable tasks while maintaining control."
         }
       ],
@@ -1424,7 +1424,7 @@
         {
           "url": "https://1102tools.com/mcp/regulations-gov",
           "kind": "vendor",
-          "sha256": "02f7442400974355f002a7900c30e1e77513b683936f948777adbaca0a3c3d24",
+          "sha256": "bf9b7532ef3d067d89757cbfa212610ced5dd798c82f0c565c1a5ff864ce1a87",
           "quote": "Rulemaking dockets, documents, and public comments."
         }
       ],
@@ -1465,7 +1465,7 @@
         {
           "url": "https://www.relativity.com/",
           "kind": "vendor",
-          "sha256": "116e2f7fa0935acf76e7cb04247556a76afafe2ce9a43e8617d9a13d0b7abf8c",
+          "sha256": "5da63456d79bebd273fcdff15f7fcffdeff965d483c14204b590c1607622c6f0",
           "quote": "e-Discovery Manage end-to-end litigation &ndash; collect, process, review, and produce in one place."
         }
       ],
@@ -1570,7 +1570,7 @@
         {
           "url": "https://smith.ai/",
           "kind": "vendor",
-          "sha256": "3d39ab63301db69461bf26ed1f2de44f014f6830858eb39266f3553b05f0a9f5",
+          "sha256": "1e972e43dd958c93991b79acfc0411b9e7d7b977060aedfb2f80480211217682",
           "quote": "Our unique hybrid solution gives you the best of both worlds."
         }
       ],
@@ -1641,26 +1641,26 @@
     {
       "slug": "supabase-legal-mcp",
       "decision": "approved",
-      "reviewed_at": "2026-11-17",
-      "reviewer": "Claude Sonnet 5.5 re-review of changed sources against re-read primary sources",
+      "reviewed_at": "2026-11-21",
+      "reviewer": "Claude Sonnet 5.5 primary-source re-read on November 21, 2026, checked by Claude Fable 5.2",
       "identity_confirmed": true,
       "capabilities_confirmed": true,
       "mcp_confirmed": true,
       "sources": [
         {
-          "url": "https://raw.githubusercontent.com/supabase-community/supabase-mcp/HEAD/README.md",
+          "url": "https://raw.githubusercontent.com/supabase/mcp/HEAD/README.md",
           "kind": "maintainer",
-          "sha256": "054ee5224ed78e8918ed73ac44f02bc10224b92cde881133d6e21429d8dceb17",
+          "sha256": "18bdbb7df4c790d28e4a53ca16a71e6e07a97f13e29caf64277c89ec890b495e",
           "quote": "It connects AI assistants directly with your Supabase project and allows them to perform tasks like managing tables, fetching config, and querying data."
         },
         {
           "url": "https://supabase.com/docs/guides/ai-tools/mcp",
           "kind": "vendor",
-          "sha256": "7dc43dd5876fa4317cc5a25ef952e43fdbe583311ee1173228f2ff03dfab0436",
+          "sha256": "ad1728633606f81786a4fb755bd025dd08f7af571544da5e75814d675628a15d",
           "quote": "Scope the MCP server to a project. If no project is selected, all projects will be accessible."
         }
       ],
-      "listing_sha256": "fa58280ac951c6c23af61f591f24865e446dc128ad9dbcf240e5637da1226689",
+      "listing_sha256": "f747843929091fd72e2865322564ca8102d0c2dfd9a9f4ef8121e2f1053ee2aa",
       "claims": {
         "slug": "supabase-legal-mcp",
         "name": "Supabase MCP Server",
@@ -1668,7 +1668,7 @@
         "description": "Supabase’s official MCP server connects AI assistants to Supabase projects for database queries, schema/migration work and other enabled developer tools. It is general development tooling, not a legal database template or a client-permission-aware legal application. Project scoping, optional read-only mode and feature selection constrain access; write tools exist outside read-only configuration. Review Supabase’s security guidance before connecting company data. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
         "category": "general",
         "external_url": "https://supabase.com/docs/guides/ai-tools/mcp",
-        "mcp_repo_url": "https://github.com/supabase-community/supabase-mcp",
+        "mcp_repo_url": "https://github.com/supabase/mcp",
         "mcp_install_command": null,
         "pricing_model": "contact",
         "pricing_details": "Server code is open source; Supabase hosting/features, client subscriptions and operational costs are separate. Some tools create paid resources. Confirm current vendor plans.",

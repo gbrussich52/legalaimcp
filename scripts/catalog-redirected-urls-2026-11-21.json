@@ -1,0 +1,106 @@
+[
+  {
+    "id": "d51149a3-5914-428c-8409-813fe0e7023d",
+    "expected_status": "published",
+    "expected_claims": {
+      "slug": "firecrawl-gov-index",
+      "name": "Firecrawl Government & Legal Index",
+      "tagline": "Search an index of U.S. government and legal sources for AI-assisted research.",
+      "description": "Firecrawl's Government & Legal Index searches government and legal sources including statutes, regulations and court opinions, with source links. The vendor documents public search API routes, the firecrawl_gov_search tool in its MCP server, CLI and SDK access, and AI-assistant connectors. Index search is described as credit-free; connector setup and usage limits have separate requirements. Verify the underlying issuer, jurisdiction, effective date and text before relying on a result. Documentation reviewed; this audit did not test account access or search completeness.",
+      "category": "legal_research",
+      "external_url": "https://alexandria.firecrawl.dev/firecrawl-gov-index",
+      "mcp_repo_url": null,
+      "mcp_install_command": null,
+      "pricing_model": "free",
+      "pricing_details": "The vendor states index search uses no credits and the API works without a key to start. Its native Claude/ChatGPT connector setup describes a Firecrawl account; other MCP connection paths may differ. Confirm current limits and other service charges.",
+      "tags": [
+        "government-data",
+        "statutes",
+        "regulations",
+        "case-law",
+        "index",
+        "mcp"
+      ],
+      "creator_name": "Firecrawl",
+      "creator_url": "https://www.firecrawl.dev",
+      "logo_url": null,
+      "firm_size_fit": []
+    },
+    "listing": {
+      "slug": "firecrawl-gov-index",
+      "name": "Firecrawl Government & Legal Index",
+      "tagline": "Search an index of U.S. government and legal sources for AI-assisted research.",
+      "description": "Firecrawl's Government & Legal Index searches government and legal sources including statutes, regulations and court opinions, with source links. The vendor documents public search API routes, the firecrawl_gov_search tool in its MCP server, CLI and SDK access, and AI-assistant connectors. Index search is described as credit-free; connector setup and usage limits have separate requirements. Verify the underlying issuer, jurisdiction, effective date and text before relying on a result. Documentation reviewed; this audit did not test account access or search completeness.",
+      "category": "legal_research",
+      "external_url": "https://alexandria.firecrawl.dev/providers/firecrawl-gov-index",
+      "mcp_repo_url": null,
+      "mcp_install_command": null,
+      "pricing_model": "free",
+      "pricing_details": "The vendor states index search uses no credits and the API works without a key to start. Its native Claude/ChatGPT connector setup describes a Firecrawl account; other MCP connection paths may differ. Confirm current limits and other service charges.",
+      "tags": [
+        "government-data",
+        "statutes",
+        "regulations",
+        "case-law",
+        "index",
+        "mcp"
+      ],
+      "creator_name": "Firecrawl",
+      "creator_url": "https://www.firecrawl.dev",
+      "logo_url": null,
+      "firm_size_fit": [],
+      "status": "published"
+    }
+  },
+  {
+    "id": "f8effe4c-c9a4-4ca9-b079-1d809bc6a66b",
+    "expected_status": "published",
+    "expected_claims": {
+      "slug": "supabase-legal-mcp",
+      "name": "Supabase MCP Server",
+      "tagline": "General developer connector for managing and querying Supabase projects.",
+      "description": "Supabase’s official MCP server connects AI assistants to Supabase projects for database queries, schema/migration work and other enabled developer tools. It is general development tooling, not a legal database template or a client-permission-aware legal application. Project scoping, optional read-only mode and feature selection constrain access; write tools exist outside read-only configuration. Review Supabase’s security guidance before connecting company data. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+      "category": "general",
+      "external_url": "https://supabase.com/docs/guides/ai-tools/mcp",
+      "mcp_repo_url": "https://github.com/supabase-community/supabase-mcp",
+      "mcp_install_command": null,
+      "pricing_model": "contact",
+      "pricing_details": "Server code is open source; Supabase hosting/features, client subscriptions and operational costs are separate. Some tools create paid resources. Confirm current vendor plans.",
+      "tags": [
+        "supabase",
+        "database",
+        "developer-tools",
+        "mcp",
+        "general-purpose"
+      ],
+      "creator_name": "Supabase",
+      "creator_url": "https://supabase.com",
+      "logo_url": null,
+      "firm_size_fit": []
+    },
+    "listing": {
+      "slug": "supabase-legal-mcp",
+      "name": "Supabase MCP Server",
+      "tagline": "General developer connector for managing and querying Supabase projects.",
+      "description": "Supabase’s official MCP server connects AI assistants to Supabase projects for database queries, schema/migration work and other enabled developer tools. It is general development tooling, not a legal database template or a client-permission-aware legal application. Project scoping, optional read-only mode and feature selection constrain access; write tools exist outside read-only configuration. Review Supabase’s security guidance before connecting company data. Documentation reviewed on October 27, 2026; customer-account access and deployed operation have not been tested.",
+      "category": "general",
+      "external_url": "https://supabase.com/docs/guides/ai-tools/mcp",
+      "mcp_repo_url": "https://github.com/supabase/mcp",
+      "mcp_install_command": null,
+      "pricing_model": "contact",
+      "pricing_details": "Server code is open source; Supabase hosting/features, client subscriptions and operational costs are separate. Some tools create paid resources. Confirm current vendor plans.",
+      "tags": [
+        "supabase",
+        "database",
+        "developer-tools",
+        "mcp",
+        "general-purpose"
+      ],
+      "creator_name": "Supabase",
+      "creator_url": "https://supabase.com",
+      "logo_url": null,
+      "firm_size_fit": [],
+      "status": "published"
+    }
+  }
+]
