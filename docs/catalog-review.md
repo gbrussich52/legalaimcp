@@ -56,3 +56,17 @@ A fresh primary-source pass flagged nine changed listings. Manual claim-by-claim
 The subsequent read-only source check covered 42 products and 53 primary URLs with zero findings. The strict full-source fingerprint and exact-claim gate remain unchanged. Catalog imports bind the current before-state, validate every source, exercise the transaction with rollback first, and require full readback. These manual checks do not establish that the owner-gated weekly job ran. This entry extends the existing audit history; no schedule, model, or service was added.
 
 The same release updates the supported SDK to1.32.2 and Zod to4.6.7, retaining the existing1.x MCP handler through a scoped peer override proven by HTTP interoperability tests; it avoids an unnecessary SDK2 architecture migration. A scoped compatible selector-parser6.1.5 override removes the typography package’s stale exact pin. Native full-tree audit and peer-resolution checks are clean. The previous iManage shortlist test incorrectly hardcoded October27 after the documented October28 review; its expected evidence date now matches that dated primary-source decision. The catalog cache revision changes so production cannot reuse pre-correction payloads. No security control or source gate is weakened.
+
+## New listings from submissions
+
+Claude Opus 5.5, 2026-11-22. The admin Approve button cannot publish a new listing: it needs a deployed review record, and the build refuses a record whose page does not exist yet. New listings go in through a guarded SQL pack and then a PR, the same way corrections do. Background: `docs/changes/2026-11-22-intake.md`.
+
+1. Review each submission against primary sources and write a plan file outside the repo: `reviewed_at`, `reviewer`, `admit` items (submission ids, final listing, the three confirmations, 1 to 5 sources with verbatim quotes) and `reject` items (submission ids, plain notes).
+2. Check: `node scripts/admit-submissions.mjs PLAN.json`. One PASS or FAIL line per item. It fetches every source the way the gate does and ends with the real `assertCatalogReview`. Fix every FAIL before going on. (`--no-fetch` runs only the static checks.) In the Claude sandbox, prefix `NODE_USE_ENV_PROXY=1` so Node's fetch uses the proxy.
+3. Records: `node scripts/admit-submissions.mjs PLAN.json --write-records`. New records go into `lib/catalog-reviews.json` in slug order. It refuses to overwrite a slug that already has a record.
+4. SQL: `node scripts/admit-submissions.mjs PLAN.json --sql OUT_DIR`. Writes `guard.sql`, `apply.sql`, `apply.rollback.sql` and `readback.sql`, all pure ASCII.
+5. The owner runs `guard.sql` and stops unless every boolean is true. Then `apply.rollback.sql` to exercise the trigger, then `apply.sql`, each through the confirm prompt.
+6. The owner runs `readback.sql` and saves the result as JSON. Verify it: `node scripts/admit-submissions.mjs PLAN.json --verify-readback READBACK.json`.
+7. Bump `CATALOG_CACHE_REVISION` in `lib/supabase.ts`.
+8. `npm test`, then `npm run build`. The build now finds a page for every new record.
+9. Open the PR with the records and the cache bump. Giani's merge ships it.
