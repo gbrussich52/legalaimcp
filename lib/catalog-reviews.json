@@ -1,6 +1,72 @@
 {
   "reviews": [
     {
+      "slug": "ailex-v2",
+      "decision": "approved",
+      "reviewed_at": "2026-11-22",
+      "reviewer": "Claude Fable 5.2 with two independent Claude Sonnet 5.5 source reviews, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://ailex.co.jp/company/",
+          "kind": "vendor",
+          "sha256": "727f8963b9778d34107cdb1628f75dada4d671695f9f03aad4139fbced8cf6ae",
+          "quote": "AILEX合同会社は、法律事務所向けの「検証可能なAIリーガルOS」を提供しています。"
+        },
+        {
+          "url": "https://ailex.co.jp/llms.txt",
+          "kind": "vendor",
+          "sha256": "6a330545ebf4e8b24b5d605132297e7d1b96d0d51020675dc2d6e1f33a77029f",
+          "quote": "AILEX合同会社が提供する、弁護士・法律事務所向けの「検証可能なAIリーガルOS」の公式サイトです。"
+        },
+        {
+          "url": "https://ailex.co.jp/service/",
+          "kind": "vendor",
+          "sha256": "72e9870f91a18c785d7eae2a39b3d1903857574ef7fff501dd88e3c090f8a328",
+          "quote": "外部クライアント向けの MCP サーバー（既定は読み取り専用・管理者が有効にした場合のみ）"
+        },
+        {
+          "url": "https://ailex.co.jp/security-whitepaper/",
+          "kind": "vendor",
+          "sha256": "4fbfacc8fa27a2b9d9c5b41161a528566e3c3ed7271a38816a056734f43ad2db",
+          "quote": "外部連携（MCP）は、利用者が設定画面で発行するトークンで認証します。"
+        },
+        {
+          "url": "https://ailex.co.jp/pricing/",
+          "kind": "vendor",
+          "sha256": "060c16f85317510374ba0e0b77c569a788352807ba4a5fe43a8a85356c80b725",
+          "quote": "1 席 13,200 円／月（税込）で、席ごとに書面 60 回と読み取り 1,000 ページの枠が付き、事務所全体でまとめて使えます"
+        }
+      ],
+      "listing_sha256": "471ba0527733e2922e490719cd0c8342908be369ecc70a97aa08196f630ec12b",
+      "claims": {
+        "slug": "ailex-v2",
+        "name": "AILEX v2",
+        "tagline": "Japanese-language AI practice management and drafting for law firms in Japan",
+        "description": "AILEX v2 is a paid, Japanese-language AI legal operating system from AILEX LLC (AILEX合同会社) of Tokyo, for lawyers and law firms in Japan. The vendor's pages describe case records, AI-assisted drafts of court documents, and preparation of filing packages for Japan's mints court e-filing system. Lawyers review the output and file with the court themselves, since the vendor states AILEX does not submit to mints. The vendor also documents an MCP server for external AI clients. It is read-only by default, needs a token issued by a user, and works only if a firm administrator enables it. The product targets Japanese legal workflows, not US or worldwide law, and the interface is in Japanese. We did not verify AI accuracy, MCP tool behavior, account behavior or security claims; the vendor says it holds no third-party security certification yet.",
+        "category": "case_management",
+        "external_url": "https://ailex.co.jp/",
+        "mcp_repo_url": "https://app.ailex.co.jp/mcp",
+        "mcp_install_command": null,
+        "pricing_model": "paid",
+        "pricing_details": "JPY 13,200 per seat per month including tax; free for 30 days after sign-up",
+        "tags": [
+          "japan",
+          "japanese",
+          "case management",
+          "court filing",
+          "mcp",
+          "law firm"
+        ],
+        "creator_name": "AILEX LLC (AILEX合同会社)",
+        "creator_url": "https://ailex.co.jp/",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
       "slug": "aws-document-loader-mcp",
       "decision": "approved",
       "reviewed_at": "2026-10-27",
@@ -39,6 +105,66 @@
         ],
         "creator_name": "AWS Labs",
         "creator_url": "https://github.com/awslabs",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "bailii-mcp-server",
+      "decision": "approved",
+      "reviewed_at": "2026-11-22",
+      "reviewer": "Claude Fable 5.2 with two independent Claude Sonnet 5.5 source reviews, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/paulieb89/bailii-mcp/main/LICENSE",
+          "kind": "maintainer",
+          "sha256": "bf55c34bfeff1b02f5e1656c4386eeb800da975e468b735027be18b9397c2a99",
+          "quote": "Copyright 2026 Paul Boucherat"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/paulieb89/bailii-mcp/main/README.md",
+          "kind": "maintainer",
+          "sha256": "a7ff86c7c3da09eaf914225028755739c0766a989c4bebcd2e2b671c26857a6c",
+          "quote": "Search UK case law on BAILII. Retrieve judgments with automatic section extraction (summary, conclusions, discussion, background)."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/paulieb89/bailii-mcp/main/bailii_mcp.py",
+          "kind": "maintainer",
+          "sha256": "fce384cfac154c6474182b7310ee8e3e78546a4f88f2d53cadf125192fbbfe98",
+          "quote": "from fastmcp import FastMCP"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/paulieb89/bailii-mcp/main/pyproject.toml",
+          "kind": "maintainer",
+          "sha256": "a348cbc9413368c09db09968c600b791ea788ae849c26e59337e9182748c3c31",
+          "quote": "license = \"Apache-2.0\""
+        }
+      ],
+      "listing_sha256": "0b235cb5a174b6febc96491ddf0ce14211bc043209e59245afda9176b60d48ab",
+      "claims": {
+        "slug": "bailii-mcp-server",
+        "name": "BAILII MCP Server",
+        "tagline": "Open-source local MCP server to search UK court judgments on BAILII and read them by section.",
+        "description": "BAILII MCP Server is an open-source Python MCP server that searches BAILII and retrieves UK court judgments. It has three tools: bailii_search, bailii_get_judgment and bailii_list_courts. By default it returns the summary and conclusions of a judgment, and it can return a named section or the full text on request. It covers UK courts and tribunals on BAILII, such as the Supreme Court, Court of Appeal, High Court and Employment Appeal Tribunal. It runs on your own machine because BAILII blocks cloud servers. The README says BAILII terms prohibit bulk downloading, so use it for targeted research, and that section extraction depends on how each judgment is formatted. It uses the Apache-2.0 license and is maintained by Paul Boucherat of BOUCH. We did not verify the accuracy of search results or section extraction, or whether its use complies with BAILII terms.",
+        "category": "legal_research",
+        "external_url": "https://github.com/paulieb89/bailii-mcp",
+        "mcp_repo_url": "https://github.com/paulieb89/bailii-mcp",
+        "mcp_install_command": null,
+        "pricing_model": "free",
+        "pricing_details": null,
+        "tags": [
+          "uk",
+          "case law",
+          "bailii",
+          "judgments",
+          "open source",
+          "python"
+        ],
+        "creator_name": "Paul Boucherat (BOUCH)",
+        "creator_url": "https://github.com/paulieb89",
         "logo_url": null,
         "firm_size_fit": []
       }
@@ -119,6 +245,71 @@
         ],
         "creator_name": "Vaquill-AI",
         "creator_url": "https://github.com/Vaquill-AI",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "captainlegal",
+      "decision": "approved",
+      "reviewed_at": "2026-11-22",
+      "reviewer": "Claude Fable 5.2 with two independent Claude Sonnet 5.5 source reviews, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://www.captain.legal/us/terms.html",
+          "kind": "vendor",
+          "sha256": "a4782d2e6f518427ae0602fa59ce4ec7fc525114a7023a89711b6a1aff6a1940",
+          "quote": "without restriction or reservation, the entire contractual relationship between Camines LLC"
+        },
+        {
+          "url": "https://mcp.captain.legal/docs/en/",
+          "kind": "vendor",
+          "sha256": "bc9eb3b8b7936d11b01fdff25f0c017ab64bf0e82cc016e126cd20bb69b9f7af",
+          "quote": "Captain.Legal provides legal document templates with encoded, cited checks."
+        },
+        {
+          "url": "https://mcp.captain.legal/docs/en/",
+          "kind": "vendor",
+          "sha256": "bc9eb3b8b7936d11b01fdff25f0c017ab64bf0e82cc016e126cd20bb69b9f7af",
+          "quote": "The official Captain.Legal MCP server gives compatible assistants access to the full qualified catalogue."
+        },
+        {
+          "url": "https://mcp.captain.legal/",
+          "kind": "vendor",
+          "sha256": "9debc0dbfc542063743388be0b0c6434a528390699554bf68d944cb6d93d4335",
+          "quote": "You only pay if you decide to buy the final document, at the same price as on captain.legal."
+        },
+        {
+          "url": "https://www.captain.legal/us/about.html",
+          "kind": "vendor",
+          "sha256": "0b9f1d5b258c48f054e0f6079c666262e3201b289230e0d468f444033392c329",
+          "quote": "Damien Delmotte founded Captain.Legal."
+        }
+      ],
+      "listing_sha256": "56d5c7a61136be33bbd3e26e12b3c12362cc794726cb49df03aa27b1fbd40d17",
+      "claims": {
+        "slug": "captainlegal",
+        "name": "Captain.Legal",
+        "tagline": "Create a legal document in an AI chat: free preview, paid final copy by email",
+        "description": "Captain.Legal is a remote MCP connector for the Captain.Legal document service. An AI assistant searches the catalogue by country, category or keyword, loads the questionnaire for the chosen template, checks the answers against encoded rules that cite their legal basis, and makes a free watermarked PDF preview. The connector and the preview are free and need no API key. The final document costs money, is paid on a captain.legal page and arrives by email. The vendor says the interview follows the language of the conversation and that the catalogue is organised by country. The vendor pages address consumers and businesses and show no law-firm use case. The vendor says it gives no individual legal advice. Not verified by us: legal accuracy of the templates, the rule checks, prices, data handling and security claims, and how the connector behaves in each assistant.",
+        "category": "document_processing",
+        "external_url": "https://mcp.captain.legal/",
+        "mcp_repo_url": "https://mcp.captain.legal/connect/",
+        "mcp_install_command": null,
+        "pricing_model": "freemium",
+        "pricing_details": "The connector is free, and so is the watermarked preview. You only pay if you decide to buy the final document, at the same price as on captain.legal.",
+        "tags": [
+          "legal-documents",
+          "templates",
+          "contracts",
+          "consumer",
+          "remote-mcp"
+        ],
+        "creator_name": "Camines LLC (Captain.Legal)",
+        "creator_url": "https://www.captain.legal/",
         "logo_url": null,
         "firm_size_fit": []
       }
@@ -430,6 +621,72 @@
       }
     },
     {
+      "slug": "court-rules",
+      "decision": "approved",
+      "reviewed_at": "2026-11-22",
+      "reviewer": "Claude Fable 5.2 with two independent Claude Sonnet 5.5 source reviews, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://www.courtrules.app/terms",
+          "kind": "vendor",
+          "sha256": "32c7a8ce77d1450d6e30be657880b611d997ed6c5df48b86486b5ba1d0bac3db",
+          "quote": "© 2026 Court Rules Inc. All rights reserved."
+        },
+        {
+          "url": "https://www.courtrules.app/about",
+          "kind": "vendor",
+          "sha256": "d66bfb03ba2ba9bf8c5d809f72809dcecf5d3c37d79b39bdab232eb1a186145d",
+          "quote": "Covered judges publish standing orders for page limits, formatting, courtesy copies, motion practice, and more."
+        },
+        {
+          "url": "https://www.courtrules.app/mcp",
+          "kind": "vendor",
+          "sha256": "bb97d2d23d4533f5c5b742cd7121c55647034ac91312ae9c72a5e99544dfaeb9",
+          "quote": "claude mcp add --transport http court-rules https://mcp.courtrules.app/mcp"
+        },
+        {
+          "url": "https://www.courtrules.app/api",
+          "kind": "vendor",
+          "sha256": "408b400726037d94d202815dc72e125996378e7f164a5cf7df496ff02c0767ef",
+          "quote": "Start with a free key from the console. Production use needs a license."
+        },
+        {
+          "url": "https://www.courtrules.app/llms.txt",
+          "kind": "vendor",
+          "sha256": "7df28f3e14b2f493a30e3e77ad0b6b75c67b6c8196e3863b3b2c496aa76032fe",
+          "quote": "Coverage is over 600 federal judges' standing orders across 20 federal districts, plus a state-court beta."
+        }
+      ],
+      "listing_sha256": "6cb7140a4708928b87d4d581ab360b33016d2cc4079b416bbab45ba17084b3e1",
+      "claims": {
+        "slug": "court-rules",
+        "name": "Court Rules",
+        "tagline": "U.S. court rules, judge standing orders and a deadline calculator, with a remote MCP server",
+        "description": "Court Rules (CourtRules.app) is a reference for U.S. federal and state court rules, run by Court Rules Inc. It covers local rules, individual judge standing orders, court holidays and a filing deadline calculator, and each rule links to the court's own document. It also publishes privacy enforcement data from federal and state agencies. The vendor says coverage is over 600 federal judges across 20 federal districts, plus a state-court beta, and tells users to read the order itself before relying on a summary. A remote MCP server and a JSON API let AI assistants and legal-tech products query the same data. The MCP server needs sign-in at the vendor's console or an API key. It is aimed at attorneys, paralegals and compliance teams, and at legal-technology companies. We did not verify rule accuracy, current coverage, account behavior or API limits, and we did not call any tool.",
+        "category": "legal_research",
+        "external_url": "https://www.courtrules.app/",
+        "mcp_repo_url": "https://mcp.courtrules.app/mcp",
+        "mcp_install_command": null,
+        "pricing_model": "freemium",
+        "pricing_details": "The website is free with no sign-up. A free API key is available from the console. Production use needs a license, priced by quote.",
+        "tags": [
+          "court-rules",
+          "standing-orders",
+          "deadlines",
+          "us-federal",
+          "mcp",
+          "api"
+        ],
+        "creator_name": "Court Rules Inc.",
+        "creator_url": "https://www.courtrules.app/",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
       "slug": "courtlistener-citations-checker",
       "decision": "approved",
       "reviewed_at": "2026-10-27",
@@ -606,6 +863,131 @@
         ],
         "creator_name": "Diligent",
         "creator_url": "https://www.diligent.com/",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "directcase-legal-search",
+      "decision": "approved",
+      "reviewed_at": "2026-11-22",
+      "reviewer": "Claude Fable 5.2 with two independent Claude Sonnet 5.5 source reviews, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://www.directcase.ai/gb/en/terms/",
+          "kind": "vendor",
+          "sha256": "7fdc619b9ae498fbd806847d7c14b61cd3fabf779800624f250c871c7ee92355",
+          "quote": "DirectCase s.r.o., Company ID (IČO): 24337269, with its registered office at Zenklova 2530/23, 180 00 Praha, Czech Republic"
+        },
+        {
+          "url": "https://www.directcase.ai/gb/en/home/",
+          "kind": "vendor",
+          "sha256": "f866453c9855d66cba548cba55ff1b7d939b8a5416bfa793e95e6869de5b7073",
+          "quote": "DirectCase is AI built for lawyers, trainee lawyers and in-house teams."
+        },
+        {
+          "url": "https://www.directcase.ai/gb/en/docs/mcp/",
+          "kind": "vendor",
+          "sha256": "648574f1e1bccd3c2f7b3628b33f8a1d6ed7c06ace3ce0413994800d715cee3c",
+          "quote": "DirectCase Legal Search is a remote Model Context Protocol (MCP) connector"
+        },
+        {
+          "url": "https://www.directcase.ai/gb/en/home/",
+          "kind": "vendor",
+          "sha256": "f866453c9855d66cba548cba55ff1b7d939b8a5416bfa793e95e6869de5b7073",
+          "quote": "All plans include 10 free trial queries."
+        },
+        {
+          "url": "https://www.directcase.ai/gb/en/terms/",
+          "kind": "vendor",
+          "sha256": "7fdc619b9ae498fbd806847d7c14b61cd3fabf779800624f250c871c7ee92355",
+          "quote": "Free use of the Service without a paid subscription is limited to 10 requests per natural person in any period of three months."
+        }
+      ],
+      "listing_sha256": "5e1c279353abd594164520ec7d6537cbaf9747d898c7610b92e6cf518651e0fe",
+      "claims": {
+        "slug": "directcase-legal-search",
+        "name": "DirectCase Legal Search",
+        "tagline": "Legal research with linked citations to EU law, plus a hosted MCP connector with OAuth sign-in.",
+        "description": "DirectCase Legal Search is a legal research tool from DirectCase s.r.o. of Prague. It answers legal questions with citations that link to the original law or decision, and it covers EU law, including the Court of Justice of the EU and the European Court of Human Rights. It is built for lawyers, trainee lawyers and in-house teams. The vendor also runs a remote MCP connector at https://mcp.directcase.ai that signs in with OAuth 2.1, so an AI assistant can use the same sources. Country coverage and document counts differ between the vendor's own pages, so this listing gives neither; check your jurisdiction with the vendor first. New accounts get 10 free trial queries. We did not verify accuracy, whether every citation resolves, which countries are covered, MCP tool behavior after sign-in, or security claims.",
+        "category": "legal_research",
+        "external_url": "https://www.directcase.ai/gb/en/home/",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "freemium",
+        "pricing_details": "10 free trial queries, per the vendor home page. The vendor terms limit free use to 10 requests per person in any three months. Paid plans are on the vendor site.",
+        "tags": [
+          "legal research",
+          "citations",
+          "eu law",
+          "mcp",
+          "case law",
+          "legislation"
+        ],
+        "creator_name": "DirectCase s.r.o.",
+        "creator_url": "https://www.directcase.ai/",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "esgenix",
+      "decision": "approved",
+      "reviewed_at": "2026-11-22",
+      "reviewer": "Claude Fable 5.2 with two independent Claude Sonnet 5.5 source reviews, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": false,
+      "sources": [
+        {
+          "url": "https://esgenix.com/about",
+          "kind": "vendor",
+          "sha256": "6a22c606890700a16e7be29e55415c7b9396081cbdb1212faa67315a5228a11f",
+          "quote": "Esgenix is built by Syncinvent Labs Private Limited, headquartered in Bengaluru, India, by a team of patent practitioners, AI architects, and technologists with 65 years of combined drafting experience."
+        },
+        {
+          "url": "https://esgenix.com/ai-patent-drafting-us",
+          "kind": "vendor",
+          "sha256": "e1990174e5be9eeb0c392aa5856b7357c3c109eb1ae74147ecd4298a08a0d4cf",
+          "quote": "AI patent drafting software for US patent attorneys"
+        },
+        {
+          "url": "https://esgenix.com/plans",
+          "kind": "vendor",
+          "sha256": "71d5477b3169ef6a674600ae9cdd4ded5be698e4244abed786fe8d8aa84cb13f",
+          "quote": "This page does not list a price or take a payment."
+        },
+        {
+          "url": "https://esgenix.com/products/patent-drafting",
+          "kind": "vendor",
+          "sha256": "3b34184d4a6d44fabd9ae893b50cd357ef9adcd5887b5245fdf96132f0a2ced3",
+          "quote": "native to US, European, and Indian practice"
+        }
+      ],
+      "listing_sha256": "df115986456a3ad63c9b613f780ad13def7fa88e5ed1e40f135211ef17265ade",
+      "claims": {
+        "slug": "esgenix",
+        "name": "Esgenix",
+        "tagline": "Agentic patent drafting and prior art search for IP teams",
+        "description": "Esgenix is a patent drafting and prior art search platform from Syncinvent Labs Private Limited in Bengaluru, India. The vendor says specialist AI agents on different underlying models draft claims, description, abstract and figures, and run prior art, freedom-to-operate and invalidity searches, with an attorney approving each of five gates. It targets patent attorneys, law firms and in-house IP teams and says it is native to US, European and Indian practice. No public price is listed. We found no MCP server or MCP documentation. We did not verify output accuracy, account behavior, certifications or any security claim.",
+        "category": "document_processing",
+        "external_url": "https://esgenix.com/",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "contact",
+        "pricing_details": null,
+        "tags": [
+          "patent",
+          "drafting",
+          "prior art",
+          "ip",
+          "agentic"
+        ],
+        "creator_name": "Syncinvent Labs Private Limited",
+        "creator_url": "https://esgenix.com/about",
         "logo_url": null,
         "firm_size_fit": []
       }
@@ -789,6 +1171,65 @@
         ],
         "creator_name": "Ansvar Systems",
         "creator_url": "https://ansvar.eu",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "gleanmark-trademark-search",
+      "decision": "approved",
+      "reviewed_at": "2026-11-22",
+      "reviewer": "Claude Fable 5.2 with two independent Claude Sonnet 5.5 source reviews, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://gleanmark.com/llms.txt",
+          "kind": "vendor",
+          "sha256": "97623e6ecda1252003f67e536533d48a28f6a24d39f745f791b0e0a616239564",
+          "quote": "Legal entity: TMZap Incorporated"
+        },
+        {
+          "url": "https://gleanmark.com/llms-full.txt",
+          "kind": "vendor",
+          "sha256": "4a0db9d7afd631628f5699dcfa6eef8d929ac16c258628baef1fa48f0dcf9ffe",
+          "quote": "Built for IP attorneys, brand teams, and startup founders."
+        },
+        {
+          "url": "https://gleanmark.com/llms.txt",
+          "kind": "vendor",
+          "sha256": "97623e6ecda1252003f67e536533d48a28f6a24d39f745f791b0e0a616239564",
+          "quote": "Endpoint: https://gleanmark.com/mcp"
+        },
+        {
+          "url": "https://gleanmark.com/llms.txt",
+          "kind": "vendor",
+          "sha256": "97623e6ecda1252003f67e536533d48a28f6a24d39f745f791b0e0a616239564",
+          "quote": "Free ($0/mo): 10 searches and 15 trademark records a day, 3 monitored marks, basic alerts, 1 portfolio"
+        }
+      ],
+      "listing_sha256": "7f1c982320fa79638d811a165e98f6546db654aebb8ed85208ab46bc764511f7",
+      "claims": {
+        "slug": "gleanmark-trademark-search",
+        "name": "GleanMark Trademark Search",
+        "tagline": "Search USPTO trademark records from your AI assistant over MCP",
+        "description": "GleanMark is a trademark research and monitoring service for U.S. federal (USPTO) trademarks. It runs a remote MCP server at https://gleanmark.com/mcp using streamable HTTP. Public register research needs no account; knockout and similar-mark searches, portfolios and other workspace tools need a GleanMark sign-in. Tools include trademark search, lookup by serial number, sound-alike search, owner and attorney search, mark comparison and TTAB owner statistics. The vendor says it is built for IP attorneys, brand teams and startup founders. It covers U.S. federal marks only, not state, common-law or international marks. It is a research tool, not a filing service. Not verified by us: search accuracy, clearance analysis quality, data freshness, security claims, and account behavior.",
+        "category": "legal_research",
+        "external_url": "https://gleanmark.com/",
+        "mcp_repo_url": "https://gleanmark.com/mcp",
+        "mcp_install_command": null,
+        "pricing_model": "freemium",
+        "pricing_details": "Free: 10 searches and 15 trademark records a day. Starter $99/mo. Professional $249/seat/mo. Firm $599/seat/mo.",
+        "tags": [
+          "trademark",
+          "uspto",
+          "ttab",
+          "clearance",
+          "ip"
+        ],
+        "creator_name": "TMZap Incorporated",
+        "creator_url": "https://gleanmark.com/",
         "logo_url": null,
         "firm_size_fit": []
       }
@@ -1087,6 +1528,72 @@
       }
     },
     {
+      "slug": "leela",
+      "decision": "approved",
+      "reviewed_at": "2026-11-22",
+      "reviewer": "Claude Fable 5.2 with two independent Claude Sonnet 5.5 source reviews, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": false,
+      "sources": [
+        {
+          "url": "https://leela.works/faq",
+          "kind": "vendor",
+          "sha256": "793c0a00303ae196aa2c003aa184f665ee5c9bda45520934d1efaaa2034b5092",
+          "quote": "Anyone who negotiates contracts: in-house legal teams, law firms and deal teams, contracts and procurement, and the sales and corporate development people who work with them."
+        },
+        {
+          "url": "https://leela.works/terms",
+          "kind": "vendor",
+          "sha256": "e10a2fff649d54472328cc4146cd8348742fcae9116bf30714f8b2ce5f6f474f",
+          "quote": "The agreement under which Humblepaper, Inc. provides Leela Works."
+        },
+        {
+          "url": "https://leela.works/about",
+          "kind": "vendor",
+          "sha256": "ade452e3823f8cfd518e9be54b5c1a81bc23abac17375964a5f9d656cc14c946",
+          "quote": "A US corporation with founders based in India."
+        },
+        {
+          "url": "https://leela.works/faq",
+          "kind": "vendor",
+          "sha256": "793c0a00303ae196aa2c003aa184f665ee5c9bda45520934d1efaaa2034b5092",
+          "quote": "One plan, every feature, per seat. $149 per seat per month for 1 to 4 seats, falling to $122 at 15 to 20 seats."
+        },
+        {
+          "url": "https://leela.works/security",
+          "kind": "vendor",
+          "sha256": "c7dbf6ac0e6cd3631356f6b12db8bdd1057f0c91b9703b87cec39715822ee21d",
+          "quote": "Documents and deal data are encrypted at rest with AES-256-GCM."
+        }
+      ],
+      "listing_sha256": "b8933e6a4b8d9103023fdd8e0e5a014e7c682b940134231ea59800c3e0253f4c",
+      "claims": {
+        "slug": "leela",
+        "name": "Leela",
+        "tagline": "Contract negotiation agent: email a draft, get an issues list and redline.",
+        "description": "Leela is a contract negotiation agent from Humblepaper, Inc. of New York. You email her the other side's draft, and she returns an issues list, a Word redline and a note, checked against your playbook. When the counterparty responds, you forward their draft. She compares it to your last version and marks each position moved, held, conceded or new. The vendor names in-house legal teams, law firms, deal teams and procurement as users. It says she sends work only to members of your team, and that she does not give legal advice. A desktop app is also offered. Pricing is $149 per seat per month for 1 to 4 seats, with a 14 day trial and no card. The vendor says it is not yet SOC 2 compliant and processes data in the United States by default. Jurisdiction and language support are not stated. We did not verify review accuracy, redline quality, account behavior or security claims.",
+        "category": "document_processing",
+        "external_url": "https://leela.works",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "paid",
+        "pricing_details": "$149 per seat per month for 1 to 4 seats, falling to $122 at 15 to 20 seats; 14 day trial, no card",
+        "tags": [
+          "contracts",
+          "redlining",
+          "negotiation",
+          "playbook",
+          "email",
+          "word"
+        ],
+        "creator_name": "Humblepaper, Inc.",
+        "creator_url": "https://leela.works/about",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
       "slug": "legal-mcp-agentic",
       "decision": "approved",
       "reviewed_at": "2026-10-27",
@@ -1127,6 +1634,66 @@
       }
     },
     {
+      "slug": "legalmcp",
+      "decision": "approved",
+      "reviewed_at": "2026-11-22",
+      "reviewer": "Claude Fable 5.2 with two independent Claude Sonnet 5.5 source reviews, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/Mahender22/legal-mcp/main/LICENSE",
+          "kind": "maintainer",
+          "sha256": "69ba2a74b7aa84fa3210942cfd3482d0c3b1fc534ebe9a84086d64fab904cac3",
+          "quote": "Copyright (c) 2026 LegalMCP"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Mahender22/legal-mcp/main/README.md",
+          "kind": "maintainer",
+          "sha256": "5a6eae3fbfe0f1d6d91c7364e945d21e8125bbfa3b32b38d5f239c1d9269ce51",
+          "quote": "Connect Claude, GPT, Cursor, or any MCP-compatible AI to 4M+ US court opinions, Clio practice management, and PACER federal filings."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Mahender22/legal-mcp/main/legal_mcp/src/server.py",
+          "kind": "maintainer",
+          "sha256": "ecd616c3a0db5d6e54001e095335dc887cee9f22b9c9682547ad953405c06216",
+          "quote": "from fastmcp import FastMCP"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/Mahender22/legal-mcp/main/README.md",
+          "kind": "maintainer",
+          "sha256": "5a6eae3fbfe0f1d6d91c7364e945d21e8125bbfa3b32b38d5f239c1d9269ce51",
+          "quote": "All 18 tools, MIT license, no paywall."
+        }
+      ],
+      "listing_sha256": "bfe3099d16557fd4c1b301d71f2e7d0eb456f534fcab137ebab8575fd76e5dff",
+      "claims": {
+        "slug": "legalmcp",
+        "name": "LegalMCP",
+        "tagline": "Open-source MCP server for US case law search, citation parsing, Clio and PACER",
+        "description": "LegalMCP is an open-source MCP server written in Python with FastMCP. Its README lists 18 tools: search of US court opinions, citation parsing, Clio practice management lookups (clients, matters, time entries, tasks, documents, calendar) and PACER federal case search. An MCP-compatible AI client such as Claude or Cursor connects to it. Clio tools need a Clio token and PACER tools need a PACER account, and PACER charges per page for document downloads. The code is MIT licensed and free. It covers US sources only. Not verified: accuracy of results, how the Clio and PACER tools behave with live accounts, whether the package is published on PyPI (the PyPI lookup returned 404), and the maintainer's legal name or country.",
+        "category": "legal_research",
+        "external_url": "https://github.com/Mahender22/legal-mcp",
+        "mcp_repo_url": "https://github.com/Mahender22/legal-mcp",
+        "mcp_install_command": null,
+        "pricing_model": "free",
+        "pricing_details": "Free and open source.",
+        "tags": [
+          "case law",
+          "courtlistener",
+          "pacer",
+          "clio",
+          "citations",
+          "open source"
+        ],
+        "creator_name": "Mahender22",
+        "creator_url": "https://github.com/Mahender22",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
       "slug": "lex-machina",
       "decision": "approved",
       "reviewed_at": "2026-11-17",
@@ -1161,6 +1728,65 @@
         ],
         "creator_name": "LexisNexis",
         "creator_url": "https://www.lexisnexis.com",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "lexery",
+      "decision": "approved",
+      "reviewed_at": "2026-11-22",
+      "reviewer": "Claude Fable 5.2 with two independent Claude Sonnet 5.5 source reviews, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": false,
+      "sources": [
+        {
+          "url": "https://lexery.com.ua/terms",
+          "kind": "vendor",
+          "sha256": "03f9710d236af6802480614cca2f4679fdfdc66c7337b07468099b6a8a980e95",
+          "quote": "Сервіс надає Андрій Середюк, фізична особа – підприємець"
+        },
+        {
+          "url": "https://lexery.com.ua/lexery",
+          "kind": "vendor",
+          "sha256": "040e0ec244ca93ef19568a23bab41757a7441c9224811204ad239a239a981f78",
+          "quote": "Адвокати, юрисконсульти, юридичні компанії"
+        },
+        {
+          "url": "https://lexery.com.ua/pricing",
+          "kind": "vendor",
+          "sha256": "80e1c2b8bc881b7d62631ee7a553b370995aeff0d16c0a626758e73f410fc97c",
+          "quote": "Три плани від&nbsp;$15&nbsp;на&nbsp;місяць."
+        },
+        {
+          "url": "https://lexery.com.ua/en",
+          "kind": "vendor",
+          "sha256": "340de30d23855e817aee898f2742060b5ce4904348c7c4b86889e3a7b81b501c",
+          "quote": "LEXERY answers legal questions and drafts documents with references to Ukrainian legislation and case law."
+        }
+      ],
+      "listing_sha256": "6d5d7bb1d30b763ee2fb2107393877de8cdeda558610bbc03015d9a6f215c253",
+      "claims": {
+        "slug": "lexery",
+        "name": "LEXERY",
+        "tagline": "AI legal agent for Ukrainian law: current statutes, Supreme Court practice, quote checks and Word drafts.",
+        "description": "LEXERY is an AI agent for lawyers who work with Ukrainian law. The vendor says it finds a provision in its current wording, picks Supreme Court of Ukraine practice, checks quotes against the source and drafts documents in Word. The vendor names advocates, in-house counsel and law firms as its users. The interface is in Ukrainian; only the landing page has an English version. Plans are paid, from $15 a month, and new accounts open only after an application is approved. The vendor states that models are not trained on user requests. The operator is a sole proprietor in Ukraine. We did not verify answer accuracy, citation checks, data handling, security claims or account behavior. No MCP server or MCP docs were found.",
+        "category": "legal_research",
+        "external_url": "https://lexery.com.ua",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "paid",
+        "pricing_details": "Plans from $15 a month. One 5-day trial of the Standard plan. Prices in USD, taxes included.",
+        "tags": [
+          "ukraine",
+          "legal research",
+          "case law",
+          "document drafting",
+          "ukrainian"
+        ],
+        "creator_name": "FOP Serediuk Andrii Ruslanovych",
+        "creator_url": "https://lexery.com.ua",
         "logo_url": null,
         "firm_size_fit": []
       }
@@ -1206,6 +1832,72 @@
         ],
         "creator_name": "Luminance",
         "creator_url": "https://www.luminance.com/",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "merit-ukrainian-law-registers",
+      "decision": "approved",
+      "reviewed_at": "2026-11-22",
+      "reviewer": "Claude Fable 5.2 with two independent Claude Sonnet 5.5 source reviews, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://merit.legal/mcp/offer",
+          "kind": "vendor",
+          "sha256": "8d5ccb5be8cb20728ad80eb9fa25b46915fca06482c950b38dcaccb9defd5705",
+          "quote": "Кушнірук Сергій Ігорович"
+        },
+        {
+          "url": "https://merit.legal/mcp",
+          "kind": "vendor",
+          "sha256": "8873f998f4c9813c7c8a88c9de70bafe080ac310f26aa048e88fa134e2d35067",
+          "quote": "Законодавство з редакціями на будь-яку дату, практика Верховного Суду, ЄДР, реєстри адвокатів і нотаріусів, виконавчі провадження та санкції."
+        },
+        {
+          "url": "https://merit.legal/mcp/offer",
+          "kind": "vendor",
+          "sha256": "8d5ccb5be8cb20728ad80eb9fa25b46915fca06482c950b38dcaccb9defd5705",
+          "quote": "приймає запити за адресою https://law.merit.legal/mcp"
+        },
+        {
+          "url": "https://merit.legal/mcp/claude",
+          "kind": "vendor",
+          "sha256": "8da8213057567bc2ffe2a9b00853fbed12c82d0b923c894ce49dacf028221f22",
+          "quote": "Додайте Merit у Claude як власний конектор"
+        },
+        {
+          "url": "https://merit.legal/mcp",
+          "kind": "vendor",
+          "sha256": "8873f998f4c9813c7c8a88c9de70bafe080ac310f26aa048e88fa134e2d35067",
+          "quote": "Після пробного тижня — від 790 грн за 4 тижні."
+        }
+      ],
+      "listing_sha256": "e9bf9e50cf8cdda6c54f5ae8cfedf0f9549782faeb6bc564fdba17452da2a8d6",
+      "claims": {
+        "slug": "merit-ukrainian-law-registers",
+        "name": "Merit - Ukrainian Law & Registers",
+        "tagline": "Ukrainian laws on any date, court decisions, registers and sanctions lists inside Claude, ChatGPT or Gemini.",
+        "description": "Merit is a hosted MCP server that gives Claude, ChatGPT or Gemini read access to Ukrainian legal sources. The vendor says it covers 55 sources and 134 tools: laws in their version on any date, Supreme Court practice, the court decisions register, court, advocate and notary registers, the company register, tax and enforcement registers, and five sanctions lists (Ukraine, EU, OFAC, UK, UN). It also covers some foreign company registers (GLEIF, UK Companies House, ICIJ Offshore Leaks). It is for Ukrainian lawyers, law firms and compliance teams. The focus is Ukrainian law, and the vendor pages are written in Ukrainian. The vendor states that no tool changes or sends anything and that you connect by signing in to a Merit account. The operator is a sole proprietor whose Ukrainian registry entry is dated 29 October 2026, so the business is very new. We did not verify accuracy, data freshness, billing or account behavior.",
+        "category": "legal_research",
+        "external_url": "https://merit.legal/mcp",
+        "mcp_repo_url": "https://law.merit.legal/mcp",
+        "mcp_install_command": null,
+        "pricing_model": "paid",
+        "pricing_details": "7-day Start trial for 1 UAH, then from 790 UAH per 4 weeks (launch price for payments before 31 December 2026, from 990 UAH after). The vendor says auto-renewal can be switched off in the account.",
+        "tags": [
+          "ukraine",
+          "legal research",
+          "registers",
+          "sanctions",
+          "kyc",
+          "case law"
+        ],
+        "creator_name": "Kushniruk Serhii Ihorovych (sole proprietor), Merit",
+        "creator_url": "https://merit.legal/",
         "logo_url": null,
         "firm_size_fit": []
       }
@@ -1425,6 +2117,249 @@
       }
     },
     {
+      "slug": "pii-blackout",
+      "decision": "approved",
+      "reviewed_at": "2026-11-22",
+      "reviewer": "Claude Fable 5.2 with two independent Claude Sonnet 5.5 source reviews, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": false,
+      "sources": [
+        {
+          "url": "https://piiblackout.com/terms",
+          "kind": "vendor",
+          "sha256": "c82df29fbf4bcdacb22913db2eaf76f2555d5f981e579aa45f4fc9a561cf6ffb",
+          "quote": "Operated by SHAO SHUAI (individual developer)."
+        },
+        {
+          "url": "https://piiblackout.com/llms.txt",
+          "kind": "vendor",
+          "sha256": "da0acffebece5f5e111a85b86dcfdb784f04c2b3c7d74a6c6843c9fc6b7b781c",
+          "quote": "PII Blackout is assistive redaction software for law firms and small businesses."
+        },
+        {
+          "url": "https://piiblackout.com/use-cases/legal-ediscovery",
+          "kind": "vendor",
+          "sha256": "8bd30c31d6b1e639d5c48c4982ffc6937a3d055a509573e6c4b49ecd4b2bf0c7",
+          "quote": "PII Blackout targets solo and small firms that need batch offline redaction without enterprise DLP contracts."
+        },
+        {
+          "url": "https://piiblackout.com/pricing",
+          "kind": "vendor",
+          "sha256": "6df52f3d715a01b76a36d8dc9e49d494a680d90b2463d6bdb75fd1d1182fe1ec",
+          "quote": "Up to 3 PDFs per day (desktop)"
+        }
+      ],
+      "listing_sha256": "e90a1c463daf71e833b5f23c68dc41e1465571cbddaa0ae6eb5603678cdb7c8e",
+      "claims": {
+        "slug": "pii-blackout",
+        "name": "PII Blackout",
+        "tagline": "Offline desktop software that permanently redacts PII in PDF, Word and Excel files.",
+        "description": "PII Blackout is desktop software for Windows and macOS that finds personal data such as names, emails, phone numbers, SSNs, bank accounts and card numbers in PDF, Word (.docx) and Excel (.xlsx) files. The user reviews each match, then applies a permanent blackout. The vendor says it is for law firms and small businesses, and publishes a legal eDiscovery page for solo and small firms that need batch redaction. The vendor says processing runs on the user's computer, and that sign-in needs internet. The vendor lists English, German, Spanish, French, Italian, Portuguese and Dutch. We found no MCP server or MCP documentation. The vendor calls it assistive and says no software can guarantee full detection, so users must check the output. This directory did not verify detection accuracy, offline behavior, security or compliance claims, or the operator's location.",
+        "category": "document_processing",
+        "external_url": "https://piiblackout.com/",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "freemium",
+        "pricing_details": "Free tier: up to 3 PDFs per day and up to 15 pages per document on desktop. Starter plan $29 billed monthly (100 pages per month). Day Pass $9.90 and Week Pass $34.90, one time.",
+        "tags": [
+          "redaction",
+          "pii",
+          "ediscovery",
+          "offline",
+          "desktop",
+          "documents"
+        ],
+        "creator_name": "SHAO SHUAI",
+        "creator_url": "https://piiblackout.com/",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "precision-ai-os",
+      "decision": "approved",
+      "reviewed_at": "2026-11-22",
+      "reviewer": "Claude Fable 5.2 with two independent Claude Sonnet 5.5 source reviews, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://getprecision.ai/about",
+          "kind": "vendor",
+          "sha256": "f410dd789e6ce8364d56c6bed5d297f7b2efa9db410e49e71ab346274d3ecb3c",
+          "quote": "It is operated by Precision AI LLC in Miami, Florida."
+        },
+        {
+          "url": "https://getprecision.ai/industries/law-firms",
+          "kind": "vendor",
+          "sha256": "a8f8b2870838c99dfb86697ca45db790c1e4ea1ba72511bde34d7f6088736086",
+          "quote": "AI for law firms works across intake, practice management, documents and email."
+        },
+        {
+          "url": "https://getprecision.ai/industries/law-firms",
+          "kind": "vendor",
+          "sha256": "a8f8b2870838c99dfb86697ca45db790c1e4ea1ba72511bde34d7f6088736086",
+          "quote": "Draft client updates from verified deadlines, recent filings and the latest email thread for an attorney to approve."
+        },
+        {
+          "url": "https://getprecision.ai/pricing",
+          "kind": "vendor",
+          "sha256": "c85459d0dbe46a112938b72cd00e708ec8afdc4e18e0de151ac723cbceefec22",
+          "quote": "Precision AI OS is priced in credits for the work agents do, never per seat."
+        }
+      ],
+      "listing_sha256": "9bf2f878d5287b73fd50ab93fdc4bfafb2b8b5cfa373d0c1dd2eef00960bbb50",
+      "claims": {
+        "slug": "precision-ai-os",
+        "name": "Precision AI OS",
+        "tagline": "AI agents with shared memory for firms, with approval before any send",
+        "description": "Precision AI OS is an AI agent platform from Precision AI LLC in Miami, Florida. It gives a firm shared memory, an agent for each area of work, and approval before anything is sent. The vendor publishes a law firms page that covers matter intake, conflict-check preparation, an AI consent register and client update drafts, all for attorney approval. The vendor states it does not do legal research. Pricing is credit based, never per seat. English only, United States focus. Not verified: accuracy of outputs, security and governance claims, current prices, and how the product behaves after sign-in.",
+        "category": "general",
+        "external_url": "https://getprecision.ai",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "contact",
+        "pricing_details": null,
+        "tags": [
+          "law firms",
+          "agents",
+          "intake",
+          "approvals",
+          "consent"
+        ],
+        "creator_name": "Precision AI LLC",
+        "creator_url": "https://getprecision.ai",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "qanu",
+      "decision": "approved",
+      "reviewed_at": "2026-11-22",
+      "reviewer": "Claude Fable 5.2 with two independent Claude Sonnet 5.5 source reviews, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": false,
+      "sources": [
+        {
+          "url": "https://www.qanu.ai/en/about",
+          "kind": "vendor",
+          "sha256": "1793c2b2cd6f841548596680f5d533469f7e4c243c4da5da8f20a520ef522c54",
+          "quote": "Qanu is an AI-powered SaaS platform built by KazeCorp Systems W.L.L."
+        },
+        {
+          "url": "https://www.qanu.ai/en/legal-notice",
+          "kind": "vendor",
+          "sha256": "6c7dda176d4586144d953e9f028dfd175cd47b6bd9797a3f7432d566789e85f5",
+          "quote": "Company and legal information for Qanu, operated by KazeCorp Systems W.L.L."
+        },
+        {
+          "url": "https://www.qanu.ai/en/legal-ai",
+          "kind": "vendor",
+          "sha256": "011d286786a049e6b058df66cdd4ef89f83def4eb726a27345b35eb5a19d40f2",
+          "quote": "Qanu is an Arabic-first legal workspace built for that work in GCC law firms and legal departments."
+        },
+        {
+          "url": "https://www.qanu.ai/en",
+          "kind": "vendor",
+          "sha256": "e55a5a0ab08d6524a0eaf26709f31542eaba0c14ea9b5604bbf690827f420e2b",
+          "quote": "For solo lawyers wanting to test the platform."
+        },
+        {
+          "url": "https://www.qanu.ai/en",
+          "kind": "vendor",
+          "sha256": "e55a5a0ab08d6524a0eaf26709f31542eaba0c14ea9b5604bbf690827f420e2b",
+          "quote": "Research GCC law with citations, review and draft contracts, and manage your matter documents in Arabic and English, all in one workspace."
+        }
+      ],
+      "listing_sha256": "9ed15a7e8e596afe9c2058496910a6a18eedd8dfdea3831d8b00bd9cb2eaff60",
+      "claims": {
+        "slug": "qanu",
+        "name": "Qanu",
+        "tagline": "Arabic-first AI legal workspace for GCC law firms and legal teams",
+        "description": "Qanu is a web-based legal workspace from KazeCorp Systems W.L.L. of Bahrain. It is built for law firms and in-house legal teams in the GCC. Users can research GCC law with citations, review and draft contracts, and manage matter documents in Arabic and English in one workspace. The vendor says each answer links to the law, regulation or matter document it relied on, and says in-country hosting is available in KSA and UAE. It lists a free plan for solo lawyers and an enterprise plan through sales. We did not verify answer accuracy, security or hosting claims, account behavior, or any MCP support.",
+        "category": "legal_research",
+        "external_url": "https://www.qanu.ai/en",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "freemium",
+        "pricing_details": "Free plan for solo lawyers. Enterprise plan through sales. The vendor says figures are indicative.",
+        "tags": [
+          "gcc",
+          "arabic",
+          "contract review",
+          "legal research",
+          "bilingual"
+        ],
+        "creator_name": "KazeCorp Systems W.L.L.",
+        "creator_url": "https://www.qanu.ai/en/about",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "redactifyai",
+      "decision": "approved",
+      "reviewed_at": "2026-11-22",
+      "reviewer": "Claude Fable 5.2 with two independent Claude Sonnet 5.5 source reviews, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": false,
+      "sources": [
+        {
+          "url": "https://www.redactifyai.com/security/",
+          "kind": "vendor",
+          "sha256": "c6d0950c9fda3510bd4e30046d61cec857e2dd76c35d2c474f90e2655a6b8b20",
+          "quote": "RedactifyAI is a product of RockQube Technologies LLC"
+        },
+        {
+          "url": "https://www.redactifyai.com/terms-and-conditions/",
+          "kind": "vendor",
+          "sha256": "876aedefd946b204170a2732ea4e7e80949c28656882fbbef15b2f7272ff5c03",
+          "quote": "RedactifyAI is an AI-powered document redaction platform designed for lawyers and legal teams."
+        },
+        {
+          "url": "https://www.redactifyai.com/features/",
+          "kind": "vendor",
+          "sha256": "a42f8f6963839c62f5831a845fc79a7fdd8aa3b369371b704439c464951e5cee",
+          "quote": "The redacted version is saved as a new file. Your original is never overwritten."
+        },
+        {
+          "url": "https://www.redactifyai.com/pricing/",
+          "kind": "vendor",
+          "sha256": "0b6cb1c46f0e4385d6a8e4f267b0a38713348e2031dc10e2ed1d89c50d893cc8",
+          "quote": "Per-seat pricing: Starter: $19/seat (1 seat included)."
+        }
+      ],
+      "listing_sha256": "8a89c1def6f54711a908c83c7852d51cebc04aaf86092055c7b1e99b0882c7d6",
+      "claims": {
+        "slug": "redactifyai",
+        "name": "RedactifyAI",
+        "tagline": "AI redaction for legal documents, with user review of each redaction and Clio sync.",
+        "description": "RedactifyAI is a web app that finds and removes sensitive data in legal documents. The vendor says it is designed for lawyers and legal teams. It reads PDF, Word (DOCX/DOC) and image files, includes OCR for scans, and takes up to 50 documents per upload from a device or a Clio matter. Its AI uses context, so it can tell a name in a signature block from a name in a case citation. Users review and approve each redaction. The vendor says redaction removes the data from the file and cleans hidden content. On Starter and higher plans, Clio sync saves the redacted copy as a new file and leaves the original. The vendor says files are processed only in the US and never used to train AI. RockQube Technologies LLC runs it. We found no MCP server or MCP documentation. We did not verify detection accuracy, Clio sync behavior, security claims, the award shown on the home page, or account behavior.",
+        "category": "document_processing",
+        "external_url": "https://www.redactifyai.com",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "freemium",
+        "pricing_details": "Free plan: 50 pages/month. Starter: $19/month. Higher plans are listed on the vendor pricing page.",
+        "tags": [
+          "redaction",
+          "pii",
+          "ocr",
+          "clio",
+          "document processing"
+        ],
+        "creator_name": "RockQube Technologies LLC",
+        "creator_url": "https://www.redactifyai.com",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
       "slug": "regulationsgov-mcp",
       "decision": "approved",
       "reviewed_at": "2026-11-17",
@@ -1571,6 +2506,66 @@
       }
     },
     {
+      "slug": "signal87-ai",
+      "decision": "approved",
+      "reviewed_at": "2026-11-22",
+      "reviewer": "Claude Fable 5.2 with two independent Claude Sonnet 5.5 source reviews, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://www.signal87.ai/terms",
+          "kind": "vendor",
+          "sha256": "e3fbc926600eaab5a42b0ba2da2bae7ef2495ee00fb9a5bff4b2cf69f93995dd",
+          "quote": "Signal87 LLC, a Wyoming limited liability company"
+        },
+        {
+          "url": "https://www.signal87.ai/",
+          "kind": "vendor",
+          "sha256": "7e026f36a07dc3522dd622fecf8a3385f84fd131aa5762426030131b6dea2116",
+          "quote": "Signal87 AI is an enterprise document memory and legal AI research platform."
+        },
+        {
+          "url": "https://www.signal87.ai/claude",
+          "kind": "vendor",
+          "sha256": "79abab9f44c1b226376214eaa54b8cbec869bc15c873a1dbdde568344c2c1c0f",
+          "quote": "The connector can search and read files. It cannot create, change, move, delete or share anything in Signal87."
+        },
+        {
+          "url": "https://www.signal87.ai/llms.txt",
+          "kind": "vendor",
+          "sha256": "e8612846e5b95a46380ff450521aeb8fe3e709efd6d17b2e5457c2aafe9a5d2c",
+          "quote": "Free: up to 50 documents, never expires, full access to every feature."
+        }
+      ],
+      "listing_sha256": "b263eb30e56863bd27a86f9cae8e7c2313ee6268b60c8b2f2a24428cd5c8e4da",
+      "claims": {
+        "slug": "signal87-ai",
+        "name": "Signal87 AI",
+        "tagline": "Document workspace with source-cited answers and a read-only Claude connector.",
+        "description": "Signal87 AI is a document workspace from Signal87 LLC. Users upload contracts, reports and spreadsheets, or connect Google Drive, ask questions in plain language, and get answers with citations to the page and paragraph in their own files. The vendor calls it a legal AI research platform for legal, government and enterprise teams, and it can compare documents for shared terms, differences and missing clauses. The vendor also publishes a read-only Claude connector at https://www.signal87.ai/mcp that can list, search and read files in a user's Signal87 account, with OAuth sign-in. Its connector page focuses on city ordinances, council minutes and contracts. Not verified by us: answer accuracy, security and privacy practices, jurisdiction coverage, language support, the connector's tool behavior, and paid plan prices.",
+        "category": "document_processing",
+        "external_url": "https://www.signal87.ai/",
+        "mcp_repo_url": "https://www.signal87.ai/mcp",
+        "mcp_install_command": null,
+        "pricing_model": "freemium",
+        "pricing_details": "Free plan: up to 50 documents. Paid monthly plans: 100 Documents and Unlimited. Prices not stated on pages checked.",
+        "tags": [
+          "document-review",
+          "citations",
+          "contracts",
+          "claude-connector",
+          "mcp",
+          "legal-research"
+        ],
+        "creator_name": "Signal87 LLC",
+        "creator_url": "https://www.signal87.ai/",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
       "slug": "smith-ai",
       "decision": "approved",
       "reviewed_at": "2026-11-17",
@@ -1651,6 +2646,72 @@
       }
     },
     {
+      "slug": "specterai",
+      "decision": "approved",
+      "reviewed_at": "2026-11-22",
+      "reviewer": "Claude Fable 5.2 with two independent Claude Sonnet 5.5 source reviews, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://www.specterlaw.ai/nutzungsbedingungen",
+          "kind": "vendor",
+          "sha256": "5416b3435fa43bbbca4f64d82ad4bee3f507a3f3de9f0cc547ad0b4f2db76d95",
+          "quote": "der von der ROLIDE SRL, Sos. Vergului Nr. 19, Bl. H4, Sc. 1, Et. 5, Ap. 21, Sector 2, București, Rumänien"
+        },
+        {
+          "url": "https://www.specterlaw.ai/loesungen/kanzleien",
+          "kind": "vendor",
+          "sha256": "9a2a0d37860d104281efeb91bbbc7c05d776b01751157e68d95369bdfce57da0",
+          "quote": "Specter hilft Ihrer Kanzlei, mehr Fälle konsistent und schneller zu bearbeiten"
+        },
+        {
+          "url": "https://www.specterlaw.ai/specter-cite",
+          "kind": "vendor",
+          "sha256": "6fbd0121816bebcdc06285a2dccc241f801619ddb61acd0744636a489e502663",
+          "quote": "Specter Cite ist ein MCP-Server für deutsches und europäisches Recht."
+        },
+        {
+          "url": "https://cite.specterlaw.ai/docs",
+          "kind": "vendor",
+          "sha256": "eef61ed6947eba76bb4df3e0aaea6a2409d321057c144b67a93abbf9f1685761",
+          "quote": "https://cite.specterlaw.ai/mcp"
+        },
+        {
+          "url": "https://www.specterlaw.ai/pricing",
+          "kind": "vendor",
+          "sha256": "f7bd7488be14ee2f4f069dd1ba32724725c5a461a2b3a653cebd8a210710facd",
+          "quote": "99,99 € / Nutzer / Monat"
+        }
+      ],
+      "listing_sha256": "7a586e31d0e370d54500ef3161d426e2645d3a440c119364e60bded9078ca3bd",
+      "claims": {
+        "slug": "specterai",
+        "name": "SpecterAI",
+        "tagline": "AI legal research, document review and drafting for German law, with an MCP server add-on",
+        "description": "SpecterAI is an AI platform for German law, run by ROLIDE SRL in Romania. The vendor says it is for private users, law firms and in-house teams. Paid plans let users discuss contracts and other documents in chat, research laws and case law, and prepare drafts of legal letters. The Business plan allows up to 100 documents per project. The vendor also publishes Specter Cite, an MCP server for German and EU law at https://cite.specterlaw.ai/mcp. It uses OAuth sign-in with a Specter account, and is a paid add-on for Business teams. The site is in German with an English toggle. We did not verify accuracy, citation quality, security or data-location claims, free plan limits, or how any tool behaves, and we did not call the MCP server.",
+        "category": "legal_research",
+        "external_url": "https://www.specterlaw.ai/",
+        "mcp_repo_url": "https://cite.specterlaw.ai/mcp",
+        "mcp_install_command": null,
+        "pricing_model": "paid",
+        "pricing_details": "Pro 34,99 EUR per month; Business 99,99 EUR per user per month. Specter Cite is a Business add-on with no public price. Official pricing: https://www.specterlaw.ai/pricing",
+        "tags": [
+          "german law",
+          "legal research",
+          "mcp",
+          "drafting",
+          "eu law",
+          "germany"
+        ],
+        "creator_name": "ROLIDE SRL",
+        "creator_url": "https://www.specterlaw.ai/",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
       "slug": "supabase-legal-mcp",
       "decision": "approved",
       "reviewed_at": "2026-11-21",
@@ -1698,6 +2759,192 @@
       }
     },
     {
+      "slug": "syfert-legal-research",
+      "decision": "approved",
+      "reviewed_at": "2026-11-22",
+      "reviewer": "Claude Fable 5.2 with two independent Claude Sonnet 5.5 source reviews, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://syfert.com/mcp/",
+          "kind": "vendor",
+          "sha256": "3f7b4e9fea3b7c8e1db16ee28c5ecc4dbdf30173533a48d5a77cb20c0bb43827",
+          "quote": "Graham W. Syfert, Esq., P.A."
+        },
+        {
+          "url": "https://syfert.com/mcp/",
+          "kind": "vendor",
+          "sha256": "3f7b4e9fea3b7c8e1db16ee28c5ecc4dbdf30173533a48d5a77cb20c0bb43827",
+          "quote": "search 10.8 million U.S. court opinions and every state's statutes, verify citations, check whether a case is still good law, and audit a brief"
+        },
+        {
+          "url": "https://syfert.com/mcp/tools.php",
+          "kind": "vendor",
+          "sha256": "4a1917c34292bb31f83da1a342e773db23bce0f1e700b76d113c9369e87ac0bb",
+          "quote": "You do not need a token to try them: https://mcp.syfert.com/mcp answers anonymously, twenty calls a day per address."
+        },
+        {
+          "url": "https://syfert.com/mcp/",
+          "kind": "vendor",
+          "sha256": "3f7b4e9fea3b7c8e1db16ee28c5ecc4dbdf30173533a48d5a77cb20c0bb43827",
+          "quote": "Pro, $30 a month or $300 a year."
+        }
+      ],
+      "listing_sha256": "a56738bb2888dd6a14df9545839f5cae98e22cb96ceab86435570719bf4ca7a4",
+      "claims": {
+        "slug": "syfert-legal-research",
+        "name": "Syfert Legal Research",
+        "tagline": "Hosted MCP server that checks citations, case treatment and statutes against U.S. court opinions",
+        "description": "Syfert Legal Research is a hosted MCP server run by Graham W. Syfert, Esq., P.A., a law practice in Jacksonville, Florida. It lets an AI assistant search 10.8 million U.S. court opinions and every state's statutes, verify citations, check whether a case is still good law, and audit a brief. The opinions come from the Free Law Project's CourtListener bulk data, refreshed quarterly. It is built for lawyers and covers U.S. federal and state law. You can connect without an account at 20 calls a day per address. A free account allows 10,000 searches a month, and Pro costs $30 a month or $300 a year. We did not verify the accuracy of its citation checks or treatment flags, its statute coverage, its uptime, or its privacy claims.",
+        "category": "legal_research",
+        "external_url": "https://syfert.com/mcp/",
+        "mcp_repo_url": "https://mcp.syfert.com/mcp",
+        "mcp_install_command": null,
+        "pricing_model": "freemium",
+        "pricing_details": "Pro, $30 a month or $300 a year.",
+        "tags": [
+          "citations",
+          "case law",
+          "statutes",
+          "us law",
+          "citator",
+          "mcp"
+        ],
+        "creator_name": "Graham W. Syfert, Esq., P.A.",
+        "creator_url": "https://syfert.com/",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "taiwan-legal-rag",
+      "decision": "approved",
+      "reviewed_at": "2026-11-22",
+      "reviewer": "Claude Fable 5.2 with two independent Claude Sonnet 5.5 source reviews, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/aa0101181514/tw-legal-rag/main/README.md",
+          "kind": "maintainer",
+          "sha256": "07903c4f1f172a397d72ea62fcc835135db7e7fa02313c21271045f11025e2e0",
+          "quote": "作者：黃思齊（Aaron Huang）律師，[法律偵探／Dr.Legal](https://dr-legal.com.tw) 創辦人"
+        },
+        {
+          "url": "https://dr-legal.com.tw/mcp",
+          "kind": "vendor",
+          "sha256": "cc43b66630d5046177985ced18632c4c2e56f4bf9db8e2f5c1e5e38fe1da28c5",
+          "quote": "claude mcp add --transport http --scope user tlr https://tlr.dr-legal.com.tw/mcp"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/aa0101181514/tw-legal-rag/main/TERMS.md",
+          "kind": "maintainer",
+          "sha256": "1c1c40da428ea07178b3a6141d57be12e314923bee0845a6540aa78c0650290e",
+          "quote": "the service is provided as-is, free of charge, with no"
+        },
+        {
+          "url": "https://dr-legal.com.tw/about",
+          "kind": "vendor",
+          "sha256": "01c1ddff6d6406014fc0f00e7b80892113d92ea1bb42c08233f638d74d3acb75",
+          "quote": "由創辦人一人獨力經營。創辦人是執業律師"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/aa0101181514/tw-legal-rag/main/server.json",
+          "kind": "maintainer",
+          "sha256": "95ff6cf9a4f5a74fe82ae802703fdfba8b65a10351fa7f464a58d42968a763fa",
+          "quote": "Taiwan law MCP server: 22M court judgments, statutes, agency rulings, with citation checks"
+        }
+      ],
+      "listing_sha256": "e2c0dba67b0283d463997900c7f18d1edb9e546cb7ff4f3c0e5e53436dc91395",
+      "claims": {
+        "slug": "taiwan-legal-rag",
+        "name": "Taiwan Legal RAG",
+        "tagline": "Free hosted MCP server for searching Taiwan court judgments, statutes and administrative rulings",
+        "description": "Taiwan Legal RAG is a hosted MCP server and a command-line client for searching Taiwan law. Its six tools cover court judgment search, full judgment text with appeal links, a citation-whitelist bundle, current statute lookup, administrative ruling lookup by number and administrative ruling search by meaning. It is run by Dr.Legal (Legal Detective), founded and operated by Taiwan lawyer Aaron Huang, and it is meant for lawyers, researchers and in-house teams working on Taiwan law. It covers Taiwan only, and the vendor pages are in Traditional Chinese. Use is free, but you sign in to a free Dr.Legal account with Google or email when you connect. The client code uses the Elastic License 2.0, which is source-available and not open source, and the hosted service terms bar resale and bulk mirroring of the corpus. We did not test search accuracy, citation quality, the sign-in flow or the vendor's corpus counts.",
+        "category": "legal_research",
+        "external_url": "https://dr-legal.com.tw/mcp",
+        "mcp_repo_url": "https://github.com/aa0101181514/tw-legal-rag",
+        "mcp_install_command": null,
+        "pricing_model": "free",
+        "pricing_details": null,
+        "tags": [
+          "taiwan",
+          "case-law",
+          "statutes",
+          "mcp",
+          "oauth",
+          "traditional-chinese"
+        ],
+        "creator_name": "Dr.Legal (Legal Detective), Aaron Huang",
+        "creator_url": "https://dr-legal.com.tw",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "telewizard",
+      "decision": "approved",
+      "reviewed_at": "2026-11-22",
+      "reviewer": "Claude Fable 5.2 with two independent Claude Sonnet 5.5 source reviews, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": false,
+      "sources": [
+        {
+          "url": "https://telewizard.ai/en/solutions/ai-legal-virtual-receptionist-for-law-firms",
+          "kind": "vendor",
+          "sha256": "2b3ca3de33fd928ffc05eaf320279a881457c20987c820e7b996b8b58e597035",
+          "quote": "TeleWizard's AI receptionist for law firms answers calls, captures intake details and books consultations on phone and web chat."
+        },
+        {
+          "url": "https://telewizard.ai/en/terms-of-service",
+          "kind": "vendor",
+          "sha256": "4ae781734f85eb1b5a55c90b97e952a0277fe524d8daf3e981ddf89f4feccf01",
+          "quote": "Welcome to TeleWizard, a product offered by NextGen AI Tech, LLC, on the website telewizard.ai"
+        },
+        {
+          "url": "https://telewizard.ai/en/pricing",
+          "kind": "vendor",
+          "sha256": "e17bf598e01ba1316ec02c4b9891a0b4c5b5bf9a6319ed8044fd791f368e6100",
+          "quote": "Pricing is quotation-based."
+        },
+        {
+          "url": "https://telewizard.ai/en/faqs",
+          "kind": "vendor",
+          "sha256": "23872acacb0d07e71cabcf42edf81f975b7f4a9b2208920512e59a8f81a938c5",
+          "quote": "TeleWizard supports 50+ languages."
+        }
+      ],
+      "listing_sha256": "88aad5ade5a7bb068b735587e0bc109df95b75b24121442071f0c1c8ef4456fb",
+      "claims": {
+        "slug": "telewizard",
+        "name": "TeleWizard",
+        "tagline": "Managed AI receptionists for law firm intake and client calls",
+        "description": "TeleWizard is a managed AI receptionist service for law firms, run by NextGen AI Tech, LLC. AI phone agents answer calls, capture intake details, book consultations and route callers to staff. Web chat uses the same agent. It connects with Clio Manage, Clio Grow and Lawmatics. The vendor's team sets up and maintains the service. AI Supervisor reviews calls against the firm's instructions. The vendor states support for 50+ languages, and messaging channels such as WhatsApp, SMS, email, Facebook and Instagram are an add-on. Pricing is by quotation. We did not verify call quality, accuracy, security or compliance claims, or how the service behaves in a live account.",
+        "category": "client_communication",
+        "external_url": "https://telewizard.ai/en/solutions/ai-legal-virtual-receptionist-for-law-firms",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "contact",
+        "pricing_details": null,
+        "tags": [
+          "ai receptionist",
+          "intake",
+          "phone",
+          "clio",
+          "lawmatics",
+          "scheduling"
+        ],
+        "creator_name": "NextGen AI Tech, LLC",
+        "creator_url": "https://telewizard.ai/en/",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
       "slug": "timesolv",
       "decision": "approved",
       "reviewed_at": "2026-10-27",
@@ -1733,6 +2980,180 @@
         ],
         "creator_name": "TimeSolv",
         "creator_url": "https://www.timesolv.com/",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "uk-case-law-mcp-server",
+      "decision": "approved",
+      "reviewed_at": "2026-11-22",
+      "reviewer": "Claude Fable 5.2 with two independent Claude Sonnet 5.5 source reviews, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/georgejeffers/uk-case-law-mcp-server/main/package.json",
+          "kind": "maintainer",
+          "sha256": "02573c9c7c3df8dabe22ec8c3ff8e93e7098bc96847f14865512e4cec0e27826",
+          "quote": "\"author\": \"George Jefferson\","
+        },
+        {
+          "url": "https://raw.githubusercontent.com/georgejeffers/uk-case-law-mcp-server/main/README.md",
+          "kind": "maintainer",
+          "sha256": "63fabd560379de7d6b77436d2201b2f1e215be4a02a7f627c230d057b42449d7",
+          "quote": "A [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server that provides Claude with tools to search and retrieve UK case law from [The National Archives](https://caselaw.nationalarchives.gov.uk/)."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/georgejeffers/uk-case-law-mcp-server/main/src/server.ts",
+          "kind": "maintainer",
+          "sha256": "d7039a47068a69f89d15c2a16c4a4c2bd96eaca64ee8978c8cb9473a51d65436",
+          "quote": "import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';"
+        }
+      ],
+      "listing_sha256": "a95b880cfe3129cfa35530b8ece494f15a3c7c71ec2dddfdb0da607023458443",
+      "claims": {
+        "slug": "uk-case-law-mcp-server",
+        "name": "UK Case Law MCP Server",
+        "tagline": "MCP server that searches and retrieves UK case law from The National Archives Find Case Law API.",
+        "description": "An MCP server by an individual maintainer that gives an AI assistant two tools: search UK case law, and fetch the text of a judgment by neutral citation or document URI. It reads from The National Archives Find Case Law API, which the README says covers judgments from 2003 onward and needs no authentication. The README lists the UK Supreme Court, Court of Appeal, High Court divisions and several tribunals. It runs locally on Bun over stdio. The license is PolyForm Noncommercial 1.0.0, so use is limited to personal, educational and non-commercial purposes, and commercial use needs a separate license from the maintainer. Not verified by us: accuracy or completeness of results, behavior of the National Archives API, whether the server runs as documented, and long-term maintenance.",
+        "category": "legal_research",
+        "external_url": "https://github.com/georgejeffers/uk-case-law-mcp-server",
+        "mcp_repo_url": "https://github.com/georgejeffers/uk-case-law-mcp-server",
+        "mcp_install_command": null,
+        "pricing_model": "free",
+        "pricing_details": "Free for personal, educational and non-commercial use under PolyForm Noncommercial 1.0.0. Commercial use requires a separate license.",
+        "tags": [
+          "uk",
+          "case-law",
+          "legal-research",
+          "national-archives",
+          "mcp",
+          "typescript"
+        ],
+        "creator_name": "George Jefferson",
+        "creator_url": "https://github.com/georgejeffers",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "uk-legal-mcp",
+      "decision": "approved",
+      "reviewed_at": "2026-11-22",
+      "reviewer": "Claude Fable 5.2 with two independent Claude Sonnet 5.5 source reviews, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/paulieb89/uk-legal-mcp/main/README.md",
+          "kind": "maintainer",
+          "sha256": "ca339ea01a557ed98f0560ea24ed331154909bb3c3f94469a0668881b3520cf8",
+          "quote": "Maintained by BOUCH — private hosting, custom tools and setup: paul@bouch.dev"
+        },
+        {
+          "url": "https://www.bouch.dev/products/uk-legal-mcp",
+          "kind": "vendor",
+          "sha256": "b44c7baac78419842ada70ae3a9be0aa5b6e333bfdc57ee99eaecf5c4bfa85bf",
+          "quote": "Search UK legislation, court judgments, Hansard debates and HMRC guidance, with citations your agent can point back to."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/paulieb89/uk-legal-mcp/main/server.json",
+          "kind": "maintainer",
+          "sha256": "b6b7efb5ab360ed019e33eb235154d0ed7d79f6fcd8d7b74eb1cd01b4517d496",
+          "quote": "\"url\": \"https://uk-legal-mcp.fly.dev/mcp\""
+        },
+        {
+          "url": "https://raw.githubusercontent.com/paulieb89/uk-legal-mcp/main/README.md",
+          "kind": "maintainer",
+          "sha256": "ca339ea01a557ed98f0560ea24ed331154909bb3c3f94469a0668881b3520cf8",
+          "quote": "Hosted endpoint — no install, no API key:"
+        },
+        {
+          "url": "https://www.bouch.dev/products/uk-legal-mcp",
+          "kind": "vendor",
+          "sha256": "b44c7baac78419842ada70ae3a9be0aa5b6e333bfdc57ee99eaecf5c4bfa85bf",
+          "quote": "claude mcp add --transport http uk-legal https://uk-legal-mcp.fly.dev/mcp"
+        }
+      ],
+      "listing_sha256": "1524eacc099fbb7f1f20bf6f255d6dcc9897b281b8ffc4623fdbbc98bc00c85a",
+      "claims": {
+        "slug": "uk-legal-mcp",
+        "name": "UK Legal MCP",
+        "tagline": "Open-source MCP server for UK legislation, case law, Hansard, OSCOLA citations and HMRC guidance.",
+        "description": "UK Legal MCP is an open-source MCP server that connects AI assistants to UK legal sources: legislation from legislation.gov.uk, court judgments from Find Case Law at The National Archives, Hansard debates, bills, votes, committees, OSCOLA citation parsing and HMRC guidance. It returns primary source text and citation metadata. The maintainer publishes a hosted endpoint that needs no install and no API key, and a local mode that runs through uvx. It is MIT licensed and maintained by BOUCH. Scope is United Kingdom sources; the maintainer notes legislation can apply differently across England, Wales, Scotland and Northern Ireland. Not verified by us: accuracy and completeness of results, uptime, the tool count, and the operator's country or business registration.",
+        "category": "legal_research",
+        "external_url": "https://www.bouch.dev/products/uk-legal-mcp",
+        "mcp_repo_url": "https://github.com/paulieb89/uk-legal-mcp",
+        "mcp_install_command": null,
+        "pricing_model": "free",
+        "pricing_details": "Open source, MIT license. Hosted endpoint needs no API key. BOUCH offers private hosting; no price is published.",
+        "tags": [
+          "uk",
+          "case-law",
+          "legislation",
+          "hansard",
+          "oscola",
+          "hmrc"
+        ],
+        "creator_name": "BOUCH (Paul Boucherat)",
+        "creator_url": "https://github.com/paulieb89",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "uk-legal-skills",
+      "decision": "approved",
+      "reviewed_at": "2026-11-22",
+      "reviewer": "Claude Fable 5.2 with two independent Claude Sonnet 5.5 source reviews, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://raw.githubusercontent.com/davendra/uk-legal-skills/main/LICENSE.md",
+          "kind": "maintainer",
+          "sha256": "97e0cfb0bd7ed4f6fdd4ba4a0d4fdafb5875d94cf3c0bc728fc20ef052cbc027",
+          "quote": "Copyright 2026 Davendra Patel (trading as The Counsel)"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/davendra/uk-legal-skills/main/README.md",
+          "kind": "maintainer",
+          "sha256": "05554cff67173f56a9dd71b856c5446a8a25ab403289bea2ffb49da7c1ad1d59",
+          "quote": "Each skill is grounded in a specific corner of England & Wales law, with the precise statute in the margin"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/davendra/uk-legal-skills/main/mcp-servers/uk-legislation/src/index.ts",
+          "kind": "maintainer",
+          "sha256": "8ddfce4a99bb34aa87b5bdea92e2fab4161c40baed4a4dc745cff3445206662e",
+          "quote": "import { McpServer } from \"@modelcontextprotocol/sdk/server/mcp.js\";"
+        }
+      ],
+      "listing_sha256": "1955e49827ed1af5aabec8a250c4b7f02849ec061ca1c74ab63db899526ab4ba",
+      "claims": {
+        "slug": "uk-legal-skills",
+        "name": "UK Legal Skills",
+        "tagline": "Claude Code skills and local MCP servers for England and Wales law",
+        "description": "UK Legal Skills is a set of Claude Code skills run as /legal commands. The README lists 38 skills and 12 agents for England and Wales legal work, such as contract triage and review. It includes two local MCP servers written in TypeScript, one for legislation and one for case law, that query public government sources and need no API key. It covers England and Wales only, and the README says it is not legal advice. The code is source-available under the Functional Source License (FSL-1.1-Apache-2.0), not open source, and cannot be repackaged as a competing hosted service. Not verified: output accuracy, price, the operator's location, and the separate hosted product.",
+        "category": "legal_research",
+        "external_url": "https://github.com/davendra/uk-legal-skills",
+        "mcp_repo_url": "https://github.com/davendra/uk-legal-skills",
+        "mcp_install_command": null,
+        "pricing_model": "contact",
+        "pricing_details": null,
+        "tags": [
+          "uk",
+          "england-wales",
+          "legislation",
+          "case-law",
+          "claude-code",
+          "mcp"
+        ],
+        "creator_name": "Davendra Patel (trading as The Counsel)",
+        "creator_url": "https://github.com/davendra",
         "logo_url": null,
         "firm_size_fit": []
       }
@@ -1774,6 +3195,132 @@
         ],
         "creator_name": "JamesANZ",
         "creator_url": "https://github.com/JamesANZ",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "vaquill-ai",
+      "decision": "approved",
+      "reviewed_at": "2026-11-22",
+      "reviewer": "Claude Fable 5.2 with two independent Claude Sonnet 5.5 source reviews, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://www.vaquill.ai/terms",
+          "kind": "vendor",
+          "sha256": "75f7ff3d27e5fad67c6e298266777a4501a0980ef85234e3fce6d624644b54b7",
+          "quote": "an India-registered limited liability partnership that operates Vaquill AI"
+        },
+        {
+          "url": "https://www.vaquill.ai/about",
+          "kind": "vendor",
+          "sha256": "c5d3f7495de217634a51a2454d6f553caf5db4f5bcbcc9939224c4e3d394373a",
+          "quote": "Vaquill AI covers the complete US Code, the CFR, and all 56 state and territory statute codes: 6M+ sections, normalized, cross-referenced, and citation-addressable."
+        },
+        {
+          "url": "https://www.vaquill.ai/mcp",
+          "kind": "vendor",
+          "sha256": "8a53283abcf1695ba5e785e87e5fca03067d5f80d560302ac22dc8bb33861e4f",
+          "quote": "Search the US Code, the CFR, and 56 state and territory statute codes (6M+ sections) from Claude, ChatGPT, Gemini, Cursor, VS Code, and Windsurf."
+        },
+        {
+          "url": "https://www.vaquill.ai/llms.txt",
+          "kind": "vendor",
+          "sha256": "155475c00284a627acd4cae70c91d12132d34b2d80e34a57fc31200cade4a78c",
+          "quote": "Sold as a developer API, not as an end-user application."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/vaquill-AI/vaquill-mcp/main/README.md",
+          "kind": "maintainer",
+          "sha256": "97cfe26a717395faa3fe5b9ff083fab40d5b437079b5fbdc750d3ae43504600a",
+          "quote": "new accounts get 1,000 free API credits, no card required"
+        }
+      ],
+      "listing_sha256": "857b4256163884eb7cdd4b623f1247677df837bbf91a60ff1b9f1709f5bfd1ae",
+      "claims": {
+        "slug": "vaquill-ai",
+        "name": "Vaquill AI",
+        "tagline": "US statutes, regulations and court rules as MCP tools and an API",
+        "description": "Vaquill AI is a data service for US primary law, sold to developers and companies, with an MCP server. Through MCP tools an AI client can search the US Code, the CFR and 56 state and territory statute codes (6M+ sections per the vendor), resolve Bluebook citations and read section text. The vendor lists Claude, ChatGPT, Gemini, Cursor, VS Code and Windsurf as supported clients. Install the local package with pip install vaquill-mcp, or add the hosted server at https://mcp.vaquill.ai/mcp. New accounts get 1,000 free API credits, no card required. The vendor says it is a developer API, not an end-user application. Its terms name Aralsura Solutions LLP, an India-registered partnership, as the operator. We did not test search accuracy, corpus completeness, credit billing, paid prices, or security claims.",
+        "category": "legal_research",
+        "external_url": "https://www.vaquill.ai/",
+        "mcp_repo_url": "https://github.com/Vaquill-AI/vaquill-mcp",
+        "mcp_install_command": null,
+        "pricing_model": "freemium",
+        "pricing_details": "New accounts get 1,000 free API credits, no card required.",
+        "tags": [
+          "statutes",
+          "us-law",
+          "legal-research",
+          "regulations",
+          "api",
+          "citations"
+        ],
+        "creator_name": "Aralsura Solutions LLP (Vaquill AI)",
+        "creator_url": "https://www.vaquill.ai/about",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "venley-mcp",
+      "decision": "approved",
+      "reviewed_at": "2026-11-22",
+      "reviewer": "Claude Fable 5.2 with two independent Claude Sonnet 5.5 source reviews, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://venley.ai/nosotros",
+          "kind": "vendor",
+          "sha256": "08504da7889df425ad7dd16e58f9d85fbbe46f6879f9431f07ffb2715ffbd68a",
+          "quote": "Venley es un producto de Venezolana de Tecnología Legal S.A., RIF J-50551555-1."
+        },
+        {
+          "url": "https://venley.ai/producto/mcp",
+          "kind": "vendor",
+          "sha256": "902e7fa36cbde06eaab40b5f6ad32d8032a73df7ddd8eba73d28ff3204a4ab88",
+          "quote": "Conecte ChatGPT o Claude con Sentencias del TSJ y normas habilitadas para su cuenta, sus referencias de publicación y sus Colecciones."
+        },
+        {
+          "url": "https://venley.ai/ayuda/guias/conectar-claude",
+          "kind": "vendor",
+          "sha256": "fda32ddaba0e71e09f94de15d28cced6409894916e535a439155d691a248386f",
+          "quote": "Use el nombre Venley y la URL https://api.venley.ai/mcp. Haga clic en Añadir."
+        },
+        {
+          "url": "https://venley.ai/precios",
+          "kind": "vendor",
+          "sha256": "b683bd093dde3362ae925dbba059895a54f8d9c1f7b2cb532f7313e56878eb86",
+          "quote": "Precios de Venley: Gratis, Básico $11,99 y Pro $24,99 + IVA"
+        }
+      ],
+      "listing_sha256": "0a71204b0bbe9ac075cc487057bab2794427f49084d0b476e01ddd3701a0056f",
+      "claims": {
+        "slug": "venley-mcp",
+        "name": "Venley MCP",
+        "tagline": "Connect ChatGPT or Claude to Venezuelan TSJ judgments and laws, with links back to the source document.",
+        "description": "Venley MCP connects ChatGPT or Claude to judgments of Venezuela's Supreme Court (TSJ), laws and other norms enabled for the user's account, publication references and the user's own Collections. It runs on the permissions of the user's Venley account, and answers link to the document so the user can check the cited passage in context. Venezolana de Tecnología Legal S.A. makes it for independent lawyers, law firms and legal departments that research Venezuelan law. Its pages are in Spanish. The vendor publishes the server URL and connector steps for ChatGPT and Claude. A free plan includes 10 MCP reads per month, and paid plans allow more. We did not verify answer accuracy, citation quality, account behavior or security claims.",
+        "category": "legal_research",
+        "external_url": "https://venley.ai/producto/mcp",
+        "mcp_repo_url": "https://api.venley.ai/mcp",
+        "mcp_install_command": null,
+        "pricing_model": "freemium",
+        "pricing_details": "Free $0 (10 MCP reads per month); Basic $11.99 + IVA per month (200 MCP reads); Pro $24.99 + IVA per month (500 MCP reads). Prices in USD.",
+        "tags": [
+          "venezuela",
+          "case-law",
+          "legal-research",
+          "spanish",
+          "tsj",
+          "mcp"
+        ],
+        "creator_name": "Venezolana de Tecnología Legal S.A.",
+        "creator_url": "https://venley.ai/nosotros",
         "logo_url": null,
         "firm_size_fit": []
       }
@@ -1825,6 +3372,131 @@
         ],
         "creator_name": "Clio",
         "creator_url": "https://vlex.com",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "voicefleet",
+      "decision": "approved",
+      "reviewed_at": "2026-11-22",
+      "reviewer": "Claude Fable 5.2 with two independent Claude Sonnet 5.5 source reviews, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://voicefleet.ai/for/law-firms",
+          "kind": "vendor",
+          "sha256": "0aede93738227d742249f708ead83be60662a68725b812a102fe118897cf9513",
+          "quote": "you keep your number and forward your calls. It answers general questions using the information you give it, such as your practice areas, office hours and how consultations work."
+        },
+        {
+          "url": "https://voicefleet.ai/terms",
+          "kind": "vendor",
+          "sha256": "3d37ed3fd73d959d179c526c71030b65a4eda3762dcb991a51e1b51b94df47e8",
+          "quote": "operating from Dublin, Ireland"
+        },
+        {
+          "url": "https://voicefleet.ai/",
+          "kind": "vendor",
+          "sha256": "38faa23d2c649212e6368d6a29fda041d6f1cf36684540162b5d7fa1199b848a",
+          "quote": "openclaw mcp add voicefleet --url https://voicefleet.ai/api/mcp"
+        },
+        {
+          "url": "https://voicefleet.ai/pricing",
+          "kind": "vendor",
+          "sha256": "a466f8a0f99d4af1ebc2d875dfc1f7a19c774a330aab231444319c05cbcf52ec",
+          "quote": "Starter, Growth and Pro are €99, €299 and €599 billed in euros (Ireland and Europe, including the UK), $99, $299 and $599 billed in US dollars (United States), or A$140, A$424 and A$851 billed in Australian dollars (Australia)."
+        },
+        {
+          "url": "https://voicefleet.ai/plugins/mcp",
+          "kind": "vendor",
+          "sha256": "3e88edc61144821e5eac7897d69e762c9f7479a647eef4f05d84cd5d1224395e",
+          "quote": "Send a JSON-RPC 2.0 tools/call request to https://voicefleet.ai/api/mcp."
+        }
+      ],
+      "listing_sha256": "5fdb488e5504101203970874df9eb17c8ded4353c64fe56693c32cec5cb091fe",
+      "claims": {
+        "slug": "voicefleet",
+        "name": "VoiceFleet",
+        "tagline": "AI phone receptionist that answers a firm's calls, takes caller details and books consultations.",
+        "description": "VoiceFleet is an AI phone receptionist operated from Dublin, Ireland. For law firms, it answers the firm's existing number after the firm forwards its calls, and answers general questions from information the firm supplies, such as practice areas, office hours and how consultations work. For new enquiries, it takes the caller's name, contact details and a short description of the matter, and can book an initial consultation into a connected Google Calendar, Calendly or Cal.com. The firm gets a summary of every call, and on the Growth plan calls can transfer to a member of staff. VoiceFleet states that it does not give legal advice, check for conflicts or connect to practice management software such as Clio. It also publishes an MCP server at https://voicefleet.ai/api/mcp. Its public tools cover integration lookup, a call-readiness score and a missed-call cost estimate. Its workspace tools, which need a bearer token, cover assistant status, recent calls and call-forwarding rules. Call accuracy for legal calls, security and compliance claims, customer counts, the legal entity name and the behavior of the account-based MCP tools were not verified.",
+        "category": "client_communication",
+        "external_url": "https://voicefleet.ai/for/law-firms",
+        "mcp_repo_url": "https://voicefleet.ai/api/mcp",
+        "mcp_install_command": null,
+        "pricing_model": "paid",
+        "pricing_details": "Starter, Growth and Pro cost 99, 299 and 599 a month, billed in euros (Ireland and Europe, including the UK) or US dollars (United States), or A$140, A$424 and A$851 in Australia. Plans include 500, 1,000 and 2,000 minutes a month. Every plan has a 7-day free trial, no setup fee and no contract.",
+        "tags": [
+          "voice",
+          "receptionist",
+          "intake",
+          "scheduling",
+          "mcp",
+          "ireland"
+        ],
+        "creator_name": "VoiceFleet",
+        "creator_url": "https://voicefleet.ai/",
+        "logo_url": null,
+        "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "whisperit",
+      "decision": "approved",
+      "reviewed_at": "2026-11-22",
+      "reviewer": "Claude Fable 5.2 with two independent Claude Sonnet 5.5 source reviews, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": false,
+      "sources": [
+        {
+          "url": "https://whisperit.ai/legal",
+          "kind": "vendor",
+          "sha256": "e93c07e7761ceab321b2afc8d573948fe9171d133564a19df7adf1451f37b6ef",
+          "quote": "Whisperit SA · Unlimitrust Campus · Route des Flumeaux 46 · 1008 Prilly · Switzerland · CHE-450.115.788"
+        },
+        {
+          "url": "https://whisperit.ai/llms.txt",
+          "kind": "vendor",
+          "sha256": "10fcf39246d5b56286916b8d16167f47bb9fa057efa7c09611348d07ed652427",
+          "quote": "Whisperit is a Swiss legal AI workspace for law firms: voice dictation, AI-assisted drafting, legal research, and case management in one secure platform."
+        },
+        {
+          "url": "https://whisperit.ai/pricing",
+          "kind": "vendor",
+          "sha256": "16bf1a7f1350baecd2957503631f37d9b52026de63d79480d54bfef4637fb10a",
+          "quote": "Legal research with source citations"
+        },
+        {
+          "url": "https://whisperit.ai/security",
+          "kind": "vendor",
+          "sha256": "e1db0f1c0e2d13bef48fc1ee75d01312b7f5d0ce36435e0bef22b6aa436d3f48",
+          "quote": "Your data never leaves Switzerland."
+        }
+      ],
+      "listing_sha256": "7341934f35af77b576bc28f9ac69eaefdca235f83dec07ff23510433cc43183c",
+      "claims": {
+        "slug": "whisperit",
+        "name": "Whisperit",
+        "tagline": "Swiss AI workspace for lawyers: dictation, drafting, case analysis and research with citations",
+        "description": "Whisperit is an AI workspace for lawyers, notaries and legal teams, made by Whisperit SA of Prilly, Switzerland. Its pricing page lists voice dictation and transcription in French, German, Italian and English, AI case management (parties, timelines, overviews), legal research with source citations, and a shared vault for team work. The vendor states that its data never leaves Switzerland. It is a hosted product. We found no MCP documentation or endpoint on the vendor's pages. We did not verify accuracy, research quality, account behavior, or the vendor's security and compliance claims.",
+        "category": "document_processing",
+        "external_url": "https://whisperit.ai/",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "contact",
+        "pricing_details": null,
+        "tags": [
+          "dictation",
+          "drafting",
+          "legal research",
+          "case management",
+          "switzerland"
+        ],
+        "creator_name": "Whisperit SA",
+        "creator_url": "https://whisperit.ai/",
         "logo_url": null,
         "firm_size_fit": []
       }

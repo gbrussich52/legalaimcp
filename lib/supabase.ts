@@ -12,7 +12,9 @@ export const SUPABASE_SCHEMA = 'legalaimcp'
 // Claude Sonnet 5.5, 2026-11-21: new namespace so production reads the Firecrawl and Supabase MCP link corrections (import 3).
 // Claude Sonnet 5.5, 2026-11-21: new namespace so production reads the corrected pdf-reader-mcp (anymd) pricing text after import 4
 // (docs/changes/2026-11-22-catalog-resource.md), so ISR does not reuse the old claims.
-export const CATALOG_CACHE_REVISION = '2026-11-22-catalog-resource'
+// Claude Fable 5.2, 2026-11-22: new namespace so production reads the 27 listings admitted from the submission queue
+// (docs/changes/2026-11-22-intake.md) instead of a cached catalog that predates them.
+export const CATALOG_CACHE_REVISION = '2026-11-22-intake-27'
 
 export function createSchemaClient(
   url: string,

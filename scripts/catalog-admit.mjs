@@ -76,6 +76,11 @@ function normalizeListing(raw) {
     pricing_model: PRICING.includes(raw.pricing_model) ? raw.pricing_model : refuse(`pricing_model: must be one of ${PRICING.join(', ')}`),
     creator_name: boundedText(raw.creator_name, 'creator_name', 2, 100, { noMarkup: true }),
   }
+  // Claude Fable 5.2, 2026-11-22: the catalog publishes no install command and no firm-size claim
+  // (lib/catalog-evidence.test.ts pins both on every review record). The first real plan carried seven install
+  // commands and only that test caught them, after the records were written. Refuse here, before any record or SQL.
+  if (!absent(raw.mcp_install_command)) refuse('mcp_install_command: must be empty; the catalog links the MCP docs or repo and publishes no install command')
+  if (Array.isArray(raw.firm_size_fit) && raw.firm_size_fit.length) refuse('firm_size_fit: must be empty; the catalog publishes no firm-size claim')
   for (const field of OPTIONAL_TEXT) out[field] = absent(raw[field]) ? null : boundedText(raw[field], field, 1, 2000)
   for (const field of OPTIONAL_URL) out[field] = absent(raw[field]) ? null : httpsUrl(raw[field], field)
   for (const field of ['tags', 'firm_size_fit']) {

@@ -81,6 +81,13 @@ describe('admission check', () => {
     for (const [over, field] of cases) expect(await reasonOf(withListing(over), { fetchSources: false })).toContain(field)
   })
 
+  // Claude Fable 5.2, 2026-11-22: the first real plan carried seven install commands and passed this tool; only
+  // lib/catalog-evidence.test.ts caught them, after the records were written. The tool now refuses them up front.
+  it('refuses an install command and a firm-size claim, which the catalog never publishes', async () => {
+    expect(await reasonOf(withListing({ mcp_install_command: 'npx acme-mcp' }), { fetchSources: false })).toContain('mcp_install_command')
+    expect(await reasonOf(withListing({ firm_size_fit: ['solo'] }), { fetchSources: false })).toContain('firm_size_fit')
+    expect((await run(withListing({ mcp_install_command: '', firm_size_fit: [] }), { fetchSources: false })).ok).toBe(true)
+  })
   it('refuses control characters but not real non-ASCII text', async () => {
     expect(await reasonOf(withListing({ description: 'Acme Draft reviews contract clauses.\u0000 Documentation reviewed only, nothing tested.' }), { fetchSources: false })).toContain('control')
     const out = await run(withListing({ name: 'Acme Dráft 合同', tagline: 'Contract clause review, the firm’s playbook.' }), { fetchSources: false })
