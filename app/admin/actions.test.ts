@@ -12,7 +12,7 @@ import { headers } from 'next/headers'
 import { isAdminAuthenticated } from '@/lib/admin-auth'
 import { getAdminClient } from '@/lib/supabase-admin'
 import { assertCatalogReview, storeCatalogReview } from '@/lib/catalog-review'
-import { updateListingStatus, deleteListing, approveSubmission } from './actions'
+import { updateListingStatus, deleteListing, approveSubmission, rejectSubmission } from './actions'
 
 type AnyRecord = Record<string, unknown>
 
@@ -273,5 +273,32 @@ describe('approveSubmission', () => {
       insertError: { message: 'duplicate key' },
     })
     await expect(approveSubmission('s1')).rejects.toThrow('Failed to create listing: duplicate key')
+  })
+})
+
+// Claude Sonnet 5.5, 2026-11-22: approve and reject must only act on pending rows, so a double click or a stale tab cannot republish or flip a decided submission.
+describe.each(['approved', 'rejected'])('submission already %s', (status) => {
+  it('approveSubmission refuses and writes nothing', async () => {
+    const { inserted, updated } = makeDb({ submission: { id: 's1', listing_data: VALID_LISTING_DATA, submitter_name: 'Jane', status } })
+    await expect(approveSubmission('s1')).rejects.toThrow('Submission is not pending')
+    expect(inserted).toHaveLength(0)
+    expect(updated).toHaveLength(0)
+  })
+  it('rejectSubmission refuses and writes nothing', async () => {
+    const { updated } = makeDb({ submission: { id: 's1', listing_data: VALID_LISTING_DATA, submitter_name: 'Jane', status } })
+    await expect(rejectSubmission('s1')).rejects.toThrow('Submission is not pending')
+    expect(updated).toHaveLength(0)
+  })
+})
+
+describe('rejectSubmission', () => {
+  it('rejects a pending submission with a note', async () => {
+    const { updated } = makeDb({ submission: { id: 's1', listing_data: VALID_LISTING_DATA, submitter_name: 'Jane', status: 'pending' } })
+    await rejectSubmission('s1', 'spam')
+    expect(updated).toContainEqual({ table: 'submissions', payload: { status: 'rejected', notes: 'spam' } })
+  })
+  it('throws when the submission does not exist', async () => {
+    makeDb({ submission: null })
+    await expect(rejectSubmission('missing')).rejects.toThrow('Submission not found')
   })
 })

@@ -156,6 +156,8 @@ export async function approveSubmission(submissionId: string) {
     .eq('id', submissionId)
     .single()
   if (fetchErr || !sub) throw new Error('Submission not found')
+  // Claude Sonnet 5.5, 2026-11-22: only pending submissions can be approved; a decided one must not republish.
+  if (sub.status !== 'pending') throw new Error('Submission is not pending')
 
   // Cast to Record<string, unknown> for safe property access; individual
   // string fields are cast to string at the insert site via String() or '|| ""'.
@@ -249,6 +251,14 @@ export async function approveSubmission(submissionId: string) {
 
 export async function rejectSubmission(submissionId: string, notes?: string) {
   const db = await requireAdmin()
+  // Claude Sonnet 5.5, 2026-11-22: same pending-only rule as approve; do not flip a decided submission.
+  const { data: sub, error: fetchErr } = await db
+    .from('submissions')
+    .select('id, status')
+    .eq('id', submissionId)
+    .single()
+  if (fetchErr || !sub) throw new Error('Submission not found')
+  if (sub.status !== 'pending') throw new Error('Submission is not pending')
   const { error } = await db
     .from('submissions')
     .update({ status: 'rejected', notes: notes || 'Rejected by admin' })
