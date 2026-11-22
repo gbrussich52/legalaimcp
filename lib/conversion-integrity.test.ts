@@ -21,6 +21,15 @@ describe('conversion claims stay within implemented behavior', () => {
       expect(read(file)).toContain("listing.featured_until ? 'Sponsored' : 'Featured'")
     }
   })
+  // Claude Sonnet 5.5, 2026-11-22: Featured is editorial, Sponsored is paid; copy must say so.
+  it('describes Featured and Sponsored truthfully', () => {
+    expect(read('app/terms/page.tsx')).not.toContain('Featured placements are paid and always labeled as featured')
+    expect(read('app/terms/page.tsx')).toContain('Paid placements are labeled Sponsored.')
+    expect(read('app/pricing/page.tsx')).not.toContain('Featured breaks ties between equal matches')
+    expect(read('app/components/FeatureListingCTA.tsx')).not.toContain('Featured badge')
+    expect(read('app/featured/success/page.tsx')).toContain('mailto:hello@legalaimcp.com')
+    expect(read('app/components/Footer.tsx')).toContain("href: '/pricing'")
+  })
   it('does not ship unsupported paid analytics or send planner inputs', () => {
     expect(read('app/workflow-plan/planner.tsx')).not.toMatch(/@vercel\/analytics|fetch\(|localStorage|sessionStorage/)
     expect(read('app/components/AssessmentBooking.tsx')).toContain('utm_source=legalaimcp')

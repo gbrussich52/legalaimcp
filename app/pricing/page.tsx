@@ -75,8 +75,9 @@ export default function PricingPage() {
         <ul className="space-y-2 font-body text-charcoal/80 mb-8">
           <li>✓ Sort boost on /servers, category pages, and homepage Featured grid</li>
           <li>✓ Featured badge on the listing (labeled as sponsored)</li>
-          {/* Claude Opus, 2026-11-12: MCP search now ranks by relevance first; Featured only breaks ties. */}
-          <li>✓ In MCP directory search, Featured breaks ties between equal matches</li>
+          {/* Claude Opus, 2026-11-12: MCP search now ranks by relevance first; Featured only breaks ties.
+              Claude Sonnet 5.5, 2026-11-22: code ranks relevance, then link-checked, then featured (lib/search.ts), so say so. */}
+          <li>✓ In MCP directory search, a paid placement breaks ties between matches that are equally relevant and equally link-checked</li>
           <li>✓ No affiliate links required; one Checkout payment</li>
         </ul>
         <Link href="/servers" className="btn-primary inline-flex">

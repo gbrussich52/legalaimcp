@@ -83,7 +83,8 @@ export function FeatureListingCTA({
             Feature this listing — {PRICE_LABEL} / 30 days
           </p>
           <p className="font-body text-xs text-charcoal/75 mt-1">
-            Sponsored sort boost + Featured badge. MCP search stays free.{' '}
+            {/* Claude Sonnet 5.5, 2026-11-22: a paid listing shows the Sponsored badge, not Featured. */}
+            Sponsored sort boost + Sponsored badge. MCP search stays free.{' '}
             <Link href="/pricing" className="text-gold-text hover:underline">
               Details
             </Link>

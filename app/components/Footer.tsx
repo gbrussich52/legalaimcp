@@ -15,6 +15,8 @@ const RESOURCES = [
   { href: '/workflow-plan', label: 'Free Workflow Plan' },
   { href: '/workflow-assessment', label: 'Workflow Assessment' },
   { href: '/submit', label: 'Submit a Tool' },
+  // Claude Sonnet 5.5, 2026-11-22: pricing was not linked from the footer.
+  { href: '/pricing', label: 'Pricing' },
   { href: '/blog', label: 'Blog' },
   { href: '/about', label: 'About' },
 ]
