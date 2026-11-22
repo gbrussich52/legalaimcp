@@ -105,6 +105,16 @@ describe('admission check', () => {
     expect(out.results[0].reason).toContain('already has a review record')
   })
 
+  it('accepts an identical checked-in record, so --sql and --verify-readback still run after --write-records', async () => {
+    const first = await run(plan())
+    const record = first.admits[0].record
+    const again = await checkPlan(plan(), { gate, policy: { ...policy(), reviews: [record] }, fetcher, now: NOW })
+    expect(again.results[0].reason).toContain('matches the checked-in record')
+    expect(again.admits[0].recorded).toBe(true)
+    const changed = await checkPlan(plan(), { gate, policy: { ...policy(), reviews: [{ ...record, reviewer: 'Someone else' }] }, fetcher, now: NOW })
+    expect(changed.ok).toBe(false)
+  })
+
   it('needs 1 to 5 sources with quotes of at least 15 normalized characters', async () => {
     expect(await reasonOf(plan({ admit: [{ ...baseAdmit(), sources: [] }] }), { fetchSources: false })).toContain('source')
     const six = Array.from({ length: 6 }, () => ({ url: SRC_URL, kind: 'vendor', quote: QUOTE }))
