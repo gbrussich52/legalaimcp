@@ -91,7 +91,9 @@ export default async function CategoryPage({
       // Verified first for the same reason the MCP server orders this way:
       // surface what we can stand behind ahead of what we chose to highlight.
       .order('verified', { ascending: false })
+      // Claude Sonnet 5.5, 2026-11-22: paid placements before editorial picks.
       .order('featured', { ascending: false })
+      .order('featured_until', { ascending: false, nullsFirst: false })
       .order('name', { ascending: true }),
     supabase.from('categories').select('slug, name').neq('slug', slug).order('name'),
   ])

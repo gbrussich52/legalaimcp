@@ -27,7 +27,9 @@ export async function GET(req: Request) {
 
     const { data, error } = await db
       .from('listings')
-      .update({ featured: false })
+      // Claude Sonnet 5.5, 2026-11-22: also clear featured_until so an expired paid row sorts like a plain row.
+      // payments rows and featured_purchased_at keep the purchase history.
+      .update({ featured: false, featured_until: null })
       .eq('featured', true)
       .not('featured_until', 'is', null)
       .lt('featured_until', now)

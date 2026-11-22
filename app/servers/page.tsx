@@ -9,6 +9,7 @@ import { ItemListJsonLd } from '../components/JsonLd'
 import { LISTING_CARD_COLUMNS, type ListingCardData } from '@/lib/types'
 import { CATEGORY_LABELS, PRICING_LABELS } from '@/lib/constants'
 import { sanitizeSearchQuery } from '@/lib/search'
+import { orderFeaturedFirst } from '@/lib/featured-order'
 import { SoftwareConnectionShortlist } from '../components/SoftwareConnection'
 import { withSocial } from '@/lib/seo-meta'
 
@@ -67,8 +68,8 @@ export default async function BrowsePage({
     if (pricing) query = query.eq('pricing_model', pricing)
     if (q) query = query.or(`name.ilike.%${q}%,tagline.ilike.%${q}%`)
 
-    query = query
-      .order('featured', { ascending: false })
+    // Claude Sonnet 5.5, 2026-11-22: paid placements first, then editorial, then name (lib/featured-order.ts).
+    query = orderFeaturedFirst(query)
       .order('name')
       .range((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE - 1)
 

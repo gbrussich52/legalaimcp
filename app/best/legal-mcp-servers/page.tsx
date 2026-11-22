@@ -37,7 +37,9 @@ export default async function BestLegalMcpServersPage() {
       .from('listings')
       .select(LISTING_CARD_COLUMNS)
       .eq('status', 'published')
+      // Claude Sonnet 5.5, 2026-11-22: paid placements before editorial picks.
       .order('featured', { ascending: false })
+      .order('featured_until', { ascending: false, nullsFirst: false })
       .order('verified', { ascending: false })
       .order('name', { ascending: true })
       .limit(ROUNDUP_SIZE)

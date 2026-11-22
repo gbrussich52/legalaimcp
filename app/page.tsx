@@ -48,6 +48,9 @@ export default async function HomePage() {
           .select(LISTING_CARD_COLUMNS) // Q3: card columns only — no description
           .eq('status', 'published')
           .eq('featured', true)
+          // Claude Sonnet 5.5, 2026-11-22: paid placements first so a paid row is always in the six; editorial fill the rest.
+          .order('featured_until', { ascending: false, nullsFirst: false })
+          .order('name')
           .limit(6)
           .then((r) => r.data),
         supabase
