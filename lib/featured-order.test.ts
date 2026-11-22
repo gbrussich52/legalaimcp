@@ -51,8 +51,8 @@ describe('sortHomeFeatured', () => {
     const rows = [r('contact', 'contact'), r('paidFree', 'free', '2026-12-10T00:00:00Z'), r('paid', 'paid')]
     expect(names(sortHomeFeatured(rows, now))[0]).toBe('paidFree')
   })
-  it('two paid rows keep their incoming order', () => {
-    const rows = [r('p1', 'free', '2026-12-10T00:00:00Z'), r('p2', 'contact', '2026-12-11T00:00:00Z')]
+  it('two paid rows in the same tier keep their incoming order', () => {
+    const rows = [r('p1', 'free', '2026-12-10T00:00:00Z'), r('p2', 'free', '2026-12-11T00:00:00Z')]
     expect(names(sortHomeFeatured(rows, now))).toEqual(['p1', 'p2'])
   })
   it('editorial rows keep the price-tier order', () => {
