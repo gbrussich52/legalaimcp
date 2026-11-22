@@ -3,8 +3,24 @@
   "name": "com.legalaimcp/directory",
   "title": "LegalAIMCP Directory",
   "description": "Search a curated directory of AI tools and MCP servers for law firms. Read-only, free, no auth.",
-  "version": "1.0.0",
+  "version": "1.4.0",
   "websiteUrl": "https://legalaimcp.com/mcp",
+  "repository": {
+    "url": "https://github.com/gbrussich52/legalaimcp",
+    "source": "github"
+  },
+  "icons": [
+    {
+      "src": "https://legalaimcp.com/icon",
+      "mimeType": "image/png",
+      "sizes": ["512x512"]
+    },
+    {
+      "src": "https://legalaimcp.com/apple-icon.png",
+      "mimeType": "image/png",
+      "sizes": ["180x180"]
+    }
+  ],
   "remotes": [
     {
       "type": "streamable-http",
