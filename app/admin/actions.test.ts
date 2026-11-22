@@ -4,7 +4,8 @@ vi.mock('next/cache', () => ({ revalidatePath: vi.fn() }))
 vi.mock('next/headers', () => ({ headers: vi.fn() }))
 vi.mock('@/lib/admin-auth', () => ({ isAdminAuthenticated: vi.fn() }))
 vi.mock('@/lib/supabase-admin', () => ({ getAdminClient: vi.fn() }))
-vi.mock('@/lib/catalog-review', () => ({ assertCatalogReview: vi.fn(), storeCatalogReview: vi.fn() }))
+// Claude Opus 5.5, 2026-11-22: keep the real generateSlug (moved into this module) while mocking the gate.
+vi.mock('@/lib/catalog-review', async (importOriginal) => ({ ...(await importOriginal<typeof import('@/lib/catalog-review')>()), assertCatalogReview: vi.fn(), storeCatalogReview: vi.fn() }))
 
 import { revalidatePath } from 'next/cache'
 import { headers } from 'next/headers'

@@ -7,7 +7,8 @@ import { getAdminClient } from '@/lib/supabase-admin'
 import { isSameOriginRequest } from '@/lib/origin'
 import { CATEGORY_LABELS, PRICING_LABELS } from '@/lib/constants'
 import { z } from 'zod'
-import { assertCatalogReview, storeCatalogReview } from '@/lib/catalog-review'
+// Claude Opus 5.5, 2026-11-22: generateSlug now lives in lib/catalog-review.ts, shared with scripts/admit-submissions.mjs.
+import { assertCatalogReview, storeCatalogReview, generateSlug } from '@/lib/catalog-review'
 import { LISTING_ADMIN_COLUMNS } from '@/lib/types'
 
 /**
@@ -143,15 +144,6 @@ export async function deleteListing(id: string) {
   const { error } = await db.from('listings').delete().eq('id', id)
   if (error) throw new Error(`Failed to delete listing: ${error.message}`)
   revalidateAll()
-}
-
-function generateSlug(name: string): string {
-  return name
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '')
 }
 
 export async function approveSubmission(submissionId: string) {
