@@ -6,18 +6,22 @@ import { pathToFileURL } from 'node:url'
 /** An interrupted/failed real run invalidates prior success before work starts. */
 export async function withVerifyHealth(run, { file, dryRun = false } = {}) {
   if (dryRun) return run()
-  const save = async (ok, counts, errorCode) => {
+  const save = async (ok, counts, errorCode, extra = {}) => {
     await mkdir(path.dirname(file), { recursive: true })
     const temp = `${file}.${process.pid}.tmp`
-    await writeFile(temp, JSON.stringify({checkedAt:new Date().toISOString(),ok,counts,errorCode},null,2)+'\n')
+    await writeFile(temp, JSON.stringify({checkedAt:new Date().toISOString(),ok,counts,errorCode,...extra},null,2)+'\n')
     await rename(temp,file)
   }
   await save(false,null,'IN_PROGRESS')
   try {
-    const counts = await run()
-    if (!counts || !Number.isInteger(counts.checked) || counts.checked < 1) throw new Error('Empty verification result')
-    await save(true,counts,null)
-    return counts
+    const result = await run()
+    // Claude Sonnet 5.5, 2026-11-22: run() may carry the source-audit outcome beside the link-check counts. Record both
+    // separately; plain counts (no audit field) keep the old four-key file.
+    const { audit, ...counts } = result ?? {}
+    if (!result || !Number.isInteger(counts.checked) || counts.checked < 1) throw new Error('Empty verification result')
+    if (audit === undefined) await save(true,counts,null)
+    else await save(audit.ok===true,counts,audit.ok===true?null:'SOURCE_AUDIT_FAILED',{audit,linkCheck:{ran:true,...counts}})
+    return result
   } catch (error) {
     await save(false,null,'VERIFY_FAILED')
     throw error

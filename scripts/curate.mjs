@@ -39,11 +39,12 @@ import process from 'node:process'
 import { createClient } from '@supabase/supabase-js'
 import { withVerifyHealth } from './weekly/health.mjs'
 import { auditPublishedCatalog } from './import-reviewed-catalog.mjs'
+// Claude Sonnet 5.5, 2026-11-22: CLI 3.x argv lives in one tested module.
+import { PROJECT_REF, supabaseArgv } from './weekly/supabase-argv.mjs'
 
 const run = promisify(execFile)
 const ROOT = path.resolve(import.meta.dirname, '..')
 const HEALTH_FILE = path.join(ROOT, 'scripts', 'weekly', 'logs', 'verify-health.json')
-const PROJECT_REF = 'bzrdzchrdthyrhdsodla'
 const SEEN_FILE = path.join(ROOT, 'scripts', 'curate-seen.json')
 
 const argv = process.argv.slice(2)
@@ -222,6 +223,7 @@ async function discover() {
 
   if (dryRun) {
     log('dry run — nothing written')
+    finish()
     return
   }
 
@@ -349,7 +351,7 @@ const MAX_FAILURES = 3
  * RLS denies anonymous UPDATE on `listings` (correctly — the public key is
  * shipped to every browser). The alternative would be putting a service-role
  * key in .env.local, which creates a second, far more dangerous secret on disk
- * for a script that runs weekly on one laptop. `supabase db query --linked`
+ * for a script that runs weekly on one laptop. `supabase db query --remote=<ref>`
  * already authenticates as postgres through the CLI's own stored credentials,
  * so this adds no new trust surface.
  *
@@ -359,7 +361,9 @@ const MAX_FAILURES = 3
  * reaches it — but the escaping stays as defense in depth.
  */
 async function sql(query) {
-  const { stdout } = await run('supabase', ['db', 'query', '--linked', '--project-ref', PROJECT_REF, query], {
+  // Claude Sonnet 5.5, 2026-11-22: `--linked` fails on CLI 3.x; every caller of sql() writes, so write: true. Output is JSON
+  // ({ rows, boundary, warning }); the one caller ignores it, so nothing parses it.
+  const { stdout } = await run('supabase', supabaseArgv(query, { write: true }), {
     maxBuffer: 10 * 1024 * 1024,
     timeout: 45000,
     killSignal: 'SIGKILL',
@@ -375,9 +379,24 @@ const uuid = (v) => {
 async function verify() {
   const dryRun = has('dry-run')
   const supabase = await loadEnv()
-  const sourceAudit = await auditPublishedCatalog(supabase, { output: dryRun ? false : undefined })
-  if (!sourceAudit.ok) throw new Error('Primary-source review failed; inspect scripts/weekly/logs/catalog-health.json and catalog-improve.md')
-  log(`primary claims: ${sourceAudit.checked} reviewed; ${sourceAudit.sourceRequests} source requests; no automatic claim or review-date changes`)
+  // Claude Sonnet 5.5, 2026-11-22: the source audit and the link check are separate jobs. A failed audit used to throw here
+  // and the link check below never ran (not since 2026-10-28). Now the audit outcome is kept, the
+  // link check always runs, and the command ends with exit 2 if the audit had findings or errored.
+  // The audit itself is unchanged: no skipping, no automatic claim or review-date refresh.
+  let sourceAudit
+  try {
+    sourceAudit = await auditPublishedCatalog(supabase, { output: dryRun ? false : undefined })
+  } catch {
+    sourceAudit = { ok: false, checked: 0, findings: [], errorCode: 'AUDIT_ERROR' }
+  }
+  const audit = { ok: sourceAudit.ok === true, checked: sourceAudit.checked ?? 0, findings: sourceAudit.findings?.length ?? 0 }
+  if (audit.ok) {
+    log(`primary claims: ${sourceAudit.checked} reviewed; ${sourceAudit.sourceRequests} source requests; no automatic claim or review-date changes`)
+  } else {
+    log(`primary-source review FAILED (${sourceAudit.errorCode ?? 'SOURCE_REVIEW_REQUIRED'}, ${audit.findings} finding(s)); see scripts/weekly/logs/catalog-health.json and catalog-improve.md. Running the link check anyway; exit code will be 2.`)
+  }
+  // Applied at every exit below so a failed audit always ends the command with 2.
+  const finish = () => { if (!audit.ok) process.exitCode = 2 }
 
   const { data: listings, error } = await supabase
     .from('listings')
@@ -477,7 +496,8 @@ async function verify() {
   // Non-zero exit so a scheduled run surfaces in launchd logs as needing a
   // human look, rather than succeeding quietly while listings disappear.
   if (toPull.length) process.exitCode = 1
-  return counts
+  finish()
+  return { ...counts, audit }
 }
 
 // ------------------------------------------------------------------ main ----
