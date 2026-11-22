@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { FEATURED_PRICE_CENTS } from '@/lib/featured-pricing'
+import { FEATURED_PRICE_CENTS, featuredState } from '@/lib/featured-pricing'
 
 const PRICE_LABEL = `$${(FEATURED_PRICE_CENTS / 100).toFixed(0)}`
 
@@ -58,6 +58,9 @@ export function FeatureListingCTA({
       setLoading(false)
     }
   }
+
+  // Claude Sonnet 5.5, 2026-11-22: editorial picks have nothing to buy; show no button.
+  if (featuredState(alreadyFeatured, featuredUntil, new Date()) === 'editorial') return null
 
   if (paidActive) {
     return (

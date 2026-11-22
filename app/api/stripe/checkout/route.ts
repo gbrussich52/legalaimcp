@@ -56,10 +56,17 @@ export async function POST(req: Request) {
     )
   }
 
-  let listing: { id: string; slug: string; name: string; status: string } | null = null
+  let listing: {
+    id: string
+    slug: string
+    name: string
+    status: string
+    featured: boolean | null
+    featured_until: string | null
+  } | null = null
   try {
     const db = getAdminClient()
-    let query = db.from('listings').select('id, slug, name, status')
+    let query = db.from('listings').select('id, slug, name, status, featured, featured_until')
     if (parsed.data.listing_id) {
       query = query.eq('id', parsed.data.listing_id)
     } else {
@@ -83,6 +90,15 @@ export async function POST(req: Request) {
     return NextResponse.json(
       { error: 'Only published listings can purchase Featured' },
       { status: 400 },
+    )
+  }
+
+  // Claude Sonnet 5.5, 2026-11-22: refuse editorial picks (featured, no end date). A payment would
+  // stamp featured_until and the expiry cron would then remove a placement that had no end.
+  if (listing.featured === true && listing.featured_until == null) {
+    return NextResponse.json(
+      { error: 'This listing is already featured by our editors. There is nothing to buy.' },
+      { status: 409 },
     )
   }
 
