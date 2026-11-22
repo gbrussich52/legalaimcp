@@ -21,6 +21,25 @@ export const hostOf = (url) => new URL(url).hostname.toLowerCase().replace(/^www
 // The same rule in SQL, applied to existing rows. [.] avoids backslashes in the generated text.
 const SQL_HOST = (col) => `regexp_replace(lower(substring(${col} from '^[A-Za-z][A-Za-z0-9+.-]*://(?:[^@/?#]*@)?([^/:?#]+)')), '^www[.]', '')`
 
+// Claude Sonnet 5.5, 2026-11-22: the guard compared bare hosts, so every github.com repo listing blocked every
+// new repo listing. On shared code and package hosts the key is host/first-two-path-segments (lower case, trailing
+// .git dropped from the second segment); any other site keeps host-only. JS and SQL below must agree.
+const SHARED_HOSTS = ['github.com', 'gitlab.com', 'bitbucket.org', 'codeberg.org', 'huggingface.co', 'npmjs.com', 'pypi.org']
+export const siteKey = (url) => {
+  const host = hostOf(url)
+  if (!SHARED_HOSTS.includes(host)) return host
+  const segs = new URL(url).pathname.toLowerCase().split('/').filter(Boolean).slice(0, 2)
+  if (segs.length === 2) segs[1] = segs[1].replace(/\.git$/, '')
+  return `${host}/${segs.join('/')}`
+}
+// Returns SQL text for the same key over a column. Path = text after the authority, before ? or #.
+const SQL_SITE_KEY = (col) => {
+  const host = SQL_HOST(col)
+  const segs = `array_remove(string_to_array(lower(coalesce(substring(${col} from '^[A-Za-z][A-Za-z0-9+.-]*://[^/?#]*(/[^?#]*)?'), '')), '/'), '')`
+  const tail = `case when cardinality(${segs}) >= 2 then (${segs})[1] || '/' || regexp_replace((${segs})[2], '[.]git$', '') else array_to_string(${segs}, '/') end`
+  return `(case when ${host} in (${SHARED_HOSTS.map((h) => `'${h}'`).join(', ')}) then ${host} || '/' || ${tail} else ${host} end)`
+}
+
 class Refusal extends Error {}
 const refuse = (message) => { throw new Refusal(message) }
 
@@ -110,7 +129,7 @@ export async function checkPlan(plan, { gate, policy, fetcher = fetch, fetchSour
   if (typeof plan.reviewed_at !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(plan.reviewed_at) || new Date(`${plan.reviewed_at}T00:00:00Z`).toISOString?.().slice(0, 10) !== plan.reviewed_at) return fail('reviewed_at: must be a real YYYY-MM-DD date')
   try { boundedText(plan.reviewer, 'reviewer', 2, 200) } catch (e) { return fail(e.message) }
 
-  const seenIds = new Set(), seenSlugs = new Set()
+  const seenIds = new Set(), seenSlugs = new Set(), seenKeys = new Set()
   // Bodies fetched once per run; the final gate pass re-reads the same bytes instead of hitting the vendor twice.
   const bodies = new Map()
   const cachedFetch = async (url, init) => bodies.has(String(url)) ? new Response(bodies.get(String(url))) : fetcher(url, init)
@@ -125,6 +144,10 @@ export async function checkPlan(plan, { gate, policy, fetcher = fetch, fetchSour
       if (item.listing.slug !== undefined && item.listing.slug !== slug) refuse(`slug: listing.slug ${item.listing.slug} differs from the admin rule result ${slug}`)
       if (seenSlugs.has(slug)) refuse(`duplicate slug ${slug}`)
       seenSlugs.add(slug)
+      // Claude Sonnet 5.5, 2026-11-22: two admits for one site (or one repo) in a plan are refused.
+      const key = siteKey(listing.external_url)
+      if (seenKeys.has(key)) refuse(`another admit in this plan already points at ${key}`)
+      seenKeys.add(key)
       if (policy.blocked_slugs.includes(slug)) refuse(`blocked slug ${slug}`)
       for (const field of ['external_url', 'mcp_repo_url', 'creator_url']) {
         if (listing[field] && policy.blocked_domains.some((d) => { const h = new URL(listing[field]).hostname.toLowerCase(); return h === d || h.endsWith(`.${d}`) })) refuse(`blocked domain in ${field}`)
@@ -136,7 +159,8 @@ export async function checkPlan(plan, { gate, policy, fetcher = fetch, fetchSour
       const sources = staticSources(item.sources, gate)
       const listing_sha256 = gate.catalogFingerprint(claims)
       const existing = policy.reviews.find((r) => r.slug === slug)
-      const admit = { slug, host: hostOf(listing.external_url), submission_ids: ids, listing: claims, listing_sha256, record: null, recorded: false, note: `Admitted as /servers/${slug} after primary-source review ${plan.reviewed_at}.` }
+      // host carries the site key (host, or host/owner/repo on shared code hosts), not the bare host.
+      const admit = { slug, host: siteKey(listing.external_url), submission_ids: ids, listing: claims, listing_sha256, record: null, recorded: false, note: `Admitted as /servers/${slug} after primary-source review ${plan.reviewed_at}.` }
       if (!fetchSources) {
         if (existing && existing.listing_sha256 !== listing_sha256) refuse(`slug ${slug} already has a review record with different claims`)
         admit.recorded = Boolean(existing)
@@ -227,7 +251,7 @@ wanted as (
 ${ctes},
 found as (select w.id, s.status::text as status from wanted w left join legalaimcp.submissions s on s.id = w.id),
 slug_taken as (select l.slug, l.status::text as status from legalaimcp.listings l join admits a on a.slug = l.slug),
-host_taken as (select a.slug, l.slug as existing_slug, l.external_url from legalaimcp.listings l join admits a on ${SQL_HOST('l.external_url')} = a.host where l.status = 'published'),
+host_taken as (select a.slug, l.slug as existing_slug, l.external_url from legalaimcp.listings l join admits a on ${SQL_SITE_KEY('l.external_url')} = a.host where l.status = 'published'),
 ledger_taken as (select r.slug from legalaimcp.catalog_reviews r join admits a on a.slug = r.slug)
 select
   not exists (select 1 from found where status is distinct from 'pending') as submissions_all_pending,
@@ -274,7 +298,7 @@ begin
     end if;
     if exists (select 1 from legalaimcp.listings where slug = item->>'slug') then raise exception 'Admission refused: slug % is taken', item->>'slug'; end if;
     if exists (select 1 from legalaimcp.catalog_reviews where slug = item->>'slug') then raise exception 'Admission refused: ledger row exists for %', item->>'slug'; end if;
-    if exists (select 1 from legalaimcp.listings x where x.status = 'published' and ${SQL_HOST('x.external_url')} = item->>'host') then
+    if exists (select 1 from legalaimcp.listings x where x.status = 'published' and ${SQL_SITE_KEY('x.external_url')} = item->>'host') then
       raise exception 'Admission refused: a published listing already points at %', item->>'host';
     end if;
   end loop;

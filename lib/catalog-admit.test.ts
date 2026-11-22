@@ -4,7 +4,7 @@ import { describe, it, expect } from 'vitest'
 import { readFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import * as gate from './catalog-review'
-import { checkPlan, buildSQL, mergeRecords, verifyReadback, escapeJsonAscii, hostOf } from '../scripts/catalog-admit.mjs'
+import { checkPlan, buildSQL, mergeRecords, verifyReadback, escapeJsonAscii, hostOf, siteKey } from '../scripts/catalog-admit.mjs'
 
 const NOW = new Date('2026-11-22T15:00:00Z')
 const SRC_URL = 'https://vendor.example.com/docs'
@@ -241,6 +241,40 @@ describe('SQL pack', () => {
 
   it('compares hosts without www and case', () => {
     expect(hostOf('https://WWW.Acme.example.com/a?b')).toBe('acme.example.com')
+  })
+
+  // Claude Sonnet 5.5, 2026-11-22: shared code hosts must compare by repo path, not bare host.
+  it('keys shared code hosts by owner/repo and ordinary sites by host', () => {
+    expect(siteKey('https://github.com/TCoder920/open-legal-compliance-mcp')).not.toBe(siteKey('https://github.com/someone/uk-legal-skills'))
+    const same = ['https://github.com/Foo/Bar', 'https://www.github.com/foo/bar/', 'https://GitHub.com/foo/bar.git', 'https://github.com/foo/bar?tab=readme', 'https://github.com/foo/bar#readme', 'https://github.com/foo/bar/tree/main']
+    expect(new Set(same.map(siteKey))).toEqual(new Set(['github.com/foo/bar']))
+    expect(siteKey('https://www.acme.example.com/a')).toBe(siteKey('https://acme.example.com/b/c?x#y'))
+    expect(siteKey('https://acme.example.com/a')).toBe('acme.example.com')
+    expect(siteKey('https://github.com/')).toBe('github.com/')
+    expect(siteKey('https://github.com/foo')).toBe('github.com/foo')
+    expect(siteKey('https://github.com/')).not.toBe(siteKey('https://github.com/foo/bar'))
+    expect(siteKey('https://gitlab.com/g/sub/proj')).toBe('gitlab.com/g/sub')
+    expect(siteKey('https://pypi.org/project/Foo/1.0/')).toBe('pypi.org/project/foo')
+  })
+
+  it('accepts two different GitHub repos in one plan and refuses the same repo twice', async () => {
+    const item = (url: string, name: string, sub: string) => ({ ...baseAdmit(), submission_ids: [sub], listing: { ...baseListing(), name, external_url: url } })
+    const ok = plan({ admit: [item('https://github.com/a/one', 'Repo One', SUB_A), item('https://github.com/a/two', 'Repo Two', SUB_B)] })
+    expect((await run(ok, { fetchSources: false })).ok).toBe(true)
+    const dup = plan({ admit: [item('https://github.com/a/one', 'Repo One', SUB_A), item('https://www.github.com/A/one.git', 'Repo Two', SUB_B)] })
+    expect(await reasonOf(dup, { fetchSources: false })).toContain('already')
+    const site = plan({ admit: [item('https://v.example.com/a', 'Repo One', SUB_A), item('https://v.example.com/b', 'Repo Two', SUB_B)] })
+    expect(await reasonOf(site, { fetchSources: false })).toContain('already')
+  })
+
+  it('writes the site-key expression into guard.sql and apply.sql, not a bare host comparison', async () => {
+    const sql = buildSQL(await run(plan()))
+    for (const text of [sql.guard, sql.apply]) {
+      expect(text).toContain("'github.com'")
+      expect(text).toContain('[.]git$')
+      expect(text).not.toMatch(/'\^www\[\.\]', ''\) = /)
+      expect(text).not.toMatch(/[^\x00-\x7f]/)
+    }
   })
 })
 

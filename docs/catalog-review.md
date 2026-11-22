@@ -65,6 +65,7 @@ Claude Opus 5.5, 2026-11-22. The admin Approve button cannot publish a new listi
 2. Check: `node scripts/admit-submissions.mjs PLAN.json`. One PASS or FAIL line per item. It fetches every source the way the gate does and ends with the real `assertCatalogReview`. Fix every FAIL before going on. (`--no-fetch` runs only the static checks.) In the Claude sandbox, prefix `NODE_USE_ENV_PROXY=1` so Node's fetch uses the proxy.
 3. Records: `node scripts/admit-submissions.mjs PLAN.json --write-records`. New records go into `lib/catalog-reviews.json` in slug order. It refuses to overwrite a slug that already has a record.
 4. SQL: `node scripts/admit-submissions.mjs PLAN.json --sql OUT_DIR`. Writes `guard.sql`, `apply.sql`, `apply.rollback.sql` and `readback.sql`, all pure ASCII.
+   The duplicate-site check compares the host, except on shared code hosts (GitHub, GitLab, Bitbucket, Codeberg, Hugging Face, npm, PyPI), where it compares host plus owner/repo.
 5. The owner runs `guard.sql` and stops unless every boolean is true. Then `apply.rollback.sql` to exercise the trigger, then `apply.sql`, each through the confirm prompt.
 6. The owner runs `readback.sql` and saves the result as JSON. Verify it: `node scripts/admit-submissions.mjs PLAN.json --verify-readback READBACK.json`.
 7. Bump `CATALOG_CACHE_REVISION` in `lib/supabase.ts`.
