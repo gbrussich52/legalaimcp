@@ -40,3 +40,27 @@ describe('orderFeaturedFirst', () => {
     expect(FEATURED_ORDER).toHaveLength(2)
   })
 })
+
+// Claude Sonnet 5.5, 2026-11-22: homepage grid must show active paid placements first, then price tier.
+import { sortHomeFeatured } from './featured-order'
+describe('sortHomeFeatured', () => {
+  const now = new Date('2026-11-22T12:00:00Z')
+  const r = (name: string, pricing_model: string, featured_until: string | null = null) => ({ name, pricing_model, featured: true, featured_until })
+  const names = (rows: { name: string }[]) => rows.map((x) => x.name)
+  it('paid-active is first whatever its price tier', () => {
+    const rows = [r('contact', 'contact'), r('paidFree', 'free', '2026-12-10T00:00:00Z'), r('paid', 'paid')]
+    expect(names(sortHomeFeatured(rows, now))[0]).toBe('paidFree')
+  })
+  it('two paid rows keep their incoming order', () => {
+    const rows = [r('p1', 'free', '2026-12-10T00:00:00Z'), r('p2', 'contact', '2026-12-11T00:00:00Z')]
+    expect(names(sortHomeFeatured(rows, now))).toEqual(['p1', 'p2'])
+  })
+  it('editorial rows keep the price-tier order', () => {
+    const rows = [r('free', 'free'), r('contact', 'contact'), r('freemium', 'freemium'), r('paid', 'paid')]
+    expect(names(sortHomeFeatured(rows, now))).toEqual(['contact', 'paid', 'freemium', 'free'])
+  })
+  it('an expired paid row is treated as editorial', () => {
+    const rows = [r('contact', 'contact'), r('old', 'free', '2026-11-01T00:00:00Z')]
+    expect(names(sortHomeFeatured(rows, now))).toEqual(['contact', 'old'])
+  })
+})

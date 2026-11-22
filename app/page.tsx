@@ -17,6 +17,7 @@ import {
   type Category,
 } from '@/lib/types'
 import { withSocial } from '@/lib/seo-meta'
+import { sortHomeFeatured } from '@/lib/featured-order'
 
 const baseMetadata: Metadata = {
   title: { absolute: 'Legal MCP Servers & AI Tools for Law Firms | LegalAIMCP' },
@@ -28,16 +29,6 @@ const baseMetadata: Metadata = {
     description: 'Compare legal AI listings by practice area and pricing, or connect the free read-only directory MCP server.',
     url: 'https://legalaimcp.com',
   },
-}
-
-// Pricing-tier sort key for the Featured grid — implements CRO rule #10
-// (price anchoring): show higher-priced options first so freemium/free reads
-// as relief, not as "is this serious?"
-const PRICING_ANCHOR_ORDER: Record<string, number> = {
-  contact: 0,
-  paid: 1,
-  freemium: 2,
-  free: 3,
 }
 
 export default async function HomePage() {
@@ -70,11 +61,8 @@ export default async function HomePage() {
 
   // Sort Featured tools by price anchor (high → low) so visitor brain anchors
   // on the expensive options before reaching the free ones. CRO rule #10.
-  const typedListings = ((featuredListings ?? []) as ListingCardData[]).slice().sort(
-    (a, b) =>
-      (PRICING_ANCHOR_ORDER[a.pricing_model] ?? 99) -
-      (PRICING_ANCHOR_ORDER[b.pricing_model] ?? 99),
-  )
+  // Claude Sonnet 5.5, 2026-11-22: sort moved to lib/featured-order.ts; active paid rows now lead.
+  const typedListings = sortHomeFeatured((featuredListings ?? []) as ListingCardData[], new Date())
   const typedCategories = (categories ?? []) as Category[]
   const totalTools = countData?.length ?? 0
   const recentPosts = getAllPosts().slice(0, 3)

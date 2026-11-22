@@ -27,7 +27,7 @@ export default async function FeaturedSuccessPage({
         Your Featured bump is on the way
       </h1>
       <p className="font-body text-charcoal/75 leading-relaxed mb-8">
-        Stripe Checkout completed successfully. The Featured badge and sort
+        Stripe Checkout completed successfully. The Sponsored badge and sort
         boost usually appear within a minute after the webhook lands. If nothing
         changes after a few minutes, email{' '}
         {/* %s: the page named support but gave no address. */}

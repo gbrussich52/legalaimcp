@@ -9,7 +9,7 @@ const baseMetadata: Metadata = {
   // Claude Opus, 2026-11-12: the layout template already appends "| LegalAIMCP"; the old title printed the brand twice.
   title: 'Featured Listing Pricing',
   description:
-    'Boost a published listing with a 30-day Featured placement. Sort priority and a Featured badge — MCP search stays free.',
+    'Boost a published listing with a 30-day Featured placement. Sort priority and a Sponsored badge — MCP search stays free.',
   alternates: { canonical: `${SITE_URL}/pricing` },
 }
 
@@ -74,7 +74,8 @@ export default function PricingPage() {
         </p>
         <ul className="space-y-2 font-body text-charcoal/80 mb-8">
           <li>✓ Sort boost on /servers, category pages, and homepage Featured grid</li>
-          <li>✓ Featured badge on the listing (labeled as sponsored)</li>
+          {/* Claude Sonnet 5.5, 2026-11-22: a paid listing shows Sponsored, not Featured. */}
+          <li>✓ Sponsored badge on the listing</li>
           {/* Claude Opus, 2026-11-12: MCP search now ranks by relevance first; Featured only breaks ties.
               Claude Sonnet 5.5, 2026-11-22: code ranks relevance, then link-checked, then featured (lib/search.ts), so say so. */}
           <li>✓ In MCP directory search, a paid placement breaks ties between matches that are equally relevant and equally link-checked</li>
