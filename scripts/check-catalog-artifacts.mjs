@@ -1,13 +1,16 @@
 // PUBLIC. Every source-reviewed row must produce the matching public evidence card.
 import {readFile,access} from 'node:fs/promises'
 import path from 'node:path'
+// Claude Fable 5.2, 2026-11-23: the list of expected strings moved to a tested helper; it skips a null pricing claim
+// (this line used to search the page for the word "null").
+import {expectedEvidence} from './catalog-artifact-evidence.mjs'
 const root=path.resolve(import.meta.dirname,'..')
 const policy=JSON.parse(await readFile(path.join(root,'lib/catalog-reviews.json'),'utf8'))
 if(!policy.reviews.length)throw Error('No reviewed catalog artifacts to verify')
 for(const review of policy.reviews){
  const file=path.join(root,'.next/server/app/servers',`${review.slug}.html`)
  const html=(await readFile(file,'utf8')).split('</main>')[0].replace(/&#x27;/g,"'").replace(/&quot;/g,'"').replace(/&amp;/g,'&')
- for(const expected of [review.claims.name,'Primary sources reviewed',review.reviewed_at,review.claims.pricing_details,...review.sources.map(s=>s.url)]){
+ for(const expected of expectedEvidence(review)){
   if(!html.includes(expected))throw Error(`Source-reviewed page missing exact evidence: ${review.slug}`)
  }
 }
