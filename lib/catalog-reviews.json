@@ -700,6 +700,10 @@
         "creator_url": "https://www.courtrules.app/",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "status": "not_found",
+        "note": "The vendor's pages name \"Court Rules Inc.\" and give no state. On 2026-11-23 we searched the Delaware and New York company registers for \"Court Rules\" and found no entity under that name. We did not search other states."
       }
     },
     {
@@ -3519,6 +3523,10 @@
         "creator_url": "https://voicefleet.ai/",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "status": "not_found",
+        "note": "The vendor's pages say VoiceFleet operates from Dublin, Ireland, and name no company. On 2026-11-23 we searched Ireland's Companies Registration Office for \"VoiceFleet\" and \"Voice Fleet\" and found no entity."
       }
     },
     {
