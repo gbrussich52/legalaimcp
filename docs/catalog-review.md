@@ -82,7 +82,7 @@ Claude Sonnet 5.5, 2026-11-23. `--json` (with `--all`, `--slug`, `--plan`, and `
 
 | Check | What it looks at |
 |---|---|
-| `site` | The listing address answers (up to 5 redirects, https only). A redirect to another domain is a warning. HTTP 401, 403 and 429 mean the site blocks automated readers: `unknown`, never a fail. A 5xx is asked again once after 3 seconds. |
+| `site` | The listing address answers (up to 5 redirects, http or https). A redirect to another domain is a warning. HTTP 401, 403 and 429 mean the site blocks automated readers: `unknown`, never a fail. A 5xx is asked again once after 3 seconds. |
 | `domain_age` | Registration date from the registry (RDAP). `.de` is not queried because the registry restricts automated use. Shared hosts such as github.com are marked not applicable, because their age says nothing about the vendor. |
 | `mail` | The domain has mail (MX) records. |
 | `security_resolver` | Internal alert only. The domain resolves on a plain resolver but not on a security resolver. |
@@ -93,6 +93,21 @@ Claude Sonnet 5.5, 2026-11-23. `--json` (with `--all`, `--slug`, `--plan`, and `
 Levels: `fail` if the site cannot be reached, the domain is under 30 days old, the security resolver blocks it, or a listed MCP address is gone. `watch` if the domain is under 180 days old, its registration date is unknown, it has no mail records, or the handshake could not be checked. Otherwise `pass`. A pass shows what was observed on that date. It does not mean the vendor is trustworthy.
 
 `node scripts/realness.mjs --check` runs again and prints what changed against the committed file, without writing (for a daily job). `--plan PLAN.json` checks the admit items of an admission plan before they exist in the catalog. `--endpoint URL` runs one handshake against any MCP address.
+
+### Raw submissions and hostile addresses
+
+Claude Sonnet 5.5, 2026-11-23. The checker used to see only reviewed listings. A watcher on the owner's laptop now feeds it raw addresses typed by strangers, so the address rules are strict and tested offline (`lib/realness-safety.test.ts`, resolver and fetch injected, no network).
+
+- Only `http:` and `https:` for a read. The MCP handshake is `https:` only. No login part in the address. No IP address as the host (v4, v6, or a trick such as `http://2130706433/`). The host must sit under a public suffix with a registrable domain, so `localhost`, `.local`, `.internal`, `.lan`, `.home.arpa` and bare names are refused.
+- Before any request the name is resolved (the public DNS-over-HTTPS answer plus this machine's resolver). If any address is loopback, private (10/8, 172.16/12, 192.168/16), link-local, CGNAT (100.64/10), unique-local (fc00::/7), unspecified, multicast, or a v6 form that wraps one of those (mapped, compatible, NAT64, 6to4), nothing is sent.
+- Redirects are followed by hand, at most 5, and every hop gets the same tests.
+- A refused address is a `site` check with result `fail` and the line "The address is not a public web address." No other check runs for it.
+- Bodies stop at 2 MB (256 KB for a handshake). Every request has a 15 second timeout. The only POST is the MCP `initialize` call, then one `server/discover` if the server does not know it. Any other POST body, or any other verb, is refused in code. A tool is never called.
+- Known limit: the request itself resolves the name again. A server that answers the test with a public address and the request with a private one (DNS rebinding) is not pinned. The window is one request.
+
+`--plan` takes a listing with only `name` and `external_url`, because the catalog gate passes the rest through. It is still the wrong tool for raw submissions: it names each result by a slug made from the name, so two submissions with the same name collide, and its output has no field for the submission id. So there is a second mode:
+
+`node scripts/realness.mjs --submission FILE.json --json`, where the file is `{"items":[{"ref","name","url","repo_url"}]}` (at most 200 items; `repo_url` may be null). It prints `{"checked":N,"results":[{"ref","level","reasons":[...],"checks":[{"id","result"}]}]}` and nothing else on stdout. It carries no text a vendor's server returned, only the check ids and results, and `reasons` come from fixed wording in `lib/realness.ts`. It never writes: no `--write`, no `--check`, and the cache is read but not saved. Exit 1 if any item is `fail`, 2 on an internal error.
 
 ### Gate on new listings
 

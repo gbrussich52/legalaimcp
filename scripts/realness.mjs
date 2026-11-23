@@ -2,15 +2,20 @@
 // Why: the catalog gate proves what a vendor's pages SAY. This asks whether the vendor exists at all: does the
 // site answer, how old is the domain, does it take mail, does a listed MCP endpoint answer an initialize call,
 // is it in the official MCP registry. Logic that needs no network lives in lib/realness.ts (tested).
-// Safety: https only; hosts that resolve to private, loopback or link-local addresses are refused; generic
-// User-Agent; 15 s timeout, 2 MB cap, 5 redirects; at most 4 listings at once. Everything fetched is data and
-// is parsed, never evaluated. The only MCP methods sent are initialize and server/discover. No tools/call, ever.
+// Safety: http and https only (POST https only); no login part, no IP literal, no local name, a public suffix and a
+// registrable domain; hosts that resolve to private, loopback, link-local, CGNAT, unique-local, unspecified or multicast
+// addresses are refused, on every redirect hop (followed by hand); generic User-Agent; 15 s timeout, 2 MB cap,
+// 5 redirects; at most 4 listings at once. Everything fetched is data and is parsed, never evaluated. The only MCP
+// methods sent are initialize and server/discover. No tools/call, ever.
+// Claude Sonnet 5.5, 2026-11-23 (third pass): the checker will now see raw URLs typed by strangers, so the address
+// rules above are enforced here and tested offline (lib/realness-safety.test.ts) through injected resolver and fetch.
 //
 // Usage:
 //   node scripts/realness.mjs --all [--write] [--check] [--report]
 //   node scripts/realness.mjs --slug SLUG [--slug SLUG2 ...] [--write] [--report]
 //   node scripts/realness.mjs --plan PLAN.json [--report]        admit items of an admission plan; never writes
 //   node scripts/realness.mjs --endpoint URL                     one handshake against any MCP URL; never writes
+//   node scripts/realness.mjs --submission FILE --json           raw submissions {items:[{ref,name,url,repo_url}]}; never writes
 // Exit 1 if any record is fail, 2 on an internal error, else 0.
 import { readFile, writeFile, mkdir, rename } from 'node:fs/promises'
 import { createRequire } from 'node:module'
@@ -20,6 +25,8 @@ import { isIP } from 'node:net'
 import { resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import ts from 'typescript'
+import { parse as parseHost } from 'tldts'
+import { z } from 'zod'
 
 const ROOT = resolve(import.meta.dirname, '..')
 const REVIEWS = resolve(ROOT, 'lib/catalog-reviews.json')
@@ -49,6 +56,23 @@ export async function loadRealness() {
 
 export class ProbeError extends Error { constructor(kind, message) { super(message); this.kind = kind } }
 
+// Claude Sonnet 5.5, 2026-11-23: the old v6 test only knew the dotted ::ffff: form, so ::ffff:7f00:1 (the same
+// loopback address in hex) passed. v6 is now expanded to eight groups and tested by range, with the v4 address that
+// mapped, compatible, NAT64 and 6to4 forms carry.
+function expandV6(ip) {
+  let v = ip.toLowerCase().split('%')[0]
+  const tail = v.match(/(\d+\.\d+\.\d+\.\d+)$/)
+  if (tail) { const [a, b, c, d] = tail[1].split('.').map(Number); v = v.slice(0, -tail[1].length) + ((a << 8) | b).toString(16) + ':' + ((c << 8) | d).toString(16) }
+  const [head, rest, extra] = v.split('::')
+  if (extra !== undefined) return null
+  const h = head ? head.split(':') : [], r = rest === undefined ? null : rest ? rest.split(':') : []
+  const groups = r === null ? h : [...h, ...Array(8 - h.length - r.length).fill('0'), ...r]
+  if (groups.length !== 8) return null
+  const nums = groups.map((g) => parseInt(g, 16))
+  return nums.every((n) => Number.isInteger(n) && n >= 0 && n <= 0xffff) ? nums : null
+}
+const v4Of = (hi, lo) => `${hi >> 8}.${hi & 255}.${lo >> 8}.${lo & 255}`
+
 export function isPrivateAddress(ip) {
   const kind = isIP(ip)
   if (kind === 4) {
@@ -56,13 +80,42 @@ export function isPrivateAddress(ip) {
     return a === 0 || a === 10 || a === 127 || (a === 100 && b >= 64 && b <= 127) || (a === 169 && b === 254) || (a === 172 && b >= 16 && b <= 31) || (a === 192 && b === 168) || a >= 224
   }
   if (kind === 6) {
-    const v = ip.toLowerCase()
-    const mapped = v.match(/^::ffff:(\d+\.\d+\.\d+\.\d+)$/)
-    if (mapped) return isPrivateAddress(mapped[1])
-    return v === '::' || v === '::1' || /^f[cd]/.test(v) || /^fe[89ab]/.test(v) || v.startsWith('ff')
+    const g = expandV6(ip)
+    if (!g) return true
+    if (g.every((n) => n === 0)) return true // ::
+    if ((g[0] & 0xffc0) === 0xfe80 || (g[0] & 0xffc0) === 0xfec0) return true // link-local, old site-local
+    if ((g[0] & 0xfe00) === 0xfc00) return true // unique-local fc00::/7
+    if ((g[0] & 0xff00) === 0xff00) return true // multicast
+    if (g.slice(0, 5).every((n) => n === 0) && (g[5] === 0xffff || g[5] === 0)) return isPrivateAddress(v4Of(g[6], g[7])) // mapped, compatible, ::1
+    if (g[0] === 0x64 && g[1] === 0xff9b && g.slice(2, 6).every((n) => n === 0)) return isPrivateAddress(v4Of(g[6], g[7])) // NAT64
+    if (g[0] === 0x2002) return isPrivateAddress(v4Of(g[1], g[2])) // 6to4
+    return false
   }
   return true // not an address at all: treat as unsafe
 }
+
+export const REFUSED = 'The address is not a public web address.'
+const refused = () => new ProbeError('private', REFUSED)
+const LOCAL_SUFFIXES = ['.localhost', '.local', '.internal', '.lan', '.home.arpa', '.invalid', '.test', '.example']
+
+/** null when the address may be requested; else a short reason (internal, never shown to a vendor). Pure: no DNS. */
+export function screenUrl(input, { method = 'GET' } = {}) {
+  let url
+  try { url = input instanceof URL ? input : new URL(String(input)) } catch { return 'unreadable address' }
+  if (url.protocol !== 'https:' && !(url.protocol === 'http:' && method === 'GET')) return 'scheme'
+  if (url.username || url.password) return 'login in address'
+  const host = url.hostname.toLowerCase().replace(/^\[|\]$/g, '').replace(/\.$/, '')
+  if (!host || isIP(host) || host.includes(':')) return 'ip literal'
+  if (host === 'localhost' || LOCAL_SUFFIXES.some((x) => host.endsWith(x))) return 'local name'
+  const t = parseHost(host)
+  if (!t.isIcann || !t.domain || !t.publicSuffix) return 'no public suffix or registrable domain'
+  return null
+}
+
+// Claude Sonnet 5.5, 2026-11-23: resolver and fetch are injectable so the safety tests never touch the network.
+const deps = { resolve: null, fetch: (...a) => fetch(...a) }
+/** Replace the resolver and/or fetch; returns a function that puts the old ones back. */
+export function setDeps(patch) { const old = { ...deps }; Object.assign(deps, patch); publicHostCache.clear(); return () => { Object.assign(deps, old); publicHostCache.clear() } }
 
 // ------------------------------------------------------------------- DNS ----
 
@@ -83,23 +136,27 @@ export async function doh(name, type, { provider = 'cloudflare', security = fals
 }
 
 const publicHostCache = new Map()
-/** Refuses literal IPs and any host that resolves to a private, loopback or link-local address. */
+/** The addresses a name resolves to: the public DoH answer plus this machine's own resolver, which is what fetch will use. */
+async function defaultResolve(h) {
+  const found = []
+  let dohOk = false
+  try {
+    const [a, aaaa] = await Promise.all([doh(h, 'A'), doh(h, 'AAAA')])
+    if (a.status === 3) throw new ProbeError('dns', 'the domain name does not resolve (NXDOMAIN)')
+    found.push(...[...a.answers, ...aaaa.answers].filter((x) => x.type === 1 || x.type === 28).map((x) => x.data)); dohOk = true
+  } catch (e) { if (e instanceof ProbeError && e.kind === 'dns') throw e }
+  try { found.push(...(await lookup(h, { all: true })).map((x) => x.address)) } catch { if (!dohOk) throw new ProbeError('other', 'the name could not be resolved to check it is public') }
+  return found
+}
+/** Refuses a host that is not public by its name, or that resolves to any private, loopback, link-local, CGNAT, unique-local, unspecified or multicast address. */
 export function assertPublicHost(host) {
   const h = host.toLowerCase()
   if (!publicHostCache.has(h)) {
     publicHostCache.set(h, (async () => {
-      if (isIP(h) || h.includes(':')) throw new ProbeError('private', 'an IP address is not fetched')
-      let addresses = null
-      try {
-        const [a, aaaa] = await Promise.all([doh(h, 'A'), doh(h, 'AAAA')])
-        if (a.status === 3) throw new ProbeError('dns', 'the domain name does not resolve (NXDOMAIN)')
-        addresses = [...a.answers, ...aaaa.answers].filter((x) => x.type === 1 || x.type === 28).map((x) => x.data)
-      } catch (e) {
-        if (e instanceof ProbeError && e.kind === 'dns') throw e
-        // DoH itself failed: fall back to the system resolver rather than skip the private-address rule.
-        try { addresses = (await lookup(h, { all: true })).map((x) => x.address) } catch { throw new ProbeError('other', 'the name could not be resolved to check it is public') }
-      }
-      if (addresses.some(isPrivateAddress)) throw new ProbeError('private', 'the name resolves to a private address, so it was not fetched')
+      if (isIP(h) || h.includes(':')) throw refused()
+      const addresses = await (deps.resolve ?? defaultResolve)(h)
+      if (!addresses.length) throw new ProbeError('dns', 'the domain name does not resolve (no address)')
+      if (addresses.some(isPrivateAddress)) throw refused()
     })())
   }
   return publicHostCache.get(h)
@@ -132,20 +189,36 @@ async function readCapped(res, cap, stop) {
   return Buffer.concat(chunks).toString('utf8').slice(0, cap)
 }
 
-/** One bounded https request. GET follows up to 5 redirects (https only); POST never follows one. */
+// Claude Sonnet 5.5, 2026-11-23: the only POST bodies this checker may send are the two handshake calls. Anything
+// else (a tool call, a malformed body, another verb) is refused before the request exists.
+const HANDSHAKE_METHODS = new Set(['initialize', 'server/discover'])
+function assertHandshakeOnly(method, body) {
+  if (method === 'GET') return
+  let rpc = null
+  if (method === 'POST') { try { rpc = JSON.parse(String(body)) } catch { /* falls through to the refusal */ } }
+  if (!rpc || !HANDSHAKE_METHODS.has(rpc.method)) throw new ProbeError('other', 'only the MCP handshake may be sent')
+}
+
+/**
+ * @param {string} rawUrl
+ * @param {{method?: string, headers?: Record<string,string>, body?: string, cap?: number, stop?: (text: string) => boolean}} [opts]
+ */
+// One bounded request. http or https for GET, https only for POST. Redirects (max 5) are followed by hand and every hop is screened and resolved; POST never follows one.
 export async function safeFetch(rawUrl, { method = 'GET', headers = {}, body, cap = CAP_BYTES, stop } = {}) {
-  let url = new URL(rawUrl), hops = 0
+  assertHandshakeOnly(method, body)
+  let url
+  try { url = new URL(rawUrl) } catch { throw refused() }
+  let hops = 0
   for (;;) {
-    if (url.protocol !== 'https:') throw new ProbeError('scheme', 'not an https address, so it was not fetched')
-    if (url.username || url.password) throw new ProbeError('scheme', 'an address with a login part was not fetched')
+    if (screenUrl(url, { method })) throw refused()
     await assertPublicHost(url.hostname)
     let res
-    try { res = await fetch(url, { method, headers: { 'user-agent': UA, ...headers }, body, redirect: 'manual', signal: AbortSignal.timeout(TIMEOUT_MS) }) } catch (e) { throw classifyError(e) }
+    try { res = await deps.fetch(url, { method, headers: { 'user-agent': UA, ...headers }, body, redirect: 'manual', signal: AbortSignal.timeout(TIMEOUT_MS) }) } catch (e) { throw classifyError(e) }
     const location = res.headers.get('location')
     if (method === 'GET' && res.status >= 300 && res.status < 400 && location) {
       await res.body?.cancel().catch(() => {})
       if (++hops > MAX_REDIRECTS) throw new ProbeError('redirects', 'more than 5 redirects')
-      try { url = new URL(location, url) } catch { throw new ProbeError('other', 'a redirect pointed at an unreadable address') }
+      try { url = new URL(location, url) } catch { throw refused() }
       continue
     }
     let text = ''
@@ -196,6 +269,7 @@ export async function siteCheck(url, ctx) {
     return mk('site', 'pass', `The site answered HTTP ${r.status} at ${finalHost}.`, how)
   } catch (e) {
     const p = classifyError(e)
+    if (p.kind === 'private') return mk('site', 'fail', REFUSED, 'Not repeated: the address was not requested.')
     if (p.kind === 'refused') return mk('site', 'fail', 'Connection refused: nothing is listening at the listing address.', how)
     if (p.kind === 'dns') return mk('site', 'fail', 'The domain name does not resolve (it does not exist in DNS).', how)
     return mk('site', 'unknown', errObserved(p, 'The site could not be read'), how)
@@ -349,6 +423,7 @@ export async function handshake(url, ctx) {
     return mk('mcp_endpoint', 'unknown', `${url} answered HTTP ${r.status} to the handshake, which this check cannot read as an MCP answer.`, how)
   } catch (e) {
     const p = classifyError(e)
+    if (p.kind === 'private') return mk('mcp_endpoint', 'fail', REFUSED, 'Not repeated: the address was not requested.')
     if (p.kind === 'refused') return mk('mcp_endpoint', 'fail', `Connection refused at ${url}: the listed MCP address is gone.`, how)
     if (p.kind === 'dns') return mk('mcp_endpoint', 'fail', `The name in ${url} does not resolve: the listed MCP address is gone.`, how)
     return mk('mcp_endpoint', 'unknown', errObserved(p, 'The MCP handshake could not be checked'), how)
@@ -428,6 +503,13 @@ const safely = async (id, fn) => { try { return await fn() } catch (e) { return 
 export async function checkListing(listing, ctx) {
   const domain = ctx.lib.registrableDomain(listing.external_url)
   const host = hostOfUrl(listing.external_url)
+  // Claude Sonnet 5.5, 2026-11-23: an address that is not a public web address gets one fail and no other probe: no
+  // DNS lookup of the name, no mail or registry query, nothing sent toward it.
+  if (screenUrl(listing.external_url)) {
+    const checks = [mk('site', 'fail', REFUSED, 'Not repeated: the address was not requested.')]
+    const { level, reasons } = ctx.lib.judge(checks, ctx.today)
+    return { slug: listing.slug, checked_at: ctx.today, level, reasons, checks }
+  }
   const checks = [
     await safely('site', () => siteCheck(listing.external_url, ctx)),
     await safely('domain_age', () => domainAgeCheck(domain, ctx)),
@@ -454,6 +536,27 @@ export async function realnessProvider() {
   const ctx = await createContext()
   const provider = async (listing, slug) => { const rec = await checkListing({ ...listing, slug }, ctx); await saveCache(ctx.cache).catch(() => {}); return rec }
   return provider
+}
+
+// ---------------------------------------------------------- raw submissions ----
+// Claude Sonnet 5.5, 2026-11-23: `--plan` does take a bare name and external_url (catalogClaims passes them through),
+// but it keys results by a slug made from the name, so two submissions called alike collide, it has no field for the
+// submission id, and it prints only slugs and one line of reasons. The watcher needs one row per submission id with
+// the check ids, so this mode takes {items:[{ref,name,url,repo_url}]} and answers the same way.
+const SubmissionFile = z.object({ items: z.array(z.object({
+  ref: z.string().min(1).max(80),
+  name: z.string().max(300),
+  url: z.string().max(2048),
+  repo_url: z.string().max(2048).nullish(),
+})).max(200) }).strict()
+export const parseSubmissionFile = (json) => SubmissionFile.parse(json).items
+
+/** items: [{ref,name,url,repo_url}]. Never writes. Only ids and results come back, so no text from a vendor's server can leave this function. */
+export async function checkSubmissionItems(items, ctx) {
+  parseSubmissionFile({ items }) // throws on a malformed list
+  const listings = items.map((it) => ({ slug: it.ref, name: it.name, external_url: it.url, mcp_repo_url: it.repo_url ?? null, mcp_install_command: null }))
+  const records = await checkMany(listings, ctx)
+  return { checked: records.length, results: records.map((r) => ({ ref: r.slug, level: r.level, reasons: r.reasons, checks: r.checks.map((c) => ({ id: c.id, result: c.result })) })) }
 }
 
 // ------------------------------------------------------------ file and CLI ----
@@ -508,22 +611,22 @@ export function reportTable(records) {
   return ['| Listing | Level | Site | Registered | Mail | Security DNS | MCP | Repo | Registry |', '|---|---|---|---|---|---|---|---|---|', ...rows].join('\n')
 }
 
-const USAGE = 'Usage: node scripts/realness.mjs (--all | --slug S ... | --plan PLAN.json | --endpoint URL) [--write] [--check] [--report] [--json]'
+const USAGE = 'Usage: node scripts/realness.mjs (--all | --slug S ... | --plan PLAN.json | --submission FILE | --endpoint URL) [--write] [--check] [--report] [--json]'
 
 async function main() {
   const argv = process.argv.slice(2)
   const values = (flag) => argv.flatMap((a, i) => (a === flag ? [argv[i + 1]] : [])).filter((v) => v && !v.startsWith('--'))
-  const known = new Set(['--all', '--slug', '--plan', '--endpoint', '--write', '--check', '--report', '--json', '--no-cache'])
-  const valueFlags = new Set(['--slug', '--plan', '--endpoint'])
+  const known = new Set(['--all', '--slug', '--plan', '--submission', '--endpoint', '--write', '--check', '--report', '--json', '--no-cache'])
+  const valueFlags = new Set(['--slug', '--plan', '--submission', '--endpoint'])
   const bad = argv.filter((a, i) => (a.startsWith('--') ? !known.has(a) : !valueFlags.has(argv[i - 1])))
   if (bad.length) throw Error(USAGE)
   const all = argv.includes('--all'), write = argv.includes('--write'), check = argv.includes('--check'), report = argv.includes('--report')
   // With --json stdout carries one JSON object and nothing else; every human line goes to stderr.
   const json = argv.includes('--json')
   const say = json ? console.error : console.log
-  const slugs = values('--slug'), planFile = values('--plan')[0], endpoint = values('--endpoint')[0]
-  if (!all && !slugs.length && !planFile && !endpoint) throw Error(USAGE)
-  if ((planFile || endpoint) && (write || check)) throw Error('--plan and --endpoint never write or compare; drop --write and --check')
+  const slugs = values('--slug'), planFile = values('--plan')[0], endpoint = values('--endpoint')[0], submissionFile = values('--submission')[0]
+  if (!all && !slugs.length && !planFile && !endpoint && !submissionFile) throw Error(USAGE)
+  if ((planFile || endpoint || submissionFile) && (write || check)) throw Error('--plan, --submission and --endpoint never write or compare; drop --write and --check')
   if (write && check) throw Error('--write and --check are separate runs')
 
   const ctx = await createContext({ useCache: !argv.includes('--no-cache') })
@@ -532,6 +635,16 @@ async function main() {
     const rec = await handshake(endpoint, ctx)
     console.log(JSON.stringify(rec, null, 2))
     process.exitCode = rec.result === 'fail' ? 1 : 0
+    return
+  }
+
+  if (submissionFile) {
+    // Read-only end to end: the cache is read but never saved, and nothing is written anywhere.
+    const items = parseSubmissionFile(JSON.parse(await readFile(resolve(submissionFile), 'utf8')))
+    const out = await checkSubmissionItems(items, ctx)
+    console.error(`realness: ${out.checked} submissions checked`)
+    console.log(JSON.stringify(out))
+    if (out.results.some((r) => r.level === 'fail')) process.exitCode = 1
     return
   }
 
