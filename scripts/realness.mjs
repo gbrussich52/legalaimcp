@@ -2,7 +2,7 @@
 // Why: the catalog gate proves what a vendor's pages SAY. This asks whether the vendor exists at all: does the
 // site answer, how old is the domain, does it take mail, does a listed MCP endpoint answer an initialize call,
 // is it in the official MCP registry. Logic that needs no network lives in lib/realness.ts (tested).
-// Safety: http and https only (POST https only); no login part, no IP literal, no local name, a public suffix and a
+// Safety: https only for every request and redirect hop (an http input is upgraded); no login part, no IP literal, no local name, a public suffix and a
 // registrable domain; hosts that resolve to private, loopback, link-local, CGNAT, unique-local, unspecified or multicast
 // addresses are refused, on every redirect hop (followed by hand); generic User-Agent; 15 s timeout, 2 MB cap,
 // 5 redirects; at most 4 listings at once. Everything fetched is data and is parsed, never evaluated. The only MCP
@@ -98,11 +98,24 @@ export const REFUSED = 'The address is not a public web address.'
 const refused = () => new ProbeError('private', REFUSED)
 const LOCAL_SUFFIXES = ['.localhost', '.local', '.internal', '.lan', '.home.arpa', '.invalid', '.test', '.example']
 
+/** An address typed with http:// is asked for over https on the same host, port and path. Anything else is returned as given. */
+export function upgradeHttp(input) {
+  try {
+    const url = new URL(String(input))
+    if (url.protocol !== 'http:') return String(input)
+    url.protocol = 'https:'
+    return url.href
+  } catch { return String(input) }
+}
+
 /** null when the address may be requested; else a short reason (internal, never shown to a vendor). Pure: no DNS. */
 export function screenUrl(input, { method = 'GET' } = {}) {
   let url
   try { url = input instanceof URL ? input : new URL(String(input)) } catch { return 'unreadable address' }
-  if (url.protocol !== 'https:' && !(url.protocol === 'http:' && method === 'GET')) return 'scheme'
+  // Claude Sonnet 5.5, 2026-11-23: https only, for GET and POST and every redirect hop. The name is resolved again when the
+  // connection opens, so a hostile DNS server can answer a public address to our check and a private one to the request.
+  // Over https the rebound server has no certificate for the name, so the handshake dies before one byte is sent.
+  if (url.protocol !== 'https:') return 'scheme'
   if (url.username || url.password) return 'login in address'
   const host = url.hostname.toLowerCase().replace(/^\[|\]$/g, '').replace(/\.$/, '')
   if (!host || isIP(host) || host.includes(':')) return 'ip literal'
@@ -203,11 +216,11 @@ function assertHandshakeOnly(method, body) {
  * @param {string} rawUrl
  * @param {{method?: string, headers?: Record<string,string>, body?: string, cap?: number, stop?: (text: string) => boolean}} [opts]
  */
-// One bounded request. http or https for GET, https only for POST. Redirects (max 5) are followed by hand and every hop is screened and resolved; POST never follows one.
+// One bounded request, https only: an http input is upgraded first, an http redirect hop is refused. Redirects (max 5) are followed by hand and every hop is screened and resolved; POST never follows one.
 export async function safeFetch(rawUrl, { method = 'GET', headers = {}, body, cap = CAP_BYTES, stop } = {}) {
   assertHandshakeOnly(method, body)
   let url
-  try { url = new URL(rawUrl) } catch { throw refused() }
+  try { url = new URL(upgradeHttp(rawUrl)) } catch { throw refused() }
   let hops = 0
   for (;;) {
     if (screenUrl(url, { method })) throw refused()
@@ -505,7 +518,7 @@ export async function checkListing(listing, ctx) {
   const host = hostOfUrl(listing.external_url)
   // Claude Sonnet 5.5, 2026-11-23: an address that is not a public web address gets one fail and no other probe: no
   // DNS lookup of the name, no mail or registry query, nothing sent toward it.
-  if (screenUrl(listing.external_url)) {
+  if (screenUrl(upgradeHttp(listing.external_url))) {
     const checks = [mk('site', 'fail', REFUSED, 'Not repeated: the address was not requested.')]
     const { level, reasons } = ctx.lib.judge(checks, ctx.today)
     return { slug: listing.slug, checked_at: ctx.today, level, reasons, checks }

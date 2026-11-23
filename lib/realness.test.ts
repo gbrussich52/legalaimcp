@@ -176,6 +176,11 @@ describe('judge', () => {
     expect(judge(swap('mcp_endpoint', chk('mcp_endpoint', 'unknown')), TODAY).level).toBe('watch')
     expect(judge(swap('mcp_endpoint', chk('mcp_endpoint', 'pass')), TODAY).level).toBe('pass')
   })
+  it('says the address is not public, not that the endpoint is gone, when the MCP address was refused', () => {
+    const refusedCheck = chk('mcp_endpoint', 'fail', { observed: 'The address is not a public web address.' })
+    expect(judge(swap('mcp_endpoint', refusedCheck), TODAY).reasons).toEqual(['the listed MCP address is not a public web address'])
+    expect(judge(swap('mcp_endpoint', chk('mcp_endpoint', 'fail')), TODAY).reasons).toEqual(['the listed MCP endpoint is gone'])
+  })
   it('never lets registry absence or a repo warning worsen the level', () => {
     expect(judge(swap('registry', chk('registry', 'unknown')), TODAY).level).toBe('pass')
     expect(judge(swap('repo', chk('repo', 'warn')), TODAY).level).toBe('pass')

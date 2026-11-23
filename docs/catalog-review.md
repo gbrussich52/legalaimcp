@@ -82,7 +82,7 @@ Claude Sonnet 5.5, 2026-11-23. `--json` (with `--all`, `--slug`, `--plan`, and `
 
 | Check | What it looks at |
 |---|---|
-| `site` | The listing address answers (up to 5 redirects, http or https). A redirect to another domain is a warning. HTTP 401, 403 and 429 mean the site blocks automated readers: `unknown`, never a fail. A 5xx is asked again once after 3 seconds. |
+| `site` | The listing address answers (up to 5 redirects, https only: an http address is asked for over https, and a redirect to http is refused). A redirect to another domain is a warning. HTTP 401, 403 and 429 mean the site blocks automated readers: `unknown`, never a fail. A 5xx is asked again once after 3 seconds. |
 | `domain_age` | Registration date from the registry (RDAP). `.de` is not queried because the registry restricts automated use. Shared hosts such as github.com are marked not applicable, because their age says nothing about the vendor. |
 | `mail` | The domain has mail (MX) records. |
 | `security_resolver` | Internal alert only. The domain resolves on a plain resolver but not on a security resolver. |
@@ -103,7 +103,7 @@ Claude Sonnet 5.5, 2026-11-23. The checker used to see only reviewed listings. A
 - Redirects are followed by hand, at most 5, and every hop gets the same tests.
 - A refused address is a `site` check with result `fail` and the line "The address is not a public web address." No other check runs for it.
 - Bodies stop at 2 MB (256 KB for a handshake). Every request has a 15 second timeout. The only POST is the MCP `initialize` call, then one `server/discover` if the server does not know it. Any other POST body, or any other verb, is refused in code. A tool is never called.
-- Known limit: the request itself resolves the name again. A server that answers the test with a public address and the request with a private one (DNS rebinding) is not pinned. The window is one request.
+- Known limit: the request itself resolves the name again. A server that answers the test with a public address and the request with a private one (DNS rebinding) is not pinned. Every request and every redirect hop is https only, which blunts this: a rebound server has no certificate for the name, so the handshake fails before anything is sent. The window is one request.
 
 `--plan` takes a listing with only `name` and `external_url`, because the catalog gate passes the rest through. It is still the wrong tool for raw submissions: it names each result by a slug made from the name, so two submissions with the same name collide, and its output has no field for the submission id. So there is a second mode:
 

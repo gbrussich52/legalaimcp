@@ -5,6 +5,9 @@
 // untrusted text and is only parsed here, never evaluated. A pass shows what was observed, nothing more.
 import { getDomain } from 'tldts'
 
+/** The one sentence scripts/realness.mjs writes when an address was refused and never requested. */
+export const NOT_PUBLIC_ADDRESS = 'The address is not a public web address.'
+
 export type CheckResult = 'pass' | 'warn' | 'fail' | 'unknown' | 'not_applicable'
 export type Level = 'pass' | 'watch' | 'fail'
 export type Check = {
@@ -132,7 +135,9 @@ export function judge(checks: Check[], today: string | Date): { level: Level; re
 
   if (get('site')?.result === 'fail') failReasons.push('the site could not be reached')
   if (get('security_resolver')?.result === 'fail') failReasons.push('a security DNS resolver blocks the domain')
-  if (get('mcp_endpoint')?.result === 'fail') failReasons.push('the listed MCP endpoint is gone')
+  // Claude Sonnet 5.5, 2026-11-23: a refused address was never requested, so "gone" would be false. The checker sets this exact sentence.
+  const mcp = get('mcp_endpoint')
+  if (mcp?.result === 'fail') failReasons.push(mcp.observed === NOT_PUBLIC_ADDRESS ? 'the listed MCP address is not a public web address' : 'the listed MCP endpoint is gone')
 
   const age = get('domain_age')
   if (age && age.result !== 'not_applicable') {

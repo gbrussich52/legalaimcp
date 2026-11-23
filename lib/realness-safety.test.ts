@@ -2,7 +2,7 @@
 // inside his home network. These tests pin the rules that keep a hostile URL from reaching anything private.
 // Offline only: the resolver and fetch are injected, no test touches the network.
 import { describe, it, expect, afterEach } from 'vitest'
-import { screenUrl, isPrivateAddress, safeFetch, siteCheck, handshake, checkSubmissionItems, setDeps } from '../scripts/realness.mjs'
+import { screenUrl, upgradeHttp, isPrivateAddress, safeFetch, siteCheck, handshake, checkSubmissionItems, setDeps } from '../scripts/realness.mjs'
 
 let restore: (() => void) | null = null
 afterEach(() => { restore?.(); restore = null })
@@ -21,9 +21,11 @@ const ok = () => new Response('hello', { status: 200 })
 const lib = { registrableDomain: (u: string) => { try { return new URL(u).hostname.split('.').slice(-2).join('.') } catch { return null } } }
 
 describe('screenUrl: the address itself', () => {
-  it('accepts a plain public http or https address', () => {
+  it('accepts a public https address and refuses plain http for GET and POST', () => {
     expect(screenUrl('https://example.com/a')).toBeNull()
-    expect(screenUrl('http://www.example.co.uk/')).toBeNull()
+    expect(screenUrl('https://www.example.co.uk/')).toBeNull()
+    expect(screenUrl('http://www.example.co.uk/')).not.toBeNull()
+    expect(screenUrl('http://example.com/', { method: 'GET' })).not.toBeNull()
   })
   it('refuses other schemes', () => {
     for (const u of ['ftp://example.com/', 'file:///etc/passwd', 'javascript:alert(1)', 'gopher://example.com', 'data:text/html,hi']) expect(screenUrl(u), u).not.toBeNull()
@@ -45,6 +47,37 @@ describe('screenUrl: the address itself', () => {
   it('allows POST only to https', () => {
     expect(screenUrl('http://example.com/mcp', { method: 'POST' })).not.toBeNull()
     expect(screenUrl('https://example.com/mcp', { method: 'POST' })).toBeNull()
+  })
+})
+
+// Claude Sonnet 5.5, 2026-11-23: HTTPS only, so a rebound DNS answer dies at the certificate check before anything is sent.
+describe('https only', () => {
+  it('upgrades an http input to https on the same host, port and path before the first request', async () => {
+    const { calls } = inject({ 'example.com': ['93.184.216.34'] }, ok)
+    const r = await safeFetch('http://example.com/a?b=1')
+    expect(r.status).toBe(200)
+    expect(calls.map((c) => c.url)).toEqual(['https://example.com/a?b=1'])
+    expect(upgradeHttp('http://example.com:8080/x')).toBe('https://example.com:8080/x')
+    expect(upgradeHttp('https://example.com/')).toBe('https://example.com/')
+  })
+  it('refuses a redirect hop to http and never requests it', async () => {
+    const { calls } = inject({ 'example.com': ['93.184.216.34'], 'other.example.net': ['93.184.216.35'] }, () => new Response(null, { status: 302, headers: { location: 'http://other.example.net/x' } }))
+    await expect(safeFetch('https://example.com/')).rejects.toMatchObject({ kind: 'private' })
+    expect(calls.map((c) => c.url)).toEqual(['https://example.com/'])
+  })
+  it('never hands a plain-http request to the injected fetch', async () => {
+    const { calls } = inject({ 'example.com': ['93.184.216.34'] }, (url) =>
+      url.hostname === 'example.com' && url.pathname === '/' ? new Response(null, { status: 302, headers: { location: '/next' } }) : ok())
+    await safeFetch('http://example.com/')
+    await expect(safeFetch('http://example.com/mcp', { method: 'POST', body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'initialize' }) })).resolves.toBeDefined()
+    expect(calls.length).toBeGreaterThan(0)
+    for (const c of calls) expect(String(c.url).startsWith('https://'), String(c.url)).toBe(true)
+  })
+  it('treats an upgraded address that does not answer as an ordinary site fail', async () => {
+    inject({ 'example.com': ['93.184.216.34'] }, () => { throw Object.assign(new Error('refused'), { cause: { code: 'ECONNREFUSED' } }) })
+    const r = await siteCheck('http://example.com/', { lib })
+    expect(r.result).toBe('fail')
+    expect(r.observed).not.toBe('The address is not a public web address.')
   })
 })
 
