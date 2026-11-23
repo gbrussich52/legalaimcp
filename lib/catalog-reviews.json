@@ -1018,6 +1018,14 @@
         "creator_url": "https://esgenix.com/about",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "Syncinvent Labs Private Limited",
+        "register": "public mirrors of India's company register (TAXAJ and Tofler)",
+        "url": "https://www.taxaj.com/company/syncinvent-labs-private-limited-U62013KA2025PTC207279",
+        "status": "active, CIN U62013KA2025PTC207279 (the official register needs a sign-in, so we read mirrors)",
+        "checked_at": "2026-11-23",
+        "formed": "2025-08-27"
       }
     },
     {
@@ -2957,6 +2965,10 @@
         "creator_url": "https://dr-legal.com.tw",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "status": "not_found",
+        "note": "This is an open-source project whose maintainer names no company. On 2026-11-23 Taiwan's company register open data showed no active company under the project's brand names. The package's first public release was 2026-05-27, and it has had 14 releases."
       }
     },
     {
