@@ -2424,6 +2424,14 @@
         "creator_url": "https://www.redactifyai.com",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "RockQube Technologies LLC",
+        "register": "the Wyoming Secretary of State's list of new company charters for January to March 2026",
+        "url": "https://sos.wyo.gov/Business/docs/26Q1Domestic.pdf",
+        "status": "a new company charter, filing ID 2026-001879907 (the list does not show current standing)",
+        "checked_at": "2026-11-23",
+        "formed": "2026-01-29"
       }
     },
     {
@@ -2630,6 +2638,14 @@
         "creator_url": "https://www.signal87.ai/",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "Signal87 LLC",
+        "register": "the Wyoming Secretary of State's list of new company charters for October to December 2025 (in the 2025 statistics file)",
+        "url": "https://sos.wyo.gov/Business/Statistics.aspx",
+        "status": "a new company charter, filing ID 2025-001795362 (the list does not show current standing)",
+        "checked_at": "2026-11-23",
+        "formed": "2025-10-20"
       }
     },
     {
@@ -3197,6 +3213,10 @@
         "creator_url": "https://github.com/paulieb89",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "status": "not_found",
+        "note": "The project's pages name no company. A company with a matching name, BOUCH AI LTD (17593064), was registered at UK Companies House on 2026-11-20, after this project's code was first published on 2026-03-30. No page of the project says that company runs it."
       }
     },
     {
@@ -3426,6 +3446,10 @@
         "creator_url": "https://venley.ai/nosotros",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "status": "not_found",
+        "note": "The vendor's pages name Venezolana de Tecnología Legal S.A. and give a tax number, RIF J-50551555-1. Venezuela's tax register sits behind a CAPTCHA, which we do not fill, so we could not confirm the company there."
       }
     },
     {
@@ -3546,7 +3570,7 @@
       },
       "operator": {
         "status": "not_found",
-        "note": "The vendor's pages say VoiceFleet operates from Dublin, Ireland, and name no company. On 2026-11-23 we searched Ireland's Companies Registration Office for \"VoiceFleet\" and \"Voice Fleet\" and found no entity."
+        "note": "The vendor's pages say VoiceFleet operates from Dublin, Ireland, and name no company. On 2026-11-23 we searched Ireland's Companies Registration Office for \"VoiceFleet\" and \"Voice Fleet\" and found no entity. UK Companies House also lists no company named \"VoiceFleet\"."
       }
     },
     {
