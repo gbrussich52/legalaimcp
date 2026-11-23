@@ -703,7 +703,7 @@
       },
       "operator": {
         "status": "not_found",
-        "note": "The vendor's pages name \"Court Rules Inc.\" and give no state. On 2026-11-23 we searched the Delaware and New York company registers for \"Court Rules\" and found no entity under that name. We did not search other states."
+        "note": "The vendor's pages name \"Court Rules Inc.\" and give no state. On 2026-11-23 we searched the Delaware, New York and Florida company registers for \"Court Rules\" and found no entity under that name. We did not search other states."
       }
     },
     {
@@ -1840,6 +1840,13 @@
         "creator_url": "https://lexery.com.ua",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "A sole proprietor named on the vendor's terms page",
+        "register": "YouControl, a public mirror of Ukraine's state register of businesses (search the name on the vendor's page)",
+        "url": "https://youcontrol.com.ua/",
+        "status": "registered since 2026-11-10, activity code 62.01 (matched by name and street; one mirror)",
+        "checked_at": "2026-11-23"
       }
     },
     {
@@ -1951,6 +1958,13 @@
         "creator_url": "https://merit.legal/",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "A sole proprietor named on the vendor's offer page",
+        "register": "YouControl, a public mirror of Ukraine's state register of businesses (search the name on the vendor's page)",
+        "url": "https://youcontrol.com.ua/",
+        "status": "registered since 2026-10-30, activity code 63.11 (matched by name and street; one mirror)",
+        "checked_at": "2026-11-23"
       }
     },
     {
