@@ -111,6 +111,13 @@ describe('buildVerification (get_legal_ai_tool)', () => {
     expect(getVerificationSource(row, { reviews: [{ ...review, operator: { ...op, url: 'javascript:alert(1)' } } as never] }).operator).toBeNull()
     expect(getVerificationSource(row, { reviews: [{ ...review, operator: { status: 'not_found', note: 'Nothing under that name.' } } as never] }).operator).toEqual({ status: 'not_found', note: 'Nothing under that name.' })
   })
+  // Claude Fable 5.2, 2026-11-23: every operator record on file must pass the page's own schema. A record the schema
+  // drops would print "We have not yet looked this operator up" on a listing we did look up, with no error.
+  it('keeps every operator record on file readable by the listing page', () => {
+    const withOp = (reviews.reviews as Array<{ slug: string; claims: Record<string, unknown>; operator?: unknown }>).filter((r) => r.operator !== undefined)
+    expect(withOp.length).toBeGreaterThan(0)
+    for (const r of withOp) expect(getVerificationSource({ ...r.claims, slug: r.slug }).operator, r.slug).toEqual(r.operator)
+  })
 })
 
 describe('buildVerificationSummary (list answers)', () => {

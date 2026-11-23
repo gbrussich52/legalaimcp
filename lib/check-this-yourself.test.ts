@@ -69,7 +69,10 @@ describe('Check this yourself block', () => {
     const missing = text(html('Captain.Legal', getVerificationSource(row, { reviews: [{ ...review, operator: { status: 'not_found', note: 'Nothing under that name.' } } as never] })))
     expect(missing).toContain('We looked for the operator in a public company register and did not find one. Nothing under that name.')
     expect(t).toContain('Who is behind it')
-    expect(t).toContain('We have not yet looked this operator up in a company register.')
+    // Claude Fable 5.2, 2026-11-23: the review on file now carries an operator, so the "not yet looked" case is built
+    // here instead of read from live data. Before, this line passed only because no record had an operator.
+    const unlooked = text(html('Captain.Legal', getVerificationSource(row, { reviews: [{ ...review, operator: undefined } as never] })))
+    expect(unlooked).toContain('We have not yet looked this operator up in a company register.')
   })
   it('ends with what we did not check and the method link', () => {
     expect(t).toContain('What we did not check')

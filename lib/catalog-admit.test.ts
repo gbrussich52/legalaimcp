@@ -163,7 +163,9 @@ describe('admission check', () => {
     const existing = JSON.parse(await readFile(resolve(__dirname, 'catalog-reviews.json'), 'utf8')).reviews[0]
     const out = await run(plan())
     const record = out.admits[0].record
-    expect(Object.keys(record)).toEqual(Object.keys(existing))
+    // Claude Fable 5.2, 2026-11-23: operator and realness_ack are optional on a record, and this plan carries neither,
+    // so they are left out of the comparison. Before, the check passed only because no record on file had an operator.
+    expect(Object.keys(record)).toEqual(Object.keys(existing).filter((k) => !['operator', 'realness_ack'].includes(k)))
     expect(Object.keys(record.claims)).toEqual(Object.keys(existing.claims))
     expect(Object.keys(record.sources[0])).toEqual(Object.keys(existing.sources[0]))
   })

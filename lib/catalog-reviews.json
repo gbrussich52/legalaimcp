@@ -64,6 +64,13 @@
         "creator_url": "https://ailex.co.jp/",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "ＡＩＬＥＸ合同会社",
+        "register": "Japan's National Tax Agency corporate number register",
+        "url": "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=6011003023659",
+        "status": "a registered company (godo kaisha), corporate number 6011003023659",
+        "checked_at": "2026-11-23"
       }
     },
     {
@@ -313,6 +320,14 @@
         "creator_url": "https://www.captain.legal/",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "Camines LLC",
+        "register": "the New Mexico Secretary of State business register",
+        "url": "https://enterprise.sos.nm.gov/search/business",
+        "status": "active, business ID 0008132563",
+        "checked_at": "2026-11-23",
+        "formed": "2026-09-24"
       }
     },
     {
@@ -932,6 +947,14 @@
         "creator_url": "https://www.directcase.ai/",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "DirectCase s.r.o.",
+        "register": "the Czech business register (ARES)",
+        "url": "https://ares.gov.cz/ekonomicke-subjekty-v-be/rest/ekonomicke-subjekty/24337269",
+        "status": "a registered company, ID 24337269",
+        "checked_at": "2026-11-23",
+        "formed": "2026-01-08"
       }
     },
     {
@@ -1233,6 +1256,13 @@
         "creator_url": "https://gleanmark.com/",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "TMZap Incorporated",
+        "register": "the New York Department of State corporation records",
+        "url": "https://data.ny.gov/resource/n9v6-gdp6.json?dos_id=7844761",
+        "status": "a Delaware corporation registered in New York since 2026-02-17, DOS ID 7844761",
+        "checked_at": "2026-11-23"
       }
     },
     {
@@ -1592,6 +1622,14 @@
         "creator_url": "https://leela.works/about",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "Humblepaper, Inc.",
+        "register": "the Delaware Division of Corporations entity search",
+        "url": "https://icis.corp.delaware.gov/ecorp/entitysearch/namesearch.aspx",
+        "status": "a corporation, file 3725917 (current status is not shown without a fee)",
+        "checked_at": "2026-11-23",
+        "formed": "2024-05-21"
       }
     },
     {
@@ -2234,6 +2272,14 @@
         "creator_url": "https://getprecision.ai",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "Precision AI LLC",
+        "register": "the Florida Division of Corporations (Sunbiz)",
+        "url": "https://search.sunbiz.org/Inquiry/CorporationSearch/ByName",
+        "status": "active, document number L26000503652",
+        "checked_at": "2026-11-23",
+        "formed": "2026-09-30"
       }
     },
     {
@@ -2710,6 +2756,14 @@
         "creator_url": "https://www.specterlaw.ai/",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "ROLIDE S.R.L.",
+        "register": "Romania's tax agency company data service (ANAF)",
+        "url": "https://static.anaf.ro/static/10/Anaf/Informatii_R/Servicii_web/doc_WS_V9.txt",
+        "status": "registered, CUI 53688211, trade register J2026006673006",
+        "checked_at": "2026-11-23",
+        "formed": "2026-01-30"
       }
     },
     {
@@ -2817,6 +2871,14 @@
         "creator_url": "https://syfert.com/",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "Graham W. Syfert, Esq., P.A.",
+        "register": "the Florida Division of Corporations (Sunbiz)",
+        "url": "https://search.sunbiz.org/Inquiry/CorporationSearch/ByName",
+        "status": "active, document number P10000085901",
+        "checked_at": "2026-11-23",
+        "formed": "2010-10-20"
       }
     },
     {
@@ -2943,6 +3005,14 @@
         "creator_url": "https://telewizard.ai/en/",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "NextGen AI Tech, LLC",
+        "register": "the Delaware Division of Corporations entity search",
+        "url": "https://icis.corp.delaware.gov/ecorp/entitysearch/namesearch.aspx",
+        "status": "a limited liability company, file 3012664 (current status is not shown without a fee)",
+        "checked_at": "2026-11-23",
+        "formed": "2024-01-29"
       }
     },
     {
@@ -3264,6 +3334,14 @@
         "creator_url": "https://www.vaquill.ai/about",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "Aralsura Solutions LLP",
+        "register": "two public mirrors of India's company register (ZaubaCorp and The Company Check)",
+        "url": "https://www.zaubacorp.com/ARALSURA-SOLUTIONS-LLP-ACK-2045",
+        "status": "active, LLPIN ACK-2045 (the official register needs a sign-in, so we read mirrors)",
+        "checked_at": "2026-11-23",
+        "formed": "2024-11-04"
       }
     },
     {
@@ -3500,6 +3578,13 @@
         "creator_url": "https://whisperit.ai/",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "Whisperit SA",
+        "register": "the Swiss federal UID register",
+        "url": "https://www.uid.admin.ch/Detail.aspx?uid_id=CHE-450.115.788",
+        "status": "active in the commercial register, CHE-450.115.788",
+        "checked_at": "2026-11-23"
       }
     }
   ],
