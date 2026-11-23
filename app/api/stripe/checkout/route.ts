@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { getAdminClient } from '@/lib/supabase-admin'
 import { SITE_URL } from '@/lib/constants'
+import { featuredState } from '@/lib/featured-pricing'
 import {
   FEATURED_PRICE_CENTS,
   getStripe,
@@ -95,9 +96,18 @@ export async function POST(req: Request) {
 
   // Claude Sonnet 5.5, 2026-11-22: refuse editorial picks (featured, no end date). A payment would
   // stamp featured_until and the expiry cron would then remove a placement that had no end.
-  if (listing.featured === true && listing.featured_until == null) {
+  // Claude Sonnet 5.5, 2026-11-23: also refuse during an active paid term. A second payment restarts the
+  // 30 days at the new payment and loses the unused days. Same helper as the buy box, so they agree.
+  const state = featuredState(listing.featured, listing.featured_until, new Date())
+  if (state === 'editorial') {
     return NextResponse.json(
       { error: 'This listing is already featured by our editors. There is nothing to buy.' },
+      { status: 409 },
+    )
+  }
+  if (state === 'paid-active') {
+    return NextResponse.json(
+      { error: 'This listing already has a paid placement. You can renew after it ends.' },
       { status: 409 },
     )
   }

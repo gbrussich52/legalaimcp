@@ -222,8 +222,8 @@ async function discover() {
   }
 
   if (dryRun) {
+    // Claude Sonnet 5.5, 2026-11-23: finish() only exists inside verify(); calling it here threw ReferenceError on every discover --dry-run.
     log('dry run — nothing written')
-    finish()
     return
   }
 
@@ -459,6 +459,8 @@ async function verify() {
 
   if (dryRun) {
     log('dry run — nothing written')
+    // Claude Sonnet 5.5, 2026-11-23: a dry run with a failed audit must still exit 2, like the real run.
+    finish()
     return
   }
 

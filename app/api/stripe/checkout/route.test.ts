@@ -51,7 +51,16 @@ it('still sells to a listing that is not featured', async () => {
   expect(create).toHaveBeenCalledTimes(1)
 })
 
-it('still sells a renewal to a paid listing', async () => {
-  row = { id: 'l1', slug: 'acme', name: 'Acme', status: 'published', featured: true, featured_until: '2026-12-01T00:00:00Z' }
+// Claude Sonnet 5.5, 2026-11-23: a second purchase inside an active paid term restarts the 30 days and loses the unused ones.
+it('still sells a renewal once the paid term has ended', async () => {
+  row = { id: 'l1', slug: 'acme', name: 'Acme', status: 'published', featured: true, featured_until: '2020-01-01T00:00:00Z' }
   expect((await POST(req())).status).toBe(200)
+})
+
+it('refuses a second purchase during an active paid term with 409', async () => {
+  row = { id: 'l1', slug: 'acme', name: 'Acme', status: 'published', featured: true, featured_until: '2099-01-01T00:00:00Z' }
+  const res = await POST(req())
+  expect(res.status).toBe(409)
+  expect(await res.json()).toEqual({ error: 'This listing already has a paid placement. You can renew after it ends.' })
+  expect(create).not.toHaveBeenCalled()
 })

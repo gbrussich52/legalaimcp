@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { compareFeatured, FEATURED_ORDER, orderFeaturedFirst } from './featured-order'
+import { compareCategory, compareFeatured, CATEGORY_ORDER, FEATURED_ORDER, orderCategoryPage, orderFeaturedFirst } from './featured-order'
 
 // Claude Sonnet 5.5, 2026-11-22: paid placement must sort ahead of editorial picks and the rest.
 const paid = { name: 'Zed', featured: true, featured_until: '2026-12-10T00:00:00Z' }
@@ -62,5 +62,43 @@ describe('sortHomeFeatured', () => {
   it('an expired paid row is treated as editorial', () => {
     const rows = [r('contact', 'contact'), r('old', 'free', '2026-11-01T00:00:00Z')]
     expect(names(sortHomeFeatured(rows, now))).toEqual(['contact', 'old'])
+  })
+})
+
+// Claude Sonnet 5.5, 2026-11-23: the pricing page promises a sort boost on category pages. Every new listing is
+// unverified, so a paid row must rank above verified plain and verified editorial rows there.
+describe('compareCategory', () => {
+  const row = (name: string, verified: boolean, featured: boolean, featured_until: string | null) => ({ name, verified, featured, featured_until })
+  const paidUnverified = row('PaidUnverified', false, true, '2026-12-10T00:00:00Z')
+  const verifiedPlain = row('VerifiedPlain', true, false, null)
+  const verifiedEditorial = row('VerifiedEditorial', true, true, null)
+  const names = (rows: { name: string }[]) => rows.map((r) => r.name)
+  it('a paid unverified row ranks above verified plain and verified editorial rows', () => {
+    expect(names([verifiedPlain, verifiedEditorial, paidUnverified].sort(compareCategory))[0]).toBe('PaidUnverified')
+  })
+  it('among non-paid rows verified still ranks first, then featured, then name', () => {
+    const unverifiedEditorial = row('UnverifiedEditorial', false, true, null)
+    const unverifiedPlain = row('Aaa', false, false, null)
+    expect(names([unverifiedPlain, unverifiedEditorial, verifiedPlain, verifiedEditorial].sort(compareCategory)))
+      .toEqual(['VerifiedEditorial', 'VerifiedPlain', 'UnverifiedEditorial', 'Aaa'])
+  })
+  it('a later end date ranks above an earlier one', () => {
+    const later = row('Later', false, true, '2026-12-20T00:00:00Z')
+    expect(names([paidUnverified, later].sort(compareCategory))).toEqual(['Later', 'PaidUnverified'])
+  })
+})
+
+describe('orderCategoryPage', () => {
+  it('chains the category spec: end date first (nulls last), then verified, featured, name', () => {
+    const calls: unknown[][] = []
+    const q = { order(c: string, o: object) { calls.push([c, o]); return q } }
+    expect(orderCategoryPage(q)).toBe(q)
+    expect(calls).toEqual([
+      ['featured_until', { ascending: false, nullsFirst: false }],
+      ['verified', { ascending: false }],
+      ['featured', { ascending: false }],
+      ['name', { ascending: true }],
+    ])
+    expect(CATEGORY_ORDER).toHaveLength(4)
   })
 })

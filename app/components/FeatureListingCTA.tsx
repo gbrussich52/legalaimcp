@@ -66,7 +66,8 @@ export function FeatureListingCTA({
     return (
       <div className="rounded-lg border border-navy/20 bg-navy/5 px-5 py-4 mb-10">
         <p className="font-sans text-sm font-semibold text-navy">
-          Featured through {new Date(featuredUntil as string).toLocaleDateString()}
+          {/* Claude Sonnet 5.5, 2026-11-23: the badge for a paid placement is "Sponsored", so the heading says the same. */}
+          Sponsored through {new Date(featuredUntil as string).toLocaleDateString()}
         </p>
         <p className="font-body text-xs text-charcoal/75 mt-1">
           Sponsored placement — sort boost + badge. Renew from this page after it expires.

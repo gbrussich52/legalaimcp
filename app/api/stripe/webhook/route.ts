@@ -109,6 +109,13 @@ async function applyFeaturedPurchase(session: Stripe.Checkout.Session) {
   const purchasedAt = payment.created_at
   const featuredUntil = new Date(Date.parse(purchasedAt) + FEATURED_DURATION_DAYS * 24 * 60 * 60 * 1000)
 
+  // Claude Sonnet 5.5, 2026-11-23: an event delivered or replayed after the 30 days would write a past end
+  // date onto a plain row. The payment stays recorded; the listing is not touched.
+  if (featuredUntil.getTime() <= Date.now()) {
+    console.info(`[stripe/webhook] Term already over, listing not updated listing=${listingId} session=${session.id}`)
+    return
+  }
+
   const { data: updated, error: listErr } = await db
     .from('listings')
     .update({
@@ -120,6 +127,10 @@ async function applyFeaturedPurchase(session: Stripe.Checkout.Session) {
     })
     .eq('id', listingId)
     .or(`featured_purchased_at.is.null,featured_purchased_at.lte.${purchasedAt}`)
+    // Claude Sonnet 5.5, 2026-11-23: never match an editorial pick (featured, no end date). An admin can make
+    // a row editorial after checkout started; a paid write would stamp an end date and the expiry cron would
+    // remove the pick 30 days later. A second .or() is sent as a second query param, which PostgREST ANDs.
+    .or('featured.eq.false,featured_until.not.is.null')
     .select('id')
     .maybeSingle()
 
@@ -130,7 +141,13 @@ async function applyFeaturedPurchase(session: Stripe.Checkout.Session) {
   if (!updated) {
     // A newer purchase wins. A missing listing or unreadable state needs a retry.
     const { data: current, error: currentError } = await db.from('listings')
-      .select('featured_purchased_at').eq('id', listingId).maybeSingle()
+      .select('featured,featured_until,featured_purchased_at').eq('id', listingId).maybeSingle()
+    // Claude Sonnet 5.5, 2026-11-23: editorial row at payment time. Do not throw (Stripe would retry forever) and do
+    // not touch the listing or listing_payments.status. The stable code is for a future alert; no email or name.
+    if (!currentError && current && current.featured === true && current.featured_until == null) {
+      console.error(`PAID_NO_PLACEMENT session=${session.id} listing=${listingId} reason=editorial_pick`)
+      return
+    }
     if (currentError || !current || Date.parse(current.featured_purchased_at) < Date.parse(purchasedAt) ||
       !Number.isFinite(Date.parse(current.featured_purchased_at))) throw new Error('Listing fulfillment unconfirmed')
   }

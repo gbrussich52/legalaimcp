@@ -53,3 +53,39 @@ export function sortHomeFeatured<T extends { pricing_model: string; featured: bo
       (PRICING_ANCHOR_ORDER[a.pricing_model] ?? 99) - (PRICING_ANCHOR_ORDER[b.pricing_model] ?? 99),
   )
 }
+
+// Claude Sonnet 5.5, 2026-11-23: category pages only. The pricing page promises paid placements a sort
+// boost there, but verified came first, and every newly admitted listing is unverified, so a paying vendor
+// ranked below every verified plain row. A non-null end date means a paid term, so it sorts first (nulls
+// last), then verified, then featured, then name. Best-of pages keep verified first on purpose.
+export const CATEGORY_ORDER = [
+  { column: 'featured_until', ascending: false, nullsFirst: false },
+  { column: 'verified', ascending: false, nullsFirst: undefined },
+  { column: 'featured', ascending: false, nullsFirst: undefined },
+  { column: 'name', ascending: true, nullsFirst: undefined },
+] as const
+
+/** Chain the category-page order onto a Supabase query builder. */
+export function orderCategoryPage<Q extends Orderable<Q>>(query: Q): Q {
+  let q = query
+  for (const o of CATEGORY_ORDER) {
+    q = q.order(
+      o.column,
+      o.nullsFirst === undefined ? { ascending: o.ascending } : { ascending: o.ascending, nullsFirst: o.nullsFirst },
+    )
+  }
+  return q
+}
+
+type CategoryRow = Row & { verified: boolean }
+
+/** In-memory twin of CATEGORY_ORDER; used to test the rule. */
+export function compareCategory(a: CategoryRow, b: CategoryRow): number {
+  const aPaid = a.featured_until != null
+  const bPaid = b.featured_until != null
+  if (aPaid !== bPaid) return aPaid ? -1 : 1
+  if (aPaid && a.featured_until !== b.featured_until) return (a.featured_until as string) < (b.featured_until as string) ? 1 : -1
+  if (a.verified !== b.verified) return a.verified ? -1 : 1
+  if (a.featured !== b.featured) return a.featured ? -1 : 1
+  return a.name.localeCompare(b.name)
+}
