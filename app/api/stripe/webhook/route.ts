@@ -56,6 +56,12 @@ export async function POST(req: Request) {
   return NextResponse.json({ received: true })
 }
 
+function placementFilter(purchasedAt: string): string {
+  const notNewer = ['featured_purchased_at.is.null', `featured_purchased_at.lte.${purchasedAt}`]
+  const notEditorial = ['featured.eq.false', 'featured_until.not.is.null']
+  return notNewer.flatMap((a) => notEditorial.map((b) => `and(${a},${b})`)).join(',')
+}
+
 async function applyFeaturedPurchase(session: Stripe.Checkout.Session) {
   if (session.payment_status !== 'paid') {
     console.warn('[stripe/webhook] session not paid, not granting featured', session.id, session.payment_status)
@@ -126,11 +132,13 @@ async function applyFeaturedPurchase(session: Stripe.Checkout.Session) {
       featured_purchased_at: purchasedAt,
     })
     .eq('id', listingId)
-    .or(`featured_purchased_at.is.null,featured_purchased_at.lte.${purchasedAt}`)
-    // Claude Sonnet 5.5, 2026-11-23: never match an editorial pick (featured, no end date). An admin can make
-    // a row editorial after checkout started; a paid write would stamp an end date and the expiry cron would
-    // remove the pick 30 days later. A second .or() is sent as a second query param, which PostgREST ANDs.
-    .or('featured.eq.false,featured_until.not.is.null')
+    // Claude Sonnet 5.5, 2026-11-23: (not newer than this purchase) AND (not an editorial pick), as ONE or= value.
+    // Editorial = featured with no end date; an admin can make a row editorial after checkout started, and a
+    // paid write would stamp an end date that the expiry cron removes 30 days later. Two .or() calls would send
+    // two or= parameters, and PostgREST's own tests do not cover that. They do cover nesting inside one
+    // parameter (AndOrParamsSpec.hs, "can be nested inside the same expression"), so we expand the AND of the
+    // two ORs into four and() terms.
+    .or(placementFilter(purchasedAt))
     .select('id')
     .maybeSingle()
 
