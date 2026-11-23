@@ -57,9 +57,6 @@ export default function TermsPage() {
               before publishing, but we don&apos;t independently verify every claim a vendor makes.
               Pricing, features, and availability can change after we last checked &mdash; confirm
               directly with the vendor before you rely on any detail.
-              {/* Claude Sonnet 5.5, 2026-11-23: link to the method page. */}
-              Each listing shows what we checked and when. See{' '}
-              <Link className="text-gold-text underline" href="/how-we-verify">How we check listings</Link>.
             </p>
           </div>
 

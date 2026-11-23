@@ -9,7 +9,7 @@ import { SHARED_DOMAINS } from '../scripts/realness.mjs'
 
 const claims = (slug: string) => (reviews.reviews as { slug: string; claims: Record<string, unknown> }[]).find((r) => r.slug === slug)!.claims
 
-import { mcpUrlLabel, CODE_HOSTS } from './verification'
+import { mcpUrlLabel, CODE_HOSTS, resultLabel } from './verification'
 
 // The listing page said "MCP Repository" even when mcp_repo_url was a live endpoint (captainlegal).
 describe('mcpUrlLabel', () => {
@@ -23,6 +23,16 @@ describe('mcpUrlLabel', () => {
   })
   it('uses the same code-host list as the realness checker', () => {
     expect([...CODE_HOSTS].sort()).toEqual([...SHARED_DOMAINS].sort())
+  })
+})
+
+describe('resultLabel', () => {
+  const none = 'No entry in the official MCP registry matched this listing. Absence proves nothing either way.'
+  it('says No entry found only for a registry search that found nothing', () => {
+    expect(resultLabel({ id: 'registry', result: 'unknown', observed: none })).toBe('No entry found')
+    expect(resultLabel({ id: 'registry', result: 'unknown', observed: 'The official MCP registry answered HTTP 503, so it was not checked.' })).toBe('Could not check')
+    expect(resultLabel({ id: 'mail', result: 'unknown', observed: none })).toBe('Could not check')
+    expect(resultLabel({ id: 'registry', result: 'pass', observed: 'Listed as x' })).toBe('Passed')
   })
 })
 
@@ -94,6 +104,9 @@ describe('buildVerification (get_legal_ai_tool)', () => {
     const op = { name: 'Camines LLC', register: 'Delaware Division of Corporations', url: 'https://icis.corp.delaware.gov/', status: 'Good standing', checked_at: '2026-11-23' }
     const src = getVerificationSource(row, { reviews: [{ ...review, operator: op } as never] })
     expect(src.operator).toEqual(op)
+    const withFormed = { ...op, formed: '2018-04-02' }
+    expect(getVerificationSource(row, { reviews: [{ ...review, operator: withFormed } as never] }).operator).toEqual(withFormed)
+    expect(getVerificationSource(row, { reviews: [{ ...review, operator: { ...op, formed: 'last year' } } as never] }).operator).toBeNull()
     expect(getVerificationSource({ ...row, name: 'Changed' }, { reviews: [{ ...review, operator: op } as never] }).operator).toBeNull()
     expect(getVerificationSource(row, { reviews: [{ ...review, operator: { ...op, url: 'javascript:alert(1)' } } as never] }).operator).toBeNull()
     expect(getVerificationSource(row, { reviews: [{ ...review, operator: { status: 'not_found', note: 'Nothing under that name.' } } as never] }).operator).toEqual({ status: 'not_found', note: 'Nothing under that name.' })
@@ -113,7 +126,7 @@ describe('buildVerificationSummary (list answers)', () => {
   })
   it('counts only the public checks that apply', () => {
     const s = buildVerificationSummary({ slug: 'telewizard' })
-    expect(s.checks_by_result).toEqual({ pass: 3, warn: 0, fail: 0, unknown: 1 })
+    expect(s.checks_by_result).toEqual({ pass: 3, warn: 0, fail: 0, unknown: 0 })
   })
   it('has zero counts and no date when nothing was checked', () => {
     expect(buildVerificationSummary({ slug: 'none' })).toMatchObject({ checked_at: null, checks_by_result: { pass: 0, warn: 0, fail: 0, unknown: 0 } })

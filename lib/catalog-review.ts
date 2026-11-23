@@ -30,9 +30,10 @@ export type CatalogReview = {
   identity_confirmed: boolean; capabilities_confirmed: boolean; mcp_confirmed: boolean
   claims?: Candidate
   // Claude Sonnet 5.5, 2026-11-23: legal entity found in a public register (or not_found), and the reason a person accepted a watch-level realness result. Not required on older records.
-  operator?: { name: string; register: string; url: string; status: string; checked_at: string } | { status: 'not_found'; note: string }
+  operator?: { name: string; register: string; url: string; status: string; checked_at: string; formed?: string } | { status: 'not_found'; note: string }
   realness_ack?: string
-  sources: Array<{ url: string; kind: string; sha256: string; quote: string }>
+  // show: false keeps the quote as evidence but off the listing page.
+  sources: Array<{ url: string; kind: string; sha256: string; quote: string; show?: false }>
 }
 
 export function isCatalogQuarantined(listing: Candidate) {

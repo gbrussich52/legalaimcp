@@ -112,7 +112,9 @@ function staticSources(raw, gate) {
     try { gate.primarySourceUrl(source.url) } catch { refuse(`sources[${i}].url: not a valid public https source`) }
     cleanText(source.quote, `sources[${i}].quote`)
     if (gate.normalize(source.quote).length < 15) refuse(`sources[${i}].quote: needs at least 15 characters after normalization`)
-    return { url: source.url, kind: source.kind, quote: source.quote }
+    // Claude Sonnet 5.5, 2026-11-23: `show: false` keeps the quote as evidence but off the listing page (private names).
+    if ('show' in source && source.show !== false) refuse(`sources[${i}].show: only false is allowed`)
+    return { url: source.url, kind: source.kind, quote: source.quote, ...(source.show === false ? { show: false } : {}) }
   })
 }
 
@@ -127,12 +129,14 @@ function validateOperator(raw) {
       if (Object.keys(raw).some((k) => !['status', 'note'].includes(k))) refuse('only status and note are allowed with not_found')
       return { status: 'not_found', note: boundedText(typeof raw.note === 'string' ? raw.note.trim() : raw.note, 'note', 10, 500) }
     }
-    if (Object.keys(raw).some((k) => !['name', 'register', 'url', 'status', 'checked_at'].includes(k))) refuse('only name, register, url, status and checked_at are allowed')
+    if (Object.keys(raw).some((k) => !['name', 'register', 'url', 'status', 'checked_at', 'formed'].includes(k))) refuse('only name, register, url, status, checked_at and formed are allowed')
     const out = {
       name: boundedText(raw.name, 'name', 2, 200), register: boundedText(raw.register, 'register', 2, 200),
       url: httpsUrl(raw.url, 'url'), status: boundedText(raw.status, 'status', 2, 100),
       checked_at: typeof raw.checked_at === 'string' && real(raw.checked_at) ? raw.checked_at : refuse('checked_at: must be a real YYYY-MM-DD date'),
     }
+    // Claude Sonnet 5.5, 2026-11-23: optional date the entity was formed, as the register entry shows it.
+    if ('formed' in raw) out.formed = typeof raw.formed === 'string' && real(raw.formed) ? raw.formed : refuse('formed: must be a real YYYY-MM-DD date')
     return out
   } catch (e) { if (e instanceof Refusal) refuse(`operator: ${e.message}`); throw e }
 }
@@ -204,7 +208,7 @@ export async function checkPlan(plan, { gate, policy, fetcher = fetch, fetchSour
         const text = await gate.readPrimarySource(gate.primarySourceUrl(source.url), fetcher)
         bodies.set(String(gate.primarySourceUrl(source.url)), text)
         if (!gate.normalize(text).includes(gate.normalize(source.quote))) refuse(`supporting quote is absent from ${source.url}`)
-        reviewed.push({ url: source.url, kind: source.kind, sha256: gate.sourceFingerprint(text), quote: source.quote })
+        reviewed.push({ url: source.url, kind: source.kind, sha256: gate.sourceFingerprint(text), quote: source.quote, ...(source.show === false ? { show: false } : {}) })
       }
       if (requireRealness) {
         if (typeof realness !== 'function') refuse('realness: no realness check was supplied, so nothing can be admitted')

@@ -364,6 +364,28 @@ describe('realness gate and operator', () => {
     expect(nf.ok).toBe(true)
     expect(nf.admits[0].record.operator).toEqual(none)
   })
+  // Claude Sonnet 5.5, 2026-11-23: optional `formed` (ISO date the entity was formed, from the register entry).
+  it('accepts an optional formed date, stores it, and refuses a bad one', async () => {
+    const formed = await gated(withOp({ operator: { ...OPERATOR, formed: '2018-04-02' } }))
+    expect(formed.ok).toBe(true)
+    expect(formed.admits[0].record.operator).toEqual({ ...OPERATOR, formed: '2018-04-02' })
+    for (const bad of ['2018', '02 Apr 2018', '2018-02-31', '', 20180402]) {
+      const out = await gated(withOp({ operator: { ...OPERATOR, formed: bad } }))
+      expect(out.ok, String(bad)).toBe(false)
+      expect(out.results[0].reason).toContain('operator')
+    }
+    expect((await gated(withOp({ operator: { status: 'not_found', note: 'Nothing under that name.', formed: '2018-04-02' } }))).ok).toBe(false)
+  })
+  // `show: false` keeps a source quote as evidence but off the public page.
+  it('keeps show:false on a source and refuses any other value', async () => {
+    const hidden = await run(plan({ admit: [{ ...baseAdmit(), sources: baseAdmit().sources.map((s: object, i: number) => (i === 0 ? { ...s, show: false } : s)) }] }))
+    expect(hidden.ok).toBe(true)
+    expect(hidden.admits[0].record.sources[0].show).toBe(false)
+    expect(hidden.admits[0].record.sources[1]?.show).toBeUndefined()
+    const bad = await run(plan({ admit: [{ ...baseAdmit(), sources: baseAdmit().sources.map((s: object, i: number) => (i === 0 ? { ...s, show: 'no' } : s)) }] }))
+    expect(bad.ok).toBe(false)
+  })
+
   it('refuses a malformed operator', async () => {
     for (const operator of [
       {}, 'Acme', { status: 'not_found' }, { status: 'not_found', note: 'x' },

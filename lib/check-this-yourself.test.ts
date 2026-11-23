@@ -41,9 +41,20 @@ describe('Check this yourself block', () => {
   it('never shows the internal level or reasons', () => {
     expect(cap).not.toMatch(/watch|reasons|level/i)
   })
-  it('says "Could not check" for an unknown result', () => {
+  it('says "Could not check" for an unknown result, and "No entry found" for a registry search with no match', () => {
+    const record: RealnessRecord = { slug: 'x', checked_at: '2026-11-23', level: 'watch', reasons: [], checks: [
+      { id: 'site', result: 'unknown', observed: 'The site blocks automated readers.', how_to_repeat: 'curl a', public: true },
+      { id: 'registry', result: 'unknown', observed: 'No entry in the official MCP registry matched this listing. Absence proves nothing either way.', how_to_repeat: 'curl b', public: true },
+      { id: 'mcp_endpoint', result: 'unknown', observed: 'timed out', how_to_repeat: 'curl c', public: true },
+    ] }
+    const out = text(html('X', { record, review: null, operator: null }))
+    expect(out).toMatch(/Website\s*Could not check/)
+    expect(out).toMatch(/Official MCP registry\s*No entry found/)
+    expect(out).toMatch(/MCP server\s*Could not check/)
+  })
+  it('hides the MCP registry row for a listing with no MCP server (TeleWizard)', () => {
     const tw = text(html('TeleWizard', getVerificationSource({ slug: 'telewizard', ...claims('telewizard') })))
-    expect(tw).toContain('Could not check')
+    expect(tw).not.toContain('Official MCP registry')
     expect(tw).not.toContain('MCP server')
   })
   it('says who is behind it in the three possible ways', () => {
@@ -53,6 +64,8 @@ describe('Check this yourself block', () => {
     const found = html('Captain.Legal', getVerificationSource(row, { reviews: [{ ...review, operator: op } as never] }))
     expect(text(found)).toContain('Camines LLC, listed in Delaware Division of Corporations as Good standing. Checked 2026-11-23.')
     expect(found).toContain('href="https://icis.corp.delaware.gov/"')
+    const formed = text(html('Captain.Legal', getVerificationSource(row, { reviews: [{ ...review, operator: { ...op, formed: '2018-04-02' } } as never] })))
+    expect(formed).toContain('Camines LLC, listed in Delaware Division of Corporations as Good standing, formed 2018-04-02. Checked 2026-11-23.')
     const missing = text(html('Captain.Legal', getVerificationSource(row, { reviews: [{ ...review, operator: { status: 'not_found', note: 'Nothing under that name.' } } as never] })))
     expect(missing).toContain('We looked for the operator in a public company register and did not find one. Nothing under that name.')
     expect(t).toContain('Who is behind it')
@@ -70,6 +83,14 @@ describe('Check this yourself block', () => {
     expect(none).toContain('We do not make, sell or run Unlisted Tool.')
     expect(none).toContain('Not checked yet.')
     expect(none).toContain('We have not yet looked this operator up in a company register.')
+  })
+  it('skips a quote marked show:false, and keeps it in the record', () => {
+    const rec = (reviews.reviews as { slug: string; sources: { quote: string; show?: boolean }[] }[]).find((r) => r.slug === 'captainlegal')!
+    const founder = rec.sources.find((s) => s.quote.includes('founded'))!
+    expect(founder.show).toBe(false)
+    const out = text(html('Captain.Legal', getVerificationSource({ slug: 'captainlegal', ...claims('captainlegal') })))
+    expect(out).not.toContain('Delmotte')
+    expect(out).toContain('Captain.Legal provides legal document templates')
   })
   it('renders vendor text as text and links only https', () => {
     const rec = (reviews.reviews as { slug: string }[]).find((r) => r.slug === 'captainlegal')!

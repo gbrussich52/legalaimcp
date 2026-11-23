@@ -225,9 +225,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=checkbox'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -457,9 +457,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=claude'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -515,9 +515,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=clio'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -630,9 +630,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=thomsonreuters'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -688,9 +688,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=composio'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -746,9 +746,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=concord'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -1034,9 +1034,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=diligent'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -1150,9 +1150,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=esgenix'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -1208,9 +1208,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=firecrawl'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -1323,9 +1323,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=gavel'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -1496,9 +1496,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=harvey'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -1554,9 +1554,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=harvey'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -1612,9 +1612,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=imanage'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -1670,9 +1670,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=invoicemyclients'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -1728,9 +1728,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=ironcladapp'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -1786,9 +1786,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=litera'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -1844,9 +1844,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=lawdroid'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -1902,9 +1902,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=leela'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -2074,9 +2074,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=lexisnexis'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -2132,9 +2132,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=lexery'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -2190,9 +2190,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=luminance'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -2308,9 +2308,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=nyclaw'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -2594,9 +2594,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=piiblackout'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -2712,9 +2712,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=qanu'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -2770,9 +2770,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=redactifyai'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -2886,9 +2886,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=relativity'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -2944,9 +2944,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=scoro'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -3060,9 +3060,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=smith'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -3118,9 +3118,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=smokeball'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -3410,9 +3410,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=telewizard'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -3468,9 +3468,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=timesolv'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -3871,9 +3871,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=vlex'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -3987,9 +3987,9 @@
         },
         {
           "id": "registry",
-          "result": "unknown",
-          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
-          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=whisperit'",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]

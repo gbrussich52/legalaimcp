@@ -286,7 +286,8 @@
           "url": "https://www.captain.legal/us/about.html",
           "kind": "vendor",
           "sha256": "0b9f1d5b258c48f054e0f6079c666262e3201b289230e0d468f444033392c329",
-          "quote": "Damien Delmotte founded Captain.Legal."
+          "quote": "Damien Delmotte founded Captain.Legal.",
+          "show": false
         }
       ],
       "listing_sha256": "56d5c7a61136be33bbd3e26e12b3c12362cc794726cb49df03aa27b1fbd40d17",

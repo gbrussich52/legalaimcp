@@ -396,6 +396,12 @@ export async function repoCheck(listing, ctx) {
   })
 }
 
+// Claude Sonnet 5.5, 2026-11-23: the MCP registry lists MCP servers. A listing that names no endpoint, no code
+// repository and no install command (TeleWizard) is not one, so "no entry" would say nothing; the check does not apply.
+export function namesMcpServer(listing) {
+  return endpointCandidates(listing).length > 0 || Boolean(String(listing.mcp_repo_url ?? '').trim()) || Boolean(String(listing.mcp_install_command ?? '').trim()) || githubRepoOf(listing) !== null
+}
+
 export async function registryCheck(listing, ctx) {
   const domain = ctx.lib.registrableDomain(listing.external_url)
   if (!domain || SHARED_DOMAINS.has(domain)) return mk('registry', 'not_applicable', 'The listing sits on a shared host, so no namespace can be matched to it.', 'See the listing page.')
@@ -406,6 +412,9 @@ export async function registryCheck(listing, ctx) {
     const res = await fetch(`https://registry.modelcontextprotocol.io/v0.1/servers?search=${encodeURIComponent(term)}`, { headers: { accept: 'application/json', 'user-agent': UA }, signal: AbortSignal.timeout(TIMEOUT_MS) })
     if (!res.ok) return mk('registry', 'unknown', `The official MCP registry answered HTTP ${res.status}, so it was not checked.`, how)
     const match = ctx.lib.parseRegistryMatch(JSON.parse((await readCapped(res, CAP_BYTES))), { endpointHost: ep ? hostOfUrl(ep.url) : hostOfUrl(listing.external_url), domain })
+    // A listing that names no MCP server has nothing to look up, so "no entry" says nothing: the check does not apply.
+    // A real namespace match is still shown as pass.
+    if (!match && !namesMcpServer(listing)) return mk('registry', 'not_applicable', 'The listing names no MCP server or code repository, so the official MCP registry does not apply.', 'See the listing page.')
     if (!match) return mk('registry', 'unknown', 'No entry in the official MCP registry matched this listing. Absence proves nothing either way.', how)
     return mk('registry', 'pass', `Listed as ${match.namespace}${match.since ? ` since ${match.since}` : ''}; the registry confirms control of that namespace, not quality.`, how)
   } catch (e) { return mk('registry', 'unknown', errObserved(classifyError(e), 'The official MCP registry could not be read'), how) }

@@ -1,7 +1,7 @@
 // Claude Sonnet 5.5, 2026-11-23: offline tests for the pure helpers in scripts/realness.mjs (address rules, endpoint
 // detection, stable output, change report). Written after the script; the network probes are exercised by the real run.
-import { describe, it, expect } from 'vitest'
-import { isPrivateAddress, isEndpointUrl, endpointOf, endpointCandidates, firstReadable, summaryJson, serialize, diffRecords } from '../scripts/realness.mjs'
+import { describe, it, expect, vi, afterEach } from 'vitest'
+import { isPrivateAddress, isEndpointUrl, endpointOf, endpointCandidates, firstReadable, summaryJson, namesMcpServer, registryCheck, serialize, diffRecords } from '../scripts/realness.mjs'
 
 describe('isPrivateAddress', () => {
   it('refuses private, loopback, link-local and mapped addresses', () => {
@@ -69,6 +69,36 @@ describe('--json summary', () => {
   it('lists check results that moved, only in --check mode', () => {
     const before = { a: r('a', 'pass', [], { site: 'pass' }), b: r('b', 'watch', []), c: r('c', 'pass', []) }
     expect(summaryJson(Object.values(fresh), before).changed).toEqual([{ slug: 'a', check: 'site', from: 'pass', to: 'fail' }])
+  })
+})
+
+// Claude Sonnet 5.5, 2026-11-23: a listing that names no MCP endpoint and no code repository is not an MCP server,
+// so the MCP registry check does not apply to it (TeleWizard).
+describe('registry applies only to MCP servers', () => {
+  it('knows when a listing names an endpoint, a repository or an install command', () => {
+    expect(namesMcpServer({ external_url: 'https://telewizard.ai/x', mcp_repo_url: null, mcp_install_command: null })).toBe(false)
+    expect(namesMcpServer({ external_url: 'https://a.com/', mcp_repo_url: 'https://mcp.captain.legal/connect/' })).toBe(true)
+    expect(namesMcpServer({ external_url: 'https://a.com/', mcp_repo_url: 'https://github.com/o/r' })).toBe(true)
+    expect(namesMcpServer({ external_url: 'https://github.com/o/r', mcp_repo_url: null })).toBe(true)
+    expect(namesMcpServer({ external_url: 'https://a.com/', mcp_install_command: 'npx -y some-mcp' })).toBe(true)
+  })
+  const searchReturns = (body: unknown) => vi.stubGlobal('fetch', vi.fn(async () => new Response(JSON.stringify(body), { status: 200 })))
+  const tw = { external_url: 'https://telewizard.ai/x', mcp_repo_url: null, mcp_install_command: null }
+  afterEach(() => vi.unstubAllGlobals())
+  it('is not_applicable for a listing with no MCP server when the registry has no match', async () => {
+    searchReturns({ servers: [] })
+    const r = await registryCheck(tw, { lib: { registrableDomain: () => 'telewizard.ai', parseRegistryMatch: () => null } })
+    expect(r).toMatchObject({ id: 'registry', result: 'not_applicable' })
+  })
+  it('stays unknown for a listing that names a server and has no match', async () => {
+    searchReturns({ servers: [] })
+    const r = await registryCheck({ ...tw, mcp_repo_url: 'https://github.com/o/r' }, { lib: { registrableDomain: () => 'telewizard.ai', parseRegistryMatch: () => null } })
+    expect(r.result).toBe('unknown')
+  })
+  it('keeps a real registry match as pass even when the listing names no server', async () => {
+    searchReturns({ servers: [] })
+    const r = await registryCheck(tw, { lib: { registrableDomain: () => 'telewizard.ai', parseRegistryMatch: () => ({ namespace: 'ai.telewizard/x', since: '2026-01-01' }) } })
+    expect(r.result).toBe('pass')
   })
 })
 

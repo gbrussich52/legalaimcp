@@ -82,6 +82,14 @@ export function mcpUrlLabel(url: string): 'MCP endpoint' | 'MCP Repository' {
 
 // ---------------------------------------------------------------- checks ----
 
+// Claude Sonnet 5.5, 2026-11-23: the registry row for a listing that names an MCP server but has no match reads
+// "No entry found", not "Could not check": we did look and found nothing. A registry that errored or timed out stays
+// "Could not check". The stored result stays `unknown` either way.
+export function resultLabel(check: { id: string; result: CheckResult; observed: string }): string {
+  if (check.id === 'registry' && check.result === 'unknown' && check.observed.startsWith('No entry in the official MCP registry')) return 'No entry found'
+  return RESULT_LABELS[check.result]
+}
+
 /** The checks a reader may see: public, and not "does not apply". An unknown result stays in, shown as "Could not check". */
 export type PublicCheck = Check & { result: Exclude<CheckResult, 'not_applicable'> }
 export function publicChecks(record: RealnessRecord | null | undefined): PublicCheck[] {
@@ -89,15 +97,15 @@ export function publicChecks(record: RealnessRecord | null | undefined): PublicC
 }
 
 const Operator = z.union([
-  z.object({ name: z.string().min(1), register: z.string().min(1), url: z.string().refine((u) => httpsHref(u) !== null), status: z.string().min(1), checked_at: z.string().min(1) }).strict(),
+  z.object({ name: z.string().min(1), register: z.string().min(1), url: z.string().refine((u) => httpsHref(u) !== null), status: z.string().min(1), checked_at: z.string().min(1), formed: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional() }).strict(),
   z.object({ status: z.literal('not_found'), note: z.string().min(1) }).strict(),
 ])
 export type Operator = z.infer<typeof Operator>
 
-type ReviewShape = { slug: string; reviewed_at: string; claims?: Record<string, unknown>; sources: Array<{ url: string; kind: string; quote: string }>; operator?: unknown }
+type ReviewShape = { slug: string; reviewed_at: string; claims?: Record<string, unknown>; sources: Array<{ url: string; kind: string; quote: string; show?: boolean }>; operator?: unknown }
 export type VerificationSource = {
   record: RealnessRecord | null
-  review: { reviewed_at: string; sources: Array<{ url: string; kind: string; quote: string }> } | null
+  review: { reviewed_at: string; sources: Array<{ url: string; kind: string; quote: string; show?: boolean }> } | null
   operator: Operator | null
 }
 

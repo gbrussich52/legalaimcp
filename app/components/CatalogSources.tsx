@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import type { ListingDetailData } from '@/lib/types'
-import { CHECK_LABELS, METHOD_PATH, RESULT_LABELS, getVerificationSource, hostnameOf, httpsHref, publicChecks, textFragmentUrl, type VerificationSource } from '@/lib/verification'
+import { CHECK_LABELS, METHOD_PATH, resultLabel, getVerificationSource, hostnameOf, httpsHref, publicChecks, textFragmentUrl, type VerificationSource } from '@/lib/verification'
 
 // Claude Sonnet 5.5, 2026-11-23: this card used to print only the review date and the source hostnames. It is now the
 // "Check this yourself" block: what the vendor says (quoted, with a link that scrolls to the quote), what we observed
@@ -22,7 +22,7 @@ const link = 'text-gold-text underline break-words'
 export function CheckThisYourself({ name, source }: { name: string; source: VerificationSource }) {
   const { record, review, operator } = source
   const checks = publicChecks(record)
-  const quotes = (review?.sources ?? []).filter((s) => httpsHref(s.url) !== null && String(s.quote ?? '').trim() !== '')
+  const quotes = (review?.sources ?? []).filter((s) => s.show !== false && httpsHref(s.url) !== null && String(s.quote ?? '').trim() !== '')
   const operatorHref = operator && 'url' in operator ? httpsHref(operator.url) : null
   return (
     <section id="check-this-yourself" className="scroll-mt-24 mb-10 rounded-xl border border-slate-200 bg-slate-50 p-5 sm:p-6" aria-labelledby="check-yourself-heading">
@@ -61,7 +61,7 @@ export function CheckThisYourself({ name, source }: { name: string; source: Veri
                   <li key={check.id}>
                     <p className="flex flex-wrap items-center gap-2">
                       <span className="font-sans font-semibold text-navy">{CHECK_LABELS[check.id] ?? check.id}</span>
-                      <span className={`text-xs rounded-full px-2.5 py-0.5 ${RESULT_STYLE[check.result] ?? RESULT_STYLE.unknown}`}>{RESULT_LABELS[check.result]}</span>
+                      <span className={`text-xs rounded-full px-2.5 py-0.5 ${RESULT_STYLE[check.result] ?? RESULT_STYLE.unknown}`}>{resultLabel(check)}</span>
                     </p>
                     <p className="text-charcoal/80 mt-1 break-words">{check.observed}</p>
                     <code className="block bg-slate-100 rounded px-3 py-2 mt-2 font-mono text-xs text-charcoal whitespace-pre-wrap break-all select-all">{check.how_to_repeat}</code>
@@ -76,7 +76,7 @@ export function CheckThisYourself({ name, source }: { name: string; source: Veri
           <h3 className={h3}>Who is behind it</h3>
           {operator && 'name' in operator ? (
             <p className="text-charcoal/80 mt-1 break-words">
-              {operator.name}, listed in {operatorHref ? <a href={operatorHref} target="_blank" rel="noopener noreferrer" className={link}>{operator.register}</a> : operator.register} as {operator.status}. Checked <time dateTime={operator.checked_at}>{operator.checked_at}</time>.
+              {operator.name}, listed in {operatorHref ? <a href={operatorHref} target="_blank" rel="noopener noreferrer" className={link}>{operator.register}</a> : operator.register} as {operator.status}{operator.formed ? `, formed ${operator.formed}` : ''}. Checked <time dateTime={operator.checked_at}>{operator.checked_at}</time>.
             </p>
           ) : operator ? (
             <p className="text-charcoal/80 mt-1 break-words">We looked for the operator in a public company register and did not find one. {operator.note}</p>

@@ -23,7 +23,7 @@ import { CATEGORY_CONTENT } from '@/lib/category-content'
 const MODIFIED = {
   home: '2026-11-12',
   privacy: '2026-09-19',
-  terms: '2026-11-23', // Claude Sonnet 5.5, 2026-11-23: one sentence and a link to /how-we-verify added.
+  terms: '2026-09-19',
   servers: '2026-11-12',
   mcp: '2026-10-19',
   submit: '2026-06-10',

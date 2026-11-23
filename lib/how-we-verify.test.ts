@@ -85,7 +85,9 @@ describe('/how-we-verify', () => {
     expect(sitemap).not.toMatch(/lastModified: new Date\(\)/)
     expect(read('app/components/Footer.tsx')).toContain("href: '/how-we-verify'")
     expect(read('app/about/page.tsx')).toContain('href="/how-we-verify"')
-    expect(read('app/terms/page.tsx')).toContain('href="/how-we-verify"')
+    // The terms carry an effective date and are legal text: they are not edited for this page.
+    expect(read('app/terms/page.tsx')).not.toContain('how-we-verify')
+    expect(sitemap).toMatch(/terms: '2026-09-19'/)
   })
   it('is pointed to by llms.txt for agents', () => {
     const llms = read('public/llms.txt')
