@@ -2349,6 +2349,14 @@
         "creator_url": "https://www.qanu.ai/en/about",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "Kazecorp Systems Co W.L.L",
+        "register": "Bahrain's commercial register (Sijilat), search by commercial name",
+        "url": "https://www.sijilat.bh/",
+        "status": "active, commercial registration 166795-1",
+        "checked_at": "2026-11-23",
+        "formed": "2023-08-06"
       }
     },
     {
