@@ -71,3 +71,35 @@ Claude Opus 5.5, 2026-11-22. The admin Approve button cannot publish a new listi
 7. Bump `CATALOG_CACHE_REVISION` in `lib/supabase.ts`.
 8. `npm test`, then `npm run build`. The build now finds a page for every new record.
 9. Open the PR with the records and the cache bump. Giani's merge ships it.
+
+## Is this vendor real: realness checks and the operator field
+
+Claude Sonnet 5.5, 2026-11-23. Zero trust: a vendor's own pages show what the vendor says, not that the vendor exists. The checks above compare claims with vendor pages. This step asks a different question, and it uses sources the vendor does not control.
+
+`node scripts/realness.mjs --all --write --report` runs seven checks per listing and writes `lib/catalog-realness.json` (one record per slug: `level`, `reasons`, and the checks with a plain-words `observed` line and a `how_to_repeat` command a stranger can run).
+
+| Check | What it looks at |
+|---|---|
+| `site` | The listing address answers (up to 5 redirects, https only). A redirect to another domain is a warning. HTTP 401, 403 and 429 mean the site blocks automated readers: `unknown`, never a fail. A 5xx is asked again once after 3 seconds. |
+| `domain_age` | Registration date from the registry (RDAP). `.de` is not queried because the registry restricts automated use. Shared hosts such as github.com are marked not applicable, because their age says nothing about the vendor. |
+| `mail` | The domain has mail (MX) records. |
+| `security_resolver` | Internal alert only. The domain resolves on a plain resolver but not on a security resolver. |
+| `mcp_endpoint` | Only when the listing names a remote MCP address. One `initialize` call; if the server does not know it, one `server/discover` call. Never any other method. A sign-in challenge counts as reachable. |
+| `repo` | A GitHub repository exists, is not archived, and the date of its last push. |
+| `registry` | An entry in the official MCP registry whose endpoint host or namespace matches. The registry confirms control of a namespace, not quality. Absence is `unknown`. |
+
+Levels: `fail` if the site cannot be reached, the domain is under 30 days old, the security resolver blocks it, or a listed MCP address is gone. `watch` if the domain is under 180 days old, its registration date is unknown, it has no mail records, or the handshake could not be checked. Otherwise `pass`. A pass shows what was observed on that date. It does not mean the vendor is trustworthy.
+
+`node scripts/realness.mjs --check` runs again and prints what changed against the committed file, without writing (for a daily job). `--plan PLAN.json` checks the admit items of an admission plan before they exist in the catalog. `--endpoint URL` runs one handshake against any MCP address.
+
+### Gate on new listings
+
+`scripts/admit-submissions.mjs` with `--write-records` or `--sql` refuses an admit item when:
+
+1. its realness level is `fail` (no override);
+2. its level is `watch` and the item has no `realness_ack`, a sentence of at least 10 characters giving the reason a person accepted it;
+3. the item has no `operator` object.
+
+`operator` answers "does the organisation exist in a public company register", and it must be answered even when the answer is no. Either `{ "name", "register", "url", "status", "checked_at" }` (the legal entity as found, with the register name, the https link to the entry, its status such as "Active", and the date you looked) or `{ "status": "not_found", "note": "where you searched and what you searched for" }`. Both are stored on the review record, with `realness_ack` when present. The 69 existing records do not carry `operator` and do not need it.
+
+A plain check without the write flags still runs offline of this step, so you can see source problems first.

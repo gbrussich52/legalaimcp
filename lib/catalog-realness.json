@@ -1,0 +1,4000 @@
+{
+  "generated_at": "2026-11-23",
+  "records": {
+    "ailex-v2": {
+      "slug": "ailex-v2",
+      "checked_at": "2026-11-23",
+      "level": "watch",
+      "reasons": [
+        "the domain registration date is unknown"
+      ],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at ailex.co.jp.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://ailex.co.jp/",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "unknown",
+          "observed": "No public registry (RDAP) service is listed for .jp, so the registration date is unknown.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/ailex.co.jp",
+          "public": true
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "ailex.co.jp has 1 mail (MX) record.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=ailex.co.jp&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "ailex.co.jp resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=ailex.co.jp&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=ailex.co.jp&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "pass",
+          "observed": "https://app.ailex.co.jp/mcp is reachable and sign-in is required.",
+          "how_to_repeat": "curl -s -X POST 'https://app.ailex.co.jp/mcp' -H 'Content-Type: application/json' -H 'Accept: application/json, text/event-stream' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{\"protocolVersion\":\"2025-06-18\",\"capabilities\":{},\"clientInfo\":{\"name\":\"listing-review\",\"version\":\"1.0\"}}}'",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=ailex'",
+          "public": true
+        }
+      ]
+    },
+    "aws-document-loader-mcp": {
+      "slug": "aws-document-loader-mcp",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at awslabs.github.io.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://awslabs.github.io/mcp/servers/document-loader-mcp-server",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "not_applicable",
+          "observed": "github.io is a shared host, so its age says nothing about the vendor.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/github.io",
+          "public": true
+        },
+        {
+          "id": "mail",
+          "result": "not_applicable",
+          "observed": "github.io is a shared host, so its mail records say nothing about the vendor.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=github.io&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "awslabs.github.io resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=awslabs.github.io&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=awslabs.github.io&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "pass",
+          "observed": "The GitHub repository awslabs/mcp exists and is not archived; its last push was 2026-11-21.",
+          "how_to_repeat": "curl -s https://api.github.com/repos/awslabs/mcp",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "not_applicable",
+          "observed": "The listing sits on a shared host, so no namespace can be matched to it.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        }
+      ]
+    },
+    "bailii-mcp-server": {
+      "slug": "bailii-mcp-server",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at github.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://github.com/paulieb89/bailii-mcp",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its age says nothing about the vendor.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/github.com",
+          "public": true
+        },
+        {
+          "id": "mail",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its mail records say nothing about the vendor.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=github.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "github.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=github.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=github.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "pass",
+          "observed": "The GitHub repository paulieb89/bailii-mcp exists and is not archived; its last push was 2026-11-19.",
+          "how_to_repeat": "curl -s https://api.github.com/repos/paulieb89/bailii-mcp",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "not_applicable",
+          "observed": "The listing sits on a shared host, so no namespace can be matched to it.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        }
+      ]
+    },
+    "billing-ai-checkbox": {
+      "slug": "billing-ai-checkbox",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at www.checkbox.ai.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://www.checkbox.ai/solutions/invoice-review",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows checkbox.ai registered on 2017-12-16.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/checkbox.ai",
+          "public": true,
+          "value": "2017-12-16"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "checkbox.ai has 1 mail (MX) record.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=checkbox.ai&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "www.checkbox.ai resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=www.checkbox.ai&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=www.checkbox.ai&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=checkbox'",
+          "public": true
+        }
+      ]
+    },
+    "canlii-legal-research": {
+      "slug": "canlii-legal-research",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at github.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://github.com/Vaquill-AI/canlii-mcp",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its age says nothing about the vendor.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/github.com",
+          "public": true
+        },
+        {
+          "id": "mail",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its mail records say nothing about the vendor.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=github.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "github.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=github.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=github.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "pass",
+          "observed": "The GitHub repository Vaquill-AI/canlii-mcp exists and is not archived; its last push was 2026-10-26.",
+          "how_to_repeat": "curl -s https://api.github.com/repos/Vaquill-AI/canlii-mcp",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "not_applicable",
+          "observed": "The listing sits on a shared host, so no namespace can be matched to it.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        }
+      ]
+    },
+    "captainlegal": {
+      "slug": "captainlegal",
+      "checked_at": "2026-11-23",
+      "level": "watch",
+      "reasons": [
+        "the MCP handshake could not be checked"
+      ],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at mcp.captain.legal.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://mcp.captain.legal/",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows captain.legal registered on 2018-07-06.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/captain.legal",
+          "public": true,
+          "value": "2018-07-06"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "captain.legal has 5 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=captain.legal&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "mcp.captain.legal resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=mcp.captain.legal&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=mcp.captain.legal&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "unknown",
+          "observed": "https://mcp.captain.legal/ answered HTTP 200 to the handshake, which this check cannot read as an MCP answer.",
+          "how_to_repeat": "curl -s -X POST 'https://mcp.captain.legal/' -H 'Content-Type: application/json' -H 'Accept: application/json, text/event-stream' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{\"protocolVersion\":\"2025-06-18\",\"capabilities\":{},\"clientInfo\":{\"name\":\"listing-review\",\"version\":\"1.0\"}}}'",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "pass",
+          "observed": "Listed as legal.captain/captain-legal since 2026-08-08; the registry confirms control of that namespace, not quality.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=captain'",
+          "public": true
+        }
+      ]
+    },
+    "cerebra-legal-server": {
+      "slug": "cerebra-legal-server",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at github.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://github.com/yoda-digital/mcp-cerebra-legal-server",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its age says nothing about the vendor.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/github.com",
+          "public": true
+        },
+        {
+          "id": "mail",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its mail records say nothing about the vendor.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=github.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "github.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=github.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=github.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "pass",
+          "observed": "The GitHub repository yoda-digital/mcp-cerebra-legal-server exists and is not archived; its last push was 2025-03-24.",
+          "how_to_repeat": "curl -s https://api.github.com/repos/yoda-digital/mcp-cerebra-legal-server",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "not_applicable",
+          "observed": "The listing sits on a shared host, so no namespace can be matched to it.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        }
+      ]
+    },
+    "claude-legal": {
+      "slug": "claude-legal",
+      "checked_at": "2026-11-23",
+      "level": "watch",
+      "reasons": [
+        "the domain has no mail records"
+      ],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at claude.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://claude.com/product/overview",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows claude.com registered on 1995-05-24.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/claude.com",
+          "public": true,
+          "value": "1995-05-24"
+        },
+        {
+          "id": "mail",
+          "result": "warn",
+          "observed": "claude.com has no mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=claude.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "claude.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=claude.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=claude.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=claude'",
+          "public": true
+        }
+      ]
+    },
+    "clio": {
+      "slug": "clio",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "unknown",
+          "observed": "The site answered HTTP 403 at www.clio.com. It blocks automated readers, so nothing was read.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://www.clio.com",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows clio.com registered on 2013-11-13.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/clio.com",
+          "public": true,
+          "value": "2013-11-13"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "clio.com has 4 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=clio.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "www.clio.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=www.clio.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=www.clio.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=clio'",
+          "public": true
+        }
+      ]
+    },
+    "clio-matter-manager": {
+      "slug": "clio-matter-manager",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at github.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://github.com/CHLEGAL/clio-mcp-server",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its age says nothing about the vendor.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/github.com",
+          "public": true
+        },
+        {
+          "id": "mail",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its mail records say nothing about the vendor.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=github.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "github.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=github.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=github.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "pass",
+          "observed": "The GitHub repository CHLEGAL/clio-mcp-server exists and is not archived; its last push was 2026-04-14.",
+          "how_to_repeat": "curl -s https://api.github.com/repos/CHLEGAL/clio-mcp-server",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "not_applicable",
+          "observed": "The listing sits on a shared host, so no namespace can be matched to it.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        }
+      ]
+    },
+    "cocounsel": {
+      "slug": "cocounsel",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at legal.thomsonreuters.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://legal.thomsonreuters.com/en/products/cocounsel-legal",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows thomsonreuters.com registered on 2007-05-04.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/thomsonreuters.com",
+          "public": true,
+          "value": "2007-05-04"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "thomsonreuters.com has 2 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=thomsonreuters.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "legal.thomsonreuters.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=legal.thomsonreuters.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=legal.thomsonreuters.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=thomsonreuters'",
+          "public": true
+        }
+      ]
+    },
+    "composio-legal-toolkit": {
+      "slug": "composio-legal-toolkit",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at docs.composio.dev.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://docs.composio.dev/docs/single-toolkit-mcp",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows composio.dev registered on 2023-04-02.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/composio.dev",
+          "public": true,
+          "value": "2023-04-02"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "composio.dev has 5 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=composio.dev&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "docs.composio.dev resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=docs.composio.dev&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=docs.composio.dev&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=composio'",
+          "public": true
+        }
+      ]
+    },
+    "concord-contract-intelligence": {
+      "slug": "concord-contract-intelligence",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at www.concord.app.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://www.concord.app/",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows concord.app registered on 2018-05-14.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/concord.app",
+          "public": true,
+          "value": "2018-05-14"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "concord.app has 5 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=concord.app&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "www.concord.app resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=www.concord.app&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=www.concord.app&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=concord'",
+          "public": true
+        }
+      ]
+    },
+    "court-rules": {
+      "slug": "court-rules",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at www.courtrules.app.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://www.courtrules.app/",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows courtrules.app registered on 2026-01-11.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/courtrules.app",
+          "public": true,
+          "value": "2026-01-11"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "courtrules.app has 5 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=courtrules.app&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "www.courtrules.app resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=www.courtrules.app&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=www.courtrules.app&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "pass",
+          "observed": "https://mcp.courtrules.app/mcp is reachable and sign-in is required.",
+          "how_to_repeat": "curl -s -X POST 'https://mcp.courtrules.app/mcp' -H 'Content-Type: application/json' -H 'Accept: application/json, text/event-stream' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{\"protocolVersion\":\"2025-06-18\",\"capabilities\":{},\"clientInfo\":{\"name\":\"listing-review\",\"version\":\"1.0\"}}}'",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "pass",
+          "observed": "Listed as app.courtrules/court-rules since 2026-08-31; the registry confirms control of that namespace, not quality.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=courtrules'",
+          "public": true
+        }
+      ]
+    },
+    "courtlistener-citations-checker": {
+      "slug": "courtlistener-citations-checker",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at github.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://github.com/john-walkoe/courtlistener_citations_mcp",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its age says nothing about the vendor.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/github.com",
+          "public": true
+        },
+        {
+          "id": "mail",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its mail records say nothing about the vendor.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=github.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "github.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=github.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=github.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "pass",
+          "observed": "The GitHub repository john-walkoe/courtlistener_citations_mcp exists and is not archived; its last push was 2026-04-13.",
+          "how_to_repeat": "curl -s https://api.github.com/repos/john-walkoe/courtlistener_citations_mcp",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "not_applicable",
+          "observed": "The listing sits on a shared host, so no namespace can be matched to it.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        }
+      ]
+    },
+    "courtlistener-mcp": {
+      "slug": "courtlistener-mcp",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at mcp.courtlistener.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://mcp.courtlistener.com/",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows courtlistener.com registered on 2010-03-23.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/courtlistener.com",
+          "public": true,
+          "value": "2010-03-23"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "courtlistener.com has 5 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=courtlistener.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "mcp.courtlistener.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=mcp.courtlistener.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=mcp.courtlistener.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "pass",
+          "observed": "https://mcp.courtlistener.com/ is reachable and sign-in is required.",
+          "how_to_repeat": "curl -s -X POST 'https://mcp.courtlistener.com/' -H 'Content-Type: application/json' -H 'Accept: application/json, text/event-stream' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{\"protocolVersion\":\"2025-06-18\",\"capabilities\":{},\"clientInfo\":{\"name\":\"listing-review\",\"version\":\"1.0\"}}}'",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "pass",
+          "observed": "The GitHub repository freelawproject/courtlistener-mcp exists and is not archived; its last push was 2026-11-23.",
+          "how_to_repeat": "curl -s https://api.github.com/repos/freelawproject/courtlistener-mcp",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=courtlistener'",
+          "public": true
+        }
+      ]
+    },
+    "courtlistener-mcp-self-hosted": {
+      "slug": "courtlistener-mcp-self-hosted",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at github.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://github.com/blakeox/courtlistener-mcp",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its age says nothing about the vendor.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/github.com",
+          "public": true
+        },
+        {
+          "id": "mail",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its mail records say nothing about the vendor.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=github.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "github.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=github.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=github.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "pass",
+          "observed": "The GitHub repository blakeox/courtlistener-mcp exists and is not archived; its last push was 2026-11-19.",
+          "how_to_repeat": "curl -s https://api.github.com/repos/blakeox/courtlistener-mcp",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "not_applicable",
+          "observed": "The listing sits on a shared host, so no namespace can be matched to it.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        }
+      ]
+    },
+    "diligent-compliance": {
+      "slug": "diligent-compliance",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at www.diligent.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://www.diligent.com/",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows diligent.com registered on 2000-11-01.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/diligent.com",
+          "public": true,
+          "value": "2000-11-01"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "diligent.com has 1 mail (MX) record.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=diligent.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "www.diligent.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=www.diligent.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=www.diligent.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=diligent'",
+          "public": true
+        }
+      ]
+    },
+    "directcase-legal-search": {
+      "slug": "directcase-legal-search",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at www.directcase.ai.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://www.directcase.ai/gb/en/home/",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows directcase.ai registered on 2025-11-12.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/directcase.ai",
+          "public": true,
+          "value": "2025-11-12"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "directcase.ai has 1 mail (MX) record.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=directcase.ai&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "www.directcase.ai resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=www.directcase.ai&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=www.directcase.ai&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "pass",
+          "observed": "Listed as ai.directcase/directcase since 2026-08-21; the registry confirms control of that namespace, not quality.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=directcase'",
+          "public": true
+        }
+      ]
+    },
+    "esgenix": {
+      "slug": "esgenix",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at esgenix.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://esgenix.com/",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows esgenix.com registered on 2023-04-17.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/esgenix.com",
+          "public": true,
+          "value": "2023-04-17"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "esgenix.com has 2 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=esgenix.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "esgenix.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=esgenix.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=esgenix.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=esgenix'",
+          "public": true
+        }
+      ]
+    },
+    "firecrawl-gov-index": {
+      "slug": "firecrawl-gov-index",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at alexandria.firecrawl.dev.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://alexandria.firecrawl.dev/providers/firecrawl-gov-index",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows firecrawl.dev registered on 2024-04-08.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/firecrawl.dev",
+          "public": true,
+          "value": "2024-04-08"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "firecrawl.dev has 1 mail (MX) record.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=firecrawl.dev&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "alexandria.firecrawl.dev resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=alexandria.firecrawl.dev&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=alexandria.firecrawl.dev&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=firecrawl'",
+          "public": true
+        }
+      ]
+    },
+    "freshbooks-legal-billing": {
+      "slug": "freshbooks-legal-billing",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at github.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://github.com/roboulos/freshbooks-mcp",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its age says nothing about the vendor.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/github.com",
+          "public": true
+        },
+        {
+          "id": "mail",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its mail records say nothing about the vendor.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=github.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "github.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=github.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=github.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "pass",
+          "observed": "The GitHub repository roboulos/freshbooks-mcp exists and is not archived; its last push was 2025-06-09.",
+          "how_to_repeat": "curl -s https://api.github.com/repos/roboulos/freshbooks-mcp",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "not_applicable",
+          "observed": "The listing sits on a shared host, so no namespace can be matched to it.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        }
+      ]
+    },
+    "gavel": {
+      "slug": "gavel",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at www.gavel.io.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://www.gavel.io/",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows gavel.io registered on 2016-08-06.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/gavel.io",
+          "public": true,
+          "value": "2016-08-06"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "gavel.io has 5 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=gavel.io&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "www.gavel.io resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=www.gavel.io&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=www.gavel.io&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=gavel'",
+          "public": true
+        }
+      ]
+    },
+    "german-law-mcp": {
+      "slug": "german-law-mcp",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at github.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://github.com/Ansvar-Systems/German-law-mcp",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its age says nothing about the vendor.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/github.com",
+          "public": true
+        },
+        {
+          "id": "mail",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its mail records say nothing about the vendor.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=github.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "github.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=github.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=github.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "warn",
+          "observed": "The GitHub repository Ansvar-Systems/German-law-mcp is archived; its last push was 2026-07-07.",
+          "how_to_repeat": "curl -s https://api.github.com/repos/Ansvar-Systems/German-law-mcp",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "not_applicable",
+          "observed": "The listing sits on a shared host, so no namespace can be matched to it.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        }
+      ]
+    },
+    "gleanmark-trademark-search": {
+      "slug": "gleanmark-trademark-search",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at gleanmark.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://gleanmark.com/",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows gleanmark.com registered on 2025-06-21.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/gleanmark.com",
+          "public": true,
+          "value": "2025-06-21"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "gleanmark.com has 5 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=gleanmark.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "gleanmark.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=gleanmark.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=gleanmark.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "pass",
+          "observed": "https://gleanmark.com/mcp answers the MCP handshake as \"GleanMark\" version 1.2.0.",
+          "how_to_repeat": "curl -s -X POST 'https://gleanmark.com/mcp' -H 'Content-Type: application/json' -H 'Accept: application/json, text/event-stream' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{\"protocolVersion\":\"2025-06-18\",\"capabilities\":{},\"clientInfo\":{\"name\":\"listing-review\",\"version\":\"1.0\"}}}'",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "pass",
+          "observed": "Listed as com.gleanmark/trademark-search since 2026-02-19; the registry confirms control of that namespace, not quality.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=gleanmark'",
+          "public": true
+        }
+      ]
+    },
+    "harvey-ai": {
+      "slug": "harvey-ai",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at www.harvey.ai.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://www.harvey.ai/",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows harvey.ai registered on 2017-12-15.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/harvey.ai",
+          "public": true,
+          "value": "2017-12-15"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "harvey.ai has 5 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=harvey.ai&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "www.harvey.ai resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=www.harvey.ai&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=www.harvey.ai&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=harvey'",
+          "public": true
+        }
+      ]
+    },
+    "harvey-mcp": {
+      "slug": "harvey-mcp",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at developers.harvey.ai.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://developers.harvey.ai/guides/harvey_mcp",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows harvey.ai registered on 2017-12-15.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/harvey.ai",
+          "public": true,
+          "value": "2017-12-15"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "harvey.ai has 5 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=harvey.ai&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "developers.harvey.ai resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=developers.harvey.ai&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=developers.harvey.ai&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=harvey'",
+          "public": true
+        }
+      ]
+    },
+    "imanage-work": {
+      "slug": "imanage-work",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at docs.imanage.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://docs.imanage.com/ai/mcpserver-user-help/en-US/Adding_MCP_connectors_for_Claude.html",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows imanage.com registered on 1998-08-26.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/imanage.com",
+          "public": true,
+          "value": "1998-08-26"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "imanage.com has 1 mail (MX) record.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=imanage.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "docs.imanage.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=docs.imanage.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=docs.imanage.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=imanage'",
+          "public": true
+        }
+      ]
+    },
+    "invoice-my-clients-mcp": {
+      "slug": "invoice-my-clients-mcp",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at www.invoicemyclients.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://www.invoicemyclients.com/features/mcp-server",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows invoicemyclients.com registered on 2024-08-30.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/invoicemyclients.com",
+          "public": true,
+          "value": "2024-08-30"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "invoicemyclients.com has 1 mail (MX) record.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=invoicemyclients.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "www.invoicemyclients.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=www.invoicemyclients.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=www.invoicemyclients.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=invoicemyclients'",
+          "public": true
+        }
+      ]
+    },
+    "ironclad": {
+      "slug": "ironclad",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at ironcladapp.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://ironcladapp.com/",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows ironcladapp.com registered on 2014-11-07.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/ironcladapp.com",
+          "public": true,
+          "value": "2014-11-07"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "ironcladapp.com has 2 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=ironcladapp.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "ironcladapp.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=ironcladapp.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=ironcladapp.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=ironcladapp'",
+          "public": true
+        }
+      ]
+    },
+    "kira-systems": {
+      "slug": "kira-systems",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at www.litera.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://www.litera.com/capabilities/review",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows litera.com registered on 2001-12-28.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/litera.com",
+          "public": true,
+          "value": "2001-12-28"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "litera.com has 3 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=litera.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "www.litera.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=www.litera.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=www.litera.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=litera'",
+          "public": true
+        }
+      ]
+    },
+    "lawdroid": {
+      "slug": "lawdroid",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at lawdroid.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://lawdroid.com/builder/",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows lawdroid.com registered on 2014-05-12.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/lawdroid.com",
+          "public": true,
+          "value": "2014-05-12"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "lawdroid.com has 5 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=lawdroid.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "lawdroid.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=lawdroid.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=lawdroid.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=lawdroid'",
+          "public": true
+        }
+      ]
+    },
+    "leela": {
+      "slug": "leela",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at leela.works.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://leela.works",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows leela.works registered on 2023-10-05.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/leela.works",
+          "public": true,
+          "value": "2023-10-05"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "leela.works has 1 mail (MX) record.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=leela.works&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "leela.works resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=leela.works&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=leela.works&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=leela'",
+          "public": true
+        }
+      ]
+    },
+    "legal-mcp-agentic": {
+      "slug": "legal-mcp-agentic",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at github.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://github.com/agentic-ops/legal-mcp",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its age says nothing about the vendor.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/github.com",
+          "public": true
+        },
+        {
+          "id": "mail",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its mail records say nothing about the vendor.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=github.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "github.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=github.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=github.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "pass",
+          "observed": "The GitHub repository agentic-ops/legal-mcp exists and is not archived; its last push was 2026-07-17.",
+          "how_to_repeat": "curl -s https://api.github.com/repos/agentic-ops/legal-mcp",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "not_applicable",
+          "observed": "The listing sits on a shared host, so no namespace can be matched to it.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        }
+      ]
+    },
+    "legalmcp": {
+      "slug": "legalmcp",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at github.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://github.com/Mahender22/legal-mcp",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its age says nothing about the vendor.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/github.com",
+          "public": true
+        },
+        {
+          "id": "mail",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its mail records say nothing about the vendor.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=github.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "github.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=github.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=github.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "pass",
+          "observed": "The GitHub repository Mahender22/legal-mcp exists and is not archived; its last push was 2026-06-19.",
+          "how_to_repeat": "curl -s https://api.github.com/repos/Mahender22/legal-mcp",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "not_applicable",
+          "observed": "The listing sits on a shared host, so no namespace can be matched to it.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        }
+      ]
+    },
+    "lex-machina": {
+      "slug": "lex-machina",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at www.lexisnexis.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://www.lexisnexis.com/en-us/products/lex-machina.page",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows lexisnexis.com registered on 1997-06-26.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/lexisnexis.com",
+          "public": true,
+          "value": "1997-06-26"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "lexisnexis.com has 1 mail (MX) record.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=lexisnexis.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "www.lexisnexis.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=www.lexisnexis.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=www.lexisnexis.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=lexisnexis'",
+          "public": true
+        }
+      ]
+    },
+    "lexery": {
+      "slug": "lexery",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at lexery.com.ua.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://lexery.com.ua",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows lexery.com.ua registered on 2026-04-05.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/lexery.com.ua",
+          "public": true,
+          "value": "2026-04-05"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "lexery.com.ua has 3 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=lexery.com.ua&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "lexery.com.ua resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=lexery.com.ua&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=lexery.com.ua&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=lexery'",
+          "public": true
+        }
+      ]
+    },
+    "luminance": {
+      "slug": "luminance",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at www.luminance.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://www.luminance.com/",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows luminance.com registered on 1996-02-23.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/luminance.com",
+          "public": true,
+          "value": "1996-02-23"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "luminance.com has 1 mail (MX) record.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=luminance.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "www.luminance.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=www.luminance.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=www.luminance.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=luminance'",
+          "public": true
+        }
+      ]
+    },
+    "merit-ukrainian-law-registers": {
+      "slug": "merit-ukrainian-law-registers",
+      "checked_at": "2026-11-23",
+      "level": "watch",
+      "reasons": [
+        "the domain is under 180 days old (99 days)"
+      ],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at merit.legal.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://merit.legal/mcp",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "warn",
+          "observed": "The registry (RDAP) shows merit.legal registered on 2026-08-16. That is under 180 days ago.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/merit.legal",
+          "public": true,
+          "value": "2026-08-16"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "merit.legal has 2 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=merit.legal&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "merit.legal resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=merit.legal&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=merit.legal&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "pass",
+          "observed": "https://law.merit.legal/mcp answers the MCP handshake as \"ua_legal\" version 1.0.3.",
+          "how_to_repeat": "curl -s -X POST 'https://law.merit.legal/mcp' -H 'Content-Type: application/json' -H 'Accept: application/json, text/event-stream' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{\"protocolVersion\":\"2025-06-18\",\"capabilities\":{},\"clientInfo\":{\"name\":\"listing-review\",\"version\":\"1.0\"}}}'",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=merit'",
+          "public": true
+        }
+      ]
+    },
+    "nyclaw-custom-development": {
+      "slug": "nyclaw-custom-development",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at nyclaw.io.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://nyclaw.io/law-firm-workflows",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows nyclaw.io registered on 2026-02-20.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/nyclaw.io",
+          "public": true,
+          "value": "2026-02-20"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "nyclaw.io has 2 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=nyclaw.io&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "nyclaw.io resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=nyclaw.io&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=nyclaw.io&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=nyclaw'",
+          "public": true
+        }
+      ]
+    },
+    "open-legal-compliance-mcp": {
+      "slug": "open-legal-compliance-mcp",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at github.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://github.com/TCoder920/open-legal-compliance-mcp",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its age says nothing about the vendor.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/github.com",
+          "public": true
+        },
+        {
+          "id": "mail",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its mail records say nothing about the vendor.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=github.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "github.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=github.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=github.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "pass",
+          "observed": "The GitHub repository TCoder920/open-legal-compliance-mcp exists and is not archived; its last push was 2025-12-08.",
+          "how_to_repeat": "curl -s https://api.github.com/repos/TCoder920/open-legal-compliance-mcp",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "not_applicable",
+          "observed": "The listing sits on a shared host, so no namespace can be matched to it.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        }
+      ]
+    },
+    "pageguard-privacy-compliance": {
+      "slug": "pageguard-privacy-compliance",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at github.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://github.com/pageguard/pageguard-mcp",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its age says nothing about the vendor.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/github.com",
+          "public": true
+        },
+        {
+          "id": "mail",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its mail records say nothing about the vendor.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=github.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "github.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=github.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=github.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "pass",
+          "observed": "The GitHub repository pageguard/pageguard-mcp exists and is not archived; its last push was 2026-04-07.",
+          "how_to_repeat": "curl -s https://api.github.com/repos/pageguard/pageguard-mcp",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "not_applicable",
+          "observed": "The listing sits on a shared host, so no namespace can be matched to it.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        }
+      ]
+    },
+    "paymo-time-tracker-mcp": {
+      "slug": "paymo-time-tracker-mcp",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at github.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://github.com/feamster/paymo-mcp",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its age says nothing about the vendor.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/github.com",
+          "public": true
+        },
+        {
+          "id": "mail",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its mail records say nothing about the vendor.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=github.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "github.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=github.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=github.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "pass",
+          "observed": "The GitHub repository feamster/paymo-mcp exists and is not archived; its last push was 2026-11-17.",
+          "how_to_repeat": "curl -s https://api.github.com/repos/feamster/paymo-mcp",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "not_applicable",
+          "observed": "The listing sits on a shared host, so no namespace can be matched to it.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        }
+      ]
+    },
+    "pdf-reader-mcp": {
+      "slug": "pdf-reader-mcp",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at github.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://github.com/SylphxAI/anymd",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its age says nothing about the vendor.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/github.com",
+          "public": true
+        },
+        {
+          "id": "mail",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its mail records say nothing about the vendor.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=github.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "github.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=github.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=github.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "pass",
+          "observed": "The GitHub repository SylphxAI/anymd exists and is not archived; its last push was 2026-11-23.",
+          "how_to_repeat": "curl -s https://api.github.com/repos/SylphxAI/anymd",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "not_applicable",
+          "observed": "The listing sits on a shared host, so no namespace can be matched to it.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        }
+      ]
+    },
+    "pii-blackout": {
+      "slug": "pii-blackout",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at piiblackout.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://piiblackout.com/",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows piiblackout.com registered on 2026-03-19.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/piiblackout.com",
+          "public": true,
+          "value": "2026-03-19"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "piiblackout.com has 3 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=piiblackout.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "piiblackout.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=piiblackout.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=piiblackout.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=piiblackout'",
+          "public": true
+        }
+      ]
+    },
+    "precision-ai-os": {
+      "slug": "precision-ai-os",
+      "checked_at": "2026-11-23",
+      "level": "watch",
+      "reasons": [
+        "the domain is under 180 days old (58 days)"
+      ],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at getprecision.ai.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://getprecision.ai",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "warn",
+          "observed": "The registry (RDAP) shows getprecision.ai registered on 2026-09-26. That is under 180 days ago.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/getprecision.ai",
+          "public": true,
+          "value": "2026-09-26"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "getprecision.ai has 1 mail (MX) record.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=getprecision.ai&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "getprecision.ai resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=getprecision.ai&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=getprecision.ai&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "pass",
+          "observed": "Listed as ai.getprecision/precision-ai-os since 2026-11-03; the registry confirms control of that namespace, not quality.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=getprecision'",
+          "public": true
+        }
+      ]
+    },
+    "qanu": {
+      "slug": "qanu",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at www.qanu.ai.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://www.qanu.ai/en",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows qanu.ai registered on 2026-01-21.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/qanu.ai",
+          "public": true,
+          "value": "2026-01-21"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "qanu.ai has 1 mail (MX) record.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=qanu.ai&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "www.qanu.ai resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=www.qanu.ai&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=www.qanu.ai&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=qanu'",
+          "public": true
+        }
+      ]
+    },
+    "redactifyai": {
+      "slug": "redactifyai",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at www.redactifyai.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://www.redactifyai.com",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows redactifyai.com registered on 2025-12-04.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/redactifyai.com",
+          "public": true,
+          "value": "2025-12-04"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "redactifyai.com has 2 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=redactifyai.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "www.redactifyai.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=www.redactifyai.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=www.redactifyai.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=redactifyai'",
+          "public": true
+        }
+      ]
+    },
+    "regulationsgov-mcp": {
+      "slug": "regulationsgov-mcp",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at 1102tools.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://1102tools.com/mcp/regulations-gov",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows 1102tools.com registered on 2026-03-24.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/1102tools.com",
+          "public": true,
+          "value": "2026-03-24"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "1102tools.com has 2 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=1102tools.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "1102tools.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=1102tools.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=1102tools.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "pass",
+          "observed": "Listed as com.1102tools/acquisition-gov-mcp since 2026-10-10; the registry confirms control of that namespace, not quality.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=1102tools'",
+          "public": true
+        }
+      ]
+    },
+    "relativity": {
+      "slug": "relativity",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at www.relativity.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://www.relativity.com/",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows relativity.com registered on 1997-11-12.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/relativity.com",
+          "public": true,
+          "value": "1997-11-12"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "relativity.com has 1 mail (MX) record.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=relativity.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "www.relativity.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=www.relativity.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=www.relativity.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=relativity'",
+          "public": true
+        }
+      ]
+    },
+    "scoro-practice-analytics": {
+      "slug": "scoro-practice-analytics",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at www.scoro.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://www.scoro.com/mcp/",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows scoro.com registered on 2005-07-09.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/scoro.com",
+          "public": true,
+          "value": "2005-07-09"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "scoro.com has 5 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=scoro.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "www.scoro.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=www.scoro.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=www.scoro.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=scoro'",
+          "public": true
+        }
+      ]
+    },
+    "signal87-ai": {
+      "slug": "signal87-ai",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at www.signal87.ai.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://www.signal87.ai/",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows signal87.ai registered on 2025-08-11.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/signal87.ai",
+          "public": true,
+          "value": "2025-08-11"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "signal87.ai has 2 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=signal87.ai&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "www.signal87.ai resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=www.signal87.ai&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=www.signal87.ai&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "pass",
+          "observed": "https://www.signal87.ai/mcp is reachable and sign-in is required.",
+          "how_to_repeat": "curl -s -X POST 'https://www.signal87.ai/mcp' -H 'Content-Type: application/json' -H 'Accept: application/json, text/event-stream' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{\"protocolVersion\":\"2025-06-18\",\"capabilities\":{},\"clientInfo\":{\"name\":\"listing-review\",\"version\":\"1.0\"}}}'",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=signal87'",
+          "public": true
+        }
+      ]
+    },
+    "smith-ai": {
+      "slug": "smith-ai",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at smith.ai.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://smith.ai/",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows smith.ai registered on 2017-12-16.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/smith.ai",
+          "public": true,
+          "value": "2017-12-16"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "smith.ai has 2 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=smith.ai&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "smith.ai resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=smith.ai&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=smith.ai&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=smith'",
+          "public": true
+        }
+      ]
+    },
+    "smokeball": {
+      "slug": "smokeball",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at www.smokeball.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://www.smokeball.com/",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows smokeball.com registered on 2001-11-26.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/smokeball.com",
+          "public": true,
+          "value": "2001-11-26"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "smokeball.com has 1 mail (MX) record.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=smokeball.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "www.smokeball.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=www.smokeball.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=www.smokeball.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=smokeball'",
+          "public": true
+        }
+      ]
+    },
+    "specterai": {
+      "slug": "specterai",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at www.specterlaw.ai.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://www.specterlaw.ai/",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows specterlaw.ai registered on 2025-04-09.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/specterlaw.ai",
+          "public": true,
+          "value": "2025-04-09"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "specterlaw.ai has 6 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=specterlaw.ai&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "www.specterlaw.ai resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=www.specterlaw.ai&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=www.specterlaw.ai&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "pass",
+          "observed": "https://cite.specterlaw.ai/mcp is reachable and sign-in is required.",
+          "how_to_repeat": "curl -s -X POST 'https://cite.specterlaw.ai/mcp' -H 'Content-Type: application/json' -H 'Accept: application/json, text/event-stream' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{\"protocolVersion\":\"2025-06-18\",\"capabilities\":{},\"clientInfo\":{\"name\":\"listing-review\",\"version\":\"1.0\"}}}'",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "pass",
+          "observed": "Listed as ai.specterlaw/cite since 2026-10-10; the registry confirms control of that namespace, not quality.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=specterlaw'",
+          "public": true
+        }
+      ]
+    },
+    "supabase-legal-mcp": {
+      "slug": "supabase-legal-mcp",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at supabase.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://supabase.com/docs/guides/ai-tools/mcp",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows supabase.com registered on 2017-09-24.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/supabase.com",
+          "public": true,
+          "value": "2017-09-24"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "supabase.com has 5 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=supabase.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "supabase.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=supabase.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=supabase.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "pass",
+          "observed": "The GitHub repository supabase/mcp exists and is not archived; its last push was 2026-11-23.",
+          "how_to_repeat": "curl -s https://api.github.com/repos/supabase/mcp",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "pass",
+          "observed": "Listed as com.supabase/mcp since 2026-08-10; the registry confirms control of that namespace, not quality.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=supabase'",
+          "public": true
+        }
+      ]
+    },
+    "syfert-legal-research": {
+      "slug": "syfert-legal-research",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at syfert.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://syfert.com/mcp/",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows syfert.com registered on 2002-09-11.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/syfert.com",
+          "public": true,
+          "value": "2002-09-11"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "syfert.com has 5 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=syfert.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "syfert.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=syfert.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=syfert.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "pass",
+          "observed": "https://mcp.syfert.com/mcp answers the MCP handshake as \"syfert-legal-research\" version 2.0.0.",
+          "how_to_repeat": "curl -s -X POST 'https://mcp.syfert.com/mcp' -H 'Content-Type: application/json' -H 'Accept: application/json, text/event-stream' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{\"protocolVersion\":\"2025-06-18\",\"capabilities\":{},\"clientInfo\":{\"name\":\"listing-review\",\"version\":\"1.0\"}}}'",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "pass",
+          "observed": "Listed as com.syfert/legal-research since 2026-09-10; the registry confirms control of that namespace, not quality.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=syfert'",
+          "public": true
+        }
+      ]
+    },
+    "taiwan-legal-rag": {
+      "slug": "taiwan-legal-rag",
+      "checked_at": "2026-11-23",
+      "level": "watch",
+      "reasons": [
+        "the domain is under 180 days old (93 days)"
+      ],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at dr-legal.com.tw.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://dr-legal.com.tw/mcp",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "warn",
+          "observed": "The registry (RDAP) shows dr-legal.com.tw registered on 2026-08-22. That is under 180 days ago.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/dr-legal.com.tw",
+          "public": true,
+          "value": "2026-08-22"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "dr-legal.com.tw has 3 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=dr-legal.com.tw&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "dr-legal.com.tw resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=dr-legal.com.tw&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=dr-legal.com.tw&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "pass",
+          "observed": "The GitHub repository aa0101181514/tw-legal-rag exists and is not archived; its last push was 2026-11-22.",
+          "how_to_repeat": "curl -s https://api.github.com/repos/aa0101181514/tw-legal-rag",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=dr-legal'",
+          "public": true
+        }
+      ]
+    },
+    "telewizard": {
+      "slug": "telewizard",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at telewizard.ai.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://telewizard.ai/en/solutions/ai-legal-virtual-receptionist-for-law-firms",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows telewizard.ai registered on 2023-06-19.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/telewizard.ai",
+          "public": true,
+          "value": "2023-06-19"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "telewizard.ai has 1 mail (MX) record.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=telewizard.ai&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "telewizard.ai resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=telewizard.ai&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=telewizard.ai&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=telewizard'",
+          "public": true
+        }
+      ]
+    },
+    "timesolv": {
+      "slug": "timesolv",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at www.timesolv.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://www.timesolv.com/",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows timesolv.com registered on 1999-11-23.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/timesolv.com",
+          "public": true,
+          "value": "1999-11-23"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "timesolv.com has 1 mail (MX) record.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=timesolv.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "www.timesolv.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=www.timesolv.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=www.timesolv.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=timesolv'",
+          "public": true
+        }
+      ]
+    },
+    "uk-case-law-mcp-server": {
+      "slug": "uk-case-law-mcp-server",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at github.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://github.com/georgejeffers/uk-case-law-mcp-server",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its age says nothing about the vendor.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/github.com",
+          "public": true
+        },
+        {
+          "id": "mail",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its mail records say nothing about the vendor.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=github.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "github.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=github.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=github.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "pass",
+          "observed": "The GitHub repository georgejeffers/uk-case-law-mcp-server exists and is not archived; its last push was 2025-12-28.",
+          "how_to_repeat": "curl -s https://api.github.com/repos/georgejeffers/uk-case-law-mcp-server",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "not_applicable",
+          "observed": "The listing sits on a shared host, so no namespace can be matched to it.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        }
+      ]
+    },
+    "uk-legal-mcp": {
+      "slug": "uk-legal-mcp",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at www.bouch.dev.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://www.bouch.dev/products/uk-legal-mcp",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows bouch.dev registered on 2026-03-18.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/bouch.dev",
+          "public": true,
+          "value": "2026-03-18"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "bouch.dev has 5 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=bouch.dev&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "www.bouch.dev resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=www.bouch.dev&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=www.bouch.dev&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "pass",
+          "observed": "The GitHub repository paulieb89/uk-legal-mcp exists and is not archived; its last push was 2026-11-19.",
+          "how_to_repeat": "curl -s https://api.github.com/repos/paulieb89/uk-legal-mcp",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=bouch'",
+          "public": true
+        }
+      ]
+    },
+    "uk-legal-skills": {
+      "slug": "uk-legal-skills",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at github.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://github.com/davendra/uk-legal-skills",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its age says nothing about the vendor.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/github.com",
+          "public": true
+        },
+        {
+          "id": "mail",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its mail records say nothing about the vendor.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=github.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "github.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=github.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=github.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "pass",
+          "observed": "The GitHub repository davendra/uk-legal-skills exists and is not archived; its last push was 2026-06-09.",
+          "how_to_repeat": "curl -s https://api.github.com/repos/davendra/uk-legal-skills",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "not_applicable",
+          "observed": "The listing sits on a shared host, so no namespace can be matched to it.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        }
+      ]
+    },
+    "us-legal-mcp": {
+      "slug": "us-legal-mcp",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at github.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://github.com/JamesANZ/us-legal-mcp",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its age says nothing about the vendor.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/github.com",
+          "public": true
+        },
+        {
+          "id": "mail",
+          "result": "not_applicable",
+          "observed": "github.com is a shared host, so its mail records say nothing about the vendor.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=github.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "github.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=github.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=github.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "pass",
+          "observed": "The GitHub repository JamesANZ/us-legal-mcp exists and is not archived; its last push was 2026-10-15.",
+          "how_to_repeat": "curl -s https://api.github.com/repos/JamesANZ/us-legal-mcp",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "not_applicable",
+          "observed": "The listing sits on a shared host, so no namespace can be matched to it.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        }
+      ]
+    },
+    "vaquill-ai": {
+      "slug": "vaquill-ai",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at www.vaquill.ai.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://www.vaquill.ai/",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows vaquill.ai registered on 2025-09-29.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/vaquill.ai",
+          "public": true,
+          "value": "2025-09-29"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "vaquill.ai has 6 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=vaquill.ai&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "www.vaquill.ai resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=www.vaquill.ai&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=www.vaquill.ai&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "pass",
+          "observed": "The GitHub repository Vaquill-AI/vaquill-mcp exists and is not archived; its last push was 2026-11-22.",
+          "how_to_repeat": "curl -s https://api.github.com/repos/Vaquill-AI/vaquill-mcp",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=vaquill'",
+          "public": true
+        }
+      ]
+    },
+    "venley-mcp": {
+      "slug": "venley-mcp",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at venley.ai.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://venley.ai/producto/mcp",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows venley.ai registered on 2024-05-23.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/venley.ai",
+          "public": true,
+          "value": "2024-05-23"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "venley.ai has 5 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=venley.ai&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "venley.ai resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=venley.ai&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=venley.ai&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "pass",
+          "observed": "https://api.venley.ai/mcp is reachable and sign-in is required.",
+          "how_to_repeat": "curl -s -X POST 'https://api.venley.ai/mcp' -H 'Content-Type: application/json' -H 'Accept: application/json, text/event-stream' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{\"protocolVersion\":\"2025-06-18\",\"capabilities\":{},\"clientInfo\":{\"name\":\"listing-review\",\"version\":\"1.0\"}}}'",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=venley'",
+          "public": true
+        }
+      ]
+    },
+    "vlex-vincent": {
+      "slug": "vlex-vincent",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at vlex.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://vlex.com/vincent-ai",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows vlex.com registered on 1999-12-09.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/vlex.com",
+          "public": true,
+          "value": "1999-12-09"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "vlex.com has 7 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=vlex.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "vlex.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=vlex.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=vlex.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=vlex'",
+          "public": true
+        }
+      ]
+    },
+    "voicefleet": {
+      "slug": "voicefleet",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at voicefleet.ai.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://voicefleet.ai/for/law-firms",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows voicefleet.ai registered on 2026-01-04.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/voicefleet.ai",
+          "public": true,
+          "value": "2026-01-04"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "voicefleet.ai has 5 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=voicefleet.ai&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "voicefleet.ai resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=voicefleet.ai&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=voicefleet.ai&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "pass",
+          "observed": "https://voicefleet.ai/api/mcp answers the MCP handshake as \"voicefleet-mcp\" version 1.0.0.",
+          "how_to_repeat": "curl -s -X POST 'https://voicefleet.ai/api/mcp' -H 'Content-Type: application/json' -H 'Accept: application/json, text/event-stream' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{\"protocolVersion\":\"2025-06-18\",\"capabilities\":{},\"clientInfo\":{\"name\":\"listing-review\",\"version\":\"1.0\"}}}'",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=voicefleet'",
+          "public": true
+        }
+      ]
+    },
+    "whisperit": {
+      "slug": "whisperit",
+      "checked_at": "2026-11-23",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at whisperit.ai.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://whisperit.ai/",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows whisperit.ai registered on 2024-04-25.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/whisperit.ai",
+          "public": true,
+          "value": "2024-04-25"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "whisperit.ai has 5 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=whisperit.ai&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "whisperit.ai resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=whisperit.ai&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=whisperit.ai&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=whisperit'",
+          "public": true
+        }
+      ]
+    }
+  }
+}

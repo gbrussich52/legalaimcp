@@ -317,3 +317,90 @@ describe('readback verification', () => {
     expect(bad.problems.join(' ')).toMatch(/pending/)
   })
 })
+
+// Claude Sonnet 5.5, 2026-11-23: realness gate and operator field. Written before the code.
+// Zero trust: a vendor's pages prove what it says, not that it exists. With the write flags the CLI passes
+// requireRealness; the check stays off for plain runs so existing behavior is unchanged.
+describe('realness gate and operator', () => {
+  const OPERATOR = { name: 'Acme Draft Inc.', register: 'Delaware Division of Corporations', url: 'https://icis.corp.delaware.gov/ecorp/entitysearch/', status: 'Good standing', checked_at: '2026-11-23' }
+  const withOp = (over: Record<string, unknown> = {}) => plan({ admit: [{ ...baseAdmit(), operator: OPERATOR, ...over }] })
+  const level = (lvl: 'pass' | 'watch' | 'fail', reasons: string[] = []) => async (_listing: unknown, slug: string) => ({ slug, checked_at: '2026-11-23', level: lvl, reasons, checks: [] })
+  const gated = (p: unknown, lvl: 'pass' | 'watch' | 'fail' = 'pass', reasons: string[] = []) => run(p, { requireRealness: true, realness: level(lvl, reasons) })
+
+  it('refuses a fail-level realness result when the write flags are on', async () => {
+    const out = await gated(withOp(), 'fail', ['the site could not be reached'])
+    expect(out.ok).toBe(false)
+    expect(out.results[0].reason).toMatch(/realness.*fail/i)
+    expect(out.results[0].reason).toContain('the site could not be reached')
+  })
+  it('a fail cannot be overridden with realness_ack', async () => {
+    const out = await gated(withOp({ realness_ack: 'I looked at it and it is fine to list.' }), 'fail', ['x'])
+    expect(out.ok).toBe(false)
+  })
+  it('refuses a watch result without realness_ack and accepts it with one', async () => {
+    const bare = await gated(withOp(), 'watch', ['the domain has no mail records'])
+    expect(bare.ok).toBe(false)
+    expect(bare.results[0].reason).toContain('realness_ack')
+    const acked = await gated(withOp({ realness_ack: 'Owner confirmed by phone; mail runs on another domain.' }), 'watch', ['x'])
+    expect(acked.ok).toBe(true)
+    expect(acked.admits[0].record.realness_ack).toBe('Owner confirmed by phone; mail runs on another domain.')
+    expect((await gated(withOp({ realness_ack: '   ' }), 'watch', ['x'])).ok).toBe(false)
+  })
+  it('passes a pass-level result with an operator', async () => {
+    const out = await gated(withOp())
+    expect(out.ok).toBe(true)
+    expect(out.admits[0].record.realness_ack).toBeUndefined()
+  })
+  it('refuses a missing operator with the write flags, even when realness passes', async () => {
+    const out = await gated(plan())
+    expect(out.ok).toBe(false)
+    expect(out.results[0].reason).toContain('operator')
+  })
+  it('accepts a register entry and a not_found answer, and stores operator on the record', async () => {
+    const reg = await gated(withOp())
+    expect(reg.admits[0].record.operator).toEqual(OPERATOR)
+    const none = { status: 'not_found', note: 'Searched the Delaware and New York registers for Acme; no match.' }
+    const nf = await gated(withOp({ operator: none }))
+    expect(nf.ok).toBe(true)
+    expect(nf.admits[0].record.operator).toEqual(none)
+  })
+  it('refuses a malformed operator', async () => {
+    for (const operator of [
+      {}, 'Acme', { status: 'not_found' }, { status: 'not_found', note: 'x' },
+      { ...OPERATOR, url: 'http://register.example.com' }, { ...OPERATOR, checked_at: '23 Nov' }, { ...OPERATOR, checked_at: '2026-02-31' },
+      { ...OPERATOR, name: '' }, { name: 'Acme Draft Inc.', status: 'Active' },
+    ]) {
+      const out = await gated(withOp({ operator }))
+      expect(out.ok, JSON.stringify(operator)).toBe(false)
+      expect(out.results[0].reason).toContain('operator')
+    }
+  })
+  it('validates an operator that is present even when the gate is off, and does not require one', async () => {
+    expect((await run(plan())).ok).toBe(true)
+    const bad = await run(withOp({ operator: { status: 'not_found' } }))
+    expect(bad.ok).toBe(false)
+  })
+  it('refuses when the gate is on but no realness provider was given', async () => {
+    const out = await run(withOp(), { requireRealness: true })
+    expect(out.ok).toBe(false)
+    expect(out.results[0].reason).toContain('realness')
+  })
+  it('turns a provider error into a refusal, not a pass', async () => {
+    const out = await run(withOp(), { requireRealness: true, realness: async () => { throw new Error('network down') } })
+    expect(out.ok).toBe(false)
+    expect(out.results[0].reason).toContain('network down')
+  })
+  it('does not run the realness check when the gate is off', async () => {
+    let called = 0
+    const out = await run(withOp(), { realness: async () => { called++; return { level: 'fail', reasons: [] } } })
+    expect(out.ok).toBe(true)
+    expect(called).toBe(0)
+  })
+  it('the operator is on the written review record and still passes the real gate', async () => {
+    const out = await gated(withOp())
+    const record = out.admits[0].record
+    await expect(gate.assertCatalogReview(record.claims, { reviews: [record], fetcher, now: NOW })).resolves.toBeUndefined()
+    const merged = JSON.parse(mergeRecords(JSON.stringify({ reviews: [], blocked_domains: [], blocked_slugs: [] }, null, 2) + '\n', [record]))
+    expect(merged.reviews[0].operator).toEqual(OPERATOR)
+  })
+})
