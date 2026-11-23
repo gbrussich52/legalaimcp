@@ -292,10 +292,8 @@
     "captainlegal": {
       "slug": "captainlegal",
       "checked_at": "2026-11-23",
-      "level": "watch",
-      "reasons": [
-        "the MCP handshake could not be checked"
-      ],
+      "level": "pass",
+      "reasons": [],
       "checks": [
         {
           "id": "site",
@@ -328,9 +326,9 @@
         },
         {
           "id": "mcp_endpoint",
-          "result": "unknown",
-          "observed": "https://mcp.captain.legal/ answered HTTP 200 to the handshake, which this check cannot read as an MCP answer.",
-          "how_to_repeat": "curl -s -X POST 'https://mcp.captain.legal/' -H 'Content-Type: application/json' -H 'Accept: application/json, text/event-stream' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{\"protocolVersion\":\"2025-06-18\",\"capabilities\":{},\"clientInfo\":{\"name\":\"listing-review\",\"version\":\"1.0\"}}}'",
+          "result": "pass",
+          "observed": "https://mcp.captain.legal/connect/ answers the MCP handshake as \"captain-legal\" version 0.1.0.",
+          "how_to_repeat": "curl -s -X POST 'https://mcp.captain.legal/connect/' -H 'Content-Type: application/json' -H 'Accept: application/json, text/event-stream' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{\"protocolVersion\":\"2025-06-18\",\"capabilities\":{},\"clientInfo\":{\"name\":\"listing-review\",\"version\":\"1.0\"}}}'",
           "public": true
         },
         {

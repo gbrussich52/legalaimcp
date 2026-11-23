@@ -78,6 +78,8 @@ Claude Sonnet 5.5, 2026-11-23. Zero trust: a vendor's own pages show what the ve
 
 `node scripts/realness.mjs --all --write --report` runs seven checks per listing and writes `lib/catalog-realness.json` (one record per slug: `level`, `reasons`, and the checks with a plain-words `observed` line and a `how_to_repeat` command a stranger can run).
 
+Claude Sonnet 5.5, 2026-11-23. `--json` (with `--all`, `--slug`, `--plan`, and `--check`) prints one object on stdout and sends every human line to stderr: `{"checked": N, "findings": [{"slug","level":"fail","reason"}], "watch": [{"slug","reason"}], "changed": [{"slug","check","from","to"}]}`. `findings` holds fail listings only; `changed` is filled only with `--check`. Exit codes do not change (1 when any listing fails, 2 on an internal error). Also: a `mcp_repo_url` on any host that is not a shared code host is the declared endpoint whatever its path, and is tried first; if it cannot be read, the next candidate is tried.
+
 | Check | What it looks at |
 |---|---|
 | `site` | The listing address answers (up to 5 redirects, https only). A redirect to another domain is a warning. HTTP 401, 403 and 429 mean the site blocks automated readers: `unknown`, never a fail. A 5xx is asked again once after 3 seconds. |

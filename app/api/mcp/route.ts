@@ -2,7 +2,8 @@ import { registerLegalChatgptApp } from '@/lib/chatgpt-app'
 import { boundedMcpRequest } from '@/lib/chatgpt-http'
 import { createMcpHandler } from 'mcp-handler'
 import { z } from 'zod'
-import { ToolItem, toStructured, formatTool, type ToolRow } from '@/lib/mcp-results'
+// Claude Sonnet 5.5, 2026-11-23: search and recommend return ListItem (compact verification_summary); get returns DetailItem (full verification).
+import { ListItem, DetailItem, toListItem, toDetailItem, formatTool, type ToolRow } from '@/lib/mcp-results'
 import { supabase } from '@/lib/supabase'
 import { CATEGORY_LABELS, PRICING_LABELS, SITE_URL } from '@/lib/constants'
 import { rankSearchResults, searchTerms } from '@/lib/search'
@@ -122,7 +123,7 @@ const handler = createMcpHandler(
         },
         outputSchema: {
           count: z.number().describe('Number of tools returned'),
-          tools: z.array(ToolItem).describe('Matching tools, link-verified listings first'),
+          tools: z.array(ListItem).describe('Matching tools, link-verified listings first'),
         },
         annotations: READ_ONLY,
       },
@@ -177,7 +178,7 @@ const handler = createMcpHandler(
 
         const structuredContent = {
           count: data?.length ?? 0,
-          tools: (data ?? []).map((t) => toStructured(t as ToolRow)),
+          tools: (data ?? []).map((t) => toListItem(t as ToolRow)),
         }
 
         const text = !data?.length
@@ -209,9 +210,7 @@ const handler = createMcpHandler(
         },
         outputSchema: {
           found: z.boolean().describe('False when no published listing has this slug'),
-          tool: ToolItem.extend({
-            description: z.string().nullable().describe('Full listing description'),
-          })
+          tool: DetailItem
             .optional()
             .describe('The listing, present when found is true'),
         },
@@ -244,12 +243,7 @@ const handler = createMcpHandler(
           content: [{ type: 'text' as const, text: formatTool(data as ToolRow, true) }],
           structuredContent: {
             found: true,
-            tool: {
-              ...toStructured(data as ToolRow),
-              description: (data as ToolRow).description
-                ? String((data as ToolRow).description)
-                : null,
-            },
+            tool: toDetailItem(data as ToolRow),
           },
         }
       }
@@ -337,7 +331,7 @@ const handler = createMcpHandler(
           count: z.number().describe('Number of recommendations returned'),
           recommendations: z
             .array(
-              ToolItem.extend({
+              ListItem.extend({
                 score: z.number().describe('Deterministic fit score — see matched_factors for how it was earned'),
                 matched_factors: z
                   .array(z.string())
@@ -372,7 +366,7 @@ const handler = createMcpHandler(
         )
 
         const recommendations = ranked.map((r) => ({
-          ...toStructured(r.listing),
+          ...toListItem(r.listing),
           score: r.score,
           matched_factors: r.matchedFactors,
           pricing_note: pricingSupportNote(r.listing.pricing_model),
@@ -401,10 +395,12 @@ const handler = createMcpHandler(
     )
   },
   {
-    serverInfo: { name: 'legalaimcp', version: '1.4.0' },
+    serverInfo: { name: 'legalaimcp', version: '1.5.0' },
     // Shown to connecting clients at initialize — orientation for the agent.
+    // Claude Sonnet 5.5, 2026-11-23: version 1.4.0 to 1.5.0 (independent-directory evidence in answers); one sentence
+    // tells an agent that this server is not the vendor and where the checks are.
     instructions:
-      'Directory of AI tools and MCP servers for law firms, from legalaimcp.com. Read-only. For a workflow-based sourced comparison, use build_legal_ai_shortlist; it accepts fixed choices only, never client documents or matter facts. Start with list_legal_ai_categories to see practice areas, search_legal_ai_tools to find tools (or recommend_legal_ai_tools for a scored recommendation given a practice area + firm size), then get_legal_ai_tool for full detail on one. "Links verified" means an automated link check passed on the stated date — it is not an endorsement, security audit, or legal advice. When present, connection contains reviewed setup documentation with source/date/permission notes; customer_account_tested is false. A null connection means no reviewed guide is attached.',
+      'Directory of AI tools and MCP servers for law firms, from legalaimcp.com. Read-only. This server is an independent directory, not the vendor of any listed tool. get_legal_ai_tool returns the checks we ran and how to repeat them. For a workflow-based sourced comparison, use build_legal_ai_shortlist; it accepts fixed choices only, never client documents or matter facts. Start with list_legal_ai_categories to see practice areas, search_legal_ai_tools to find tools (or recommend_legal_ai_tools for a scored recommendation given a practice area + firm size), then get_legal_ai_tool for full detail on one. "Links verified" means an automated link check passed on the stated date — it is not an endorsement, security audit, or legal advice. When present, connection contains reviewed setup documentation with source/date/permission notes; customer_account_tested is false. A null connection means no reviewed guide is attached.',
   },
   {
     basePath: '/api',

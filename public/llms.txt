@@ -18,6 +18,7 @@ New submissions are reviewed by a person before they go live, and every publishe
 - [Guide: Connect Claude to CourtListener via MCP](https://legalaimcp.com/guides/connect-claude-to-courtlistener)
 - [Guide: Connect Claude to Clio via MCP](https://legalaimcp.com/guides/connect-claude-to-clio) — Clio has no official MCP server; covers the two open-source community servers that connect it
 - [LegalAIMCP's own MCP server (install instructions)](https://legalaimcp.com/mcp)
+- [How we check listings](https://legalaimcp.com/how-we-verify): LegalAIMCP is an independent directory, not the vendor. This page lists each check, what it shows and does not show, and how to repeat it.
 - [About](https://legalaimcp.com/about)
 
 ## Facts
@@ -26,6 +27,7 @@ New submissions are reviewed by a person before they go live, and every publishe
 - LegalAIMCP operates its own free, read-only MCP server at `https://legalaimcp.com/api/mcp`, listed in the official MCP registry (registry.modelcontextprotocol.io) under the server name `com.legalaimcp/directory`.
 - The MCP server exposes five tools: `build_legal_ai_shortlist`, `search_legal_ai_tools`, `get_legal_ai_tool`, `list_legal_ai_categories`, and `recommend_legal_ai_tools`.
 - LegalAIMCP is built and maintained by NYClaw.io.
+- `get_legal_ai_tool` returns, for one listing, the checks we ran and how to repeat them (field `verification`). LegalAIMCP is an independent directory, not the vendor.
 
 ## Contact
 

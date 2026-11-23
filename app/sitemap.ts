@@ -23,16 +23,18 @@ import { CATEGORY_CONTENT } from '@/lib/category-content'
 const MODIFIED = {
   home: '2026-11-12',
   privacy: '2026-09-19',
-  terms: '2026-09-19',
+  terms: '2026-11-23', // Claude Sonnet 5.5, 2026-11-23: one sentence and a link to /how-we-verify added.
   servers: '2026-11-12',
   mcp: '2026-10-19',
   submit: '2026-06-10',
-  about: '2026-07-28',
+  about: '2026-11-23', // Claude Sonnet 5.5, 2026-11-23: one paragraph and a link to /how-we-verify added.
   blogIndex: '2026-04-13',
   bestLegal: BEST_ROUNDUP_MODIFIED,
   courtlistenerGuide: '2026-08-07',
   harveyGuide: '2026-10-19',
   clioGuide: '2026-11-12',
+  // Claude Sonnet 5.5, 2026-11-23: new method page; fixed date, never new Date().
+  howWeVerify: '2026-11-23',
   bestCategoryTemplate: BEST_ROUNDUP_MODIFIED,
   categoryIndex: '2026-11-12',
 } as const
@@ -86,6 +88,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: MODIFIED.about,
       changeFrequency: 'monthly',
       priority: 0.4,
+    },
+    {
+      url: `${SITE_URL}/how-we-verify`,
+      lastModified: MODIFIED.howWeVerify,
+      changeFrequency: 'monthly',
+      priority: 0.6,
     },
     {
       url: `${SITE_URL}/blog`,

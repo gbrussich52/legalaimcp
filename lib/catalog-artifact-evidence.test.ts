@@ -14,9 +14,9 @@ const review = (over: Record<string, unknown> = {}) => ({
 })
 
 describe('expectedEvidence (post-build page check)', () => {
-  it('asks for name, the sources heading, the review date, every source URL and the pricing text', () => {
+  it('asks for name, the evidence heading, the review date, every source URL and the pricing text', () => {
     expect(expectedEvidence(review())).toEqual([
-      'Acme Draft', 'Primary sources reviewed', '2026-11-22', 'https://acme.example/pricing', 'https://acme.example/docs', 'From $20 a month',
+      'Acme Draft', 'Check this yourself', '2026-11-22', 'https://acme.example/pricing', 'https://acme.example/docs', 'From $20 a month',
     ])
   })
 

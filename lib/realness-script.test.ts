@@ -1,7 +1,7 @@
 // Claude Sonnet 5.5, 2026-11-23: offline tests for the pure helpers in scripts/realness.mjs (address rules, endpoint
 // detection, stable output, change report). Written after the script; the network probes are exercised by the real run.
 import { describe, it, expect } from 'vitest'
-import { isPrivateAddress, isEndpointUrl, endpointOf, serialize, diffRecords } from '../scripts/realness.mjs'
+import { isPrivateAddress, isEndpointUrl, endpointOf, endpointCandidates, firstReadable, summaryJson, serialize, diffRecords } from '../scripts/realness.mjs'
 
 describe('isPrivateAddress', () => {
   it('refuses private, loopback, link-local and mapped addresses', () => {
@@ -26,6 +26,52 @@ describe('endpoint detection', () => {
     expect(endpointOf({ external_url: 'https://mcp.courtlistener.com/', mcp_repo_url: 'https://github.com/a/b' })?.source).toBe('external_url')
   })
 })
+// Claude Sonnet 5.5, 2026-11-23: captainlegal declares https://mcp.captain.legal/connect/ in mcp_repo_url and it
+// answers the handshake, but the path rule skipped it and the bare host was probed, so the record said unknown.
+describe('declared endpoint', () => {
+  const captain = { external_url: 'https://mcp.captain.legal/', mcp_repo_url: 'https://mcp.captain.legal/connect/', mcp_install_command: null }
+  it('takes mcp_repo_url on a vendor host whatever its path, and tries it first', () => {
+    expect(endpointOf(captain)?.url).toBe('https://mcp.captain.legal/connect/')
+    expect(endpointCandidates(captain).map((c) => c.url)).toEqual(['https://mcp.captain.legal/connect/', 'https://mcp.captain.legal/'])
+  })
+  it('does not treat a code host URL as an endpoint', () => {
+    expect(endpointCandidates({ external_url: 'https://x.com/', mcp_repo_url: 'https://github.com/a/b/tree/main/src' })).toEqual([])
+    expect(endpointCandidates({ external_url: 'https://x.com/', mcp_repo_url: 'http://x.com/mcp' })).toEqual([])
+  })
+  it('lists each address once', () => {
+    expect(endpointCandidates({ external_url: 'https://a.com/', mcp_repo_url: 'https://a.com/mcp', mcp_install_command: 'claude mcp add --transport http a https://a.com/mcp' }).map((c) => c.url)).toEqual(['https://a.com/mcp'])
+  })
+  const res = (result: string, tag: string) => ({ id: 'mcp_endpoint', result, observed: tag, how_to_repeat: 'h', public: true })
+  it('moves on when a candidate cannot be read, and settles on unknown only when all are unknown', async () => {
+    const cands = [{ url: 'https://a/1', source: 'mcp_repo_url' }, { url: 'https://a/2', source: 'external_url' }]
+    const seen: string[] = []
+    const probe = (map: Record<string, string>) => async (url: string) => { seen.push(url); return res(map[url], url) }
+    expect((await firstReadable(cands, probe({ 'https://a/1': 'unknown', 'https://a/2': 'pass' }))).observed).toBe('https://a/2')
+    seen.length = 0
+    expect((await firstReadable(cands, probe({ 'https://a/1': 'pass', 'https://a/2': 'pass' }))).observed).toBe('https://a/1')
+    expect(seen).toEqual(['https://a/1'])
+    expect((await firstReadable(cands, probe({ 'https://a/1': 'unknown', 'https://a/2': 'unknown' }))).observed).toBe('https://a/1')
+  })
+})
+
+// Claude Sonnet 5.5, 2026-11-23: the coordinator's daily runner parses this script, so --json prints one object with a fixed shape.
+describe('--json summary', () => {
+  const r = (slug: string, level: string, reasons: string[], results: Record<string, string> = { site: 'pass' }) => ({ slug, checked_at: 'd', level, reasons, checks: Object.entries(results).map(([id, result]) => ({ id, result, observed: 'o', how_to_repeat: 'h', public: true })) })
+  const fresh = { a: r('a', 'fail', ['the site could not be reached', 'x'], { site: 'fail' }), b: r('b', 'watch', ['the domain is under 180 days old (40 days)']), c: r('c', 'pass', []) }
+  it('has checked, findings (fail only), watch and an empty changed list outside --check', () => {
+    expect(summaryJson(Object.values(fresh), null)).toEqual({
+      checked: 3,
+      findings: [{ slug: 'a', level: 'fail', reason: 'the site could not be reached; x' }],
+      watch: [{ slug: 'b', reason: 'the domain is under 180 days old (40 days)' }],
+      changed: [],
+    })
+  })
+  it('lists check results that moved, only in --check mode', () => {
+    const before = { a: r('a', 'pass', [], { site: 'pass' }), b: r('b', 'watch', []), c: r('c', 'pass', []) }
+    expect(summaryJson(Object.values(fresh), before).changed).toEqual([{ slug: 'a', check: 'site', from: 'pass', to: 'fail' }])
+  })
+})
+
 describe('output', () => {
   const rec = (slug: string, level = 'pass', result = 'pass') => ({ slug, checked_at: '2026-11-23', level, reasons: [], checks: [{ id: 'site', result, observed: 'o', how_to_repeat: 'h', public: true }] })
   it('sorts keys so diffs stay small', () => {

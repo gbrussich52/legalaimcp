@@ -34,7 +34,7 @@ const RDAP_OVERRIDES = { io: 'https://rdap.identitydigital.services/rdap/' }
 // The .de registry's terms restrict automated use, so it is never queried.
 const RDAP_SKIP = new Set(['de'])
 // Code and page hosts: a domain here says nothing about the vendor, so domain-level checks are not applicable.
-const SHARED_DOMAINS = new Set(['github.com', 'gitlab.com', 'bitbucket.org', 'codeberg.org', 'huggingface.co', 'npmjs.com', 'pypi.org', 'github.io', 'gitlab.io'])
+export const SHARED_DOMAINS = new Set(['github.com', 'gitlab.com', 'bitbucket.org', 'codeberg.org', 'huggingface.co', 'npmjs.com', 'pypi.org', 'github.io', 'gitlab.io'])
 
 // Reuse the tested logic from lib/realness.ts, compiled the same way scripts/import-reviewed-catalog.mjs loads the gate.
 export async function loadRealness() {
@@ -283,13 +283,33 @@ export function isEndpointUrl(u) {
   if (url.protocol !== 'https:' || isSharedUrl(u)) return false
   return ENDPOINT_PATH.test(url.pathname) || (url.hostname.startsWith('mcp.') && (url.pathname === '/' || url.pathname === ''))
 }
-/** Where the listing names a remote MCP address: mcp_repo_url, a URL inside the install command, or an mcp.* external_url. */
-export function endpointOf(listing) {
+// Claude Sonnet 5.5, 2026-11-23: a mcp_repo_url that is not on a shared code host is the address the listing
+// declares, whatever its path (captainlegal: https://mcp.captain.legal/connect/ answers the handshake). Before,
+// only paths ending in /mcp or /sse counted, so the bare host was probed and the record said unknown.
+/** Every address the listing may serve MCP on, best first: the declared mcp_repo_url, the install command URL, an mcp.* external_url. */
+export function endpointCandidates(listing) {
   const fromCommand = String(listing.mcp_install_command ?? '').match(/https:\/\/[^\s'"]+/)?.[0]
-  for (const [source, url] of [['mcp_repo_url', listing.mcp_repo_url], ['mcp_install_command', fromCommand], ['external_url', hostOfUrl(listing.external_url)?.startsWith('mcp.') ? listing.external_url : null]]) {
-    if (url && isEndpointUrl(url)) return { url, source }
+  const declared = (u) => { try { return new URL(u).protocol === 'https:' && !isSharedUrl(u) } catch { return false } }
+  const tries = [
+    ['mcp_repo_url', declared(listing.mcp_repo_url) ? listing.mcp_repo_url : null],
+    ['mcp_install_command', fromCommand && isEndpointUrl(fromCommand) ? fromCommand : null],
+    ['external_url', hostOfUrl(listing.external_url)?.startsWith('mcp.') && isEndpointUrl(listing.external_url) ? listing.external_url : null],
+  ]
+  const seen = new Set(), out = []
+  for (const [source, url] of tries) if (url && !seen.has(url)) { seen.add(url); out.push({ url, source }) }
+  return out
+}
+/** The first candidate: where the listing names a remote MCP address. */
+export function endpointOf(listing) { return endpointCandidates(listing)[0] ?? null }
+/** Probe in order; stop at the first answer that is not unknown. If every candidate is unknown, return the first one's result. */
+export async function firstReadable(candidates, probe) {
+  let first = null
+  for (const c of candidates) {
+    const r = await probe(c.url)
+    if (r.result !== 'unknown') return r
+    first ??= r
   }
-  return null
+  return first
 }
 
 const INIT_BODY = { jsonrpc: '2.0', id: 1, method: 'initialize', params: { protocolVersion: '2025-06-18', capabilities: {}, clientInfo: { name: 'listing-review', version: '1.0' } } }
@@ -299,9 +319,9 @@ const DISCOVER_BODY = { jsonrpc: '2.0', id: 'discover-1', method: 'server/discov
 const curlFor = (url, body, extra = []) => `curl -s -X POST '${url}' -H 'Content-Type: application/json' -H 'Accept: application/json, text/event-stream'${extra.map((h) => ` -H '${h}'`).join('')} -d '${JSON.stringify(body)}'`
 
 export async function mcpEndpointCheck(listing, ctx) {
-  const ep = endpointOf(listing)
-  if (!ep) return mk('mcp_endpoint', 'not_applicable', 'The listing names no remote MCP address.', 'See the listing page.')
-  return handshake(ep.url, ctx)
+  const candidates = endpointCandidates(listing)
+  if (!candidates.length) return mk('mcp_endpoint', 'not_applicable', 'The listing names no remote MCP address.', 'See the listing page.')
+  return firstReadable(candidates, (url) => handshake(url, ctx))
 }
 
 /** One initialize POST; if the server does not know it, one server/discover POST. Nothing else is ever sent. */
@@ -451,6 +471,25 @@ export function diffRecords(before, after) {
   return lines
 }
 
+// Claude Sonnet 5.5, 2026-11-23: --json output for a daily runner in another repo that parses this script. One fixed shape.
+/** results: fresh records. before: committed records by slug in --check mode, else null (changed stays empty). */
+export function summaryJson(results, before) {
+  const line = (r) => r.reasons.join('; ') || r.level
+  const changed = []
+  for (const r of before ? results : []) {
+    for (const c of r.checks) {
+      const old = before[r.slug]?.checks.find((x) => x.id === c.id)
+      if (old && old.result !== c.result) changed.push({ slug: r.slug, check: c.id, from: old.result, to: c.result })
+    }
+  }
+  return {
+    checked: results.length,
+    findings: results.filter((r) => r.level === 'fail').map((r) => ({ slug: r.slug, level: 'fail', reason: line(r) })),
+    watch: results.filter((r) => r.level === 'watch').map((r) => ({ slug: r.slug, reason: line(r) })),
+    changed,
+  }
+}
+
 export function reportTable(records) {
   const cell = (r, id) => r.checks.find((c) => c.id === id)?.result ?? '-'
   const rows = Object.values(records).sort((a, b) => (a.slug < b.slug ? -1 : 1)).map((r) => {
@@ -460,16 +499,19 @@ export function reportTable(records) {
   return ['| Listing | Level | Site | Registered | Mail | Security DNS | MCP | Repo | Registry |', '|---|---|---|---|---|---|---|---|---|', ...rows].join('\n')
 }
 
-const USAGE = 'Usage: node scripts/realness.mjs (--all | --slug S ... | --plan PLAN.json | --endpoint URL) [--write] [--check] [--report]'
+const USAGE = 'Usage: node scripts/realness.mjs (--all | --slug S ... | --plan PLAN.json | --endpoint URL) [--write] [--check] [--report] [--json]'
 
 async function main() {
   const argv = process.argv.slice(2)
   const values = (flag) => argv.flatMap((a, i) => (a === flag ? [argv[i + 1]] : [])).filter((v) => v && !v.startsWith('--'))
-  const known = new Set(['--all', '--slug', '--plan', '--endpoint', '--write', '--check', '--report', '--no-cache'])
+  const known = new Set(['--all', '--slug', '--plan', '--endpoint', '--write', '--check', '--report', '--json', '--no-cache'])
   const valueFlags = new Set(['--slug', '--plan', '--endpoint'])
   const bad = argv.filter((a, i) => (a.startsWith('--') ? !known.has(a) : !valueFlags.has(argv[i - 1])))
   if (bad.length) throw Error(USAGE)
   const all = argv.includes('--all'), write = argv.includes('--write'), check = argv.includes('--check'), report = argv.includes('--report')
+  // With --json stdout carries one JSON object and nothing else; every human line goes to stderr.
+  const json = argv.includes('--json')
+  const say = json ? console.error : console.log
   const slugs = values('--slug'), planFile = values('--plan')[0], endpoint = values('--endpoint')[0]
   if (!all && !slugs.length && !planFile && !endpoint) throw Error(USAGE)
   if ((planFile || endpoint) && (write || check)) throw Error('--plan and --endpoint never write or compare; drop --write and --check')
@@ -510,18 +552,19 @@ async function main() {
   if (check) {
     const scope = all ? existing.records : Object.fromEntries(Object.entries(existing.records).filter(([s]) => fresh[s]))
     const changes = diffRecords(Object.fromEntries(Object.entries(scope).map(([k, v]) => [k, v])), fresh)
-    console.log(changes.length ? changes.join('\n') : `No change in ${results.length} records (ignoring the check date).`)
+    say(changes.length ? changes.join('\n') : `No change in ${results.length} records (ignoring the check date).`)
   }
   if (write) {
     const merged = all ? fresh : { ...existing.records, ...fresh }
     const temp = `${OUT}.${process.pid}.tmp`
     await writeFile(temp, serialize(merged, ctx.today)); await rename(temp, OUT)
-    console.log(`Wrote ${Object.keys(merged).length} records to lib/catalog-realness.json`)
+    say(`Wrote ${Object.keys(merged).length} records to lib/catalog-realness.json`)
   }
-  if (report) console.log(reportTable(fresh))
-  else if (!check) for (const r of results) console.log(`${r.level.toUpperCase().padEnd(5)} ${r.slug}${r.reasons.length ? `: ${r.reasons.join('; ')}` : ''}`)
+  if (report) say(reportTable(fresh))
+  else if (!check) for (const r of results) say(`${r.level.toUpperCase().padEnd(5)} ${r.slug}${r.reasons.length ? `: ${r.reasons.join('; ')}` : ''}`)
   const counts = results.reduce((n, r) => ({ ...n, [r.level]: (n[r.level] ?? 0) + 1 }), {})
   console.error(`realness: ${results.length} checked, ${counts.pass ?? 0} pass, ${counts.watch ?? 0} watch, ${counts.fail ?? 0} fail`)
+  if (json) console.log(JSON.stringify(summaryJson(results, check ? existing.records : null)))
   if (results.some((r) => r.level === 'fail')) process.exitCode = 1
 }
 
