@@ -67,7 +67,8 @@ describe('Check this yourself block', () => {
     const formed = text(html('Captain.Legal', getVerificationSource(row, { reviews: [{ ...review, operator: { ...op, formed: '2018-04-02' } } as never] })))
     expect(formed).toContain('Camines LLC, listed in Delaware Division of Corporations as Good standing, formed 2018-04-02. Checked 2026-11-23.')
     const missing = text(html('Captain.Legal', getVerificationSource(row, { reviews: [{ ...review, operator: { status: 'not_found', note: 'Nothing under that name.' } } as never] })))
-    expect(missing).toContain('We looked for the operator in a public company register and did not find one. Nothing under that name.')
+    expect(missing).toContain('We did not find the operator in a public company register. Nothing under that name.')
+    expect(missing).not.toContain('We looked for the operator')
     expect(t).toContain('Who is behind it')
     // Claude Fable 5.2, 2026-11-23: the review on file now carries an operator, so the "not yet looked" case is built
     // here instead of read from live data. Before, this line passed only because no record had an operator.

@@ -79,7 +79,7 @@ export function CheckThisYourself({ name, source }: { name: string; source: Veri
               {operator.name}, listed in {operatorHref ? <a href={operatorHref} target="_blank" rel="noopener noreferrer" className={link}>{operator.register}</a> : operator.register} as {operator.status}{operator.formed ? `, formed ${operator.formed}` : ''}. Checked <time dateTime={operator.checked_at}>{operator.checked_at}</time>.
             </p>
           ) : operator ? (
-            <p className="text-charcoal/80 mt-1 break-words">We looked for the operator in a public company register and did not find one. {operator.note}</p>
+            <p className="text-charcoal/80 mt-1 break-words">{/* Claude Fable 5.2, 2026-11-23: was "We looked for the operator in a public company register and did not find one." That is false when the vendor names no company and there was nothing to search, so the fixed words claim only the outcome and the note says what was done. */}We did not find the operator in a public company register. {operator.note}</p>
           ) : (
             <p className="text-charcoal/80 mt-1">We have not yet looked this operator up in a company register.</p>
           )}
