@@ -21,6 +21,10 @@ function atom(a:string):boolean {
   if(a.startsWith('featured_purchased_at.lte.')) return listing.featured_purchased_at!=null && Date.parse(String(listing.featured_purchased_at))<=Date.parse(a.slice('featured_purchased_at.lte.'.length))
   if(a==='featured.eq.false') return listing.featured===false
   if(a==='featured_until.not.is.null') return listing.featured_until!=null
+  // Claude Sonnet 5.5, 2026-11-23: atoms of the "no active term bought by a different payment" guard.
+  if(a==='featured_until.is.null') return listing.featured_until==null
+  if(a.startsWith('featured_until.lte.')) return listing.featured_until!=null && Date.parse(String(listing.featured_until))<=Date.parse(a.slice('featured_until.lte.'.length))
+  if(a.startsWith('featured_purchased_at.eq.')) return listing.featured_purchased_at!=null && Date.parse(String(listing.featured_purchased_at))===Date.parse(a.slice('featured_purchased_at.eq.'.length))
   throw new Error('unknown atom '+a)
 }
 function matchesOr(expr:string):boolean {
@@ -76,11 +80,12 @@ it('duplicate successful completed/async events never extend the original term',
   eventType='checkout.session.async_payment_succeeded';vi.setSystemTime(new Date('2026-09-20T12:00:00Z'))
   expect((await POST(request())).status).toBe(200);expect(listing).toEqual(original);expect(payments.size).toBe(1)
 })
-it('a distinct purchase resets the term and an older replay cannot overwrite it',async()=>{
-  await POST(request());vi.setSystemTime(new Date('2026-09-20T12:00:00Z'));session.id='cs_new'
-  await POST(request());expect(listing.featured_until).toBe('2026-10-20T12:00:00.000Z');expect(payments.size).toBe(2)
+it('a distinct purchase after the term ended resets the term and an older replay cannot overwrite it',async()=>{
+  // Claude Sonnet 5.5, 2026-11-23: was 2026-09-20, inside the first term. A second payment inside an active term no longer restarts it (see the active-term tests below).
+  await POST(request());vi.setSystemTime(new Date('2026-10-20T12:00:00Z'));session.id='cs_new'
+  await POST(request());expect(listing.featured_until).toBe('2026-11-19T12:00:00.000Z');expect(payments.size).toBe(2)
   session.id='cs_original';expect((await POST(request())).status).toBe(200)
-  expect(listing.stripe_checkout_session_id).toBe('cs_new');expect(listing.featured_until).toBe('2026-10-20T12:00:00.000Z')
+  expect(listing.stripe_checkout_session_id).toBe('cs_new');expect(listing.featured_until).toBe('2026-11-19T12:00:00.000Z')
 })
 it.each(['checkout.session.completed','checkout.session.async_payment_succeeded'])('never grants an unpaid %s event',async type=>{
   eventType=type;session.payment_status='unpaid'
@@ -123,15 +128,47 @@ it('a replay of an editorial-blocked payment stays 200 and leaves the row alone'
   await POST(request());expect((await POST(request())).status).toBe(200);expect(listing.featured_until).toBeNull()
 })
 
+// Claude Sonnet 5.5, 2026-11-23: two tabs, two paid sessions for one listing. The second payment must not change the row.
+const noPlacementLines=()=>vi.mocked(console.error).mock.calls.map(c=>String(c[0])).filter(m=>m.startsWith('PAID_NO_PLACEMENT'))
+it('order A then B: a second payment inside an active term leaves the row alone and logs active_term once',async()=>{
+  session.id='cs_A';await POST(request());const afterA={...listing}
+  vi.setSystemTime(new Date('2026-09-16T12:00:00Z'));session.id='cs_B'
+  expect((await POST(request())).status).toBe(200)
+  expect(listing).toEqual(afterA);expect(payments.size).toBe(2)
+  expect(noPlacementLines()).toEqual(['PAID_NO_PLACEMENT session=cs_B listing=listing-one reason=active_term'])
+})
+it('order B then A (B ledger is older, A is applied first): the older payment is logged, row unchanged',async()=>{
+  payments.set('cs_B',{listing_id:'listing-one',status:'completed',created_at:'2026-09-15T12:00:00.000Z'})
+  vi.setSystemTime(new Date('2026-09-16T12:00:00Z'));session.id='cs_A';await POST(request());const afterA={...listing}
+  session.id='cs_B'
+  expect((await POST(request())).status).toBe(200)
+  expect(listing).toEqual(afterA)
+  expect(noPlacementLines()).toEqual(['PAID_NO_PLACEMENT session=cs_B listing=listing-one reason=active_term'])
+})
+it('redelivery of the payment that holds the term is idempotent and silent',async()=>{
+  session.id='cs_A';await POST(request());const afterA={...listing}
+  vi.setSystemTime(new Date('2026-09-16T12:00:00Z'))
+  expect((await POST(request())).status).toBe(200)
+  expect(listing).toEqual(afterA);expect(noPlacementLines()).toEqual([])
+})
+it('a purchase after the term ended places the listing, also when the cron has not cleared featured',async()=>{
+  listing={featured:true,featured_until:'2026-09-10T12:00:00.000Z',featured_purchased_at:'2026-08-11T12:00:00.000Z',stripe_checkout_session_id:'cs_old'}
+  expect((await POST(request())).status).toBe(200)
+  expect(listing.stripe_checkout_session_id).toBe("cs_original")
+  expect(listing.featured_until).toBe('2026-10-15T12:00:00.000Z');expect(noPlacementLines()).toEqual([])
+})
+
 // Claude Sonnet 5.5, 2026-11-23: PostgREST's own tests prove nesting inside ONE or= parameter, not two same-key or= parameters.
-it('sends the listing update with exactly one or() holding the four and() terms',async()=>{
+it('sends the listing update with exactly one or() holding the twelve and() terms',async()=>{
   await POST(request())
   expect(orCalls).toHaveLength(1)
   const at='2026-09-15T12:00:00.000Z'
-  expect(orCalls[0].split(/,(?=and\()/).sort()).toEqual([
-    `and(featured_purchased_at.is.null,featured.eq.false)`,
-    `and(featured_purchased_at.is.null,featured_until.not.is.null)`,
-    `and(featured_purchased_at.lte.${at},featured.eq.false)`,
-    `and(featured_purchased_at.lte.${at},featured_until.not.is.null)`,
-  ].sort())
+  const now='2026-09-15T12:00:00.000Z'
+  // not newer x not editorial x (no term, term over, or this very payment holds it)
+  const a=['featured_purchased_at.is.null',`featured_purchased_at.lte.${at}`]
+  const b=['featured.eq.false','featured_until.not.is.null']
+  const c=['featured_until.is.null',`featured_until.lte.${now}`,`featured_purchased_at.eq.${at}`]
+  const want=a.flatMap(x=>b.flatMap(y=>c.map(z=>`and(${x},${y},${z})`)))
+  expect(want).toHaveLength(12)
+  expect(orCalls[0].split(/,(?=and\()/).sort()).toEqual(want.sort())
 })

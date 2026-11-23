@@ -59,7 +59,19 @@ export async function POST(req: Request) {
 function placementFilter(purchasedAt: string): string {
   const notNewer = ['featured_purchased_at.is.null', `featured_purchased_at.lte.${purchasedAt}`]
   const notEditorial = ['featured.eq.false', 'featured_until.not.is.null']
-  return notNewer.flatMap((a) => notEditorial.map((b) => `and(${a},${b})`)).join(',')
+  // Claude Sonnet 5.5, 2026-11-23: third factor, no ACTIVE term bought by a DIFFERENT payment. A row passes when it
+  // has no end date, the end date is past (the expiry cron may not have run), or this very payment bought the term.
+  // listings stores stripe_checkout_session_id, but a newer purchase overwrites it, so "same payment" is equality
+  // of featured_purchased_at (it is this payment's ledger created_at) with this payment's purchasedAt.
+  // Still ONE or= value: 2 x 2 x 3 = 12 and() terms, because PostgREST has no NOT over an or.
+  const notActiveOther = [
+    'featured_until.is.null',
+    `featured_until.lte.${new Date().toISOString()}`,
+    `featured_purchased_at.eq.${purchasedAt}`,
+  ]
+  return notNewer
+    .flatMap((a) => notEditorial.flatMap((b) => notActiveOther.map((c) => `and(${a},${b},${c})`)))
+    .join(',')
 }
 
 async function applyFeaturedPurchase(session: Stripe.Checkout.Session) {
@@ -154,6 +166,15 @@ async function applyFeaturedPurchase(session: Stripe.Checkout.Session) {
     // not touch the listing or listing_payments.status. The stable code is for a future alert; no email or name.
     if (!currentError && current && current.featured === true && current.featured_until == null) {
       console.error(`PAID_NO_PLACEMENT session=${session.id} listing=${listingId} reason=editorial_pick`)
+      return
+    }
+    // Claude Sonnet 5.5, 2026-11-23: a different payment holds an active paid term (two tabs, both paid). Before, the
+    // later payment restarted the term, and the earlier payment arriving second fell through with no log line.
+    // Answer 200 so Stripe does not retry; the stable code is for a future alert.
+    if (!currentError && current && current.featured_until != null &&
+      Date.parse(current.featured_until) > Date.now() &&
+      Date.parse(current.featured_purchased_at) !== Date.parse(purchasedAt)) {
+      console.error(`PAID_NO_PLACEMENT session=${session.id} listing=${listingId} reason=active_term`)
       return
     }
     if (currentError || !current || Date.parse(current.featured_purchased_at) < Date.parse(purchasedAt) ||
