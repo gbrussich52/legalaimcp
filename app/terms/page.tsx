@@ -63,7 +63,9 @@ export default function TermsPage() {
           <div>
             <h2 className="font-display text-2xl font-semibold text-navy mb-4">Featured listings</h2>
             <p className="text-base text-charcoal/75 leading-relaxed">
-              Featured placements are paid and always labeled as featured. Payment secures visibility
+              {/* Claude Sonnet 5.5, 2026-11-22: old text said Featured was always paid; Featured is editorial, Sponsored is paid. */}
+              Paid placements are labeled Sponsored. Listings labeled Featured are editorial picks and
+              are not paid. Payment secures visibility
               for the purchased period; it does not constitute our endorsement of the tool&apos;s
               quality, security, or fitness for any purpose. Purchases are processed by Stripe and
               described further on our{' '}

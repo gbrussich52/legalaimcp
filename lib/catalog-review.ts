@@ -10,8 +10,20 @@ type Candidate = { [K in typeof FIELDS[number]]?: unknown }
 const digest = (text: string) => createHash('sha256').update(text).digest('hex')
 export const catalogClaims = (listing: Candidate) => Object.fromEntries(FIELDS.map(key => [key, listing[key] ?? (key === 'tags' || key === 'firm_size_fit' ? [] : null)]))
 export const catalogFingerprint = (listing: Candidate) => digest(JSON.stringify(Object.entries(catalogClaims(listing))))
-const normalize = (text: string) => text.replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, ' ').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
+// Claude Opus 5.5, 2026-11-22: exported so scripts/catalog-admit.mjs checks quotes with the gate's own normalization, not a copy.
+export const normalize = (text: string) => text.replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, ' ').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
 export const sourceFingerprint = (text: string) => digest(normalize(text))
+
+// Claude Opus 5.5, 2026-11-22: one slug rule for the admin Approve button and scripts/admit-submissions.mjs.
+// Moved here unchanged from app/admin/actions.ts so the two paths cannot drift apart.
+export function generateSlug(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '')
+}
 
 export type CatalogReview = {
   slug: string; decision: string; reviewed_at: string; reviewer: string; listing_sha256: string
@@ -28,6 +40,34 @@ export function isCatalogQuarantined(listing: Candidate) {
       return records.blocked_domains.some(domain => host === domain || host.endsWith(`.${domain}`))
     } catch { return false }
   })
+}
+
+// Claude Opus 5.5, 2026-11-22: URL rule and bounded fetch lifted out of assertCatalogReview unchanged,
+// so the admission script fetches a source exactly the way the gate later re-fetches it.
+export function primarySourceUrl(raw: string): URL {
+  const url = new URL(raw)
+  // Only trusted checked-in review URLs are fetched, never URLs supplied by a submission.
+  if (url.protocol !== 'https:' || url.username || url.password || url.port || !/^[a-z0-9][a-z0-9.-]*\.[a-z]{2,}$/i.test(url.hostname) || /(^|\.)(localhost|local|internal|test|invalid)$/.test(url.hostname)) throw new Error('Publication blocked: invalid primary source URL.')
+  return url
+}
+
+export async function readPrimarySource(url: URL, fetcher: typeof fetch = fetch): Promise<string> {
+  const response = await fetcher(url, { redirect: 'error', cache: 'no-store', signal: AbortSignal.timeout(12000) })
+  if (!response.ok) throw new Error('Publication blocked: primary source unavailable.')
+  // Bound response consumption, including chunked bodies without Content-Length.
+  const reader = response.body?.getReader()
+  if (!reader) throw new Error('Publication blocked: primary source unavailable.')
+  const chunks: Uint8Array[] = []; let size = 0
+  try {
+    for (;;) {
+      const { done, value } = await reader.read()
+      if (done) break
+      size += value.byteLength
+      if (size > 2_000_000) throw new Error('Publication blocked: primary source exceeds review size limit.')
+      chunks.push(value)
+    }
+  } finally { await reader.cancel() }
+  return Buffer.concat(chunks).toString('utf8')
 }
 
 /** Normal admission fails closed. This is editorial evidence, not a customer integration test. */
@@ -50,26 +90,9 @@ export async function assertCatalogReview(listing: Candidate, {
   if (!review.sources?.length || review.sources.length > 5) throw new Error('Publication blocked: primary-source evidence is required (maximum five sources).')
   for (const source of review.sources) {
     if (!['vendor', 'maintainer'].includes(source.kind)) throw new Error('Publication blocked: evidence must be a primary vendor or maintainer source.')
-    const url = new URL(source.url)
-    // Only trusted checked-in review URLs are fetched, never URLs supplied by a submission.
-    if (url.protocol !== 'https:' || url.username || url.password || url.port || !/^[a-z0-9][a-z0-9.-]*\.[a-z]{2,}$/i.test(url.hostname) || /(^|\.)(localhost|local|internal|test|invalid)$/.test(url.hostname)) throw new Error('Publication blocked: invalid primary source URL.')
+    const url = primarySourceUrl(source.url)
     if (!/^[a-f0-9]{64}$/.test(source.sha256) || normalize(source.quote).length < 15) throw new Error('Publication blocked: a source fingerprint and supporting quote are required.')
-    const response = await fetcher(url, { redirect: 'error', cache: 'no-store', signal: AbortSignal.timeout(12000) })
-    if (!response.ok) throw new Error('Publication blocked: primary source unavailable.')
-    // Bound response consumption, including chunked bodies without Content-Length.
-    const reader = response.body?.getReader()
-    if (!reader) throw new Error('Publication blocked: primary source unavailable.')
-    const chunks: Uint8Array[] = []; let size = 0
-    try {
-      for (;;) {
-        const { done, value } = await reader.read()
-        if (done) break
-        size += value.byteLength
-        if (size > 2_000_000) throw new Error('Publication blocked: primary source exceeds review size limit.')
-        chunks.push(value)
-      }
-    } finally { await reader.cancel() }
-    const text = Buffer.concat(chunks).toString('utf8')
+    const text = await readPrimarySource(url, fetcher)
     if (sourceFingerprint(text) !== source.sha256) throw new Error('Publication blocked: primary source changed; review it again.')
     if (!normalize(text).includes(normalize(source.quote))) throw new Error('Publication blocked: supporting quote is absent from the primary source.')
   }

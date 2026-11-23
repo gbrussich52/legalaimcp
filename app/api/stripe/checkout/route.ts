@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { getAdminClient } from '@/lib/supabase-admin'
 import { SITE_URL } from '@/lib/constants'
+import { featuredState } from '@/lib/featured-pricing'
 import {
   FEATURED_PRICE_CENTS,
   getStripe,
@@ -56,10 +57,17 @@ export async function POST(req: Request) {
     )
   }
 
-  let listing: { id: string; slug: string; name: string; status: string } | null = null
+  let listing: {
+    id: string
+    slug: string
+    name: string
+    status: string
+    featured: boolean | null
+    featured_until: string | null
+  } | null = null
   try {
     const db = getAdminClient()
-    let query = db.from('listings').select('id, slug, name, status')
+    let query = db.from('listings').select('id, slug, name, status, featured, featured_until')
     if (parsed.data.listing_id) {
       query = query.eq('id', parsed.data.listing_id)
     } else {
@@ -83,6 +91,24 @@ export async function POST(req: Request) {
     return NextResponse.json(
       { error: 'Only published listings can purchase Featured' },
       { status: 400 },
+    )
+  }
+
+  // Claude Sonnet 5.5, 2026-11-22: refuse editorial picks (featured, no end date). A payment would
+  // stamp featured_until and the expiry cron would then remove a placement that had no end.
+  // Claude Sonnet 5.5, 2026-11-23: also refuse during an active paid term. A second payment restarts the
+  // 30 days at the new payment and loses the unused days. Same helper as the buy box, so they agree.
+  const state = featuredState(listing.featured, listing.featured_until, new Date())
+  if (state === 'editorial') {
+    return NextResponse.json(
+      { error: 'This listing is already featured by our editors. There is nothing to buy.' },
+      { status: 409 },
+    )
+  }
+  if (state === 'paid-active') {
+    return NextResponse.json(
+      { error: 'This listing already has a paid placement. You can renew after it ends.' },
+      { status: 409 },
     )
   }
 

@@ -50,7 +50,12 @@ const submissionSchema = z.object({
   pricing_details: z.string().optional(),
   description: z.string().min(50).max(2000),
   creator_name: noAngleBrackets(100, 2),
-  submitter_email: z.string().email(),
+  // Claude Sonnet 5.5, 2026-11-23: our own domain is refused so a visitor cannot pose as curate-bot@legalaimcp.com
+  // (the intake watcher read that address as "our bot"). The bot inserts straight into the database, not here.
+  submitter_email: z
+    .string()
+    .email()
+    .refine((e) => !/@legalaimcp\.com$/i.test(e), { message: 'Use your own email address so we can reply.' }),
   creator_url: httpUrl.optional().or(z.literal('')),
 })
 

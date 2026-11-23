@@ -7,7 +7,8 @@ import { getAdminClient } from '@/lib/supabase-admin'
 import { isSameOriginRequest } from '@/lib/origin'
 import { CATEGORY_LABELS, PRICING_LABELS } from '@/lib/constants'
 import { z } from 'zod'
-import { assertCatalogReview, storeCatalogReview } from '@/lib/catalog-review'
+// Claude Opus 5.5, 2026-11-22: generateSlug now lives in lib/catalog-review.ts, shared with scripts/admit-submissions.mjs.
+import { assertCatalogReview, storeCatalogReview, generateSlug } from '@/lib/catalog-review'
 import { LISTING_ADMIN_COLUMNS } from '@/lib/types'
 
 /**
@@ -145,15 +146,6 @@ export async function deleteListing(id: string) {
   revalidateAll()
 }
 
-function generateSlug(name: string): string {
-  return name
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '')
-}
-
 export async function approveSubmission(submissionId: string) {
   const db = await requireAdmin()
 
@@ -164,6 +156,8 @@ export async function approveSubmission(submissionId: string) {
     .eq('id', submissionId)
     .single()
   if (fetchErr || !sub) throw new Error('Submission not found')
+  // Claude Sonnet 5.5, 2026-11-22: only pending submissions can be approved; a decided one must not republish.
+  if (sub.status !== 'pending') throw new Error('Submission is not pending')
 
   // Cast to Record<string, unknown> for safe property access; individual
   // string fields are cast to string at the insert site via String() or '|| ""'.
@@ -257,6 +251,14 @@ export async function approveSubmission(submissionId: string) {
 
 export async function rejectSubmission(submissionId: string, notes?: string) {
   const db = await requireAdmin()
+  // Claude Sonnet 5.5, 2026-11-22: same pending-only rule as approve; do not flip a decided submission.
+  const { data: sub, error: fetchErr } = await db
+    .from('submissions')
+    .select('id, status')
+    .eq('id', submissionId)
+    .single()
+  if (fetchErr || !sub) throw new Error('Submission not found')
+  if (sub.status !== 'pending') throw new Error('Submission is not pending')
   const { error } = await db
     .from('submissions')
     .update({ status: 'rejected', notes: notes || 'Rejected by admin' })

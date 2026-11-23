@@ -44,14 +44,14 @@ const FAQ_ITEMS = [
   },
   {
     q: 'How is this directory funded? Are listings paid?',
-    text: 'Listing itself is free — no tool pays just to appear. Optional Featured placements ($69 / 30 days) buy a sort boost and a Featured badge; those are labeled on the listing. There are no affiliate links. Core funding still comes from NYClaw.io, the AI agency that builds the directory. MCP search stays free.',
+    text: 'Listing itself is free — no tool pays just to appear. Optional Featured placements ($69 / 30 days) buy a sort boost and a Sponsored badge; those are labeled on the listing. There are no affiliate links. Core funding still comes from NYClaw.io, the AI agency that builds the directory. MCP search stays free.',
     a: (
       <>
         Listing itself is free — no tool pays just to appear. Optional{' '}
         <Link href="/pricing" className="text-gold-text font-semibold hover:underline">
           Featured placements
         </Link>{' '}
-        ($69 / 30 days) buy a sort boost and a Featured badge; those are labeled
+        ($69 / 30 days) buy a sort boost and a Sponsored badge; those are labeled
         on the listing. There are no affiliate links. Core funding still comes
         from{' '}
         <Link href={NYCLAW_URL} className="text-gold-text font-semibold hover:underline" target="_blank" rel="noopener noreferrer">

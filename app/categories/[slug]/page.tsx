@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
+import { orderCategoryPage } from '@/lib/featured-order'
 import { ListingCard } from '../../components/ListingCard'
 import { LeadGenCTA } from '../../components/LeadGenCTA'
 import { ItemListJsonLd, FAQJsonLd, BreadcrumbJsonLd } from '../../components/JsonLd'
@@ -83,16 +84,16 @@ export default async function CategoryPage({
   const categoryEnum = slug.replace(/-/g, '_')
   const [categoryRes, listingsRes, siblingsRes] = await Promise.all([
     supabase.from('categories').select(CATEGORY_COLUMNS).eq('slug', slug).single<Category>(),
-    supabase
-      .from('listings')
-      .select(LISTING_CARD_COLUMNS)
-      .eq('status', 'published')
-      .eq('category', categoryEnum)
-      // Verified first for the same reason the MCP server orders this way:
-      // surface what we can stand behind ahead of what we chose to highlight.
-      .order('verified', { ascending: false })
-      .order('featured', { ascending: false })
-      .order('name', { ascending: true }),
+    // Claude Sonnet 5.5, 2026-11-23: paid term first (non-null end date), then verified, then featured, then name.
+    // The pricing page promises a sort boost here; with verified first, a new paid listing (unverified) ranked below
+    // every verified plain one. Order spec and tests live in lib/featured-order.ts.
+    orderCategoryPage(
+      supabase
+        .from('listings')
+        .select(LISTING_CARD_COLUMNS)
+        .eq('status', 'published')
+        .eq('category', categoryEnum),
+    ),
     supabase.from('categories').select('slug, name').neq('slug', slug).order('name'),
   ])
 

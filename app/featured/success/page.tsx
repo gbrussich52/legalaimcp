@@ -27,9 +27,13 @@ export default async function FeaturedSuccessPage({
         Your Featured bump is on the way
       </h1>
       <p className="font-body text-charcoal/75 leading-relaxed mb-8">
-        Stripe Checkout completed successfully. The Featured badge and sort
-        boost usually appear within a minute after the webhook lands. If nothing
-        changes after a few minutes, email support with your session id.
+        Stripe Checkout completed successfully. The Sponsored badge and sort
+        {/* Claude Sonnet 5.5, 2026-11-23: listing pages cache for 300 seconds (lib/supabase.ts), so "a minute" was wrong. */}
+        boost usually appear within five minutes after the webhook lands. If nothing
+        changes after a few minutes, email{' '}
+        {/* %s: the page named support but gave no address. */}
+        <a className="text-gold-text underline" href="mailto:hello@legalaimcp.com">hello@legalaimcp.com</a>{' '}
+        with your session id.
       </p>
       {params.session_id && (
         <p className="font-mono text-xs text-charcoal/75 mb-8 break-all">

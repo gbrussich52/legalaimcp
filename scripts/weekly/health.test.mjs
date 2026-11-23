@@ -28,6 +28,20 @@ test('failed and empty results replace previous success; dry-run cannot refresh 
   const before=await readFile(file,'utf8');await withVerifyHealth(async()=>counts,{file,dryRun:true});assert.equal(await readFile(file,'utf8'),before)
  } finally {await rm(dir,{recursive:true,force:true})}
 })
+// Claude Sonnet 5.5, 2026-11-22: a failed source audit must not hide that the link check ran.
+test('audit failure is recorded separately from the link check that still ran',async()=>{
+ const dir=await mkdtemp(path.join(tmpdir(),'curate-health-'));const file=path.join(dir,'health.json')
+ try {
+  const audit={ok:false,checked:42,findings:24}
+  await withVerifyHealth(async()=>({...counts,audit}),{file})
+  let saved=JSON.parse(await readFile(file,'utf8'))
+  assert.equal(saved.ok,false);assert.equal(saved.errorCode,'SOURCE_AUDIT_FAILED');assert.deepEqual(saved.counts,counts)
+  assert.deepEqual(saved.audit,audit);assert.deepEqual(saved.linkCheck,{ran:true,...counts})
+  for(const k of ['checkedAt','ok','counts','errorCode'])assert.ok(k in saved)
+  await withVerifyHealth(async()=>({...counts,audit:{ok:true,checked:42,findings:0}}),{file})
+  saved=JSON.parse(await readFile(file,'utf8'));assert.equal(saved.ok,true);assert.equal(saved.errorCode,null);assert.equal(saved.audit.ok,true);assert.equal(saved.linkCheck.ran,true)
+ } finally {await rm(dir,{recursive:true,force:true})}
+})
 test('weekly wrapper attempts both phases, propagates failures and accepts normal unpublish exit',async()=>{
  const dir=await mkdtemp(path.join(tmpdir(),'curate-runner-'))
  try {
@@ -43,9 +57,10 @@ test('weekly wrapper attempts both phases, propagates failures and accepts norma
 })
 test('curation targets shared schema/project and bounds database subprocess',async()=>{
  const source=await readFile(new URL('../curate.mjs',import.meta.url),'utf8')
- assert.match(source,/db: \{ schema: 'legalaimcp' \}/);assert.match(source,/const PROJECT_REF = 'bzrdzchrdthyrhdsodla'/)
+ assert.match(source,/db: \{ schema: 'legalaimcp' \}/);assert.match(await readFile(new URL('./supabase-argv.mjs',import.meta.url),'utf8'),/const PROJECT_REF = 'bzrdzchrdthyrhdsodla'/)
  assert.equal((source.match(/UPDATE legalaimcp\.listings SET/g)||[]).length,3);assert.doesNotMatch(source,/UPDATE listings SET/)
- assert.match(source,/\['db', 'query', '--linked', '--project-ref', PROJECT_REF, query\]/)
+ // Claude Sonnet 5.5, 2026-11-22: argv now comes from supabaseArgv (CLI 3.x); no --linked anywhere in the command.
+ assert.match(source,/supabaseArgv\(query, \{ write: true \}\)/);assert.doesNotMatch(source,/'--linked'/)
  assert.match(source,/timeout: 45000/);assert.match(source,/killSignal: 'SIGKILL'/)
  assert.match(source,/listings.length === 0/);assert.match(source,/process.exitCode = 2/)
 })

@@ -56,6 +56,12 @@ export async function POST(req: Request) {
   return NextResponse.json({ received: true })
 }
 
+function placementFilter(purchasedAt: string): string {
+  const notNewer = ['featured_purchased_at.is.null', `featured_purchased_at.lte.${purchasedAt}`]
+  const notEditorial = ['featured.eq.false', 'featured_until.not.is.null']
+  return notNewer.flatMap((a) => notEditorial.map((b) => `and(${a},${b})`)).join(',')
+}
+
 async function applyFeaturedPurchase(session: Stripe.Checkout.Session) {
   if (session.payment_status !== 'paid') {
     console.warn('[stripe/webhook] session not paid, not granting featured', session.id, session.payment_status)
@@ -109,6 +115,13 @@ async function applyFeaturedPurchase(session: Stripe.Checkout.Session) {
   const purchasedAt = payment.created_at
   const featuredUntil = new Date(Date.parse(purchasedAt) + FEATURED_DURATION_DAYS * 24 * 60 * 60 * 1000)
 
+  // Claude Sonnet 5.5, 2026-11-23: an event delivered or replayed after the 30 days would write a past end
+  // date onto a plain row. The payment stays recorded; the listing is not touched.
+  if (featuredUntil.getTime() <= Date.now()) {
+    console.info(`[stripe/webhook] Term already over, listing not updated listing=${listingId} session=${session.id}`)
+    return
+  }
+
   const { data: updated, error: listErr } = await db
     .from('listings')
     .update({
@@ -119,7 +132,13 @@ async function applyFeaturedPurchase(session: Stripe.Checkout.Session) {
       featured_purchased_at: purchasedAt,
     })
     .eq('id', listingId)
-    .or(`featured_purchased_at.is.null,featured_purchased_at.lte.${purchasedAt}`)
+    // Claude Sonnet 5.5, 2026-11-23: (not newer than this purchase) AND (not an editorial pick), as ONE or= value.
+    // Editorial = featured with no end date; an admin can make a row editorial after checkout started, and a
+    // paid write would stamp an end date that the expiry cron removes 30 days later. Two .or() calls would send
+    // two or= parameters, and PostgREST's own tests do not cover that. They do cover nesting inside one
+    // parameter (AndOrParamsSpec.hs, "can be nested inside the same expression"), so we expand the AND of the
+    // two ORs into four and() terms.
+    .or(placementFilter(purchasedAt))
     .select('id')
     .maybeSingle()
 
@@ -130,7 +149,13 @@ async function applyFeaturedPurchase(session: Stripe.Checkout.Session) {
   if (!updated) {
     // A newer purchase wins. A missing listing or unreadable state needs a retry.
     const { data: current, error: currentError } = await db.from('listings')
-      .select('featured_purchased_at').eq('id', listingId).maybeSingle()
+      .select('featured,featured_until,featured_purchased_at').eq('id', listingId).maybeSingle()
+    // Claude Sonnet 5.5, 2026-11-23: editorial row at payment time. Do not throw (Stripe would retry forever) and do
+    // not touch the listing or listing_payments.status. The stable code is for a future alert; no email or name.
+    if (!currentError && current && current.featured === true && current.featured_until == null) {
+      console.error(`PAID_NO_PLACEMENT session=${session.id} listing=${listingId} reason=editorial_pick`)
+      return
+    }
     if (currentError || !current || Date.parse(current.featured_purchased_at) < Date.parse(purchasedAt) ||
       !Number.isFinite(Date.parse(current.featured_purchased_at))) throw new Error('Listing fulfillment unconfirmed')
   }

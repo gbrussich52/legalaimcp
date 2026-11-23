@@ -124,6 +124,27 @@ describe('submitListing — validation rejections', () => {
   })
 })
 
+describe('submitListing — own-domain submitter email', () => {
+  // Claude Sonnet 5.5, 2026-11-23: the intake watcher trusted curate-bot@legalaimcp.com as "written by our bot".
+  // The bot inserts straight into the database, never through this action, so the form can refuse our own domain.
+  it.each(['curate-bot@legalaimcp.com', 'Someone@LegalAIMCP.com'])(
+    'rejects %s with a plain message and no insert',
+    async (email) => {
+      const { inserted } = makeClient()
+      const res = await submitListing(PREV, makeFormData({ submitter_email: email }))
+      expect(res).toEqual({ success: false, error: 'Use your own email address so we can reply.' })
+      expect(inserted).toHaveLength(0)
+    },
+  )
+
+  it('still accepts a lookalike domain', async () => {
+    const { inserted } = makeClient()
+    const res = await submitListing(PREV, makeFormData({ submitter_email: 'a@notlegalaimcp.com' }))
+    expect(res.success).toBe(true)
+    expect(inserted).toHaveLength(1)
+  })
+})
+
 describe('submitListing — infrastructure failures', () => {
   it('degrades gracefully when Supabase is not configured', async () => {
     state.client = null

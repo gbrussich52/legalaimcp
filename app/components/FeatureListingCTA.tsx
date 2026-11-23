@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { FEATURED_PRICE_CENTS } from '@/lib/featured-pricing'
+import { FEATURED_PRICE_CENTS, featuredState } from '@/lib/featured-pricing'
 
 const PRICE_LABEL = `$${(FEATURED_PRICE_CENTS / 100).toFixed(0)}`
 
@@ -59,11 +59,15 @@ export function FeatureListingCTA({
     }
   }
 
+  // Claude Sonnet 5.5, 2026-11-22: editorial picks have nothing to buy; show no button.
+  if (featuredState(alreadyFeatured, featuredUntil, new Date()) === 'editorial') return null
+
   if (paidActive) {
     return (
       <div className="rounded-lg border border-navy/20 bg-navy/5 px-5 py-4 mb-10">
         <p className="font-sans text-sm font-semibold text-navy">
-          Featured through {new Date(featuredUntil as string).toLocaleDateString()}
+          {/* Claude Sonnet 5.5, 2026-11-23: the badge for a paid placement is "Sponsored", so the heading says the same. */}
+          Sponsored through {new Date(featuredUntil as string).toLocaleDateString()}
         </p>
         <p className="font-body text-xs text-charcoal/75 mt-1">
           Sponsored placement — sort boost + badge. Renew from this page after it expires.
@@ -80,7 +84,8 @@ export function FeatureListingCTA({
             Feature this listing — {PRICE_LABEL} / 30 days
           </p>
           <p className="font-body text-xs text-charcoal/75 mt-1">
-            Sponsored sort boost + Featured badge. MCP search stays free.{' '}
+            {/* Claude Sonnet 5.5, 2026-11-22: a paid listing shows the Sponsored badge, not Featured. */}
+            Sponsored sort boost + Sponsored badge. MCP search stays free.{' '}
             <Link href="/pricing" className="text-gold-text hover:underline">
               Details
             </Link>
