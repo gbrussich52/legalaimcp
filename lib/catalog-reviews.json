@@ -331,6 +331,68 @@
       }
     },
     {
+      "slug": "casedocker",
+      "decision": "approved",
+      "reviewed_at": "2026-11-23",
+      "reviewer": "Claude Sonnet 5.5 source review, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": false,
+      "sources": [
+        {
+          "url": "https://www.casedocker.com/llms.txt",
+          "kind": "vendor",
+          "sha256": "de10f5156b0bb2fad02d815e7118fd150341e305d0873eb13d8b7b518d8f7974",
+          "quote": "CaseDocker is an AI-powered legal operations platform for contract lifecycle management, legal case management, notice management, compliance management, document e-signing, playbooks, billing, and legal operations reporting."
+        },
+        {
+          "url": "https://www.casedocker.com/llms.txt",
+          "kind": "vendor",
+          "sha256": "de10f5156b0bb2fad02d815e7118fd150341e305d0873eb13d8b7b518d8f7974",
+          "quote": "Legal guides (India law)"
+        },
+        {
+          "url": "https://www.casedocker.com/llms.txt",
+          "kind": "vendor",
+          "sha256": "de10f5156b0bb2fad02d815e7118fd150341e305d0873eb13d8b7b518d8f7974",
+          "quote": "CaseDocker content is product information, not legal advice."
+        }
+      ],
+      "listing_sha256": "7d976f09edc32fe13d594acb981dd64141242872952c788be76d007dfeac7039",
+      "claims": {
+        "slug": "casedocker",
+        "name": "CaseDocker",
+        "tagline": "AI legal operations platform for contracts, cases, notices and compliance",
+        "description": "CaseDocker is a legal operations platform that its own site calls AI-powered. The vendor lists contract lifecycle management, legal case management, notice management, compliance management, document e-signing, playbooks, billing and legal operations reporting. Its legal guides and notice formats are labelled for India, so fit for other jurisdictions is unverified. The vendor says its content is product information, not legal advice. We found no MCP server or MCP documentation. We did not verify AI accuracy, security or compliance claims, pricing, or the operating company; the vendor's pages block automated readers, so we read only its llms.txt file.",
+        "category": "case_management",
+        "external_url": "https://www.casedocker.com/landing/",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "contact",
+        "pricing_details": null,
+        "tags": [
+          "case management",
+          "contracts",
+          "india",
+          "e-signing",
+          "compliance",
+          "notices"
+        ],
+        "creator_name": "CaseDocker",
+        "creator_url": "https://www.casedocker.com/landing/",
+        "logo_url": null,
+        "firm_size_fit": []
+      },
+      "operator": {
+        "name": "Coingeit Technologies Private Limited",
+        "register": "a public mirror of India's company register (Tofler)",
+        "url": "https://www.tofler.in/coingeit-technologies-private-limited/company/U72300UP2013PTC059652",
+        "status": "active, CIN U72300UP2013PTC059652; named as the app's developer on Google Play",
+        "checked_at": "2026-11-23",
+        "formed": "2013-09-19"
+      }
+    },
+    {
       "slug": "cerebra-legal-server",
       "decision": "approved",
       "reviewed_at": "2026-10-27",
@@ -2239,6 +2301,79 @@
         "creator_url": "https://piiblackout.com/",
         "logo_url": null,
         "firm_size_fit": []
+      }
+    },
+    {
+      "slug": "postalform",
+      "decision": "approved",
+      "reviewed_at": "2026-11-23",
+      "reviewer": "Claude Sonnet 5.5 source review, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://postalform.com/agents",
+          "kind": "vendor",
+          "sha256": "3131e59c05c8eab30a641b4c1f9365f7d4a736e30e9c937b28ca04e89f031dda",
+          "quote": "Remote MCP endpoint: https://postalform.com/mcp"
+        },
+        {
+          "url": "https://postalform.com/final-demand-letter",
+          "kind": "vendor",
+          "sha256": "663cbde16f34c78d06e7c3c3b7b786359cf2d56abc76a4b54f58108e961c7b40",
+          "quote": "A final demand letter for payment is a clear written notice that says what is owed, why it is owed, the deadline to pay"
+        },
+        {
+          "url": "https://postalform.com/pricing",
+          "kind": "vendor",
+          "sha256": "ef48b04a01b58ca4861e11108dddcab425bce2ac8b04229b04096886fb02743e",
+          "quote": "starts at $3.40 in black-and-white or $3.80 in color"
+        },
+        {
+          "url": "https://postalform.com/terms",
+          "kind": "vendor",
+          "sha256": "a2b263b96f5f507441dbbda7b1ac169a328d3d8c44212de89a540915d081593c",
+          "quote": "is a service operated by PostalForm LLC."
+        },
+        {
+          "url": "https://postalform.com/landlord-notices",
+          "kind": "vendor",
+          "sha256": "a40900182c36e179efdeef5979ee141fa476aa7bd95a1a17633dbf8a48bc14a3",
+          "quote": "PostalForm does not currently generate formal eviction, termination, nonrenewal, pay-or-quit, cure-or-quit, or rent-increase notices for any state or the District of Columbia."
+        }
+      ],
+      "listing_sha256": "0c963b75cc08d4e1a12925fc306f553bc8f5d369f5026937f4220f8f5b3a76c5",
+      "claims": {
+        "slug": "postalform",
+        "name": "PostalForm",
+        "tagline": "Print and mail letters and PDFs by USPS through a remote MCP server or a web form",
+        "description": "PostalForm is a print-and-mail service. Its pages name PostalForm LLC as the company behind it. The vendor publishes a remote MCP endpoint (https://postalform.com/mcp) for AI clients. For legal work, its own pages cover final demand letters. It is a mailing service, not a legal drafting tool, and the vendor says it does not generate formal eviction, termination or rent-increase notices. We did not verify mail delivery, tool behavior, or whether a mailing meets any legal service requirement.",
+        "category": "document_processing",
+        "external_url": "https://postalform.com/agents",
+        "mcp_repo_url": "https://postalform.com/mcp",
+        "mcp_install_command": null,
+        "pricing_model": "paid",
+        "pricing_details": "One-page U.S. First-Class Mail letter starts at $3.40 in black-and-white or $3.80 in color; the document-specific total is shown before payment.",
+        "tags": [
+          "mail",
+          "demand letters",
+          "mcp",
+          "print",
+          "usps"
+        ],
+        "creator_name": "PostalForm LLC",
+        "creator_url": "https://postalform.com/",
+        "logo_url": null,
+        "firm_size_fit": []
+      },
+      "operator": {
+        "name": "PostalForm LLC",
+        "register": "the Florida Division of Corporations (Sunbiz)",
+        "url": "https://search.sunbiz.org/Inquiry/CorporationSearch/ByName",
+        "status": "active, document number L26000489877 (matched by name; the vendor's pages give no state)",
+        "checked_at": "2026-11-23",
+        "formed": "2026-09-21"
       }
     },
     {

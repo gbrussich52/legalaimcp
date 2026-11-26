@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-23",
+  "generated_at": "2026-11-26",
   "records": {
     "ailex-v2": {
       "slug": "ailex-v2",
@@ -343,6 +343,64 @@
           "result": "pass",
           "observed": "Listed as legal.captain/captain-legal since 2026-08-08; the registry confirms control of that namespace, not quality.",
           "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=captain'",
+          "public": true
+        }
+      ]
+    },
+    "casedocker": {
+      "slug": "casedocker",
+      "checked_at": "2026-11-26",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "unknown",
+          "observed": "The site answered HTTP 403 at www.casedocker.com. It blocks automated readers, so nothing was read.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://www.casedocker.com/landing/",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows casedocker.com registered on 2020-09-12.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/casedocker.com",
+          "public": true,
+          "value": "2020-09-12"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "casedocker.com has 5 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=casedocker.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "www.casedocker.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=www.casedocker.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=www.casedocker.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "not_applicable",
+          "observed": "The listing names no remote MCP address.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "not_applicable",
+          "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
+          "how_to_repeat": "See the listing page.",
           "public": true
         }
       ]
@@ -2597,6 +2655,64 @@
           "result": "not_applicable",
           "observed": "The listing names no MCP server or code repository, so the official MCP registry does not apply.",
           "how_to_repeat": "See the listing page.",
+          "public": true
+        }
+      ]
+    },
+    "postalform": {
+      "slug": "postalform",
+      "checked_at": "2026-11-26",
+      "level": "pass",
+      "reasons": [],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at postalform.com.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://postalform.com/agents",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows postalform.com registered on 2024-02-24.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/postalform.com",
+          "public": true,
+          "value": "2024-02-24"
+        },
+        {
+          "id": "mail",
+          "result": "pass",
+          "observed": "postalform.com has 3 mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=postalform.com&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "postalform.com resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=postalform.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=postalform.com&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "pass",
+          "observed": "https://postalform.com/mcp answers the MCP handshake as \"postalform\" version 0.1.0.",
+          "how_to_repeat": "curl -s -X POST 'https://postalform.com/mcp' -H 'Content-Type: application/json' -H 'Accept: application/json, text/event-stream' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{\"protocolVersion\":\"2025-06-18\",\"capabilities\":{},\"clientInfo\":{\"name\":\"listing-review\",\"version\":\"1.0\"}}}'",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "pass",
+          "observed": "Listed as com.postalform/postalform since 2026-09-27; the registry confirms control of that namespace, not quality.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=postalform'",
           "public": true
         }
       ]
