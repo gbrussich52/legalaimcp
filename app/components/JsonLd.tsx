@@ -1,7 +1,6 @@
 import { SITE_NAME, SITE_URL, NYCLAW_URL, SITE_LAST_MODIFIED, BEST_ROUNDUP_PUBLISHED, BEST_ROUNDUP_MODIFIED } from '@/lib/constants'
 import type { Listing } from '@/lib/types'
 import { toJsonLd } from '@/lib/json-ld'
-import { softwareAppSchema } from '@/lib/software-schema'
 
 export function WebSiteJsonLd() {
   const schema = {
@@ -75,47 +74,9 @@ export function OrganizationJsonLd() {
   )
 }
 
-/**
- * SoftwareApplication schema for LegalAIMCP's own MCP server (the /mcp
- * install page) — the site's only first-party product, distinct from the
- * third-party listings SoftwareAppJsonLd below describes.
- */
-export function McpServerJsonLd() {
-  const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    name: `${SITE_NAME} MCP Server`,
-    description:
-      'Free, read-only MCP server for searching the LegalAIMCP directory of AI tools for law firms from Claude, ChatGPT, or any MCP client. No API key or account required.',
-    applicationCategory: 'DeveloperApplication',
-    operatingSystem: 'Any',
-    url: `${SITE_URL}/mcp`,
-    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-  }
-
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: toJsonLd(schema) }}
-    />
-  )
-}
-
-export function SoftwareAppJsonLd({
-  listing,
-}: {
-  listing: Pick<Listing, 'pricing_model' | 'pricing_details' | 'name' | 'tagline' | 'slug'>
-}) {
-  // Claude Sonnet 5.5, 2026-11-12: schema now built in lib/software-schema.ts (no price-less Offer)
-  const schema = softwareAppSchema(listing)
-
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: toJsonLd(schema) }}
-    />
-  )
-}
+// Claude, 2026-11-26: McpServerJsonLd and SoftwareAppJsonLd (SoftwareApplication for /mcp and every listing) removed.
+// Google's software-app rich result requires aggregateRating or review, the directory has no real ratings, and none may
+// be invented, so the markup failed validation on every page that carried it (Ahrefs 11/26: 69 pages).
 
 export function ItemListJsonLd({
   listings,
