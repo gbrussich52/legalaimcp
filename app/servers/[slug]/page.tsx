@@ -8,7 +8,8 @@ import { supabase } from '@/lib/supabase'
 import { isCatalogQuarantined } from '@/lib/catalog-review'
 import { mcpUrlLabel } from '@/lib/verification'
 import { CatalogSources } from '../../components/CatalogSources'
-import { SoftwareAppJsonLd, BreadcrumbJsonLd } from '../../components/JsonLd'
+import { BreadcrumbJsonLd } from '../../components/JsonLd'
+import { isMcpEndpointUrl } from '@/lib/mcp-endpoint'
 import { ListingCard } from '../../components/ListingCard'
 import { VerifiedBadge } from '../../components/VerifiedBadge'
 import { LeadGenCTA } from '../../components/LeadGenCTA'
@@ -124,7 +125,9 @@ export default async function ListingDetailPage({
 
   return (
     <main className="max-w-content mx-auto px-4 py-12">
-      <SoftwareAppJsonLd listing={listing} />
+      {/* Claude, 2026-11-26: The software app JSON-LD was removed. Google's software-app rich result requires a rating or
+          review, and this directory has neither (none may be invented), so every listing page failed validation
+          (Ahrefs 11/26: 69 pages). Product does not fit either: these are third-party tools, not goods sold here. */}
       {/* Grok Bot (Crack Bot), 2026-11-09, why: BreadcrumbList for every tool page; mirrors the visible breadcrumb below. */}
       <BreadcrumbJsonLd
         items={[
@@ -249,7 +252,19 @@ export default async function ListingDetailPage({
             Technical Details
           </summary>
           <div className="mt-4 space-y-4">
-            {listing.mcp_repo_url && (
+            {/* Claude, 2026-11-26: an endpoint URL prints as text to copy; linking it gave visitors and crawlers a 4XX. */}
+            {listing.mcp_repo_url && isMcpEndpointUrl(listing.mcp_repo_url) && (
+              <div>
+                <p className="text-xs text-charcoal/80 font-sans mb-1 uppercase tracking-wide">
+                  MCP Server URL
+                </p>
+                <code className="block bg-slate-100 rounded px-3 py-2 font-mono text-sm text-charcoal break-all">
+                  {listing.mcp_repo_url}
+                </code>
+                <p className="text-xs text-charcoal/75 font-body mt-1">Add this address in your MCP client. It is not a web page.</p>
+              </div>
+            )}
+            {listing.mcp_repo_url && !isMcpEndpointUrl(listing.mcp_repo_url) && (
               <div>
                 <p className="text-xs text-charcoal/80 font-sans mb-1 uppercase tracking-wide">
                   {/* Claude Sonnet 5.5, 2026-11-23: a live endpoint is not a repository; label it by what the URL is. */}

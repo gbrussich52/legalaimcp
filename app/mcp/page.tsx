@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { SITE_URL, SITE_NAME } from '@/lib/constants'
-import { McpServerJsonLd } from '../components/JsonLd'
 import { withSocial } from '@/lib/seo-meta'
 
 /**
@@ -73,7 +72,8 @@ function Code({ children }: { children: string }) {
 export default function McpPage() {
   return (
     <main className="bg-white">
-      <McpServerJsonLd />
+      {/* Claude, 2026-11-26: the software app JSON-LD block was removed; Google requires a rating or review for that
+          rich result and the site has none to show (Ahrefs 11/26 rich results errors). */}
       <section className="bg-navy text-white py-16 px-6">
         <div className="max-w-3xl mx-auto">
           <p className="font-sans text-xs font-bold uppercase tracking-widest text-gold-text mb-3">

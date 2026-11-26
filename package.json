@@ -10,7 +10,7 @@
     "test": "vitest run",
     "curate:discover": "node scripts/curate.mjs discover",
     "curate:links": "node scripts/curate.mjs check-links",
-    "postbuild": "node scripts/check-catalog-artifacts.mjs",
+    "postbuild": "node scripts/check-catalog-artifacts.mjs && node scripts/seo/indexnow-submit.mjs",
     "chatgpt:build": "node scripts/build-chatgpt-widget.mjs",
     "prebuild": "npm run chatgpt:build",
     "predev": "npm run chatgpt:build",

@@ -5,7 +5,8 @@ import { PrintButton } from '../components/PrintButton'
 import { withSocial } from '@/lib/seo-meta'
 
 const baseMetadata: Metadata = {
-  title: 'AI Tool Selection Checklist — 10 questions for law firms',
+  // Claude, 2026-11-26: was 69 characters with the brand (Ahrefs 11/26 "Title too long"); now 54.
+  title: 'AI Tool Selection Checklist for Law Firms',
   description:
     'A free 10-question checklist attorneys use to vet AI tools for bar compliance, client data privacy, and actual ROI before buying.',
   // No-index: this is the lead-magnet payload page. We want it accessible to

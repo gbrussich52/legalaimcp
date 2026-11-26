@@ -24,6 +24,16 @@ AI answer engines draw from.
   purpose. This was a deliberate scope boundary for the 2026-09-24 AEO pass: build the
   plumbing, don't fire it unreviewed.
 
+## Automatic submit on production deploys (2026-11-26)
+
+Claude, 2026-11-26: `scripts/seo/indexnow-submit.mjs` now runs as the second step of the npm `postbuild` script,
+after the catalog artifact check. It does nothing unless `VERCEL_ENV` is `production`. On a production build it reads
+`https://legalaimcp.com/sitemap.xml` (the previous deploy's list, capped at 10,000 URLs), posts
+`{host, key, keyLocation, urlList}` to `https://api.indexnow.org/indexnow` with an 8 second timeout and logs the
+status. Every error is caught and it always exits 0, so it can never fail a deploy. No GitHub Actions workflow.
+The key is the same `1a366e5be29e8a3030dd846be8b6acfa`; paste it into Ahrefs' IndexNow setting if Ahrefs should
+submit too. `scripts/indexnow-ping.sh` stays as the manual, print-only tool for a single URL.
+
 ## How to actually use it (next time, by hand)
 
 1. Ship a content change worth an immediate recrawl: a new guide, a corrected fact, a
@@ -37,7 +47,7 @@ AI answer engines draw from.
 
 ## Not done
 
-- Not wired into CI, the build, or a deploy hook.
+- Not wired into CI or a deploy hook. (Since 2026-11-26 it runs in `postbuild` on production builds; see above.)
 - Not auto-triggered on every Supabase listing update.
 - No submission has been made yet. This session only built the key file and the
   script. The first actual ping is a follow-up action, not part of this commit.
