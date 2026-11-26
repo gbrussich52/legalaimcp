@@ -117,66 +117,6 @@
       }
     },
     {
-      "slug": "bailii-mcp-server",
-      "decision": "approved",
-      "reviewed_at": "2026-11-22",
-      "reviewer": "Claude Fable 5.2 with two independent Claude Sonnet 5.5 source reviews, for Giani Brussich",
-      "identity_confirmed": true,
-      "capabilities_confirmed": true,
-      "mcp_confirmed": true,
-      "sources": [
-        {
-          "url": "https://raw.githubusercontent.com/paulieb89/bailii-mcp/main/LICENSE",
-          "kind": "maintainer",
-          "sha256": "bf55c34bfeff1b02f5e1656c4386eeb800da975e468b735027be18b9397c2a99",
-          "quote": "Copyright 2026 Paul Boucherat"
-        },
-        {
-          "url": "https://raw.githubusercontent.com/paulieb89/bailii-mcp/main/README.md",
-          "kind": "maintainer",
-          "sha256": "a7ff86c7c3da09eaf914225028755739c0766a989c4bebcd2e2b671c26857a6c",
-          "quote": "Search UK case law on BAILII. Retrieve judgments with automatic section extraction (summary, conclusions, discussion, background)."
-        },
-        {
-          "url": "https://raw.githubusercontent.com/paulieb89/bailii-mcp/main/bailii_mcp.py",
-          "kind": "maintainer",
-          "sha256": "fce384cfac154c6474182b7310ee8e3e78546a4f88f2d53cadf125192fbbfe98",
-          "quote": "from fastmcp import FastMCP"
-        },
-        {
-          "url": "https://raw.githubusercontent.com/paulieb89/bailii-mcp/main/pyproject.toml",
-          "kind": "maintainer",
-          "sha256": "a348cbc9413368c09db09968c600b791ea788ae849c26e59337e9182748c3c31",
-          "quote": "license = \"Apache-2.0\""
-        }
-      ],
-      "listing_sha256": "0b235cb5a174b6febc96491ddf0ce14211bc043209e59245afda9176b60d48ab",
-      "claims": {
-        "slug": "bailii-mcp-server",
-        "name": "BAILII MCP Server",
-        "tagline": "Open-source local MCP server to search UK court judgments on BAILII and read them by section.",
-        "description": "BAILII MCP Server is an open-source Python MCP server that searches BAILII and retrieves UK court judgments. It has three tools: bailii_search, bailii_get_judgment and bailii_list_courts. By default it returns the summary and conclusions of a judgment, and it can return a named section or the full text on request. It covers UK courts and tribunals on BAILII, such as the Supreme Court, Court of Appeal, High Court and Employment Appeal Tribunal. It runs on your own machine because BAILII blocks cloud servers. The README says BAILII terms prohibit bulk downloading, so use it for targeted research, and that section extraction depends on how each judgment is formatted. It uses the Apache-2.0 license and is maintained by Paul Boucherat of BOUCH. We did not verify the accuracy of search results or section extraction, or whether its use complies with BAILII terms.",
-        "category": "legal_research",
-        "external_url": "https://github.com/paulieb89/bailii-mcp",
-        "mcp_repo_url": "https://github.com/paulieb89/bailii-mcp",
-        "mcp_install_command": null,
-        "pricing_model": "free",
-        "pricing_details": null,
-        "tags": [
-          "uk",
-          "case law",
-          "bailii",
-          "judgments",
-          "open source",
-          "python"
-        ],
-        "creator_name": "Paul Boucherat (BOUCH)",
-        "creator_url": "https://github.com/paulieb89",
-        "logo_url": null,
-        "firm_size_fit": []
-      }
-    },
-    {
       "slug": "billing-ai-checkbox",
       "decision": "approved",
       "reviewed_at": "2026-10-27",
@@ -3793,6 +3733,7 @@
     "deadlinewatch.com"
   ],
   "blocked_slugs": [
+    "bailii-mcp-server",
     "billbot-legal",
     "caselaw-search-mcp",
     "clientintake-ai",

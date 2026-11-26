@@ -117,63 +117,6 @@
         }
       ]
     },
-    "bailii-mcp-server": {
-      "slug": "bailii-mcp-server",
-      "checked_at": "2026-11-23",
-      "level": "pass",
-      "reasons": [],
-      "checks": [
-        {
-          "id": "site",
-          "result": "pass",
-          "observed": "The site answered HTTP 200 at github.com.",
-          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://github.com/paulieb89/bailii-mcp",
-          "public": true
-        },
-        {
-          "id": "domain_age",
-          "result": "not_applicable",
-          "observed": "github.com is a shared host, so its age says nothing about the vendor.",
-          "how_to_repeat": "curl -sL https://rdap.org/domain/github.com",
-          "public": true
-        },
-        {
-          "id": "mail",
-          "result": "not_applicable",
-          "observed": "github.com is a shared host, so its mail records say nothing about the vendor.",
-          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=github.com&type=MX'",
-          "public": true
-        },
-        {
-          "id": "security_resolver",
-          "result": "pass",
-          "observed": "github.com resolves on both the plain and the security resolver.",
-          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=github.com&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=github.com&type=A'",
-          "public": false
-        },
-        {
-          "id": "mcp_endpoint",
-          "result": "not_applicable",
-          "observed": "The listing names no remote MCP address.",
-          "how_to_repeat": "See the listing page.",
-          "public": true
-        },
-        {
-          "id": "repo",
-          "result": "pass",
-          "observed": "The GitHub repository paulieb89/bailii-mcp exists and is not archived; its last push was 2026-11-19.",
-          "how_to_repeat": "curl -s https://api.github.com/repos/paulieb89/bailii-mcp",
-          "public": true
-        },
-        {
-          "id": "registry",
-          "result": "not_applicable",
-          "observed": "The listing sits on a shared host, so no namespace can be matched to it.",
-          "how_to_repeat": "See the listing page.",
-          "public": true
-        }
-      ]
-    },
     "billing-ai-checkbox": {
       "slug": "billing-ai-checkbox",
       "checked_at": "2026-11-23",
