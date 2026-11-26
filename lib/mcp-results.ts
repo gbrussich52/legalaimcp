@@ -3,6 +3,7 @@ import { z } from 'zod'
 import { CATEGORY_LABELS, PRICING_LABELS, SITE_URL } from './constants'
 import { getSoftwareConnection } from './connections'
 import { getCatalogEvidence } from './catalog-evidence'
+import { buildVerification, buildVerificationSummary, VerificationSchema, VerificationSummarySchema, CHECK_LABELS } from './verification'
 
 const TOOL_SHAPE = {
   slug: z.string().describe('Stable listing identifier — pass to get_legal_ai_tool'),
@@ -44,6 +45,13 @@ const TOOL_SHAPE = {
 }
 export const ToolItem = z.object(TOOL_SHAPE)
 export type ToolRow = Record<string, unknown>
+// Claude Sonnet 5.5, 2026-11-23: list answers carry only a compact summary; get_legal_ai_tool carries the full checks.
+// Before, an agent got no sign that LegalAIMCP is not the vendor, nor what was checked or how to repeat it.
+export const ListItem = ToolItem.extend({ verification_summary: VerificationSummarySchema.describe('Independence, check date and counts by result. Call get_legal_ai_tool for the checks and how to repeat each one.') })
+export const DetailItem = ToolItem.extend({
+  description: z.string().nullable().describe('Full listing description'),
+  verification: VerificationSchema.describe('LegalAIMCP is not the vendor. What we checked, when, and how to repeat each check without us.'),
+})
 
 /** Maps a DB row to the structured shape. Shared by search, detail and recommendation tools. */
 export function toStructured(t: ToolRow): z.infer<typeof ToolItem> {
@@ -76,6 +84,15 @@ export function toStructured(t: ToolRow): z.infer<typeof ToolItem> {
   }
 }
 
+/** List shape: the listing plus the compact verification summary. */
+export function toListItem(t: ToolRow): z.infer<typeof ListItem> {
+  return { ...toStructured(t), verification_summary: buildVerificationSummary(t) }
+}
+/** Detail shape: the listing plus the full verification record. */
+export function toDetailItem(t: ToolRow): z.infer<typeof DetailItem> {
+  return { ...toStructured(t), description: t.description ? String(t.description) : null, verification: buildVerification(t) }
+}
+
 /** Renders one listing as compact text. Prose twin of toStructured(). */
 export function formatTool(t: ToolRow, verbose = false): string {
   const lines = [
@@ -103,6 +120,14 @@ export function formatTool(t: ToolRow, verbose = false): string {
     if (verbose) lines.push(`- Requirements: ${connection.requirements}`, `- Permissions: ${connection.permissions}`, `- Setup: ${connection.setup}`)
   } else {
     lines.push('- Connection: no reviewed setup guide attached; compatibility not established')
+  }
+  if (verbose) {
+    // Claude Sonnet 5.5, 2026-11-23: the prose twin of `verification`, for clients that show text only.
+    const v = buildVerification(t)
+    lines.push('', `Independence: ${v.statement}`)
+    if (v.checked_at) lines.push(`Checks run ${v.checked_at}:`, ...v.checks.map(c => `- ${CHECK_LABELS[c.id] ?? c.id} (${c.result === 'unknown' ? 'could not check' : c.result}): ${c.observed} Repeat: ${c.how_to_repeat}`))
+    else lines.push('Checks: not run yet for this listing.')
+    lines.push(`Not checked: ${v.not_checked.join('; ')}.`, `How we check listings: ${v.method_url}`)
   }
   if (verbose && t.description) lines.push('', String(t.description))
   return lines.filter(Boolean).join('\n')

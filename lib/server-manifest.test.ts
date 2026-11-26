@@ -1,5 +1,5 @@
 // Claude Opus 5.5, 2026-11-22: a directory flagged our MCP Registry manifest for a missing repository and icon,
-// and its version (1.0.0) had drifted from the route's serverInfo (1.4.0). This keeps all three from regressing.
+// and its version (1.0.0) had drifted from the route's serverInfo (1.4.0; the route now reports 1.5.0). This keeps all three from regressing.
 import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'

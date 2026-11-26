@@ -18,6 +18,8 @@ const RESOURCES = [
   // Claude Sonnet 5.5, 2026-11-22: pricing was not linked from the footer.
   { href: '/pricing', label: 'Pricing' },
   { href: '/blog', label: 'Blog' },
+  // Claude Sonnet 5.5, 2026-11-23: the method page behind the Check this yourself block.
+  { href: '/how-we-verify', label: 'How we check listings' },
   { href: '/about', label: 'About' },
 ]
 

@@ -5,7 +5,7 @@ description: Use this when someone asks what AI tooling exists for law firms, or
 
 # legalaimcp
 
-Read-only directory of AI tools and MCP servers for law firms. The data shape is a Listing. Use the connected server’s advertised tool list as authority. This package targets server 1.4.0 (five tools); the additional shortlist tool requires that release to be deployed.
+Read-only directory of AI tools and MCP servers for law firms. The data shape is a Listing. Use the connected server’s advertised tool list as authority. This package targets server 1.5.0 (five tools); the additional shortlist tool requires that release to be deployed.
 
 ## Listing
 
@@ -15,6 +15,7 @@ Read-only directory of AI tools and MCP servers for law firms. The data shape is
 - `pricing_model`: `free`, `freemium`, `paid`, `contact`
 - `links_verified` / `links_verified_at`: automated URL check on that date. Not an endorsement, security audit, or legal advice.
 - `website`, `repo`, `install_command`, `maker`, `listing_url`
+- `verification_summary` (lists) and `verification` (`get_legal_ai_tool`): LegalAIMCP is an independent directory, not the vendor. `verification` holds the checks we ran, their date, how to repeat each one, and what we did not check. Pass these on to the user with their dates. A passing check is not a recommendation.
 
 ## Which tool
 

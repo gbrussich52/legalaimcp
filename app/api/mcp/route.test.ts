@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 const { from } = vi.hoisted(() => ({ from: vi.fn() }))
 vi.mock('@/lib/supabase', () => ({ supabase: { from } }))
 import { POST } from './route'
+import reviews from '@/lib/catalog-reviews.json'
 
 beforeEach(() => from.mockReset())
 function request(body: unknown) {
@@ -57,4 +58,43 @@ describe('single-message MCP route boundary', () => {
     expect(from).not.toHaveBeenCalled()
   })
 
+  // Claude Sonnet 5.5, 2026-11-23: independence and the checks travel with the answer, so an agent that never opens
+  // the website still sees that LegalAIMCP is not the vendor and how to repeat each check.
+  describe('independent-directory evidence', () => {
+    const captain = (reviews.reviews as { slug: string; claims: Record<string, unknown> }[]).find(r => r.slug === 'captainlegal')!.claims
+    const rpc = async (method: string, params: Record<string, unknown> = {}) => {
+      const response = await POST(request({ jsonrpc: '2.0', id: 7, method, params }))
+      const body = await response.text()
+      const messages = body.trim().startsWith('{') ? [JSON.parse(body)] : body.split('\n').filter(line => line.startsWith('data: ')).map(line => JSON.parse(line.slice(6)))
+      return messages.find(message => message.id === 7)
+    }
+    it('reports version 1.5.0 and says the server is a directory, not the vendor', async () => {
+      const reply = await rpc('initialize', { protocolVersion: '2025-03-26', capabilities: {}, clientInfo: { name: 'review', version: '1.0.0' } })
+      expect(reply.result.serverInfo.version).toBe('1.5.0')
+      expect(reply.result.instructions).toContain('This server is an independent directory, not the vendor of any listed tool. get_legal_ai_tool returns the checks we ran and how to repeat them.')
+    })
+    it('get_legal_ai_tool returns the full verification object next to source_review', async () => {
+      const chain = { select: vi.fn(), eq: vi.fn(), maybeSingle: vi.fn().mockResolvedValue({ data: { ...captain, verified: false, verified_at: null }, error: null }) }
+      chain.select.mockReturnValue(chain); chain.eq.mockReturnValue(chain); from.mockReturnValue(chain)
+      const { result } = await rpc('tools/call', { name: 'get_legal_ai_tool', arguments: { slug: 'captainlegal' } })
+      const tool = result.structuredContent.tool
+      expect(tool.verification.independent).toBe(true)
+      expect(tool.verification.checks.map((c: { id: string }) => c.id)).toContain('mcp_endpoint')
+      expect(tool.verification.method_url).toBe('https://legalaimcp.com/how-we-verify')
+      expect(tool.source_review.reviewed_at).toBe('2026-11-22')
+      expect(tool.verification_summary).toBeUndefined()
+      expect(result.content[0].text).toContain('independent directory')
+    })
+    it('search_legal_ai_tools returns only the compact summary per item', async () => {
+      const chain: Record<string, unknown> = {}
+      for (const key of ['select', 'eq', 'order', 'limit']) chain[key] = vi.fn(() => chain)
+      chain.then = (resolve: (v: unknown) => void) => resolve({ data: [{ ...captain, verified: false, verified_at: null }], error: null })
+      from.mockReturnValue(chain)
+      const { result } = await rpc('tools/call', { name: 'search_legal_ai_tools', arguments: {} })
+      const item = result.structuredContent.tools[0]
+      expect(item.verification_summary).toMatchObject({ independent: true, checked_at: '2026-11-23', full_record_tool: 'get_legal_ai_tool', method_url: 'https://legalaimcp.com/how-we-verify' })
+      expect(item.verification).toBeUndefined()
+      expect(JSON.stringify(item.verification_summary)).not.toContain('curl')
+    })
+  })
 })

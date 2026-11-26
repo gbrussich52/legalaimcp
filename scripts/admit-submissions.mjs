@@ -1,6 +1,7 @@
 // PUBLIC. Claude Opus 5.5, 2026-11-22: thin CLI for admitting reviewed submissions as new listings.
 // Logic and tests live in scripts/catalog-admit.mjs and lib/catalog-admit.test.ts. This file never talks to the
 // database or sends mail: it checks, writes review records, and writes SQL files the owner applies.
+// Realness: see scripts/realness.mjs and docs/catalog-review.md. --write-records and --sql run it on every admit item.
 // Usage:
 //   node scripts/admit-submissions.mjs PLAN.json [--no-fetch]          check only
 //   node scripts/admit-submissions.mjs PLAN.json --write-records       merge records into lib/catalog-reviews.json
@@ -47,7 +48,11 @@ async function main() {
     return
   }
 
-  const checked = await checkPlan(plan, { gate, policy, fetchSources: !noFetch })
+  // Claude Sonnet 5.5, 2026-11-23: zero trust gate. With --write-records or --sql every admit needs an `operator`
+  // answer and a realness run that is not fail (watch needs a person's realness_ack). Plain checks stay offline of it.
+  const gated = writeRecords || Boolean(sqlDir)
+  const realness = gated ? (await import('./realness.mjs')).realnessProvider : null
+  const checked = await checkPlan(plan, { gate, policy, fetchSources: !noFetch, requireRealness: gated, realness: gated ? await realness() : null })
   for (const line of formatResults(checked)) console.log(line)
   if (!checked.ok) { process.exitCode = 1; return }
 

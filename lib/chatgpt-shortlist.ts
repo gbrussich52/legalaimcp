@@ -2,6 +2,8 @@ import { z } from 'zod'
 import { supabase } from './supabase'
 import { toStructured, type ToolRow } from './mcp-results'
 import { FIRM_SIZES } from './recommend'
+// Claude Sonnet 5.5, 2026-11-23: each shortlist item says LegalAIMCP is independent and where the full checks are.
+import { VerificationSummarySchema, buildVerificationSummary } from './verification'
 
 /** Fixed choices intentionally exclude client matter details, files and arbitrary URLs. */
 export const SHORTLIST_WORKFLOWS = {
@@ -28,6 +30,7 @@ const ResultItem = z.strictObject({
   connection_type: z.enum(['official', 'community']).nullable(),
   requirements: z.string().max(1500), permissions: z.string().max(1500),
   reasons: z.array(z.string()).max(3),
+  verification_summary: VerificationSummarySchema,
 })
 export const ShortlistOutput = z.strictObject({
   workflow: z.string(), firm_size: z.enum(FIRM_SIZES), free_only: z.boolean(), retrieved_at: z.string(),
@@ -72,6 +75,7 @@ export function buildShortlist(rows: ToolRow[], input: ShortlistRequest, now = n
       connection_type: item.connection?.type ?? null,
       requirements: text(item.connection?.requirements,1500) || 'No reviewed setup guide attached. Confirm requirements with the publisher.',
       permissions: text(item.connection?.permissions,1500) || 'Permissions have not been reviewed. Check scopes and data handling before connecting.',
+      verification_summary: buildVerificationSummary(row),
       reasons: [`Listed under ${item.category_label}`, ...(sizeMatch ? [`Catalog tags include ${input.firm_size}-size firms`] : []), ...(input.workflow === 'contracts' ? [specificity===2 ? 'Name or tagline mentions contracts or agreements' : 'Description mentions contracts or agreements'] : [])],
     }
   })
