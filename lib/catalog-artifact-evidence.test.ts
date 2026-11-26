@@ -27,6 +27,14 @@ describe('expectedEvidence (post-build page check)', () => {
     expect(list).not.toContain('null')
   })
 
+  // Claude Fable 5.2, 2026-11-26: guard for the build failure on captainlegal (a hidden source's URL was required).
+  it('does not ask for the URL of a source marked show:false', () => {
+    const hidden = { ...review(), sources: [{ url: 'https://acme.example/pricing' }, { url: 'https://acme.example/about', show: false }] }
+    const list = expectedEvidence(hidden)
+    expect(list).toContain('https://acme.example/pricing')
+    expect(list).not.toContain('https://acme.example/about')
+  })
+
   it('refuses a record with no name, and an empty pricing string', () => {
     expect(() => expectedEvidence(review({ name: '' }))).toThrow('missing required evidence')
     expect(() => expectedEvidence(review({ pricing_details: '' }))).toThrow('unusable pricing claim')
@@ -38,7 +46,8 @@ describe('expectedEvidence (post-build page check)', () => {
     for (const r of policy.reviews) {
       const list = expectedEvidence(r)
       expect(list.every((v: unknown) => typeof v === 'string' && v.length > 0)).toBe(true)
-      expect(list).toHaveLength(3 + r.sources.length + (r.claims.pricing_details == null ? 0 : 1))
+      // Claude Fable 5.2, 2026-11-26: was r.sources.length; hidden sources (show:false) are no longer expected on the page.
+      expect(list).toHaveLength(3 + r.sources.filter((x: { show?: boolean }) => x.show !== false).length + (r.claims.pricing_details == null ? 0 : 1))
     }
   })
 })

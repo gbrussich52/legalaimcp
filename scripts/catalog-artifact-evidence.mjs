@@ -7,7 +7,10 @@
 // Claude Sonnet 5.5, 2026-11-23: the listing block is now titled "Check this yourself" (it replaces "Primary sources
 // reviewed"); the build check must look for the new heading or every reviewed page would fail it.
 export function expectedEvidence(review) {
-  const required = [review.claims.name, 'Check this yourself', review.reviewed_at, ...review.sources.map((s) => s.url)]
+  // Claude Fable 5.2, 2026-11-26: a source marked show:false stays in the record but is not printed on the page
+  // (CatalogSources.tsx skips it), so its URL is not expected there. Before, every source URL was required and the
+  // build failed on captainlegal, whose founder quote is hidden to keep a person's name off the page.
+  const required = [review.claims.name, 'Check this yourself', review.reviewed_at, ...review.sources.filter((s) => s.show !== false).map((s) => s.url)]
   for (const value of required) {
     if (typeof value !== 'string' || value.length === 0) throw Error(`Review record is missing required evidence text: ${review.slug}`)
   }
