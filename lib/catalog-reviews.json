@@ -64,6 +64,13 @@
         "creator_url": "https://ailex.co.jp/",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "ＡＩＬＥＸ合同会社",
+        "register": "Japan's National Tax Agency corporate number register",
+        "url": "https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=6011003023659",
+        "status": "a registered company (godo kaisha), corporate number 6011003023659",
+        "checked_at": "2026-11-23"
       }
     },
     {
@@ -105,66 +112,6 @@
         ],
         "creator_name": "AWS Labs",
         "creator_url": "https://github.com/awslabs",
-        "logo_url": null,
-        "firm_size_fit": []
-      }
-    },
-    {
-      "slug": "bailii-mcp-server",
-      "decision": "approved",
-      "reviewed_at": "2026-11-22",
-      "reviewer": "Claude Fable 5.2 with two independent Claude Sonnet 5.5 source reviews, for Giani Brussich",
-      "identity_confirmed": true,
-      "capabilities_confirmed": true,
-      "mcp_confirmed": true,
-      "sources": [
-        {
-          "url": "https://raw.githubusercontent.com/paulieb89/bailii-mcp/main/LICENSE",
-          "kind": "maintainer",
-          "sha256": "bf55c34bfeff1b02f5e1656c4386eeb800da975e468b735027be18b9397c2a99",
-          "quote": "Copyright 2026 Paul Boucherat"
-        },
-        {
-          "url": "https://raw.githubusercontent.com/paulieb89/bailii-mcp/main/README.md",
-          "kind": "maintainer",
-          "sha256": "a7ff86c7c3da09eaf914225028755739c0766a989c4bebcd2e2b671c26857a6c",
-          "quote": "Search UK case law on BAILII. Retrieve judgments with automatic section extraction (summary, conclusions, discussion, background)."
-        },
-        {
-          "url": "https://raw.githubusercontent.com/paulieb89/bailii-mcp/main/bailii_mcp.py",
-          "kind": "maintainer",
-          "sha256": "fce384cfac154c6474182b7310ee8e3e78546a4f88f2d53cadf125192fbbfe98",
-          "quote": "from fastmcp import FastMCP"
-        },
-        {
-          "url": "https://raw.githubusercontent.com/paulieb89/bailii-mcp/main/pyproject.toml",
-          "kind": "maintainer",
-          "sha256": "a348cbc9413368c09db09968c600b791ea788ae849c26e59337e9182748c3c31",
-          "quote": "license = \"Apache-2.0\""
-        }
-      ],
-      "listing_sha256": "0b235cb5a174b6febc96491ddf0ce14211bc043209e59245afda9176b60d48ab",
-      "claims": {
-        "slug": "bailii-mcp-server",
-        "name": "BAILII MCP Server",
-        "tagline": "Open-source local MCP server to search UK court judgments on BAILII and read them by section.",
-        "description": "BAILII MCP Server is an open-source Python MCP server that searches BAILII and retrieves UK court judgments. It has three tools: bailii_search, bailii_get_judgment and bailii_list_courts. By default it returns the summary and conclusions of a judgment, and it can return a named section or the full text on request. It covers UK courts and tribunals on BAILII, such as the Supreme Court, Court of Appeal, High Court and Employment Appeal Tribunal. It runs on your own machine because BAILII blocks cloud servers. The README says BAILII terms prohibit bulk downloading, so use it for targeted research, and that section extraction depends on how each judgment is formatted. It uses the Apache-2.0 license and is maintained by Paul Boucherat of BOUCH. We did not verify the accuracy of search results or section extraction, or whether its use complies with BAILII terms.",
-        "category": "legal_research",
-        "external_url": "https://github.com/paulieb89/bailii-mcp",
-        "mcp_repo_url": "https://github.com/paulieb89/bailii-mcp",
-        "mcp_install_command": null,
-        "pricing_model": "free",
-        "pricing_details": null,
-        "tags": [
-          "uk",
-          "case law",
-          "bailii",
-          "judgments",
-          "open source",
-          "python"
-        ],
-        "creator_name": "Paul Boucherat (BOUCH)",
-        "creator_url": "https://github.com/paulieb89",
         "logo_url": null,
         "firm_size_fit": []
       }
@@ -286,7 +233,8 @@
           "url": "https://www.captain.legal/us/about.html",
           "kind": "vendor",
           "sha256": "0b9f1d5b258c48f054e0f6079c666262e3201b289230e0d468f444033392c329",
-          "quote": "Damien Delmotte founded Captain.Legal."
+          "quote": "Damien Delmotte founded Captain.Legal.",
+          "show": false
         }
       ],
       "listing_sha256": "56d5c7a61136be33bbd3e26e12b3c12362cc794726cb49df03aa27b1fbd40d17",
@@ -312,6 +260,76 @@
         "creator_url": "https://www.captain.legal/",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "Camines LLC",
+        "register": "the New Mexico Secretary of State business register",
+        "url": "https://enterprise.sos.nm.gov/search/business",
+        "status": "active, business ID 0008132563",
+        "checked_at": "2026-11-23",
+        "formed": "2026-09-24"
+      }
+    },
+    {
+      "slug": "casedocker",
+      "decision": "approved",
+      "reviewed_at": "2026-11-23",
+      "reviewer": "Claude Sonnet 5.5 source review, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": false,
+      "sources": [
+        {
+          "url": "https://www.casedocker.com/llms.txt",
+          "kind": "vendor",
+          "sha256": "de10f5156b0bb2fad02d815e7118fd150341e305d0873eb13d8b7b518d8f7974",
+          "quote": "CaseDocker is an AI-powered legal operations platform for contract lifecycle management, legal case management, notice management, compliance management, document e-signing, playbooks, billing, and legal operations reporting."
+        },
+        {
+          "url": "https://www.casedocker.com/llms.txt",
+          "kind": "vendor",
+          "sha256": "de10f5156b0bb2fad02d815e7118fd150341e305d0873eb13d8b7b518d8f7974",
+          "quote": "Legal guides (India law)"
+        },
+        {
+          "url": "https://www.casedocker.com/llms.txt",
+          "kind": "vendor",
+          "sha256": "de10f5156b0bb2fad02d815e7118fd150341e305d0873eb13d8b7b518d8f7974",
+          "quote": "CaseDocker content is product information, not legal advice."
+        }
+      ],
+      "listing_sha256": "7d976f09edc32fe13d594acb981dd64141242872952c788be76d007dfeac7039",
+      "claims": {
+        "slug": "casedocker",
+        "name": "CaseDocker",
+        "tagline": "AI legal operations platform for contracts, cases, notices and compliance",
+        "description": "CaseDocker is a legal operations platform that its own site calls AI-powered. The vendor lists contract lifecycle management, legal case management, notice management, compliance management, document e-signing, playbooks, billing and legal operations reporting. Its legal guides and notice formats are labelled for India, so fit for other jurisdictions is unverified. The vendor says its content is product information, not legal advice. We found no MCP server or MCP documentation. We did not verify AI accuracy, security or compliance claims, pricing, or the operating company; the vendor's pages block automated readers, so we read only its llms.txt file.",
+        "category": "case_management",
+        "external_url": "https://www.casedocker.com/landing/",
+        "mcp_repo_url": null,
+        "mcp_install_command": null,
+        "pricing_model": "contact",
+        "pricing_details": null,
+        "tags": [
+          "case management",
+          "contracts",
+          "india",
+          "e-signing",
+          "compliance",
+          "notices"
+        ],
+        "creator_name": "CaseDocker",
+        "creator_url": "https://www.casedocker.com/landing/",
+        "logo_url": null,
+        "firm_size_fit": []
+      },
+      "operator": {
+        "name": "Coingeit Technologies Private Limited",
+        "register": "a public mirror of India's company register (Tofler)",
+        "url": "https://www.tofler.in/coingeit-technologies-private-limited/company/U72300UP2013PTC059652",
+        "status": "active, CIN U72300UP2013PTC059652; named as the app's developer on Google Play",
+        "checked_at": "2026-11-23",
+        "formed": "2013-09-19"
       }
     },
     {
@@ -684,6 +702,10 @@
         "creator_url": "https://www.courtrules.app/",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "status": "not_found",
+        "note": "The vendor's pages name \"Court Rules Inc.\" and give no state. On 2026-11-23 we searched the Delaware, New York and Florida company registers for \"Court Rules\" and found no entity under that name. We did not search other states."
       }
     },
     {
@@ -931,6 +953,14 @@
         "creator_url": "https://www.directcase.ai/",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "DirectCase s.r.o.",
+        "register": "the Czech business register (ARES)",
+        "url": "https://ares.gov.cz/ekonomicke-subjekty-v-be/rest/ekonomicke-subjekty/24337269",
+        "status": "a registered company, ID 24337269",
+        "checked_at": "2026-11-23",
+        "formed": "2026-01-08"
       }
     },
     {
@@ -990,6 +1020,14 @@
         "creator_url": "https://esgenix.com/about",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "Syncinvent Labs Private Limited",
+        "register": "public mirrors of India's company register (TAXAJ and Tofler)",
+        "url": "https://www.taxaj.com/company/syncinvent-labs-private-limited-U62013KA2025PTC207279",
+        "status": "active, CIN U62013KA2025PTC207279 (the official register needs a sign-in, so we read mirrors)",
+        "checked_at": "2026-11-23",
+        "formed": "2025-08-27"
       }
     },
     {
@@ -1232,6 +1270,13 @@
         "creator_url": "https://gleanmark.com/",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "TMZap Incorporated",
+        "register": "the New York Department of State corporation records",
+        "url": "https://data.ny.gov/resource/n9v6-gdp6.json?dos_id=7844761",
+        "status": "a Delaware corporation registered in New York since 2026-02-17, DOS ID 7844761",
+        "checked_at": "2026-11-23"
       }
     },
     {
@@ -1591,6 +1636,14 @@
         "creator_url": "https://leela.works/about",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "Humblepaper, Inc.",
+        "register": "the Delaware Division of Corporations entity search",
+        "url": "https://icis.corp.delaware.gov/ecorp/entitysearch/namesearch.aspx",
+        "status": "a corporation, file 3725917 (current status is not shown without a fee)",
+        "checked_at": "2026-11-23",
+        "formed": "2024-05-21"
       }
     },
     {
@@ -1789,6 +1842,13 @@
         "creator_url": "https://lexery.com.ua",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "A sole proprietor named on the vendor's terms page",
+        "register": "YouControl, a public mirror of Ukraine's state register of businesses (search the name on the vendor's page)",
+        "url": "https://youcontrol.com.ua/",
+        "status": "registered since 2026-11-10, activity code 62.01 (matched by name and street; one mirror)",
+        "checked_at": "2026-11-23"
       }
     },
     {
@@ -1900,6 +1960,13 @@
         "creator_url": "https://merit.legal/",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "A sole proprietor named on the vendor's offer page",
+        "register": "YouControl, a public mirror of Ukraine's state register of businesses (search the name on the vendor's page)",
+        "url": "https://youcontrol.com.ua/",
+        "status": "registered since 2026-10-30, activity code 63.11 (matched by name and street; one mirror)",
+        "checked_at": "2026-11-23"
       }
     },
     {
@@ -2177,6 +2244,79 @@
       }
     },
     {
+      "slug": "postalform",
+      "decision": "approved",
+      "reviewed_at": "2026-11-23",
+      "reviewer": "Claude Sonnet 5.5 source review, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://postalform.com/agents",
+          "kind": "vendor",
+          "sha256": "3131e59c05c8eab30a641b4c1f9365f7d4a736e30e9c937b28ca04e89f031dda",
+          "quote": "Remote MCP endpoint: https://postalform.com/mcp"
+        },
+        {
+          "url": "https://postalform.com/final-demand-letter",
+          "kind": "vendor",
+          "sha256": "663cbde16f34c78d06e7c3c3b7b786359cf2d56abc76a4b54f58108e961c7b40",
+          "quote": "A final demand letter for payment is a clear written notice that says what is owed, why it is owed, the deadline to pay"
+        },
+        {
+          "url": "https://postalform.com/pricing",
+          "kind": "vendor",
+          "sha256": "ef48b04a01b58ca4861e11108dddcab425bce2ac8b04229b04096886fb02743e",
+          "quote": "starts at $3.40 in black-and-white or $3.80 in color"
+        },
+        {
+          "url": "https://postalform.com/terms",
+          "kind": "vendor",
+          "sha256": "a2b263b96f5f507441dbbda7b1ac169a328d3d8c44212de89a540915d081593c",
+          "quote": "is a service operated by PostalForm LLC."
+        },
+        {
+          "url": "https://postalform.com/landlord-notices",
+          "kind": "vendor",
+          "sha256": "a40900182c36e179efdeef5979ee141fa476aa7bd95a1a17633dbf8a48bc14a3",
+          "quote": "PostalForm does not currently generate formal eviction, termination, nonrenewal, pay-or-quit, cure-or-quit, or rent-increase notices for any state or the District of Columbia."
+        }
+      ],
+      "listing_sha256": "0c963b75cc08d4e1a12925fc306f553bc8f5d369f5026937f4220f8f5b3a76c5",
+      "claims": {
+        "slug": "postalform",
+        "name": "PostalForm",
+        "tagline": "Print and mail letters and PDFs by USPS through a remote MCP server or a web form",
+        "description": "PostalForm is a print-and-mail service. Its pages name PostalForm LLC as the company behind it. The vendor publishes a remote MCP endpoint (https://postalform.com/mcp) for AI clients. For legal work, its own pages cover final demand letters. It is a mailing service, not a legal drafting tool, and the vendor says it does not generate formal eviction, termination or rent-increase notices. We did not verify mail delivery, tool behavior, or whether a mailing meets any legal service requirement.",
+        "category": "document_processing",
+        "external_url": "https://postalform.com/agents",
+        "mcp_repo_url": "https://postalform.com/mcp",
+        "mcp_install_command": null,
+        "pricing_model": "paid",
+        "pricing_details": "One-page U.S. First-Class Mail letter starts at $3.40 in black-and-white or $3.80 in color; the document-specific total is shown before payment.",
+        "tags": [
+          "mail",
+          "demand letters",
+          "mcp",
+          "print",
+          "usps"
+        ],
+        "creator_name": "PostalForm LLC",
+        "creator_url": "https://postalform.com/",
+        "logo_url": null,
+        "firm_size_fit": []
+      },
+      "operator": {
+        "name": "PostalForm LLC",
+        "register": "the Florida Division of Corporations (Sunbiz)",
+        "url": "https://search.sunbiz.org/Inquiry/CorporationSearch/ByName",
+        "status": "active, document number L26000489877 (matched by name; the vendor's pages give no state)",
+        "checked_at": "2026-11-23",
+        "formed": "2026-09-21"
+      }
+    },
+    {
       "slug": "precision-ai-os",
       "decision": "approved",
       "reviewed_at": "2026-11-22",
@@ -2233,6 +2373,14 @@
         "creator_url": "https://getprecision.ai",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "Precision AI LLC",
+        "register": "the Florida Division of Corporations (Sunbiz)",
+        "url": "https://search.sunbiz.org/Inquiry/CorporationSearch/ByName",
+        "status": "active, document number L26000503652",
+        "checked_at": "2026-11-23",
+        "formed": "2026-09-30"
       }
     },
     {
@@ -2298,6 +2446,14 @@
         "creator_url": "https://www.qanu.ai/en/about",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "Kazecorp Systems Co W.L.L",
+        "register": "Bahrain's commercial register (Sijilat), search by commercial name",
+        "url": "https://www.sijilat.bh/",
+        "status": "active, commercial registration 166795-1",
+        "checked_at": "2026-11-23",
+        "formed": "2023-08-06"
       }
     },
     {
@@ -2357,6 +2513,14 @@
         "creator_url": "https://www.redactifyai.com",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "RockQube Technologies LLC",
+        "register": "the Wyoming Secretary of State's list of new company charters for January to March 2026",
+        "url": "https://sos.wyo.gov/Business/docs/26Q1Domestic.pdf",
+        "status": "a new company charter, filing ID 2026-001879907 (the list does not show current standing)",
+        "checked_at": "2026-11-23",
+        "formed": "2026-01-29"
       }
     },
     {
@@ -2563,6 +2727,14 @@
         "creator_url": "https://www.signal87.ai/",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "Signal87 LLC",
+        "register": "the Wyoming Secretary of State's list of new company charters for October to December 2025 (in the 2025 statistics file)",
+        "url": "https://sos.wyo.gov/Business/Statistics.aspx",
+        "status": "a new company charter, filing ID 2025-001795362 (the list does not show current standing)",
+        "checked_at": "2026-11-23",
+        "formed": "2025-10-20"
       }
     },
     {
@@ -2709,6 +2881,14 @@
         "creator_url": "https://www.specterlaw.ai/",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "ROLIDE S.R.L.",
+        "register": "Romania's tax agency company data service (ANAF)",
+        "url": "https://static.anaf.ro/static/10/Anaf/Informatii_R/Servicii_web/doc_WS_V9.txt",
+        "status": "registered, CUI 53688211, trade register J2026006673006",
+        "checked_at": "2026-11-23",
+        "formed": "2026-01-30"
       }
     },
     {
@@ -2816,6 +2996,14 @@
         "creator_url": "https://syfert.com/",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "Graham W. Syfert, Esq., P.A.",
+        "register": "the Florida Division of Corporations (Sunbiz)",
+        "url": "https://search.sunbiz.org/Inquiry/CorporationSearch/ByName",
+        "status": "active, document number P10000085901",
+        "checked_at": "2026-11-23",
+        "formed": "2010-10-20"
       }
     },
     {
@@ -2882,6 +3070,10 @@
         "creator_url": "https://dr-legal.com.tw",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "status": "not_found",
+        "note": "This is an open-source project whose maintainer names no company. On 2026-11-23 Taiwan's company register open data showed no active company under the project's brand names. The package's first public release was 2026-05-27, and it has had 14 releases."
       }
     },
     {
@@ -2942,6 +3134,14 @@
         "creator_url": "https://telewizard.ai/en/",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "NextGen AI Tech, LLC",
+        "register": "the Delaware Division of Corporations entity search",
+        "url": "https://icis.corp.delaware.gov/ecorp/entitysearch/namesearch.aspx",
+        "status": "a limited liability company, file 3012664 (current status is not shown without a fee)",
+        "checked_at": "2026-11-23",
+        "formed": "2024-01-29"
       }
     },
     {
@@ -3102,6 +3302,10 @@
         "creator_url": "https://github.com/paulieb89",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "status": "not_found",
+        "note": "The project's pages name no company. A company with a matching name, BOUCH AI LTD (17593064), was registered at UK Companies House on 2026-11-20, after this project's code was first published on 2026-03-30. No page of the project says that company runs it."
       }
     },
     {
@@ -3263,6 +3467,14 @@
         "creator_url": "https://www.vaquill.ai/about",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "Aralsura Solutions LLP",
+        "register": "two public mirrors of India's company register (ZaubaCorp and The Company Check)",
+        "url": "https://www.zaubacorp.com/ARALSURA-SOLUTIONS-LLP-ACK-2045",
+        "status": "active, LLPIN ACK-2045 (the official register needs a sign-in, so we read mirrors)",
+        "checked_at": "2026-11-23",
+        "formed": "2024-11-04"
       }
     },
     {
@@ -3323,6 +3535,10 @@
         "creator_url": "https://venley.ai/nosotros",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "status": "not_found",
+        "note": "The vendor's pages name Venezolana de Tecnología Legal S.A. and give a tax number, RIF J-50551555-1. Venezuela's tax register sits behind a CAPTCHA, which we do not fill, so we could not confirm the company there."
       }
     },
     {
@@ -3440,6 +3656,10 @@
         "creator_url": "https://voicefleet.ai/",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "status": "not_found",
+        "note": "The vendor's pages say VoiceFleet operates from Dublin, Ireland, and name no company. On 2026-11-23 we searched Ireland's Companies Registration Office for \"VoiceFleet\" and \"Voice Fleet\" and found no entity. UK Companies House also lists no company named \"VoiceFleet\"."
       }
     },
     {
@@ -3499,6 +3719,13 @@
         "creator_url": "https://whisperit.ai/",
         "logo_url": null,
         "firm_size_fit": []
+      },
+      "operator": {
+        "name": "Whisperit SA",
+        "register": "the Swiss federal UID register",
+        "url": "https://www.uid.admin.ch/Detail.aspx?uid_id=CHE-450.115.788",
+        "status": "active in the commercial register, CHE-450.115.788",
+        "checked_at": "2026-11-23"
       }
     }
   ],
@@ -3506,6 +3733,7 @@
     "deadlinewatch.com"
   ],
   "blocked_slugs": [
+    "bailii-mcp-server",
     "billbot-legal",
     "caselaw-search-mcp",
     "clientintake-ai",

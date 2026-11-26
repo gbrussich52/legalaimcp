@@ -112,8 +112,33 @@ function staticSources(raw, gate) {
     try { gate.primarySourceUrl(source.url) } catch { refuse(`sources[${i}].url: not a valid public https source`) }
     cleanText(source.quote, `sources[${i}].quote`)
     if (gate.normalize(source.quote).length < 15) refuse(`sources[${i}].quote: needs at least 15 characters after normalization`)
-    return { url: source.url, kind: source.kind, quote: source.quote }
+    // Claude Sonnet 5.5, 2026-11-23: `show: false` keeps the quote as evidence but off the listing page (private names).
+    if ('show' in source && source.show !== false) refuse(`sources[${i}].show: only false is allowed`)
+    return { url: source.url, kind: source.kind, quote: source.quote, ...(source.show === false ? { show: false } : {}) }
   })
+}
+
+// Claude Sonnet 5.5, 2026-11-23: the question "does the organisation exist in a public company register" must be
+// answered on every admission, even when the answer is "not found". Two shapes, nothing in between.
+// The register entry itself is a reviewer's finding; this only checks it is complete and well formed.
+function validateOperator(raw) {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) refuse('operator: required, an object with the register finding or { status: "not_found", note }')
+  const real = (d) => /^\d{4}-\d{2}-\d{2}$/.test(d) && new Date(`${d}T00:00:00Z`).toISOString().slice(0, 10) === d
+  try {
+    if (raw.status === 'not_found') {
+      if (Object.keys(raw).some((k) => !['status', 'note'].includes(k))) refuse('only status and note are allowed with not_found')
+      return { status: 'not_found', note: boundedText(typeof raw.note === 'string' ? raw.note.trim() : raw.note, 'note', 10, 500) }
+    }
+    if (Object.keys(raw).some((k) => !['name', 'register', 'url', 'status', 'checked_at', 'formed'].includes(k))) refuse('only name, register, url, status, checked_at and formed are allowed')
+    const out = {
+      name: boundedText(raw.name, 'name', 2, 200), register: boundedText(raw.register, 'register', 2, 200),
+      url: httpsUrl(raw.url, 'url'), status: boundedText(raw.status, 'status', 2, 100),
+      checked_at: typeof raw.checked_at === 'string' && real(raw.checked_at) ? raw.checked_at : refuse('checked_at: must be a real YYYY-MM-DD date'),
+    }
+    // Claude Sonnet 5.5, 2026-11-23: optional date the entity was formed, as the register entry shows it.
+    if ('formed' in raw) out.formed = typeof raw.formed === 'string' && real(raw.formed) ? raw.formed : refuse('formed: must be a real YYYY-MM-DD date')
+    return out
+  } catch (e) { if (e instanceof Refusal) refuse(`operator: ${e.message}`); throw e }
 }
 
 const errorText = (e) => (e instanceof Refusal || String(e?.message).startsWith('Publication blocked')) ? e.message : `source fetch failed: ${String(e?.message ?? e).slice(0, 160)}`
@@ -123,7 +148,10 @@ const errorText = (e) => (e instanceof Refusal || String(e?.message).startsWith(
  * @param {any} plan
  * @param {{gate:any, policy:{reviews:any[],blocked_slugs:string[],blocked_domains:string[]}, fetcher?:typeof fetch, fetchSources?:boolean, now?:Date}} options
  */
-export async function checkPlan(plan, { gate, policy, fetcher = fetch, fetchSources = true, now = new Date() }) {
+// Claude Sonnet 5.5, 2026-11-23: requireRealness (the CLI sets it with --write-records or --sql) makes `operator` mandatory
+// and refuses a listing whose realness run is fail, or watch without a person's `realness_ack`. `realness` is
+// (listing, slug) => record; it is injected so tests need no network and the CLI wires scripts/realness.mjs.
+export async function checkPlan(plan, { gate, policy, fetcher = fetch, fetchSources = true, now = new Date(), requireRealness = false, realness = null }) {
   const results = [], admits = [], rejects = []
   const fail = (reason) => ({ ok: false, results: [{ kind: 'plan', label: 'plan', ok: false, reason }], admits, rejects, fetched: fetchSources })
   if (!plan || typeof plan !== 'object') return fail('plan: must be a JSON object')
@@ -162,6 +190,7 @@ export async function checkPlan(plan, { gate, policy, fetcher = fetch, fetchSour
       if (item.identity_confirmed !== true || item.capabilities_confirmed !== true) refuse('identity_confirmed and capabilities_confirmed must both be true')
       if (typeof item.mcp_confirmed !== 'boolean') refuse('mcp_confirmed: must be true or false')
       const sources = staticSources(item.sources, gate)
+      const operator = item.operator === undefined && !requireRealness ? null : validateOperator(item.operator)
       const listing_sha256 = gate.catalogFingerprint(claims)
       const existing = policy.reviews.find((r) => r.slug === slug)
       // host carries the site key (host, or host/owner/repo on shared code hosts), not the bare host.
@@ -174,14 +203,29 @@ export async function checkPlan(plan, { gate, policy, fetcher = fetch, fetchSour
         continue
       }
       const reviewed = []
+      let realnessAck = null
       for (const source of sources) {
         const text = await gate.readPrimarySource(gate.primarySourceUrl(source.url), fetcher)
         bodies.set(String(gate.primarySourceUrl(source.url)), text)
         if (!gate.normalize(text).includes(gate.normalize(source.quote))) refuse(`supporting quote is absent from ${source.url}`)
-        reviewed.push({ url: source.url, kind: source.kind, sha256: gate.sourceFingerprint(text), quote: source.quote })
+        reviewed.push({ url: source.url, kind: source.kind, sha256: gate.sourceFingerprint(text), quote: source.quote, ...(source.show === false ? { show: false } : {}) })
+      }
+      if (requireRealness) {
+        if (typeof realness !== 'function') refuse('realness: no realness check was supplied, so nothing can be admitted')
+        let found
+        try { found = await realness(listing, slug) } catch (e) { refuse(`realness: the check could not run (${String(e?.message ?? e).slice(0, 160)})`) }
+        const why = (found?.reasons ?? []).join('; ') || 'no reason recorded'
+        if (found?.level === 'fail') refuse(`realness fail: ${why}`)
+        if (found?.level === 'watch') {
+          if (typeof item.realness_ack !== 'string' || item.realness_ack.trim().length < 10) refuse(`realness watch (${why}): add realness_ack, the reason a person accepted it`)
+          realnessAck = boundedText(item.realness_ack.trim(), 'realness_ack', 10, 500)
+        } else if (found?.level !== 'pass') refuse('realness: the check returned no level')
       }
       // Key order matches every existing record in lib/catalog-reviews.json.
       const record = { slug, decision: 'approved', reviewed_at: plan.reviewed_at, reviewer: plan.reviewer, identity_confirmed: true, capabilities_confirmed: true, mcp_confirmed: item.mcp_confirmed, sources: reviewed, listing_sha256, claims }
+      // Claude Sonnet 5.5, 2026-11-23: operator and the person's reason for accepting a watch result travel on the record.
+      if (operator) record.operator = operator
+      if (realnessAck) record.realness_ack = realnessAck
       if (existing && !isDeepStrictEqual(existing, record)) refuse(`slug ${slug} already has a review record`)
       // The real gate, against a policy that includes this record: what this tool accepts, the gate accepts.
       await gate.assertCatalogReview(claims, { reviews: [record, ...policy.reviews.filter((r) => r.slug !== slug)], fetcher: cachedFetch, now })

@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { ExternalLink } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 import { isCatalogQuarantined } from '@/lib/catalog-review'
+import { mcpUrlLabel } from '@/lib/verification'
 import { CatalogSources } from '../../components/CatalogSources'
 import { SoftwareAppJsonLd, BreadcrumbJsonLd } from '../../components/JsonLd'
 import { ListingCard } from '../../components/ListingCard'
@@ -251,7 +252,8 @@ export default async function ListingDetailPage({
             {listing.mcp_repo_url && (
               <div>
                 <p className="text-xs text-charcoal/80 font-sans mb-1 uppercase tracking-wide">
-                  MCP Repository
+                  {/* Claude Sonnet 5.5, 2026-11-23: a live endpoint is not a repository; label it by what the URL is. */}
+                  {mcpUrlLabel(listing.mcp_repo_url)}
                 </p>
                 <a
                   href={listing.mcp_repo_url}

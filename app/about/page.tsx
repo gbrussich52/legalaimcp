@@ -75,6 +75,16 @@ export default function AboutPage() {
             automated checks, which we treat as unknown rather than bad.
           </p>
 
+          {/* Claude Sonnet 5.5, 2026-11-23: link to the method page. */}
+          <p>
+            Each listing has a block called Check this yourself, with what we looked at and how to repeat
+            each check without us. The method is on{' '}
+            <Link href="/how-we-verify" className="text-gold-text font-semibold hover:underline">
+              How we check listings
+            </Link>
+            .
+          </p>
+
           <p>
             LegalAIMCP is built and maintained by{' '}
             <a
