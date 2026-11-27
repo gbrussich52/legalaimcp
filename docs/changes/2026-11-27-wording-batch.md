@@ -65,7 +65,16 @@ All sources were re-read on 2026-11-27. Old wording that named a person is not r
   - uk-legal-skills: two licence quotes added.
 - Not touched on purpose: ailex-v2, court-rules, gleanmark-trademark-search, captainlegal (finding 10: the data is right and the label fix is on another branch), esgenix, voicefleet, qanu, and the finding 15 listing text.
 
-## Not refreshed: vaquill-ai
+## Vaquill AI source fix (follow-up commit, 2026-11-27)
+
+Claude Sonnet 5.5, 2026-11-27. The owner read https://www.vaquill.ai/about and found the fact unchanged, only reworded. In the vaquill-ai record:
+- The about-page quote changed. Was: "Vaquill AI covers the complete US Code, the CFR, and all 56 state and territory statute codes: 6M+ sections, normalized, cross-referenced, and citation-addressable." Now: "6M+ sections across the US Code, the CFR and all 56 state and territory codes, reached through a REST API, an MCP server". The gate's text extraction keeps this whole span in one piece.
+- All five quotes were found on their pages, so all five source fingerprints were refreshed (terms, about, mcp, llms.txt, README).
+- Claims were not edited, so the database fingerprint is unchanged. The listing says "56 state and territory statute codes (6M+ sections per the vendor)", which the new quote backs. The listing does not say "complete", "normalized", "cross-referenced" or "citation-addressable", so nothing leans on the old wording.
+
+## Superseded note: vaquill-ai
+
+The text below was true when this batch was first committed. The follow-up above replaces it.
 
 The about page no longer holds the recorded sentence "Vaquill AI covers the complete US Code, the CFR, and all 56 state and territory statute codes: 6M+ sections, normalized, cross-referenced, and citation-addressable." It now says "6M+ sections across the US Code, the CFR and all 56 state and territory codes, reached through a REST API, an MCP server and Open US Law." The source fingerprints in the vaquill-ai record stay at their old values and need a new human review. The new listing text rests on the README and llms.txt, which still hold the facts.
 

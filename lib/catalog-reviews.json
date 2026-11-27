@@ -3585,31 +3585,31 @@
         {
           "url": "https://www.vaquill.ai/terms",
           "kind": "vendor",
-          "sha256": "08ec2f33442b1b798d435f40b20b668e8ecaa2ee506238869eb55adc4b4b5851",
+          "sha256": "56b59da47633b1bae8aceaa6aef5f4ce641c6fc0570f60459a965101f9ec511c",
           "quote": "an India-registered limited liability partnership that operates Vaquill AI"
         },
         {
           "url": "https://www.vaquill.ai/about",
           "kind": "vendor",
-          "sha256": "0acdc6167865ccf3cca37417ed8f2873ae0b54fa0fb2fd5158d2f90ed1e88915",
-          "quote": "Vaquill AI covers the complete US Code, the CFR, and all 56 state and territory statute codes: 6M+ sections, normalized, cross-referenced, and citation-addressable."
+          "sha256": "77d3b607a7467ca8df775849f3cc608edbb3df6d1f3b8711c5bc1fab44709add",
+          "quote": "6M+ sections across the US Code, the CFR and all 56 state and territory codes, reached through a REST API, an MCP server"
         },
         {
           "url": "https://www.vaquill.ai/mcp",
           "kind": "vendor",
-          "sha256": "392b0c8652e03a3072b708e4d5062ffbcc520316ac2198fc715cf91c05125aaf",
+          "sha256": "27f0471fc8021652ea11d2959329ed2e9f8dfa58d0680ce49d11a8371154da4e",
           "quote": "Search the US Code, the CFR, and 56 state and territory statute codes (6M+ sections) from Claude, ChatGPT, Gemini, Cursor, VS Code, and Windsurf."
         },
         {
           "url": "https://www.vaquill.ai/llms.txt",
           "kind": "vendor",
-          "sha256": "cea56bdb60188abf95b43b4679da910f83c33fb166b216fa1f08c5412058894a",
+          "sha256": "35dd8c33990c243418362e87c2560f0495f8e72c0c0582c7d44f112552f2df70",
           "quote": "Sold as a developer API, not as an end-user application."
         },
         {
           "url": "https://raw.githubusercontent.com/vaquill-AI/vaquill-mcp/main/README.md",
           "kind": "maintainer",
-          "sha256": "97cfe26a717395faa3fe5b9ff083fab40d5b437079b5fbdc750d3ae43504600a",
+          "sha256": "df829008415d06a38822bf73568c99658bacdb90f4691c887d7294ed6b6d09b3",
           "quote": "new accounts get 1,000 free API credits, no card required"
         }
       ],
