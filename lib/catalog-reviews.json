@@ -1970,6 +1970,79 @@
       }
     },
     {
+      "slug": "mak-immigration-source-guide",
+      "decision": "approved",
+      "reviewed_at": "2026-11-27",
+      "reviewer": "Claude Sonnet 5.5 source review, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://mak-public-rcic-mcp.vercel.app/sources",
+          "kind": "vendor",
+          "sha256": "3d33b36da375b9b296db12122b6717d895be62499febe8519ef84e146f5f2a45",
+          "quote": "Eighteen source-navigation topics, each linking directly to official Government of Canada or Justice Laws material and a separately labelled MAK educational resource."
+        },
+        {
+          "url": "https://mak-public-rcic-mcp.vercel.app/.well-known/mcp.json",
+          "kind": "vendor",
+          "sha256": "48a250f7e1b292bfe133659599c4096f0c819df6521441e5a6b8069bd9393127",
+          "quote": "Read-only Canadian immigration source navigation and professional source routing."
+        },
+        {
+          "url": "https://mak-public-rcic-mcp.vercel.app/.well-known/mcp.json",
+          "kind": "vendor",
+          "sha256": "48a250f7e1b292bfe133659599c4096f0c819df6521441e5a6b8069bd9393127",
+          "quote": "\"url\": \"https://mak-public-rcic-mcp.vercel.app/mcp\""
+        },
+        {
+          "url": "https://makimmigration.ca/mak-immigration-source-guide/",
+          "kind": "vendor",
+          "sha256": "e4cf3ba2f60a2b4e5d018aeb9a1d6091d9e8d82e9e136390b47fb6431414b7bd",
+          "quote": "The Source Guide does not decide eligibility, make individualized legal conclusions, predict outcomes, submit applications, collect sensitive case facts, book consultations or take payments."
+        },
+        {
+          "url": "https://makimmigration.ca/mak-immigration-source-guide/",
+          "kind": "vendor",
+          "sha256": "e4cf3ba2f60a2b4e5d018aeb9a1d6091d9e8d82e9e136390b47fb6431414b7bd",
+          "quote": "A published ChatGPT plugin from MAK Canadian Immigration Services for finding Canadian immigration source links, topic references and dated source-verification entries."
+        }
+      ],
+      "listing_sha256": "106e9447bfe11ae9925282738495fe413c56a0276d8b1babf60ee4c6d1b50b4b",
+      "claims": {
+        "slug": "mak-immigration-source-guide",
+        "name": "MAK Immigration Source Guide",
+        "tagline": "Links to official Government of Canada immigration sources, per the vendor.",
+        "description": "MAK Canadian Immigration Services publishes this guide. The vendor says it has eighteen source-navigation topics, each linking directly to official Government of Canada or Justice Laws material and a separately labelled MAK educational resource. Its server card calls the MCP server read-only Canadian immigration source navigation and professional source routing. The vendor says the guide does not decide eligibility, make individualized legal conclusions, predict outcomes or take payments. The MCP address is https://mak-public-rcic-mcp.vercel.app/mcp. We saw it answer an MCP handshake. We ran no tool, so tool behavior and source accuracy are unverified. The vendor is an immigration consulting firm.",
+        "category": "legal_research",
+        "external_url": "https://mak-public-rcic-mcp.vercel.app/sources",
+        "mcp_repo_url": "https://mak-public-rcic-mcp.vercel.app/mcp",
+        "mcp_install_command": null,
+        "pricing_model": "contact",
+        "pricing_details": "Not stated by the vendor.",
+        "tags": [
+          "canada",
+          "immigration",
+          "source navigation",
+          "official sources",
+          "mcp"
+        ],
+        "creator_name": "MAK Canadian Immigration Services",
+        "creator_url": "https://makimmigration.ca/",
+        "logo_url": null,
+        "firm_size_fit": []
+      },
+      "operator": {
+        "name": "MAK Canadian Immigration Services",
+        "register": "CICC public register of licensed consultants (a regulator's list of licensees, not a company register)",
+        "url": "https://register.college-ic.ca/Public-Register-EN/RCIC_Search.aspx",
+        "status": "company name on 2 licensees, both entitled to practise; no incorporation record found",
+        "checked_at": "2026-11-27"
+      },
+      "realness_ack": "The listing address is on vercel.app, a shared host that has no mail records of its own. The firm's own domain, makimmigration.ca, has Google Workspace mail and a DMARC reject policy, and the firm is on the CICC register. The owner said admit on 2026-11-27."
+    },
+    {
       "slug": "merit-ukrainian-law-registers",
       "decision": "approved",
       "reviewed_at": "2026-11-22",

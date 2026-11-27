@@ -18,7 +18,9 @@ export const SUPABASE_SCHEMA = 'legalaimcp'
 // BAILII MCP Server was pulled, so cached catalog reads refresh when this build deploys.
 // Claude Sonnet 5.5, 2026-11-27: bumped from '2026-11-26-intake-2' for the eCourtsIndia MCP admission
 // (docs/changes/2026-11-27-ecourtsindia.md), so cached catalog reads refresh once the listing row exists.
-export const CATALOG_CACHE_REVISION = '2026-11-27-intake-1'
+// Claude Sonnet 5.5, 2026-11-27: bumped from '2026-11-27-intake-1' for the MAK Immigration Source Guide admission
+// (docs/changes/2026-11-27-mak-immigration.md), so cached catalog reads refresh once the listing row exists.
+export const CATALOG_CACHE_REVISION = '2026-11-27-intake-2'
 
 export function createSchemaClient(
   url: string,
