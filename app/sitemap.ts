@@ -33,6 +33,7 @@ const MODIFIED = {
   courtlistenerGuide: '2026-08-07',
   harveyGuide: '2026-10-19',
   clioGuide: '2026-11-12',
+  imanageGuide: '2026-11-27', // Grok Bot (Crack Bot), 2026-11-27: new iManage Work setup guide.
   // Claude Sonnet 5.5, 2026-11-23: new method page; fixed date, never new Date().
   howWeVerify: '2026-11-23',
   bestCategoryTemplate: BEST_ROUNDUP_MODIFIED,
@@ -132,6 +133,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       // Clio for Claude connector on Clio Work (updated 2026-10-29); the guide panel shows it.
       url: `${SITE_URL}/guides/connect-claude-to-clio`,
       lastModified: MODIFIED.clioGuide,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${SITE_URL}/guides/connect-claude-to-imanage`,
+      lastModified: MODIFIED.imanageGuide,
       changeFrequency: 'monthly',
       priority: 0.7,
     },

@@ -43,6 +43,11 @@ const SETUP_GUIDES: Record<string, { path: string; label: string }> = {
     path: '/guides/connect-claude-to-clio',
     label: 'How to connect Claude to Clio',
   },
+  // Grok Bot (Crack Bot), 2026-11-27: step-by-step setup page for the iManage Work listing.
+  'imanage-work': {
+    path: '/guides/connect-claude-to-imanage',
+    label: 'How to connect Claude to iManage Work',
+  },
 }
 
 async function buildMetadata({

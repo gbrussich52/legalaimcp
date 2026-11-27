@@ -86,6 +86,7 @@ export const CATEGORY_CONTENT: Record<string, CategoryContent> = {
     // Claude Sonnet 5.5, 2026-11-12: search-gap fields for this category (Search Console 2026-10-16 to 2026-11-13).
     links: [
       { href: '/blog/ai-contract-review-tools-compared', label: 'Compare Luminance, Ironclad and Kira for AI contract review' },
+      { href: '/guides/connect-claude-to-imanage', label: 'Connect Claude to iManage Work (setup guide)' },
     ],
     intro: [
       'Document work is where legal AI is most mature and most crowded: contract review, clause extraction, redlining, due-diligence sweeps, and document generation all have credible tools behind them. It is also the category where the difference between products is least visible from a marketing page — nearly everything claims to "review contracts with AI."',
