@@ -16,7 +16,9 @@ export const SUPABASE_SCHEMA = 'legalaimcp'
 // (docs/changes/2026-11-22-intake.md) instead of a cached catalog that predates them.
 // Claude Fable 5.2, 2026-11-26: bumped from '2026-11-22-intake-27' after CaseDocker and PostalForm were admitted and
 // BAILII MCP Server was pulled, so cached catalog reads refresh when this build deploys.
-export const CATALOG_CACHE_REVISION = '2026-11-26-intake-2'
+// Claude Sonnet 5.5, 2026-11-27: bumped from '2026-11-26-intake-2' for the eCourtsIndia MCP admission
+// (docs/changes/2026-11-27-ecourtsindia.md), so cached catalog reads refresh once the listing row exists.
+export const CATALOG_CACHE_REVISION = '2026-11-27-intake-1'
 
 export function createSchemaClient(
   url: string,

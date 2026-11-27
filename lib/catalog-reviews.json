@@ -964,6 +964,79 @@
       }
     },
     {
+      "slug": "ecourtsindia-mcp",
+      "decision": "approved",
+      "reviewed_at": "2026-11-27",
+      "reviewer": "Claude Sonnet 5.5 source review, for Giani Brussich",
+      "identity_confirmed": true,
+      "capabilities_confirmed": true,
+      "mcp_confirmed": true,
+      "sources": [
+        {
+          "url": "https://ecourtsindia.com/api/mcp",
+          "kind": "vendor",
+          "sha256": "9c944e42d3fa45691fd584996c4d32741f51299047fa2faf51c6c162b2c5d9b2",
+          "quote": "Paste this URL into ChatGPT, Claude, Cursor, or Gemini CLI as a custom connector, then click Connect to sign in at eCourts."
+        },
+        {
+          "url": "https://ecourtsindia.com/api/mcp",
+          "kind": "vendor",
+          "sha256": "9c944e42d3fa45691fd584996c4d32741f51299047fa2faf51c6c162b2c5d9b2",
+          "quote": "22 tools covering case search, orders, cause lists, court structure, and portfolio monitoring."
+        },
+        {
+          "url": "https://ecourtsindia.com/api/mcp",
+          "kind": "vendor",
+          "sha256": "9c944e42d3fa45691fd584996c4d32741f51299047fa2faf51c6c162b2c5d9b2",
+          "quote": "MCP tools use the same Partner API credits as the REST API. Court structure and enum lookup tools are free. No separate MCP charges."
+        },
+        {
+          "url": "https://ecourtsindia.com/api",
+          "kind": "vendor",
+          "sha256": "7f908354ee99cda3650dbd68b91d232b749e10e51742a1136aa8f28166967de2",
+          "quote": "25 High Courts including all benches: Delhi, Bombay, Madras, Calcutta"
+        },
+        {
+          "url": "https://ecourtsindia.com/api/pricing",
+          "kind": "vendor",
+          "sha256": "cc84ee0eae286799357ca17ed251963a238232daa607262b3e40b2f9ad29faf2",
+          "quote": "₹200 free credits on signup."
+        }
+      ],
+      "listing_sha256": "036aa1703f5b5254da5903cf9103c57ecd87b3cedd283131dead4a076251f1c4",
+      "claims": {
+        "slug": "ecourtsindia-mcp",
+        "name": "eCourtsIndia MCP",
+        "tagline": "Indian court cases, orders and cause lists inside your AI tool, per the vendor.",
+        "description": "eCourtsIndia says its MCP server gives AI tools such as ChatGPT, Claude, Cursor and Gemini CLI 22 tools for case search, orders, cause lists, court structure and portfolio monitoring. The vendor says its data covers 25 High Courts, including all benches. You add the address https://mcp.ecourtsindia.com/mcp as a custom connector and sign in at eCourts. We saw the address answer with a sign-in request. We ran no tool, so tool behavior, data accuracy and court coverage are unverified.",
+        "category": "legal_research",
+        "external_url": "https://ecourtsindia.com/api/mcp",
+        "mcp_repo_url": "https://mcp.ecourtsindia.com/mcp",
+        "mcp_install_command": null,
+        "pricing_model": "freemium",
+        "pricing_details": "The vendor says new accounts get Rs 200 in free credits. After that it sells prepaid credits from Rs 1,000 plus 18% GST. It says MCP calls use the same credits as its REST API, and court structure and enum lookup tools are free.",
+        "tags": [
+          "india",
+          "court data",
+          "case search",
+          "cause lists",
+          "mcp"
+        ],
+        "creator_name": "eCourtsIndia",
+        "creator_url": "https://ecourtsindia.com/",
+        "logo_url": null,
+        "firm_size_fit": []
+      },
+      "operator": {
+        "name": "Billion Insights Ventures Private Limited",
+        "register": "a public mirror of India's company register (Falcon Ebiz; InstaFinancials and Tracxn agree)",
+        "url": "https://www.falconebiz.com/company/BILLION-INSIGHTS-VENTURES-PRIVATE-LIMITED-U62090UP2026PTC241369",
+        "status": "active, CIN U62090UP2026PTC241369; app developer on Google Play",
+        "checked_at": "2026-11-27",
+        "formed": "2026-01-15"
+      }
+    },
+    {
       "slug": "esgenix",
       "decision": "approved",
       "reviewed_at": "2026-11-22",
