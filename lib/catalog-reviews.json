@@ -1871,7 +1871,8 @@
           "url": "https://lexery.com.ua/terms",
           "kind": "vendor",
           "sha256": "03f9710d236af6802480614cca2f4679fdfdc66c7337b07468099b6a8a980e95",
-          "quote": "Сервіс надає Андрій Середюк, фізична особа – підприємець"
+          "quote": "Сервіс надає Андрій Середюк, фізична особа – підприємець",
+          "show": false
         },
         {
           "url": "https://lexery.com.ua/lexery",
@@ -2055,7 +2056,8 @@
           "url": "https://merit.legal/mcp/offer",
           "kind": "vendor",
           "sha256": "c8f5a6ea4f8b60c6cbe1810b3ab7c4c837ae72b5f54890b33cbfc112041ec1aa",
-          "quote": "Кушнірук Сергій Ігорович"
+          "quote": "Кушнірук Сергій Ігорович",
+          "show": false
         },
         {
           "url": "https://merit.legal/mcp",
@@ -3177,7 +3179,8 @@
           "url": "https://raw.githubusercontent.com/aa0101181514/tw-legal-rag/main/README.md",
           "kind": "maintainer",
           "sha256": "8a8e9b33092d31d1fc0d3905de50d6dcf13b44a9f1c699b10389731c4b67c579",
-          "quote": "作者：黃思齊（Aaron Huang）律師，[法律偵探／Dr.Legal](https://dr-legal.com.tw) 創辦人"
+          "quote": "作者：黃思齊（Aaron Huang）律師，[法律偵探／Dr.Legal](https://dr-legal.com.tw) 創辦人",
+          "show": false
         },
         {
           "url": "https://dr-legal.com.tw/mcp",
@@ -3355,7 +3358,8 @@
           "url": "https://raw.githubusercontent.com/georgejeffers/uk-case-law-mcp-server/main/package.json",
           "kind": "maintainer",
           "sha256": "02573c9c7c3df8dabe22ec8c3ff8e93e7098bc96847f14865512e4cec0e27826",
-          "quote": "\"author\": \"George Jefferson\","
+          "quote": "\"author\": \"George Jefferson\",",
+          "show": false
         },
         {
           "url": "https://raw.githubusercontent.com/georgejeffers/uk-case-law-mcp-server/main/README.md",
@@ -3409,7 +3413,8 @@
           "url": "https://raw.githubusercontent.com/paulieb89/uk-legal-mcp/main/README.md",
           "kind": "maintainer",
           "sha256": "ca339ea01a557ed98f0560ea24ed331154909bb3c3f94469a0668881b3520cf8",
-          "quote": "Maintained by BOUCH — private hosting, custom tools and setup: paul@bouch.dev"
+          "quote": "Maintained by BOUCH — private hosting, custom tools and setup: paul@bouch.dev",
+          "show": false
         },
         {
           "url": "https://www.bouch.dev/products/uk-legal-mcp",
@@ -3479,7 +3484,8 @@
           "url": "https://raw.githubusercontent.com/davendra/uk-legal-skills/main/LICENSE.md",
           "kind": "maintainer",
           "sha256": "97e0cfb0bd7ed4f6fdd4ba4a0d4fdafb5875d94cf3c0bc728fc20ef052cbc027",
-          "quote": "Copyright 2026 Davendra Patel (trading as The Counsel)"
+          "quote": "Copyright 2026 Davendra Patel (trading as The Counsel)",
+          "show": false
         },
         {
           "url": "https://raw.githubusercontent.com/davendra/uk-legal-skills/main/README.md",

@@ -72,6 +72,13 @@ Claude Sonnet 5.5, 2026-11-27. The owner read https://www.vaquill.ai/about and f
 - All five quotes were found on their pages, so all five source fingerprints were refreshed (terms, about, mcp, llms.txt, README).
 - Claims were not edited, so the database fingerprint is unchanged. The listing says "56 state and territory statute codes (6M+ sections per the vendor)", which the new quote backs. The listing does not say "complete", "normalized", "cross-referenced" or "citation-addressable", so nothing leans on the old wording.
 
+## Names off the listing pages (follow-up commit, 2026-11-27)
+
+Claude Sonnet 5.5, 2026-11-27. Individuals' names stay off the site. Six sources held a quote with a personal name or an email address. Each now has `show: false`, so the quote stays in the record as evidence but is not printed on the listing page.
+- Slugs, all source position 0: merit-ukrainian-law-registers, lexery, uk-legal-mcp, uk-legal-skills, uk-case-law-mcp-server, taiwan-legal-rag.
+- Prior behavior: all six quotes were shown on the page.
+- No quote text, claim or fingerprint changed. The post-build check skips `show: false` sources (`scripts/catalog-artifact-evidence.mjs`, line 13).
+
 ## Superseded note: vaquill-ai
 
 The text below was true when this batch was first committed. The follow-up above replaces it.
