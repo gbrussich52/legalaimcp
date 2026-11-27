@@ -20,7 +20,9 @@ export const SUPABASE_SCHEMA = 'legalaimcp'
 // (docs/changes/2026-11-27-ecourtsindia.md), so cached catalog reads refresh once the listing row exists.
 // Claude Sonnet 5.5, 2026-11-27: bumped from '2026-11-27-intake-1' for the MAK Immigration Source Guide admission
 // (docs/changes/2026-11-27-mak-immigration.md), so cached catalog reads refresh once the listing row exists.
-export const CATALOG_CACHE_REVISION = '2026-11-27-intake-2'
+// Claude Sonnet 5.5, 2026-11-27: bumped from '2026-11-27-intake-2' for the wording batch (docs/changes/2026-11-27-wording-batch.md),
+// so cached catalog reads refresh once the 12 listing rows carry the new wording.
+export const CATALOG_CACHE_REVISION = '2026-11-27-intake-3'
 
 export function createSchemaClient(
   url: string,

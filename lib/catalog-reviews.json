@@ -1664,7 +1664,7 @@
           "url": "https://leela.works/terms",
           "kind": "vendor",
           "sha256": "e10a2fff649d54472328cc4146cd8348742fcae9116bf30714f8b2ce5f6f474f",
-          "quote": "The agreement under which Humblepaper, Inc. provides Leela Works."
+          "quote": "Leela Works platform, formerly known as Outbox Black (the &quot;Service&quot;), operated by Humblepaper, Inc."
         },
         {
           "url": "https://leela.works/about",
@@ -1685,12 +1685,12 @@
           "quote": "Documents and deal data are encrypted at rest with AES-256-GCM."
         }
       ],
-      "listing_sha256": "b8933e6a4b8d9103023fdd8e0e5a014e7c682b940134231ea59800c3e0253f4c",
+      "listing_sha256": "983f6e55bcdaa6b92b8a575f0b6b1129d007cff5dac6d5f3f3c29558bf80303a",
       "claims": {
         "slug": "leela",
         "name": "Leela",
         "tagline": "Contract negotiation agent: email a draft, get an issues list and redline.",
-        "description": "Leela is a contract negotiation agent from Humblepaper, Inc. of New York. You email her the other side's draft, and she returns an issues list, a Word redline and a note, checked against your playbook. When the counterparty responds, you forward their draft. She compares it to your last version and marks each position moved, held, conceded or new. The vendor names in-house legal teams, law firms, deal teams and procurement as users. It says she sends work only to members of your team, and that she does not give legal advice. A desktop app is also offered. Pricing is $149 per seat per month for 1 to 4 seats, with a 14 day trial and no card. The vendor says it is not yet SOC 2 compliant and processes data in the United States by default. Jurisdiction and language support are not stated. We did not verify review accuracy, redline quality, account behavior or security claims.",
+        "description": "Leela is a contract negotiation agent from Humblepaper, Inc. The vendor says the company is a US corporation with founders based in India, and its pages give a New York mailing address. The vendor's terms say the product was formerly called Outbox Black. You email her the other side's draft, and she returns an issues list, a Word redline and a note, checked against your playbook. When the counterparty responds, you forward their draft. She compares it to your last version and marks each position moved, held, conceded or new. The vendor names in-house legal teams, law firms, deal teams and procurement as users. It says she sends work only to members of your team, and that she does not give legal advice. A desktop app is also offered. Pricing is $149 per seat per month for 1 to 4 seats, with a 14 day trial and no card. The vendor says it is not yet SOC 2 compliant and processes data in the United States by default. Jurisdiction and language support are not stated. We did not verify review accuracy, redline quality, account behavior or security claims.",
         "category": "document_processing",
         "external_url": "https://leela.works",
         "mcp_repo_url": null,
@@ -1793,12 +1793,12 @@
           "quote": "All 18 tools, MIT license, no paywall."
         }
       ],
-      "listing_sha256": "bfe3099d16557fd4c1b301d71f2e7d0eb456f534fcab137ebab8575fd76e5dff",
+      "listing_sha256": "55bc066915ed725dab60996fb64dfe0368cf32d4bc531ad65c6725a8f96055f8",
       "claims": {
         "slug": "legalmcp",
         "name": "LegalMCP",
         "tagline": "Open-source MCP server for US case law search, citation parsing, Clio and PACER",
-        "description": "LegalMCP is an open-source MCP server written in Python with FastMCP. Its README lists 18 tools: search of US court opinions, citation parsing, Clio practice management lookups (clients, matters, time entries, tasks, documents, calendar) and PACER federal case search. An MCP-compatible AI client such as Claude or Cursor connects to it. Clio tools need a Clio token and PACER tools need a PACER account, and PACER charges per page for document downloads. The code is MIT licensed and free. It covers US sources only. Not verified: accuracy of results, how the Clio and PACER tools behave with live accounts, whether the package is published on PyPI (the PyPI lookup returned 404), and the maintainer's legal name or country.",
+        "description": "LegalMCP is an open-source MCP server written in Python with FastMCP. Its README lists 18 tools: search of US court opinions, citation parsing, Clio practice management lookups (clients, matters, time entries, tasks, documents, calendar) and PACER federal case search. An MCP-compatible AI client such as Claude or Cursor connects to it. Clio tools need a Clio token and PACER tools need a PACER account, and PACER charges per page for document downloads. The code is MIT licensed and free. It covers US sources only. The README tells users to run pip install legal-mcp, but PyPI has no package named legal-mcp or legalmcp (both lookups returned 404 on 26 November 2026). The README also shows an install from the GitHub address. The last push to the repository was on 19 June 2026. Not verified: accuracy of results, how the Clio and PACER tools behave with live accounts, and the maintainer's legal name or country.",
         "category": "legal_research",
         "external_url": "https://github.com/Mahender22/legal-mcp",
         "mcp_repo_url": "https://github.com/Mahender22/legal-mcp",
@@ -1871,7 +1871,8 @@
           "url": "https://lexery.com.ua/terms",
           "kind": "vendor",
           "sha256": "03f9710d236af6802480614cca2f4679fdfdc66c7337b07468099b6a8a980e95",
-          "quote": "Сервіс надає Андрій Середюк, фізична особа – підприємець"
+          "quote": "Сервіс надає Андрій Середюк, фізична особа – підприємець",
+          "show": false
         },
         {
           "url": "https://lexery.com.ua/lexery",
@@ -1892,7 +1893,7 @@
           "quote": "LEXERY answers legal questions and drafts documents with references to Ukrainian legislation and case law."
         }
       ],
-      "listing_sha256": "6d5d7bb1d30b763ee2fb2107393877de8cdeda558610bbc03015d9a6f215c253",
+      "listing_sha256": "9764bc0455c8367ae945dba91ef7661b601dc2ad47b247dac2c62fa54bc08469",
       "claims": {
         "slug": "lexery",
         "name": "LEXERY",
@@ -1911,7 +1912,7 @@
           "document drafting",
           "ukrainian"
         ],
-        "creator_name": "FOP Serediuk Andrii Ruslanovych",
+        "creator_name": "LEXERY (sole proprietor, Ukraine)",
         "creator_url": "https://lexery.com.ua",
         "logo_url": null,
         "firm_size_fit": []
@@ -2054,40 +2055,41 @@
         {
           "url": "https://merit.legal/mcp/offer",
           "kind": "vendor",
-          "sha256": "8d5ccb5be8cb20728ad80eb9fa25b46915fca06482c950b38dcaccb9defd5705",
-          "quote": "Кушнірук Сергій Ігорович"
+          "sha256": "c8f5a6ea4f8b60c6cbe1810b3ab7c4c837ae72b5f54890b33cbfc112041ec1aa",
+          "quote": "Кушнірук Сергій Ігорович",
+          "show": false
         },
         {
           "url": "https://merit.legal/mcp",
           "kind": "vendor",
-          "sha256": "8873f998f4c9813c7c8a88c9de70bafe080ac310f26aa048e88fa134e2d35067",
+          "sha256": "2d93be17308eef9ed92f70b6a686bc86a361add2918f86116bc600d1b0ad6bdc",
           "quote": "Законодавство з редакціями на будь-яку дату, практика Верховного Суду, ЄДР, реєстри адвокатів і нотаріусів, виконавчі провадження та санкції."
         },
         {
           "url": "https://merit.legal/mcp/offer",
           "kind": "vendor",
-          "sha256": "8d5ccb5be8cb20728ad80eb9fa25b46915fca06482c950b38dcaccb9defd5705",
+          "sha256": "c8f5a6ea4f8b60c6cbe1810b3ab7c4c837ae72b5f54890b33cbfc112041ec1aa",
           "quote": "приймає запити за адресою https://law.merit.legal/mcp"
         },
         {
           "url": "https://merit.legal/mcp/claude",
           "kind": "vendor",
-          "sha256": "8da8213057567bc2ffe2a9b00853fbed12c82d0b923c894ce49dacf028221f22",
+          "sha256": "58628ce294d7f9f20abe008c71197fa506f37343b9d725bac81962457297b506",
           "quote": "Додайте Merit у Claude як власний конектор"
         },
         {
           "url": "https://merit.legal/mcp",
           "kind": "vendor",
-          "sha256": "8873f998f4c9813c7c8a88c9de70bafe080ac310f26aa048e88fa134e2d35067",
+          "sha256": "2d93be17308eef9ed92f70b6a686bc86a361add2918f86116bc600d1b0ad6bdc",
           "quote": "Після пробного тижня — від 790 грн за 4 тижні."
         }
       ],
-      "listing_sha256": "e9bf9e50cf8cdda6c54f5ae8cfedf0f9549782faeb6bc564fdba17452da2a8d6",
+      "listing_sha256": "1e99eea156c2b7a60b115f546c01edfb267daa24ed3911cccaaf193d3fe2809a",
       "claims": {
         "slug": "merit-ukrainian-law-registers",
         "name": "Merit - Ukrainian Law & Registers",
         "tagline": "Ukrainian laws on any date, court decisions, registers and sanctions lists inside Claude, ChatGPT or Gemini.",
-        "description": "Merit is a hosted MCP server that gives Claude, ChatGPT or Gemini read access to Ukrainian legal sources. The vendor says it covers 55 sources and 134 tools: laws in their version on any date, Supreme Court practice, the court decisions register, court, advocate and notary registers, the company register, tax and enforcement registers, and five sanctions lists (Ukraine, EU, OFAC, UK, UN). It also covers some foreign company registers (GLEIF, UK Companies House, ICIJ Offshore Leaks). It is for Ukrainian lawyers, law firms and compliance teams. The focus is Ukrainian law, and the vendor pages are written in Ukrainian. The vendor states that no tool changes or sends anything and that you connect by signing in to a Merit account. The operator is a sole proprietor whose Ukrainian registry entry is dated 29 October 2026, so the business is very new. We did not verify accuracy, data freshness, billing or account behavior.",
+        "description": "Merit is a hosted MCP server that gives Claude, ChatGPT or Gemini read access to Ukrainian legal sources. The vendor says it covers 55 sources and 134 tools: laws in their version on any date, Supreme Court practice, the court decisions register, court, advocate and notary registers, the company register, tax and enforcement registers, and five sanctions lists (Ukraine, EU, OFAC, UK, UN). It also covers some foreign company registers (GLEIF, UK Companies House, ICIJ Offshore Leaks). It is for Ukrainian lawyers, law firms and compliance teams. The focus is Ukrainian law, and the vendor pages are written in Ukrainian. The vendor states that no tool changes or sends anything and that you connect by signing in to a Merit account. The operator is a sole proprietor. The vendor's offer says the state register entry is dated 29 October 2026, and a public mirror of the register showed 30 October 2026 when we checked on 23 November 2026. Either way, the business is very new. We did not verify accuracy, data freshness, billing or account behavior.",
         "category": "legal_research",
         "external_url": "https://merit.legal/mcp",
         "mcp_repo_url": "https://law.merit.legal/mcp",
@@ -2102,7 +2104,7 @@
           "kyc",
           "case law"
         ],
-        "creator_name": "Kushniruk Serhii Ihorovych (sole proprietor), Merit",
+        "creator_name": "Merit (sole proprietor, Ukraine)",
         "creator_url": "https://merit.legal/",
         "logo_url": null,
         "firm_size_fit": []
@@ -2472,42 +2474,48 @@
       "mcp_confirmed": true,
       "sources": [
         {
-          "url": "https://getprecision.ai/about",
+          "url": "https://getprecision.ai/legal/privacy",
           "kind": "vendor",
-          "sha256": "f410dd789e6ce8364d56c6bed5d297f7b2efa9db410e49e71ab346274d3ecb3c",
-          "quote": "It is operated by Precision AI LLC in Miami, Florida."
+          "sha256": "95e47c866946832c4d1b92daaa52ad4c25523efdf99a16d166abc0641e7941d4",
+          "quote": "Precision AI LLC, d/b/a Precision AI OS · Miami, Florida"
+        },
+        {
+          "url": "https://getprecision.ai/legal/terms",
+          "kind": "vendor",
+          "sha256": "48aa7d09c7d0af70ed514a8d146f281d2509ea1dc2a2742c7d207aa606ea087f",
+          "quote": "a Florida limited liability company"
         },
         {
           "url": "https://getprecision.ai/industries/law-firms",
           "kind": "vendor",
-          "sha256": "a8f8b2870838c99dfb86697ca45db790c1e4ea1ba72511bde34d7f6088736086",
+          "sha256": "f1b6d3a75cd4518f61cdafe61ad84a7786e7b7c4a43ca27c859dc38d91a87360",
           "quote": "AI for law firms works across intake, practice management, documents and email."
         },
         {
           "url": "https://getprecision.ai/industries/law-firms",
           "kind": "vendor",
-          "sha256": "a8f8b2870838c99dfb86697ca45db790c1e4ea1ba72511bde34d7f6088736086",
+          "sha256": "f1b6d3a75cd4518f61cdafe61ad84a7786e7b7c4a43ca27c859dc38d91a87360",
           "quote": "Draft client updates from verified deadlines, recent filings and the latest email thread for an attorney to approve."
         },
         {
           "url": "https://getprecision.ai/pricing",
           "kind": "vendor",
-          "sha256": "c85459d0dbe46a112938b72cd00e708ec8afdc4e18e0de151ac723cbceefec22",
-          "quote": "Precision AI OS is priced in credits for the work agents do, never per seat."
+          "sha256": "22ffcc765b9dd02637a776d19bec3ba34ea42ede2eb0b1bb3348819fec53702d",
+          "quote": "Precision AI OS is priced in credits for the work agents do, never per seat. Unlimited users No per-user fee Implementation included with Managed No weekly limits Team billing Month to month Annual commitment Save 15% on Team Every plan is billed monthly. Prices exclude tax. Free Coming soon Try everything on your own team. $0 10,000 credits, one time. Email address Join the Free waitlist We&#39;ll only email you about the launch. Includes: No credit card needed Every feature. Nothing locked. Connect your tools Shared Agent OS Self-serve support Stops at zero. Upgrade anytime. Team Coming soon Put it to work across your team. Team: $100 $85 / month per month Month to month: $100 Team credits: 10,000 credits · 1 person"
         }
       ],
-      "listing_sha256": "9bf2f878d5287b73fd50ab93fdc4bfafb2b8b5cfa373d0c1dd2eef00960bbb50",
+      "listing_sha256": "6ff589b2bb0d7243f28a2745388d96039b037c87340eb0f2f71c44d1f788cbda",
       "claims": {
         "slug": "precision-ai-os",
         "name": "Precision AI OS",
         "tagline": "AI agents with shared memory for firms, with approval before any send",
-        "description": "Precision AI OS is an AI agent platform from Precision AI LLC in Miami, Florida. It gives a firm shared memory, an agent for each area of work, and approval before anything is sent. The vendor publishes a law firms page that covers matter intake, conflict-check preparation, an AI consent register and client update drafts, all for attorney approval. The vendor states it does not do legal research. Pricing is credit based, never per seat. English only, United States focus. Not verified: accuracy of outputs, security and governance claims, current prices, and how the product behaves after sign-in.",
+        "description": "Precision AI OS is an AI agent platform from Precision AI LLC. The vendor's terms call the company a Florida limited liability company, and its privacy page gives Miami, Florida as its location. It gives a firm shared memory, an agent for each area of work, and approval before anything is sent. The vendor publishes a law firms page that covers matter intake, conflict-check preparation, an AI consent register and client update drafts, all for attorney approval. The vendor states it does not do legal research. The vendor says pricing is credit based, never per seat. Its Free and Team plans are marked coming soon, and for Managed it says it is taking discovery calls. English only, United States focus. Not verified: accuracy of outputs, security and governance claims, current prices, and how the product behaves after sign-in.",
         "category": "general",
         "external_url": "https://getprecision.ai",
         "mcp_repo_url": null,
         "mcp_install_command": null,
         "pricing_model": "contact",
-        "pricing_details": null,
+        "pricing_details": "Credit based. The vendor lists a Free plan (10,000 credits, one time) and a Team plan at $100 a month for 10,000 credits and one person, or $85 a month with an annual commitment. Larger Team sizes cost more. Both plans are marked coming soon. For Managed, the vendor says it is taking discovery calls. Prices exclude tax.",
         "tags": [
           "law firms",
           "agents",
@@ -2847,14 +2855,20 @@
           "kind": "vendor",
           "sha256": "e8612846e5b95a46380ff450521aeb8fe3e709efd6d17b2e5457c2aafe9a5d2c",
           "quote": "Free: up to 50 documents, never expires, full access to every feature."
+        },
+        {
+          "url": "https://www.signal87.ai/terms",
+          "kind": "vendor",
+          "sha256": "e3fbc926600eaab5a42b0ba2da2bae7ef2495ee00fb9a5bff4b2cf69f93995dd",
+          "quote": "provides an AI-powered document intelligence and research platform"
         }
       ],
-      "listing_sha256": "b263eb30e56863bd27a86f9cae8e7c2313ee6268b60c8b2f2a24428cd5c8e4da",
+      "listing_sha256": "fcbcf5bd74a95e16cfd271ecedb338fa032373524dbe50cc5bf59ba237e4fcb1",
       "claims": {
         "slug": "signal87-ai",
         "name": "Signal87 AI",
         "tagline": "Document workspace with source-cited answers and a read-only Claude connector.",
-        "description": "Signal87 AI is a document workspace from Signal87 LLC. Users upload contracts, reports and spreadsheets, or connect Google Drive, ask questions in plain language, and get answers with citations to the page and paragraph in their own files. The vendor calls it a legal AI research platform for legal, government and enterprise teams, and it can compare documents for shared terms, differences and missing clauses. The vendor also publishes a read-only Claude connector at https://www.signal87.ai/mcp that can list, search and read files in a user's Signal87 account, with OAuth sign-in. Its connector page focuses on city ordinances, council minutes and contracts. Not verified by us: answer accuracy, security and privacy practices, jurisdiction coverage, language support, the connector's tool behavior, and paid plan prices.",
+        "description": "Signal87 AI is a document workspace from Signal87 LLC. Users upload contracts, reports and spreadsheets, or connect Google Drive, ask questions in plain language, and get answers with citations to the page and paragraph in their own files. The vendor's home page calls it an enterprise document memory and legal AI research platform, and its terms call it an AI-powered document intelligence and research platform. The vendor names legal, government and enterprise teams as users. It can compare documents for shared terms, differences and missing clauses. The vendor also publishes a read-only Claude connector at https://www.signal87.ai/mcp that can list, search and read files in a user's Signal87 account, with OAuth sign-in. Its connector page focuses on city ordinances, council minutes and contracts. Not verified by us: answer accuracy, security and privacy practices, jurisdiction coverage, language support, the connector's tool behavior, and paid plan prices.",
         "category": "document_processing",
         "external_url": "https://www.signal87.ai/",
         "mcp_repo_url": "https://www.signal87.ai/mcp",
@@ -2988,13 +3002,13 @@
           "url": "https://www.specterlaw.ai/specter-cite",
           "kind": "vendor",
           "sha256": "6fbd0121816bebcdc06285a2dccc241f801619ddb61acd0744636a489e502663",
-          "quote": "Specter Cite ist ein MCP-Server für deutsches und europäisches Recht."
+          "quote": "Specter Cite ist ein MCP-Server für deutsches und europäisches Recht. Er verbindet KI-Assistenten wie Claude und ChatGPT mit den Rechtsquellen von Specter. Das Modell liest Gesetze und Gerichtsentscheidungen im geltenden Wortlaut und zitiert sie mit Quelle, statt aus dem Gedächtnis zu antworten. Was ist ein MCP-Server? Das Model Context Protocol (MCP) ist ein offener Standard, über den KI-Assistenten externe Werkzeuge und Datenquellen nutzen. Ein MCP-Server stellt diese Werkzeuge bereit. Specter Cite liefert darüber Werkzeuge für die Rechtsrecherche: Rechtsquellen durchsuchen, Vorschriften im Wortlaut lesen, Entscheidungen lesen und Fundstellen auflösen. Mit welchen KI-Assistenten funktioniert Specter Cite? Mit jedem KI-Assistenten, der das Model Context Protocol unterstützt, darunter Claude und ChatGPT. Die Verbindung wird einmal über die Server-Adresse https://cite.specterlaw.ai/mcp eingerichtet und mit dem Specter-Konto bestätigt."
         },
         {
-          "url": "https://cite.specterlaw.ai/docs",
+          "url": "https://www.specterlaw.ai/ueber-uns",
           "kind": "vendor",
-          "sha256": "eef61ed6947eba76bb4df3e0aaea6a2409d321057c144b67a93abbf9f1685761",
-          "quote": "https://cite.specterlaw.ai/mcp"
+          "sha256": "ec1ad0aeaba8e9f2bd6709845cd89f26aa958484914f672f90cfb98cae577be4",
+          "quote": "2024 in Deutschland gegründet"
         },
         {
           "url": "https://www.specterlaw.ai/pricing",
@@ -3003,12 +3017,12 @@
           "quote": "99,99 € / Nutzer / Monat"
         }
       ],
-      "listing_sha256": "7a586e31d0e370d54500ef3161d426e2645d3a440c119364e60bded9078ca3bd",
+      "listing_sha256": "d4181ae6d0aa09fcd291b3d5bcf2d63d5ebbe66b7d2ce8b3437d620fa79fa6b5",
       "claims": {
         "slug": "specterai",
         "name": "SpecterAI",
         "tagline": "AI legal research, document review and drafting for German law, with an MCP server add-on",
-        "description": "SpecterAI is an AI platform for German law, run by ROLIDE SRL in Romania. The vendor says it is for private users, law firms and in-house teams. Paid plans let users discuss contracts and other documents in chat, research laws and case law, and prepare drafts of legal letters. The Business plan allows up to 100 documents per project. The vendor also publishes Specter Cite, an MCP server for German and EU law at https://cite.specterlaw.ai/mcp. It uses OAuth sign-in with a Specter account, and is a paid add-on for Business teams. The site is in German with an English toggle. We did not verify accuracy, citation quality, security or data-location claims, free plan limits, or how any tool behaves, and we did not call the MCP server.",
+        "description": "SpecterAI is an AI platform for German law, run by ROLIDE SRL in Romania. The vendor's about page says it was founded in 2024 in Germany, and its footer shows Stuttgart. Its terms name ROLIDE SRL of Bucharest as the operator, and a Romanian tax authority record shows that company registered on 30 January 2026. The vendor says it is for private users, law firms and in-house teams. Paid plans let users discuss contracts and other documents in chat, research laws and case law, and prepare drafts of legal letters. The Business plan allows up to 100 documents per project. The vendor also publishes Specter Cite, an MCP server for German and EU law at https://cite.specterlaw.ai/mcp. It uses OAuth sign-in with a Specter account, and is a paid add-on for Business teams. The site is in German with an English toggle. We did not verify accuracy, citation quality, security or data-location claims, free plan limits, or how any tool behaves, and we did not call the MCP server.",
         "category": "legal_research",
         "external_url": "https://www.specterlaw.ai/",
         "mcp_repo_url": "https://cite.specterlaw.ai/mcp",
@@ -3165,7 +3179,8 @@
           "url": "https://raw.githubusercontent.com/aa0101181514/tw-legal-rag/main/README.md",
           "kind": "maintainer",
           "sha256": "8a8e9b33092d31d1fc0d3905de50d6dcf13b44a9f1c699b10389731c4b67c579",
-          "quote": "作者：黃思齊（Aaron Huang）律師，[法律偵探／Dr.Legal](https://dr-legal.com.tw) 創辦人"
+          "quote": "作者：黃思齊（Aaron Huang）律師，[法律偵探／Dr.Legal](https://dr-legal.com.tw) 創辦人",
+          "show": false
         },
         {
           "url": "https://dr-legal.com.tw/mcp",
@@ -3192,12 +3207,12 @@
           "quote": "Taiwan law MCP server: 22M court judgments, statutes, agency rulings, with citation checks"
         }
       ],
-      "listing_sha256": "e2c0dba67b0283d463997900c7f18d1edb9e546cb7ff4f3c0e5e53436dc91395",
+      "listing_sha256": "2e94ea01c01edd7cfe52c8a5b6f9f7b6072ee92202dc24ccc5bf2bbe13abafca",
       "claims": {
         "slug": "taiwan-legal-rag",
         "name": "Taiwan Legal RAG",
         "tagline": "Free hosted MCP server for searching Taiwan court judgments, statutes and administrative rulings",
-        "description": "Taiwan Legal RAG is a hosted MCP server and a command-line client for searching Taiwan law. Its six tools cover court judgment search, full judgment text with appeal links, a citation-whitelist bundle, current statute lookup, administrative ruling lookup by number and administrative ruling search by meaning. It is run by Dr.Legal (Legal Detective), founded and operated by Taiwan lawyer Aaron Huang, and it is meant for lawyers, researchers and in-house teams working on Taiwan law. It covers Taiwan only, and the vendor pages are in Traditional Chinese. Use is free, but you sign in to a free Dr.Legal account with Google or email when you connect. The client code uses the Elastic License 2.0, which is source-available and not open source, and the hosted service terms bar resale and bulk mirroring of the corpus. We did not test search accuracy, citation quality, the sign-in flow or the vendor's corpus counts.",
+        "description": "Taiwan Legal RAG is a hosted MCP server and a command-line client for searching Taiwan law. Its six tools cover court judgment search, full judgment text with appeal links, a citation-whitelist bundle, current statute lookup, administrative ruling lookup by number and administrative ruling search by meaning. It is run by Dr.Legal (Legal Detective), founded and operated by Taiwan lawyer Aaron Huang, and it is meant for lawyers, researchers and in-house teams working on Taiwan law. It covers Taiwan only, and the vendor pages are in Traditional Chinese. Use is free, but you sign in to a free Dr.Legal account with Google or email when you connect. The client code uses the Elastic License 2.0 from version 2.0.0, which is source-available and not open source. The README says versions up to 1.2.2 stay under the MIT licence. The package first appeared on PyPI on 27 May 2026 with dr-lawbot.com as its home page, and version 2.0.0 followed on 9 August 2026. The vendor says one person runs the service, and its about page names no company. The hosted service terms bar resale and bulk mirroring of the corpus. We did not test search accuracy, citation quality, the sign-in flow or the vendor's corpus counts.",
         "category": "legal_research",
         "external_url": "https://dr-legal.com.tw/mcp",
         "mcp_repo_url": "https://github.com/aa0101181514/tw-legal-rag",
@@ -3343,7 +3358,8 @@
           "url": "https://raw.githubusercontent.com/georgejeffers/uk-case-law-mcp-server/main/package.json",
           "kind": "maintainer",
           "sha256": "02573c9c7c3df8dabe22ec8c3ff8e93e7098bc96847f14865512e4cec0e27826",
-          "quote": "\"author\": \"George Jefferson\","
+          "quote": "\"author\": \"George Jefferson\",",
+          "show": false
         },
         {
           "url": "https://raw.githubusercontent.com/georgejeffers/uk-case-law-mcp-server/main/README.md",
@@ -3358,12 +3374,12 @@
           "quote": "import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';"
         }
       ],
-      "listing_sha256": "a95b880cfe3129cfa35530b8ece494f15a3c7c71ec2dddfdb0da607023458443",
+      "listing_sha256": "faee8b2958ef1a26afe7a616d74b17eb1647f31e4398c891ddb3df0734ae304e",
       "claims": {
         "slug": "uk-case-law-mcp-server",
         "name": "UK Case Law MCP Server",
         "tagline": "MCP server that searches and retrieves UK case law from The National Archives Find Case Law API.",
-        "description": "An MCP server by an individual maintainer that gives an AI assistant two tools: search UK case law, and fetch the text of a judgment by neutral citation or document URI. It reads from The National Archives Find Case Law API, which the README says covers judgments from 2003 onward and needs no authentication. The README lists the UK Supreme Court, Court of Appeal, High Court divisions and several tribunals. It runs locally on Bun over stdio. The license is PolyForm Noncommercial 1.0.0, so use is limited to personal, educational and non-commercial purposes, and commercial use needs a separate license from the maintainer. Not verified by us: accuracy or completeness of results, behavior of the National Archives API, whether the server runs as documented, and long-term maintenance.",
+        "description": "An MCP server by an individual maintainer that gives an AI assistant two tools: search UK case law, and fetch the text of a judgment by neutral citation or document URI. It reads from The National Archives Find Case Law API, which the README says covers judgments from 2003 onward and needs no authentication. The README lists the UK Supreme Court, Court of Appeal, High Court divisions and several tribunals. It runs locally on Bun over stdio. The license is PolyForm Noncommercial 1.0.0, so use is limited to personal, educational and non-commercial purposes, and commercial use needs a separate license from the maintainer. The public history is one commit, titled New Repo Public, on 28 December 2025. The National Archives says its Open Justice Licence allows commercial use of judgments but does not permit computational analysis, and that programmatic searching in bulk across Find Case Law records needs a licence. Read its re-use page before using the server at scale. Not verified by us: accuracy or completeness of results, behavior of the National Archives API, whether the server runs as documented, and long-term maintenance.",
         "category": "legal_research",
         "external_url": "https://github.com/georgejeffers/uk-case-law-mcp-server",
         "mcp_repo_url": "https://github.com/georgejeffers/uk-case-law-mcp-server",
@@ -3397,7 +3413,8 @@
           "url": "https://raw.githubusercontent.com/paulieb89/uk-legal-mcp/main/README.md",
           "kind": "maintainer",
           "sha256": "ca339ea01a557ed98f0560ea24ed331154909bb3c3f94469a0668881b3520cf8",
-          "quote": "Maintained by BOUCH — private hosting, custom tools and setup: paul@bouch.dev"
+          "quote": "Maintained by BOUCH — private hosting, custom tools and setup: paul@bouch.dev",
+          "show": false
         },
         {
           "url": "https://www.bouch.dev/products/uk-legal-mcp",
@@ -3424,7 +3441,7 @@
           "quote": "claude mcp add --transport http uk-legal https://uk-legal-mcp.fly.dev/mcp"
         }
       ],
-      "listing_sha256": "1524eacc099fbb7f1f20bf6f255d6dcc9897b281b8ffc4623fdbbc98bc00c85a",
+      "listing_sha256": "77848df0c15acc9c2154440b5f8a2dba222b2c628631d5b45a75ec20eaf41802",
       "claims": {
         "slug": "uk-legal-mcp",
         "name": "UK Legal MCP",
@@ -3444,7 +3461,7 @@
           "oscola",
           "hmrc"
         ],
-        "creator_name": "BOUCH (Paul Boucherat)",
+        "creator_name": "BOUCH",
         "creator_url": "https://github.com/paulieb89",
         "logo_url": null,
         "firm_size_fit": []
@@ -3467,7 +3484,8 @@
           "url": "https://raw.githubusercontent.com/davendra/uk-legal-skills/main/LICENSE.md",
           "kind": "maintainer",
           "sha256": "97e0cfb0bd7ed4f6fdd4ba4a0d4fdafb5875d94cf3c0bc728fc20ef052cbc027",
-          "quote": "Copyright 2026 Davendra Patel (trading as The Counsel)"
+          "quote": "Copyright 2026 Davendra Patel (trading as The Counsel)",
+          "show": false
         },
         {
           "url": "https://raw.githubusercontent.com/davendra/uk-legal-skills/main/README.md",
@@ -3480,14 +3498,26 @@
           "kind": "maintainer",
           "sha256": "8ddfce4a99bb34aa87b5bdea92e2fab4161c40baed4a4dc745cff3445206662e",
           "quote": "import { McpServer } from \"@modelcontextprotocol/sdk/server/mcp.js\";"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/davendra/uk-legal-skills/main/LICENSE.md",
+          "kind": "maintainer",
+          "sha256": "97e0cfb0bd7ed4f6fdd4ba4a0d4fdafb5875d94cf3c0bc728fc20ef052cbc027",
+          "quote": "Functional Source License, Version 1.1, Apache 2.0 Future License"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/davendra/uk-legal-skills/3ff45e8a6b5cd896150180a28d10f32188871fec/LICENSE",
+          "kind": "maintainer",
+          "sha256": "82d04aa9048e0f0efb629835d3fe5b79414ed1a26c7faeb9ae8a63bc6f2f68fd",
+          "quote": "Permission is hereby granted, free of charge, to any person obtaining a copy"
         }
       ],
-      "listing_sha256": "1955e49827ed1af5aabec8a250c4b7f02849ec061ca1c74ab63db899526ab4ba",
+      "listing_sha256": "62cb2ed7cdd89857b93ebde1066f62bfb833a63707c4daff73f70ac915772408",
       "claims": {
         "slug": "uk-legal-skills",
         "name": "UK Legal Skills",
         "tagline": "Claude Code skills and local MCP servers for England and Wales law",
-        "description": "UK Legal Skills is a set of Claude Code skills run as /legal commands. The README lists 38 skills and 12 agents for England and Wales legal work, such as contract triage and review. It includes two local MCP servers written in TypeScript, one for legislation and one for case law, that query public government sources and need no API key. It covers England and Wales only, and the README says it is not legal advice. The code is source-available under the Functional Source License (FSL-1.1-Apache-2.0), not open source, and cannot be repackaged as a competing hosted service. Not verified: output accuracy, price, the operator's location, and the separate hosted product.",
+        "description": "UK Legal Skills is a set of Claude Code skills run as /legal commands. The README lists 38 skills and 12 agents for England and Wales legal work, such as contract triage and review. It includes two local MCP servers written in TypeScript, one for legislation and one for case law, that query public government sources and need no API key. It covers England and Wales only, and the README says it is not legal advice. The maintainer first published the repository on 8 June 2026 under the MIT licence and changed it to the Functional Source License (FSL-1.1-Apache-2.0) later the same day, as the commit history shows. The code is now source-available under the FSL, not open source, and cannot be repackaged as a competing hosted service. The public history is 16 commits over 8 and 9 June 2026. Not verified: output accuracy, price, the operator's location, and the separate hosted product.",
         "category": "legal_research",
         "external_url": "https://github.com/davendra/uk-legal-skills",
         "mcp_repo_url": "https://github.com/davendra/uk-legal-skills",
@@ -3561,40 +3591,40 @@
         {
           "url": "https://www.vaquill.ai/terms",
           "kind": "vendor",
-          "sha256": "08ec2f33442b1b798d435f40b20b668e8ecaa2ee506238869eb55adc4b4b5851",
+          "sha256": "56b59da47633b1bae8aceaa6aef5f4ce641c6fc0570f60459a965101f9ec511c",
           "quote": "an India-registered limited liability partnership that operates Vaquill AI"
         },
         {
           "url": "https://www.vaquill.ai/about",
           "kind": "vendor",
-          "sha256": "0acdc6167865ccf3cca37417ed8f2873ae0b54fa0fb2fd5158d2f90ed1e88915",
-          "quote": "Vaquill AI covers the complete US Code, the CFR, and all 56 state and territory statute codes: 6M+ sections, normalized, cross-referenced, and citation-addressable."
+          "sha256": "77d3b607a7467ca8df775849f3cc608edbb3df6d1f3b8711c5bc1fab44709add",
+          "quote": "6M+ sections across the US Code, the CFR and all 56 state and territory codes, reached through a REST API, an MCP server"
         },
         {
           "url": "https://www.vaquill.ai/mcp",
           "kind": "vendor",
-          "sha256": "392b0c8652e03a3072b708e4d5062ffbcc520316ac2198fc715cf91c05125aaf",
+          "sha256": "27f0471fc8021652ea11d2959329ed2e9f8dfa58d0680ce49d11a8371154da4e",
           "quote": "Search the US Code, the CFR, and 56 state and territory statute codes (6M+ sections) from Claude, ChatGPT, Gemini, Cursor, VS Code, and Windsurf."
         },
         {
           "url": "https://www.vaquill.ai/llms.txt",
           "kind": "vendor",
-          "sha256": "cea56bdb60188abf95b43b4679da910f83c33fb166b216fa1f08c5412058894a",
+          "sha256": "35dd8c33990c243418362e87c2560f0495f8e72c0c0582c7d44f112552f2df70",
           "quote": "Sold as a developer API, not as an end-user application."
         },
         {
           "url": "https://raw.githubusercontent.com/vaquill-AI/vaquill-mcp/main/README.md",
           "kind": "maintainer",
-          "sha256": "97cfe26a717395faa3fe5b9ff083fab40d5b437079b5fbdc750d3ae43504600a",
+          "sha256": "df829008415d06a38822bf73568c99658bacdb90f4691c887d7294ed6b6d09b3",
           "quote": "new accounts get 1,000 free API credits, no card required"
         }
       ],
-      "listing_sha256": "857b4256163884eb7cdd4b623f1247677df837bbf91a60ff1b9f1709f5bfd1ae",
+      "listing_sha256": "2eae3a972e4194de521d535df917abab7523f36d37a4e03974ef36fbb41f981a",
       "claims": {
         "slug": "vaquill-ai",
         "name": "Vaquill AI",
-        "tagline": "US statutes, regulations and court rules as MCP tools and an API",
-        "description": "Vaquill AI is a data service for US primary law, sold to developers and companies, with an MCP server. Through MCP tools an AI client can search the US Code, the CFR and 56 state and territory statute codes (6M+ sections per the vendor), resolve Bluebook citations and read section text. The vendor lists Claude, ChatGPT, Gemini, Cursor, VS Code and Windsurf as supported clients. Install the local package with pip install vaquill-mcp, or add the hosted server at https://mcp.vaquill.ai/mcp. New accounts get 1,000 free API credits, no card required. The vendor says it is a developer API, not an end-user application. Its terms name Aralsura Solutions LLP, an India-registered partnership, as the operator. We did not test search accuracy, corpus completeness, credit billing, paid prices, or security claims.",
+        "tagline": "US statutes, regulations, court rules and case law as MCP tools and an API",
+        "description": "Vaquill AI is a data service for US primary law, sold to developers and companies, with an MCP server. Through MCP tools an AI client can search the US Code, the CFR and 56 state and territory statute codes (6M+ sections per the vendor), resolve Bluebook citations and read section text. The vendor's README says the US server also covers state and US constitutions, state court rules, the Federal Register, executive orders and agency guidance. It also lists US case law tools: search opinion text, resolve reporter citations, read a decision and follow the cases it cites. The vendor says it holds 20M+ case records and 20M+ opinions from 2,400+ courts. The README says the US server publishes 52 tools and every one is read-only. The vendor also publishes hosted MCP servers for Indian law, which this listing does not cover. The vendor lists Claude, ChatGPT, Gemini, Cursor, VS Code and Windsurf as supported clients. Install the local package with pip install vaquill-mcp, or add the hosted server at https://mcp.vaquill.ai/mcp. New accounts get 1,000 free API credits, no card required. The vendor says it is a developer API, not an end-user application. Its terms name Aralsura Solutions LLP, an India-registered partnership, as the operator. We did not test search accuracy, corpus completeness, credit billing, paid prices, or security claims.",
         "category": "legal_research",
         "external_url": "https://www.vaquill.ai/",
         "mcp_repo_url": "https://github.com/Vaquill-AI/vaquill-mcp",
