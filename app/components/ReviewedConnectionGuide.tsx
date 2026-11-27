@@ -1,6 +1,14 @@
 import Link from 'next/link'
 import { SoftwareConnectionDetails } from './SoftwareConnection'
 
+// Grok Bot (Crack Bot), 2026-11-27: every setup guide links to the others (the iManage guide was added today).
+const SETUP_GUIDES = [
+  { slug: 'courtlistener-mcp', href: '/guides/connect-claude-to-courtlistener', label: 'Connect Claude to CourtListener' },
+  { slug: 'harvey-mcp', href: '/guides/connect-claude-to-harvey', label: 'Connect Claude to Harvey' },
+  { slug: 'clio-matter-manager', href: '/guides/connect-claude-to-clio', label: 'Connect Claude to Clio' },
+  { slug: 'imanage-work', href: '/guides/connect-claude-to-imanage', label: 'Connect Claude to iManage Work' },
+] as const
+
 /** The same reviewed source/permission record drives the guide, listing and MCP. */
 export function ReviewedConnectionGuide({ slug, title, lead }: { slug: string; title: string; lead: string }) {
   return <main className="section-padding">
@@ -16,6 +24,12 @@ export function ReviewedConnectionGuide({ slug, title, lead }: { slug: string; t
         <p>Start with fictional or otherwise permitted material. Check source records, requested permissions and which actions can change data. Review the AI provider and connected services as well as the server: MCP does not guarantee that information stays local.</p>
         <p>If authentication, a tool or a result differs from the documentation, stop the test and resolve the difference before using firm data. Public documentation review is separate from a customer-account, security or legal-output test.</p>
         <Link href={`/servers/${slug}`} className="inline-block text-gold-text font-semibold underline">Product details and primary sources →</Link>
+      </section>
+      <section className="font-body text-charcoal/80 mt-8">
+        <h2 className="font-display text-xl text-navy">Other setup guides</h2>
+        <ul className="list-disc pl-6 mt-2 space-y-1">
+          {SETUP_GUIDES.filter(g => g.slug !== slug).map(g => <li key={g.href}><Link href={g.href} className="text-gold-text underline">{g.label}</Link></li>)}
+        </ul>
       </section>
     </div>
   </main>
