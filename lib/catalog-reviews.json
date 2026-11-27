@@ -3610,8 +3610,11 @@
         "firm_size_fit": []
       },
       "operator": {
-        "status": "not_found",
-        "note": "The vendor's pages name Venezolana de Tecnología Legal S.A. and give a tax number, RIF J-50551555-1. Venezuela's tax register sits behind a CAPTCHA, which we do not fill, so we could not confirm the company there."
+        "name": "Venezolana de Tecnología Legal S.A.",
+        "register": "Dun & Bradstreet's business directory (a private directory, not a government register; Venezuela's tax register sits behind a CAPTCHA, which we do not fill)",
+        "url": "https://www.dnb.com/business-directory/company-profiles/venezolana-de-tecnolog%C3%ADa-legal-sa.c98f3e5d47a4a6bf370e7fe973ca07c2",
+        "status": "an independent company in Maracaibo, Zulia, Venezuela, D-U-N-S 817308967",
+        "checked_at": "2026-11-27"
       }
     },
     {

@@ -26,3 +26,13 @@ The vendor runs a remote MCP server for Indian court data. The listing is in sco
 ## Open after the apply
 
 `npm run build` has a post-build check that needs the listing row in production. It fails for this slug until the apply runs. That is expected.
+
+## Venley MCP: operator found (2026-11-27)
+
+Claude Fable 5.2, 2026-11-27.
+
+- **What changed:** the `venley-mcp` review record's operator block in `lib/catalog-reviews.json` now names Venezolana de Tecnología Legal S.A., with a link to its Dun & Bradstreet directory profile.
+- **Before:** the block said "not found", because Venezuela's tax register sits behind a CAPTCHA and the commercial registry has no online search.
+- **Why:** the vendor gave a D-U-N-S number. We searched Dun & Bradstreet's public business directory for that number ourselves. It returned one record: the same company name, in Maracaibo, Zulia, the city the vendor's own terms name. A search for the next number up returned a different business, so the search matches the exact number.
+- **Limits, stated on the page:** Dun & Bradstreet is a private directory, not a government register. It shows no formation date, so none is listed.
+- No database row changed.
