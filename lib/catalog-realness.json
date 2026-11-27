@@ -2256,6 +2256,66 @@
         }
       ]
     },
+    "mak-immigration-source-guide": {
+      "slug": "mak-immigration-source-guide",
+      "checked_at": "2026-11-27",
+      "level": "watch",
+      "reasons": [
+        "the domain has no mail records"
+      ],
+      "checks": [
+        {
+          "id": "site",
+          "result": "pass",
+          "observed": "The site answered HTTP 200 at mak-public-rcic-mcp.vercel.app.",
+          "how_to_repeat": "curl -sL -o /dev/null -w '%{http_code} %{url_effective}\\n' --max-redirs 5 https://mak-public-rcic-mcp.vercel.app/sources",
+          "public": true
+        },
+        {
+          "id": "domain_age",
+          "result": "pass",
+          "observed": "The registry (RDAP) shows vercel.app registered on 2020-01-28.",
+          "how_to_repeat": "curl -sL https://rdap.org/domain/vercel.app",
+          "public": true,
+          "value": "2020-01-28"
+        },
+        {
+          "id": "mail",
+          "result": "warn",
+          "observed": "vercel.app has no mail (MX) records.",
+          "how_to_repeat": "curl -s 'https://dns.google/resolve?name=vercel.app&type=MX'",
+          "public": true
+        },
+        {
+          "id": "security_resolver",
+          "result": "pass",
+          "observed": "mak-public-rcic-mcp.vercel.app resolves on both the plain and the security resolver.",
+          "how_to_repeat": "curl -s -H 'accept: application/dns-json' 'https://cloudflare-dns.com/dns-query?name=mak-public-rcic-mcp.vercel.app&type=A'; curl -s -H 'accept: application/dns-json' 'https://security.cloudflare-dns.com/dns-query?name=mak-public-rcic-mcp.vercel.app&type=A'",
+          "public": false
+        },
+        {
+          "id": "mcp_endpoint",
+          "result": "pass",
+          "observed": "https://mak-public-rcic-mcp.vercel.app/mcp answers the MCP handshake as \"mak-canadian-immigration-sources\" version 1.4.13.",
+          "how_to_repeat": "curl -s -X POST 'https://mak-public-rcic-mcp.vercel.app/mcp' -H 'Content-Type: application/json' -H 'Accept: application/json, text/event-stream' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{\"protocolVersion\":\"2025-06-18\",\"capabilities\":{},\"clientInfo\":{\"name\":\"listing-review\",\"version\":\"1.0\"}}}'",
+          "public": true
+        },
+        {
+          "id": "repo",
+          "result": "not_applicable",
+          "observed": "The listing names no GitHub repository.",
+          "how_to_repeat": "See the listing page.",
+          "public": true
+        },
+        {
+          "id": "registry",
+          "result": "unknown",
+          "observed": "No entry in the official MCP registry matched this listing. Absence proves nothing either way.",
+          "how_to_repeat": "curl -s 'https://registry.modelcontextprotocol.io/v0.1/servers?search=vercel'",
+          "public": true
+        }
+      ]
+    },
     "merit-ukrainian-law-registers": {
       "slug": "merit-ukrainian-law-registers",
       "checked_at": "2026-11-23",
