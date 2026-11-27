@@ -68,9 +68,10 @@ describe('single-message MCP route boundary', () => {
       const messages = body.trim().startsWith('{') ? [JSON.parse(body)] : body.split('\n').filter(line => line.startsWith('data: ')).map(line => JSON.parse(line.slice(6)))
       return messages.find(message => message.id === 7)
     }
-    it('reports version 1.5.0 and says the server is a directory, not the vendor', async () => {
+    // Claude Opus 5.5, 2026-11-27: 1.6.0 adds get_ai_disclosure.
+    it('reports version 1.6.0 and says the server is a directory, not the vendor', async () => {
       const reply = await rpc('initialize', { protocolVersion: '2025-03-26', capabilities: {}, clientInfo: { name: 'review', version: '1.0.0' } })
-      expect(reply.result.serverInfo.version).toBe('1.5.0')
+      expect(reply.result.serverInfo.version).toBe('1.6.0')
       expect(reply.result.instructions).toContain('This server is an independent directory, not the vendor of any listed tool. get_legal_ai_tool returns the checks we ran and how to repeat them.')
     })
     it('get_legal_ai_tool returns the full verification object next to source_review', async () => {
@@ -95,6 +96,54 @@ describe('single-message MCP route boundary', () => {
       expect(item.verification_summary).toMatchObject({ independent: true, checked_at: '2026-11-23', full_record_tool: 'get_legal_ai_tool', method_url: 'https://legalaimcp.com/how-we-verify' })
       expect(item.verification).toBeUndefined()
       expect(JSON.stringify(item.verification_summary)).not.toContain('curl')
+    })
+  })
+
+  // Claude Opus 5.5, 2026-11-27: get_ai_disclosure reads the static registry only, never the database, and says plainly
+  // when nothing is published rather than inventing an answer.
+  describe('get_ai_disclosure', () => {
+    const rpc = async (method: string, params: Record<string, unknown> = {}) => {
+      const response = await POST(request({ jsonrpc: '2.0', id: 11, method, params }))
+      const body = await response.text()
+      const messages = body.trim().startsWith('{') ? [JSON.parse(body)] : body.split('\n').filter(line => line.startsWith('data: ')).map(line => JSON.parse(line.slice(6)))
+      return messages.find(message => message.id === 11)
+    }
+    it('is listed as a read-only tool', async () => {
+      const { result } = await rpc('tools/list')
+      const tool = result.tools.find((t: { name: string }) => t.name === 'get_ai_disclosure')
+      expect(tool).toBeDefined()
+      expect(tool.annotations).toMatchObject({ readOnlyHint: true, destructiveHint: false, openWorldHint: false })
+    })
+    it('returns found=false and the standard page for a slug with no disclosure, without touching the database', async () => {
+      const { result } = await rpc('tools/call', { name: 'get_ai_disclosure', arguments: { slug: 'no-such-vendor' } })
+      expect(result.isError).not.toBe(true)
+      expect(result.structuredContent).toEqual({ found: false, standard_url: 'https://legalaimcp.com/ai-disclosure' })
+      expect(result.content[0].text).toContain('No AI Disclosure is published')
+      expect(from).not.toHaveBeenCalled()
+    })
+    it('does not treat object prototype names as slugs', async () => {
+      const { result } = await rpc('tools/call', { name: 'get_ai_disclosure', arguments: { slug: 'constructor' } })
+      expect(result.structuredContent.found).toBe(false)
+    })
+    it('returns the fictional example with every field, its source and the duties, marked fictional and self-reported', async () => {
+      const { result } = await rpc('tools/call', { name: 'get_ai_disclosure', arguments: { slug: 'example-vendor' } })
+      const d = result.structuredContent.disclosure
+      expect(result.structuredContent.found).toBe(true)
+      expect(d.vendor).toBe('Example Vendor, Inc.')
+      expect(d.fictional).toBe(true)
+      expect(d.status).toBe('self_reported')
+      expect(d.reviewed_at).toBeNull()
+      expect(d.fields).toHaveLength(15)
+      expect(d.not_legal_advice).toBe(true)
+      const training = d.fields.find((f: { id: string }) => f.id === 'trains_by_default')
+      expect(training.source_url).toBe('https://example.com/terms')
+      expect(training.duties).toContain('Informed consent for self-learning tools')
+      expect(result.content[0].text).toContain('FICTIONAL EXAMPLE')
+      expect(from).not.toHaveBeenCalled()
+    })
+    it('rejects a malformed slug', async () => {
+      const reply = await rpc('tools/call', { name: 'get_ai_disclosure', arguments: { slug: '../etc' } })
+      expect(reply.result?.isError || reply.error).toBeTruthy()
     })
   })
 })

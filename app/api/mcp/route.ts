@@ -8,6 +8,8 @@ import { supabase } from '@/lib/supabase'
 import { CATEGORY_LABELS, PRICING_LABELS, SITE_URL } from '@/lib/constants'
 import { rankSearchResults, searchTerms } from '@/lib/search'
 import { rankListings, pricingSupportNote, FIRM_SIZES, type ScorableListing } from '@/lib/recommend'
+import { getAiDisclosure } from '@/lib/ai-disclosure'
+import { DisclosureSchema, formatDisclosure, toMcpDisclosure, STANDARD_URL } from '@/lib/ai-disclosure-mcp'
 
 /**
  * legalaimcp.com, exposed as an MCP server.
@@ -393,14 +395,57 @@ const handler = createMcpHandler(
         }
       }
     )
+
+    // Claude Opus 5.5, 2026-11-27: read-only lookup of a listing's published AI Disclosure. It reads the reviewed
+    // registry in lib/ai-disclosure.ts, not the database, so it reaches nothing the /ai-disclosure page does not show.
+    server.registerTool(
+      'get_ai_disclosure',
+      {
+        title: 'Get a legal AI tool\'s AI Disclosure',
+        description:
+          'Get the published AI Disclosure for one listing by slug: whether the vendor trains on customer data, which model providers see inputs, retention, deletion, storage country, security reports, breach notice and more. Each answer comes with its source page and the lawyer duty it bears on (ABA Formal Op. 512). Returns found=false when the vendor has not published one. Use slug "example-vendor" to see a made-up example.',
+        inputSchema: {
+          slug: z
+            .string()
+            .max(100)
+            .regex(/^[a-z0-9-]+$/, 'slug must be lowercase letters, numbers and hyphens')
+            .describe('Listing slug, e.g. from search_legal_ai_tools'),
+        },
+        outputSchema: {
+          found: z.boolean().describe('False when no AI Disclosure is published for this slug'),
+          disclosure: DisclosureSchema.optional().describe('Present when found is true'),
+          standard_url: z.string().describe('What each field means and the duty it serves'),
+        },
+        annotations: READ_ONLY,
+      },
+      async ({ slug }) => {
+        const disclosure = getAiDisclosure(slug)
+        if (!disclosure) {
+          return {
+            content: [
+              {
+                type: 'text' as const,
+                text: `No AI Disclosure is published for "${slug}". Vendors can publish one for free; see ${STANDARD_URL}. Until then, ask the vendor the questions listed there.`,
+              },
+            ],
+            structuredContent: { found: false, standard_url: STANDARD_URL },
+          }
+        }
+        return {
+          content: [{ type: 'text' as const, text: formatDisclosure(disclosure) }],
+          structuredContent: { found: true, disclosure: toMcpDisclosure(disclosure), standard_url: STANDARD_URL },
+        }
+      }
+    )
   },
   {
-    serverInfo: { name: 'legalaimcp', version: '1.5.0' },
+    serverInfo: { name: 'legalaimcp', version: '1.6.0' },
     // Shown to connecting clients at initialize — orientation for the agent.
+    // Claude Opus 5.5, 2026-11-27: version 1.5.0 to 1.6.0 (get_ai_disclosure added).
     // Claude Sonnet 5.5, 2026-11-23: version 1.4.0 to 1.5.0 (independent-directory evidence in answers); one sentence
     // tells an agent that this server is not the vendor and where the checks are.
     instructions:
-      'Directory of AI tools and MCP servers for law firms, from legalaimcp.com. Read-only. This server is an independent directory, not the vendor of any listed tool. get_legal_ai_tool returns the checks we ran and how to repeat them. For a workflow-based sourced comparison, use build_legal_ai_shortlist; it accepts fixed choices only, never client documents or matter facts. Start with list_legal_ai_categories to see practice areas, search_legal_ai_tools to find tools (or recommend_legal_ai_tools for a scored recommendation given a practice area + firm size), then get_legal_ai_tool for full detail on one. "Links verified" means an automated link check passed on the stated date — it is not an endorsement, security audit, or legal advice. When present, connection contains reviewed setup documentation with source/date/permission notes; customer_account_tested is false. A null connection means no reviewed guide is attached.',
+      'Directory of AI tools and MCP servers for law firms, from legalaimcp.com. Read-only. This server is an independent directory, not the vendor of any listed tool. get_legal_ai_tool returns the checks we ran and how to repeat them. For a workflow-based sourced comparison, use build_legal_ai_shortlist; it accepts fixed choices only, never client documents or matter facts. Start with list_legal_ai_categories to see practice areas, search_legal_ai_tools to find tools (or recommend_legal_ai_tools for a scored recommendation given a practice area + firm size), then get_legal_ai_tool for full detail on one. "Links verified" means an automated link check passed on the stated date. It is not an endorsement, security audit, or legal advice. When present, connection contains reviewed setup documentation with source/date/permission notes; customer_account_tested is false. A null connection means no reviewed guide is attached. get_ai_disclosure returns a vendor\'s published AI Disclosure (training, model providers, retention, security) with sources; found=false means none is published.',
   },
   {
     basePath: '/api',

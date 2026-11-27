@@ -14,7 +14,7 @@ import { fitDescription, fitTitle, FILLER } from './seo-meta'
 const SUFFIX = ' | LegalAIMCP' // root layout title template
 const rendered = (t: Metadata['title']) => (typeof t === 'string' ? `${t}${SUFFIX}` : (t as { absolute: string }).absolute)
 
-const STATIC = ['pilot', 'document-check', 'workflow-plan', 'workflow-assessment', 'pricing', 'privacy', 'terms', 'servers', 'mcp', 'submit', 'about', 'how-we-verify', 'blog', 'best/legal-mcp-servers', 'guides/connect-claude-to-courtlistener', 'guides/connect-claude-to-harvey', 'guides/connect-claude-to-clio']
+const STATIC = ['pilot', 'document-check', 'workflow-plan', 'workflow-assessment', 'pricing', 'privacy', 'terms', 'servers', 'mcp', 'submit', 'about', 'how-we-verify', 'ai-disclosure', 'ai-disclosure/memo', 'blog', 'best/legal-mcp-servers', 'guides/connect-claude-to-courtlistener', 'guides/connect-claude-to-harvey', 'guides/connect-claude-to-clio']
 
 async function check(name: string, meta: Metadata, path: string) {
   const title = rendered(meta.title)

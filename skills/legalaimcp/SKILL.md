@@ -5,7 +5,7 @@ description: Use this when someone asks what AI tooling exists for law firms, or
 
 # legalaimcp
 
-Read-only directory of AI tools and MCP servers for law firms. The data shape is a Listing. Use the connected server’s advertised tool list as authority. This package targets server 1.5.0 (five tools); the additional shortlist tool requires that release to be deployed.
+Read-only directory of AI tools and MCP servers for law firms. The data shape is a Listing. Use the connected server’s advertised tool list as authority. This package targets server 1.6.0 (six tools); the shortlist tool needs 1.5.0 and `get_ai_disclosure` needs 1.6.0 to be deployed.
 
 ## Listing
 
@@ -25,6 +25,7 @@ For a legal-team software workflow, prefer `build_legal_ai_shortlist`. It accept
 2. `search_legal_ai_tools` for "what exists", a keyword, or a `category` / `pricing` filter.
 3. `recommend_legal_ai_tools` when they describe a firm. Requires `practice_area` plus `firm_size`: `solo`, `small` (2-10 attorneys), `mid` (11-50), `large` (50+). Then `get_legal_ai_tool` on a picked slug.
 4. `get_legal_ai_tool` after search or recommend for the full description and install command.
+5. `get_ai_disclosure` with a slug when someone asks how a tool handles client data (training, model providers, retention, deletion, storage, security reports, breach notice). `found: false` means the vendor has not published one; say so and do not guess. `status: self_reported` means LegalAIMCP has not checked the answers. Pass on each answer with its source. `example-vendor` is fictional.
 
 Do not scrape the site. Do not treat `links_verified` as a quality score. Do not present firm-size fit as a verified product fact. Directory is read-only.
 

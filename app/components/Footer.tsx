@@ -20,6 +20,8 @@ const RESOURCES = [
   { href: '/blog', label: 'Blog' },
   // Claude Sonnet 5.5, 2026-11-23: the method page behind the Check this yourself block.
   { href: '/how-we-verify', label: 'How we check listings' },
+  // Claude Opus 5.5, 2026-11-27: the AI Disclosure standard and its free diligence memo.
+  { href: '/ai-disclosure', label: 'AI Disclosure standard' },
   { href: '/about', label: 'About' },
 ]
 

@@ -17,6 +17,8 @@ import { FeatureListingCTA } from '../../components/FeatureListingCTA'
 import { CATEGORY_LABELS, PRICING_LABELS, SITE_URL } from '@/lib/constants'
 import { sanitizeLogoUrl } from '@/lib/logo-url'
 import { SoftwareConnectionDetails, ConnectionLead, ConnectionFaqs } from '../../components/SoftwareConnection'
+import { AiDisclosureLabel } from '../../components/AiDisclosureLabel'
+import { getPublishedDisclosure } from '@/lib/ai-disclosure'
 import {
   LISTING_CARD_COLUMNS,
   LISTING_DETAIL_COLUMNS,
@@ -222,6 +224,9 @@ export default async function ListingDetailPage({
 
       <SoftwareConnectionDetails slug={listing.slug} />
       <CatalogSources listing={listing} />
+      {/* Claude Opus 5.5, 2026-11-27: the vendor's AI Disclosure, or a note that none is published (lib/ai-disclosure.ts).
+          Only the published registry is read here, never the made-up example. */}
+      <AiDisclosureLabel disclosure={getPublishedDisclosure(listing.slug)} />
       {/* Claude Sonnet 5.5, 2026-11-12: FAQ with matching FAQPage schema for question-shaped queries. */}
       <ConnectionFaqs slug={listing.slug} />
 

@@ -4,6 +4,7 @@ import { SITE_URL } from '@/lib/constants'
 import { FEATURED_PRICE_CENTS, FEATURED_DURATION_DAYS } from '@/lib/featured-pricing'
 import { FAQJsonLd } from '../components/JsonLd'
 import { withSocial } from '@/lib/seo-meta'
+import { REVIEWED_MAILTO, REVIEWED_PRICE_USD, REVIEW_INTERVAL_DAYS } from '@/lib/ai-disclosure'
 
 const baseMetadata: Metadata = {
   // Claude Opus, 2026-11-12: the layout template already appends "| LegalAIMCP"; the old title printed the brand twice.
@@ -14,6 +15,7 @@ const baseMetadata: Metadata = {
 }
 
 const PRICE_DISPLAY = `$${(FEATURED_PRICE_CENTS / 100).toFixed(0)}`
+const REVIEWED_DISPLAY = `$${REVIEWED_PRICE_USD.toLocaleString('en-US')}`
 
 // Claude Opus, 2026-11-12: FAQ for vendors deciding on a placement, rendered on
 // the page and as FAQPage JSON-LD (house SEO standard). Every answer restates
@@ -35,6 +37,11 @@ const PRICING_FAQS = [
   {
     q: 'Does Featured change MCP search results?',
     a: 'Only for ties. Search ranks by how well a tool matches the question first. Featured moves a tool up only among equally good matches.',
+  },
+  // Claude Opus 5.5, 2026-11-27: the Reviewed AI Disclosure tier. No checkout: the button is an email.
+  {
+    q: 'What is a Reviewed AI Disclosure?',
+    a: `Publishing an AI Disclosure is free. For ${REVIEWED_DISPLAY} a year we check every answer against your own terms, privacy policy and trust page, cite the section, and check again every ${REVIEW_INTERVAL_DAYS} days. The label then shows Reviewed and the date. We never change an answer for pay.`,
   },
   {
     q: 'Does Featured guarantee traffic or leads?',
@@ -86,8 +93,37 @@ export default function PricingPage() {
         </Link>
       </div>
 
+      {/* Claude Opus 5.5, 2026-11-27: second paid tier. The button opens an email, never the Featured checkout. */}
+      <section className="rounded-2xl border border-slate-300 p-8 mb-10" aria-labelledby="reviewed-disclosure">
+        <h2 id="reviewed-disclosure" className="font-sans text-sm font-semibold text-gold-text uppercase tracking-wide mb-2">
+          Reviewed AI Disclosure
+        </h2>
+        <p className="font-display text-5xl font-bold text-navy mb-2">
+          {REVIEWED_DISPLAY}
+          <span className="text-lg font-sans font-medium text-charcoal/80 ml-2">/ year</span>
+        </p>
+        <p className="font-body text-sm text-charcoal/75 mb-6">
+          Publishing a self-reported <Link href="/ai-disclosure" className="text-gold-text underline">AI Disclosure</Link> is
+          free. Reviewed means we check it. Trust center software often costs thousands of dollars a year; this is one
+          standard label at a fixed price.
+        </p>
+        <ul className="space-y-2 font-body text-charcoal/80 mb-8">
+          <li>✓ We check every answer against your own terms, privacy policy and trust page</li>
+          <li>✓ We cite the section each answer comes from</li>
+          <li>✓ We check again every {REVIEW_INTERVAL_DAYS} days</li>
+          <li>✓ The label shows Reviewed and the review date</li>
+          <li>✓ We never change an answer for pay</li>
+        </ul>
+        <a href={REVIEWED_MAILTO} className="btn-primary inline-flex">
+          Ask about a review
+        </a>
+        <p className="font-body text-xs text-charcoal/75 mt-3">
+          This sends us an email. Nothing is charged until we agree the scope in writing.
+        </p>
+      </section>
+
       <section className="font-body text-charcoal/75 space-y-4 text-sm leading-relaxed">
-        <h2 className="font-display text-xl font-bold text-navy">How it works</h2>
+        <h2 className="font-display text-xl font-bold text-navy">How Featured works</h2>
         <ol className="list-decimal list-inside space-y-2">
           <li>Publish a listing (free submit + admin review).</li>
           <li>
