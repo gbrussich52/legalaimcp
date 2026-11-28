@@ -35,6 +35,8 @@ const MODIFIED = {
   clioGuide: '2026-11-12',
   // Claude Sonnet 5.5, 2026-11-23: new method page; fixed date, never new Date().
   howWeVerify: '2026-11-23',
+  // Claude Opus 5.5, 2026-11-27: the AI Disclosure standard and its diligence memo.
+  aiDisclosure: '2026-11-27',
   bestCategoryTemplate: BEST_ROUNDUP_MODIFIED,
   categoryIndex: '2026-11-12',
 } as const
@@ -59,7 +61,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/workflow-plan`, lastModified: '2026-09-08', changeFrequency: 'monthly', priority: 0.8 },
     { url: `${SITE_URL}/workflow-assessment`, lastModified: '2026-09-08', changeFrequency: 'monthly', priority: 0.7 },
     { url: SITE_URL, lastModified: MODIFIED.home, changeFrequency: 'weekly', priority: 1 },
-    { url: `${SITE_URL}/pricing`, lastModified: '2026-09-20', changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${SITE_URL}/pricing`, lastModified: MODIFIED.aiDisclosure, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${SITE_URL}/ai-disclosure`, lastModified: MODIFIED.aiDisclosure, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE_URL}/ai-disclosure/memo`, lastModified: MODIFIED.aiDisclosure, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${SITE_URL}/privacy`, lastModified: MODIFIED.privacy, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${SITE_URL}/terms`, lastModified: MODIFIED.terms, changeFrequency: 'yearly', priority: 0.3 },
     {
